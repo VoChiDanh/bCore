@@ -1,0 +1,18 @@
+xp: 1
+EnableAge: true
+AgeTime: 30 #seconds
+doctor_items:
+  MATERIAL: PAPER
+  AMOUNT: 1
+  DISPLAY_NAME: "&eMedicine"
+  LORE1: ""
+  LORE2: "&fUsed to restore patient health"
+debug: false
+doctor_price_medicine: 100
+minimum_power: 30
+Lucky_Power: 5
+Lucky_XP: 2
+Max_Power: 100
+Per_Max_Power: 100
+Restore_Power: 10
+Per_Restore_Power: 10

@@ -1,0 +1,12 @@
+name: '${project.name}'
+version: '${project.version}'
+main: net.danh.jobs.Jobs
+softdepend:
+  - Vault
+  - PlaceholderAPI
+authors: [ VoChiDanh ]
+api-version: 1.13
+commands:
+  jobs:
+    description: Main commands
+
