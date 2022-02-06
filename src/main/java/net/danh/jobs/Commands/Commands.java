@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
-import java.util.logging.Level;
 
 public class Commands implements CommandExecutor {
 
@@ -79,16 +78,13 @@ public class Commands implements CommandExecutor {
                                 @Override
                                 public void run() {
                                     try {
-                                        Date date = new Date(System.currentTimeMillis());
-                                        SimpleDateFormat format = new SimpleDateFormat("HH mm ss [dd-MM-yyyy]");
-                                        File temp = new File("plugins/Jobs/update/" + File.separator + format.format(date));
+                                        InputStream in = download.openStream();
+                                        File temp = new File("plugins/Jobs/update/");
                                         if (!temp.exists()) {
                                             temp.mkdir();
                                         }
-                                        Path path = new File("plugins/Jobs/update" + File.separator + format.format(date) + File.separator + "Jobs.jar").toPath();
-                                        try (InputStream in = con.getInputStream()) {
-                                            java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-                                        }
+                                        Path path = new File("plugins/Jobs/update/" + File.separator + "Jobs.jar").toPath();
+                                        java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
                                         sender.sendMessage(Files.getInstance().convert("&6Download finished, stop the server and check new jar in Jobs folder to get the new update"));
                                     } catch (IOException e) {
                                         e.printStackTrace();
