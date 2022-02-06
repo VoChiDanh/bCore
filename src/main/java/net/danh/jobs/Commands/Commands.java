@@ -71,7 +71,7 @@ public class Commands implements CommandExecutor {
                             String parsedTagName = tagname.replace(".", "");
 
                             URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar");
-                            sender.sendMessage(Files.getInstance().convert("&aDownloading DevBuild " + tagname));
+                            sender.sendMessage(Files.getInstance().convert("&aDownloading DevBuild " + tagname + "-SNAPSHOT"));
                             new BukkitRunnable() {
 
                                 @Override
@@ -85,7 +85,7 @@ public class Commands implements CommandExecutor {
                                         }
                                         Path path = new File("plugins/Jobs" + File.separator + "Jobs.jar").toPath();
                                         java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-                                        sender.sendMessage(Files.getInstance().convert("Download finished, restart the server to get the new update"));
+                                        sender.sendMessage(Files.getInstance().convert("&6Download finished, restart the server to get the new update"));
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
