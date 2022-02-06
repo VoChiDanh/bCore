@@ -27,6 +27,18 @@ public class Commands implements CommandExecutor {
         String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
 
         if (label.equalsIgnoreCase("jobs")) {
+            if (args.length == 0) {
+                if (sender.hasPermission("jobs.user")) {
+                    for (String user : Files.getInstance().getlanguage().getStringList("HELP_USER")) {
+                        sender.sendMessage(Files.getInstance().convert(user));
+                    }
+                }
+                if (sender.hasPermission("jobs.admin")) {
+                    for (String admin : Files.getInstance().getlanguage().getStringList("HELP_ADMIN")) {
+                        sender.sendMessage(Files.getInstance().convert(admin));
+                    }
+                }
+            }
             if (args.length == 1) {
                 if (sender.hasPermission("jobs.admin")) {
                     if (args[0].equalsIgnoreCase("reload")) {
@@ -38,7 +50,7 @@ public class Commands implements CommandExecutor {
                 }
             }
             if (args.length == 2) {
-                if (sender.hasPermission("jobs.admin")) {
+                if (sender.hasPermission("jobs.user")) {
                     if (args[0].equalsIgnoreCase("info")) {
                         if (Bukkit.getPlayer(args[1]) != null) {
                             for (String check_info : Files.getInstance().getlanguage().getStringList("INFO_CHECK")) {
