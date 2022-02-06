@@ -77,14 +77,14 @@ public class Commands implements CommandExecutor {
                                 @Override
                                 public void run() {
                                     try {
-
-                                        InputStream in = download.openStream();
                                         File temp = new File("plugins/Jobs");
                                         if (!temp.exists()) {
                                             temp.mkdir();
                                         }
                                         Path path = new File("plugins/Jobs" + File.separator + "Jobs.jar").toPath();
-                                        java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
+                                        try (InputStream in = con.getInputStream()) {
+                                            java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
+                                        }
                                         sender.sendMessage(Files.getInstance().convert("&6Download finished, restart the server to get the new update"));
                                     } catch (IOException e) {
                                         e.printStackTrace();
