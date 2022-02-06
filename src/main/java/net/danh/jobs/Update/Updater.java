@@ -40,7 +40,7 @@ public class Updater {
             URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar"); //This is where you put your download URL for your latest release, be sure to change this to //your own.
 
             if (latestVersion > Integer.parseInt(parseVersion)) {
-                Bukkit.getConsoleSender().sendMessage("a");
+                Bukkit.getConsoleSender().sendMessage(net.danh.jobs.Manager.Files.getInstance().convert("&aThere is a new version. Plugins will automatically update it to version" + tagname));
 
                 new BukkitRunnable() {
 
