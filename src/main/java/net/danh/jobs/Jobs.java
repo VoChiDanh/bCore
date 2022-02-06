@@ -5,7 +5,6 @@ import net.danh.jobs.Commands.TabCommand;
 import net.danh.jobs.Events.*;
 import net.danh.jobs.Hook.PlaceholderAPI;
 import net.danh.jobs.Manager.Files;
-import net.danh.jobs.Update.Updater;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -115,7 +114,6 @@ public final class Jobs extends JavaPlugin implements Listener {
         } else {
             getLogger().log(Level.INFO, "Loading data for " + formatNMSVersion(getNMSVersion()));
         }
-        Updater.getInstance().autoUpdate();
         (new BukkitRunnable() {
             public void run() {
                 Iterator var2 = Bukkit.getOnlinePlayers().iterator();

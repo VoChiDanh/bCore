@@ -22,6 +22,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "v0.2"
           prerelease: false
-          title: "v0.2-SNAPSHOT - Pre Release"
+          title: "v0.2-SNAPSHOT - Dev Build"
           files: |
             ./target/Jobs.jar

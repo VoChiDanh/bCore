@@ -1,5 +1,7 @@
 package net.danh.jobs.Commands;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import org.bukkit.Bukkit;
@@ -10,10 +12,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public class Commands implements CommandExecutor {
 
@@ -44,6 +56,44 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("reload")) {
                         Files.getInstance().reloadconfig();
                         sender.sendMessage(Files.getInstance().convert(PREFIX + RELOADED));
+                    }
+                    if (args[0].equalsIgnoreCase("update")) {
+                        try {
+                            String tagname = null;
+                            URL api = new URL("https://api.github.com/repos/VoChiDanh/Jobs/releases/latest");
+                            URLConnection con = api.openConnection();
+                            con.setConnectTimeout(15000);
+                            con.setReadTimeout(15000);
+
+                            JsonObject json = new JsonParser().parse(new InputStreamReader(con.getInputStream())).getAsJsonObject();
+                            tagname = json.get("tag_name").getAsString();
+
+                            String parsedTagName = tagname.replace(".", "");
+
+                            URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar");
+                            sender.sendMessage(Files.getInstance().convert("&aDownloading DevBuild " + tagname));
+                            new BukkitRunnable() {
+
+                                @Override
+                                public void run() {
+                                    try {
+
+                                        InputStream in = download.openStream();
+                                        File temp = new File("plugins/Jobs");
+                                        if (!temp.exists()) {
+                                            temp.mkdir();
+                                        }
+                                        Path path = new File("plugins/Jobs" + File.separator + "Jobs.jar").toPath();
+                                        java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
+                                        sender.sendMessage(Files.getInstance().convert("Download finished, restart the server to get the new update"));
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }.runTaskLaterAsynchronously(Jobs.getInstance(), 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 } else {
                     sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
