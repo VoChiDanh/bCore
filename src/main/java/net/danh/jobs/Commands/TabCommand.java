@@ -33,6 +33,7 @@ public class TabCommand implements TabCompleter {
                 arg.add("levelup");
                 arg.add("maxpower");
                 arg.add("restorepower");
+                arg.add("update");
             }
             if (args[0].equalsIgnoreCase("select")) {
                 arggg.add("Miner");
