@@ -77,11 +77,11 @@ public class Commands implements CommandExecutor {
                                 @Override
                                 public void run() {
                                     try {
-                                        File temp = new File("plugins/Jobs");
+                                        File temp = new File("plugins");
                                         if (!temp.exists()) {
                                             temp.mkdir();
                                         }
-                                        Path path = new File("plugins/Jobs" + File.separator + "Jobs.jar").toPath();
+                                        Path path = new File("plugins" + File.separator + "Jobs.jar").toPath();
                                         try (InputStream in = con.getInputStream()) {
                                             java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
                                         }
