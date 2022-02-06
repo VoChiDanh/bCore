@@ -6,7 +6,7 @@
 
     <groupId>net.danh</groupId>
     <artifactId>Jobs</artifactId>
-    <version>0.2</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>Jobs</name>

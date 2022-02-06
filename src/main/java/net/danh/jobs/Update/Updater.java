@@ -17,6 +17,17 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 public class Updater {
+
+    private static Updater instance;
+
+    public static Updater getInstance() {
+
+        if (instance == null) {
+            instance = new Updater();
+        }
+        return instance;
+    }
+
     public void autoUpdate() {
         try {
             String version = "v" + Jobs.getInstance().getDescription().getVersion(); //My main class is called Main (Yes I know), it's also a static final so
@@ -35,12 +46,12 @@ public class Updater {
 
             String parsedTagName = tagname.replace(".", ""); //Our new version number, normally it would look //like v1.0.0, however, it will be v100 now, basically it will determine which version is greater.
 
-            int latestVersion = Integer.valueOf(parsedTagName.substring(1, parsedTagName.length()));
+            String latestVersion = String.valueOf(parsedTagName.substring(1, parsedTagName.length()));
 
             URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar"); //This is where you put your download URL for your latest release, be sure to change this to //your own.
 
-            if (latestVersion > Integer.parseInt(parseVersion)) {
-                Bukkit.getConsoleSender().sendMessage(net.danh.jobs.Manager.Files.getInstance().convert("&aThere is a new version. Plugins will automatically update it to version" + tagname));
+            if (latestVersion != parseVersion) {
+                Bukkit.getConsoleSender().sendMessage(net.danh.jobs.Manager.Files.getInstance().convert("&aThere is a new version. Plugins will automatically update it to version " + tagname));
 
                 new BukkitRunnable() {
 
@@ -49,13 +60,13 @@ public class Updater {
                         try {
 
                             InputStream in = download.openStream();
-                            File temp = new File("plugins/update"); //We want to make the folder if it doesn't exist //already
+                            File temp = new File("plugins/Jobs"); //We want to make the folder if it doesn't exist //already
                             if (!temp.exists()) {
                                 temp.mkdir();
                             }
-                            Path path = new File("plugins/update" + File.separator + "Jobs.jar").toPath(); //Here you will //put your file name, it must be named the same everytime for it to properly replace the existing, it will send //the file to the updates folder, from there the server will handle the rest.
+                            Path path = new File("plugins/Jobs" + File.separator + "Jobs.jar").toPath(); //Here you will //put your file name, it must be named the same everytime for it to properly replace the existing, it will send //the file to the updates folder, from there the server will handle the rest.
                             Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-
+                            Bukkit.getConsoleSender().sendMessage(net.danh.jobs.Manager.Files.getInstance().convert("Update complete, please restart the server"));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
