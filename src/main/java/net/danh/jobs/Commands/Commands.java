@@ -62,6 +62,7 @@ public class Commands implements CommandExecutor {
                         try {
                             String tagname = null;
                             String body = null;
+                            String name = null;
                             URL api = new URL("https://api.github.com/repos/VoChiDanh/Jobs/releases/latest");
                             URLConnection con = api.openConnection();
                             con.setConnectTimeout(15000);
@@ -70,11 +71,11 @@ public class Commands implements CommandExecutor {
                             JsonObject json = new JsonParser().parse(new InputStreamReader(con.getInputStream())).getAsJsonObject();
                             tagname = json.get("tag_name").getAsString();
                             body = json.get("body").getAsString();
-                            String parsedbody = body.replace("## Commits", "");
+                            name = json.get("name").getAsString();
 
                             URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar");
-                            sender.sendMessage(Files.getInstance().convert("&aDownloading DevBuild " + tagname + "-SNAPSHOT"));
-                            sender.sendMessage(Files.getInstance().convert("&aUpdate log: " + parsedbody));
+                            sender.sendMessage(Files.getInstance().convert("&aDownloading " + name));
+                            sender.sendMessage(Files.getInstance().convert("&aUpdate log: " + body));
                             new BukkitRunnable() {
 
                                 @Override
