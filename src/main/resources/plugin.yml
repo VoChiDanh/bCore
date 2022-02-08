@@ -1,5 +1,5 @@
 name: '${project.name}'
-version: '${project.version}'
+version: '${project.version} ${devbuild.version}'
 main: net.danh.jobs.Jobs
 softdepend:
   - Vault
