@@ -30,6 +30,7 @@ public class Interact implements Listener {
         Integer POWER = Files.getInstance().getconfig().getInt("Lucky_Power");
         Integer XP = Files.getInstance().getconfig().getInt("Lucky_XP");
         Integer LEVELUP = Files.getInstance().getleveluptimes(e.getPlayer());
+        String COOLDOWN_DOCTOR = Files.getInstance().getconfig().getString("COOLDOWN_DOCTOR");
         double systemchance = Math.random() * 100.0D;
         double playerchance = Files.getInstance().getLuckyChance(e.getPlayer());
         if (Files.getInstance().getJobs(bs).equals("DOCTOR")) {
@@ -69,8 +70,7 @@ public class Interact implements Listener {
 
                     } else {
                         //Hasn't expired yet, shows how many seconds left until it does
-                        bn.sendMessage(Files.getInstance().convert("&cBạn cần chờ &6" + timeLeft + "&6s &cđể được cứu chữa!"));
-                        bs.sendMessage(Files.getInstance().convert("&cBệnh nhân sẽ được chữa trị sau &6" + timeLeft + "&6s"));
+                        bs.sendMessage(Files.getInstance().convert(PREFIX + COOLDOWN_DOCTOR.replaceAll("%time%", String.valueOf(timeLeft))));
                         return;
                     }
                     if (bn instanceof Player) {
