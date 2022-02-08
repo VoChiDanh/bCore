@@ -303,12 +303,12 @@ public class Commands implements CommandExecutor {
                         if (args[1].equalsIgnoreCase("Doctor")) {
                             if (Files.getInstance().getJobs(Objects.requireNonNull(((Player) sender).getPlayer())).equals(args[1].toUpperCase())) {
                                 if (Jobs.economy.getBalance(((Player) sender).getPlayer()) >= Files.getInstance().getconfig().getInt("doctor_price_medicine")) {
-                                    ItemStack items = new ItemStack(Material.valueOf(Files.getInstance().getconfig().getString("doctor_items.MATERIAL")), Files.getInstance().getconfig().getInt("doctor_items.AMOUNT"));
+                                    ItemStack items = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("doctor_items.MATERIAL")), Files.getInstance().getitems().getInt("doctor_items.AMOUNT"));
                                     ItemMeta meta = items.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getconfig().getString("doctor_items.DISPLAY_NAME"))));
+                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.DISPLAY_NAME"))));
                                     ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getconfig().getString("doctor_items.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getconfig().getString("doctor_items.LORE2"))));
+                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE1"))));
+                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE2"))));
                                     meta.setLore(lore);
                                     items.setItemMeta(meta);
                                     ((Player) sender).getInventory().addItem(items);

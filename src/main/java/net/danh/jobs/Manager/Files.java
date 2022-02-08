@@ -12,8 +12,8 @@ import java.util.Objects;
 
 public class Files {
     private static Files instance;
-    private File configFile, languageFile, dataFile;
-    private FileConfiguration config, language, data;
+    private File configFile, languageFile, dataFile, itemsFile;
+    private FileConfiguration config, language, data, items;
 
     public static Files getInstance() {
 
@@ -27,18 +27,22 @@ public class Files {
         configFile = new File(Jobs.getInstance().getDataFolder(), "config.yml");
         languageFile = new File(Jobs.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
+        itemsFile = new File(Jobs.getInstance().getDataFolder(), "items.yml");
 
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
         if (!dataFile.exists()) Jobs.getInstance().saveResource("data.yml", false);
+        if (!itemsFile.exists()) Jobs.getInstance().saveResource("items.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
+        items = new YamlConfiguration();
 
         try {
             config.load(configFile);
             language.load(languageFile);
             data.load(dataFile);
+            items.load(itemsFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -57,9 +61,14 @@ public class Files {
         return data;
     }
 
+    public FileConfiguration getitems() {
+        return items;
+    }
+
     public void reloadconfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
+        items = YamlConfiguration.loadConfiguration(itemsFile);
     }
 
     public void saveconfig() {
@@ -73,6 +82,12 @@ public class Files {
     public void savelanguage() {
         try {
             language.save(languageFile);
+        } catch (IOException ignored) {
+        }
+    }
+    public void saveitems() {
+        try {
+            items.save(itemsFile);
         } catch (IOException ignored) {
         }
     }

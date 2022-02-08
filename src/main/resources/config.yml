@@ -1,12 +1,6 @@
 xp: 1
 EnableAge: true
 AgeTime: 30 #seconds
-doctor_items:
-  MATERIAL: PAPER
-  AMOUNT: 1
-  DISPLAY_NAME: "&eMedicine"
-  LORE1: ""
-  LORE2: "&fUsed to restore patient health"
 debug: false
 doctor_price_medicine: 100
 minimum_power: 30
