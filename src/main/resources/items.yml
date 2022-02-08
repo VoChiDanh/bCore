@@ -40,3 +40,21 @@ log:
   DISPLAY_NAME: "&aLog"
   LORE1: ""
   LORE2: "&fUsed to trade/sell with other player"
+wheat:
+  MATERIAL: WHEAT
+  AMOUNT: 1
+  DISPLAY_NAME: "&6Wheat"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+carrot:
+  MATERIAL: CARROT
+  AMOUNT: 1
+  DISPLAY_NAME: "&6Carrot"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+potato:
+  MATERIAL: POTATO
+  AMOUNT: 1
+  DISPLAY_NAME: "&fPotato"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
