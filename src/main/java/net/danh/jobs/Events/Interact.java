@@ -31,7 +31,7 @@ public class Interact implements Listener {
         Integer XP = Files.getInstance().getconfig().getInt("Lucky_XP");
         Integer LEVELUP = Files.getInstance().getleveluptimes(e.getPlayer());
         double systemchance = Math.random() * 100.0D;
-        double playerchance = Files.getInstance().getAge(e.getPlayer()) / 10;
+        double playerchance = Files.getInstance().getLuckyChance(e.getPlayer());
         if (Files.getInstance().getJobs(bs).equals("DOCTOR")) {
             if (Files.getInstance().getconfig().getBoolean("debug")) {
                 Jobs.getInstance().getLogger().log(Level.INFO, "Check Jobs");

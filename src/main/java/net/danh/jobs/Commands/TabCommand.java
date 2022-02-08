@@ -13,10 +13,12 @@ public class TabCommand implements TabCompleter {
     List<String> arg = new ArrayList<>();
     List<String> argg = new ArrayList<>();
     List<String> arggg = new ArrayList<>();
+    List<String> argggg = new ArrayList<>();
 
     List<String> arg1 = new ArrayList<String>();
     List<String> arg2 = new ArrayList<String>();
     List<String> arg3 = new ArrayList<String>();
+    List<String> arg4 = new ArrayList<String>();
 
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("jobs")) {
@@ -33,6 +35,7 @@ public class TabCommand implements TabCompleter {
                 arg.add("levelup");
                 arg.add("maxpower");
                 arg.add("restorepower");
+                arg.add("luckychance");
                 arg.add("update");
             }
             if (args[0].equalsIgnoreCase("select")) {
@@ -49,10 +52,23 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("glevel")
                         || args[0].equalsIgnoreCase("levelup")
                         || args[0].equalsIgnoreCase("maxpower")
-                        || args[0].equalsIgnoreCase("restorepower")) {
+                        || args[0].equalsIgnoreCase("restorepower")
+                        || args[0].equalsIgnoreCase("luckychance")) {
                     argg.add("set");
                     argg.add("add");
                     argg.add("remove");
+                }
+                if (args[0].equalsIgnoreCase("items")) {
+                    argggg.add("Doctor");
+                    argggg.add("coal");
+                    argggg.add("iron");
+                    argggg.add("gold");
+                    argggg.add("diamond");
+                    argggg.add("emerald");
+                    argggg.add("log");
+                    argggg.add("wheat");
+                    argggg.add("carrot");
+                    argggg.add("potato");
                 }
             }
         }
@@ -77,14 +93,21 @@ public class TabCommand implements TabCompleter {
                 }
                 return arg2;
             }
-        }
-        if (args.length == 2) {
+
             if (args[0].equalsIgnoreCase("select")) {
                 for (String a3 : arggg) {
                     if (a3.toLowerCase().startsWith(args[1].toLowerCase()))
                         arg3.add(a3);
                 }
                 return arg3;
+            }
+
+            if (args[0].equalsIgnoreCase("items")) {
+                for (String a4 : argggg) {
+                    if (a4.toLowerCase().startsWith(args[1].toLowerCase()))
+                        arg4.add(a4);
+                }
+                return arg4;
             }
         }
         return null;

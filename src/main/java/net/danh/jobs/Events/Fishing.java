@@ -37,7 +37,7 @@ public class Fishing implements Listener {
                             || (((Item) e.getCaught()).getItemStack().getType()) == XMaterial.COD.parseMaterial()
                             || (((Item) e.getCaught()).getItemStack().getType()) == XMaterial.SALMON.parseMaterial()) {
                         double systemchance = Math.random() * 100.0D;
-                        double playerchance = Files.getInstance().getAge(e.getPlayer()) / 10;
+                        double playerchance = Files.getInstance().getLuckyChance(e.getPlayer());
                         if (playerchance >= systemchance) {
                             Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));

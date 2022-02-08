@@ -341,6 +341,29 @@ public class Files {
         savedata();
     }
 
+    public int getLuckyChance(Player p) {
+        return getdata().getInt("players." + p.getName() + ".LuckyChance");
+    }
+
+    public void setLuckyChance(Player p, int number) {
+        getdata().set("players." + p.getName() + ".LuckyChance", number);
+        savedata();
+    }
+
+    public void addLuckyChance(Player p, int number) {
+        getdata().set("players." + p.getName() + ".LuckyChance", getLuckyChance(p) + number);
+        savedata();
+    }
+
+    public void removeLuckyChance(Player p, int number) {
+        if (getLuckyChance(p) > getconfig().getInt("Default_Lucky_Chance")) {
+            getdata().set("players." + p.getName() + ".LuckyChance", getLuckyChance(p) - number);
+        } else {
+            getdata().set("players." + p.getName() + ".LuckyChance", getconfig().getInt("Default_Lucky_Chance"));
+        }
+        savedata();
+    }
+
     public String convert(String s) {
         return s.replaceAll("&", "§");
     }

@@ -23,6 +23,8 @@ public class BlockBreak implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         Block b = e.getBlock();
         Player p = e.getPlayer();
+        double systemchance = Math.random() * 100.0D;
+        double playerchance = Files.getInstance().getLuckyChance(e.getPlayer());
         String NEED_MORE_POWER = Files.getInstance().getlanguage().getString("NEED_MORE_POWER");
         String PREFIX = Files.getInstance().getlanguage().getString("PREFIX");
         String LUCKY = Files.getInstance().getlanguage().getString("LUCKY");
@@ -60,8 +62,6 @@ public class BlockBreak implements Listener {
                         if (Files.getInstance().getconfig().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                         }
-                        double systemchance = Math.random() * 100.0D;
-                        double playerchance = Files.getInstance().getAge(e.getPlayer()) / 10;
                         if (playerchance >= systemchance) {
                             Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
@@ -228,8 +228,6 @@ public class BlockBreak implements Listener {
                         if (Files.getInstance().getconfig().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                         }
-                        double systemchance = Math.random() * 100.0D;
-                        double playerchance = Files.getInstance().getAge(e.getPlayer()) / 10;
                         if (playerchance >= systemchance) {
                             Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
@@ -314,8 +312,6 @@ public class BlockBreak implements Listener {
                             if (Files.getInstance().getconfig().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                             }
-                            double systemchance = Math.random() * 100.0D;
-                            double playerchance = Files.getInstance().getAge(e.getPlayer()) / 10;
                             if (playerchance >= systemchance) {
                                 Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                                 Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));

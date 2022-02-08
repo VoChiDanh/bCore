@@ -10,3 +10,4 @@ Max_Power: 100
 Per_Max_Power: 100
 Restore_Power: 10
 Per_Restore_Power: 10
+Default_Lucky_Chance: 5

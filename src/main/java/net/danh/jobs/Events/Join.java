@@ -18,6 +18,7 @@ public class Join implements Listener {
             Files.getInstance().setXP(p, 0);
             Files.getInstance().setRestorePower(p, Files.getInstance().getconfig().getInt("Restore_Power"));
             Files.getInstance().setMaxPower(p, Files.getInstance().getconfig().getInt("Max_Power"));
+            Files.getInstance().setLuckyChance(p, Files.getInstance().getconfig().getInt("Default_Lucky_Chance"));
             Files.getInstance().savedata();
         }
     }
