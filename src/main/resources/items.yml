@@ -4,3 +4,33 @@ doctor_items:
   DISPLAY_NAME: "&eMedicine"
   LORE1: ""
   LORE2: "&fUsed to restore patient health"
+coal:
+  MATERIAL: COAL
+  AMOUNT: 1
+  DISPLAY_NAME: "&7Coal"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+iron:
+  MATERIAL: IRON_INGOT
+  AMOUNT: 1
+  DISPLAY_NAME: "&7Iron"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+gold:
+  MATERIAL: GOLDEN_INGOT
+  AMOUNT: 1
+  DISPLAY_NAME: "&eGold"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+diamond:
+  MATERIAL: DIAMOND
+  AMOUNT: 1
+  DISPLAY_NAME: "&bDiamond"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
+emerald:
+  MATERIAL: EMERALD
+  AMOUNT: 1
+  DISPLAY_NAME: "&aEmerald"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
