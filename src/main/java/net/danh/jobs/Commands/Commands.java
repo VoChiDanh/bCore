@@ -75,10 +75,11 @@ public class Commands implements CommandExecutor {
                             name = json.get("name").getAsString();
 
                             String parsename = name.replaceAll("v", "");
-                            if (parsename != version) {
+                            String parsebody = body.replaceAll("## Commits", "");
+                            if (!(parsename.equalsIgnoreCase(version))) {
                                 URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar");
-                                sender.sendMessage(Files.getInstance().convert("&eDownloading " + name + " &6Your version is &6v" + version));
-                                sender.sendMessage(Files.getInstance().convert("&aUpdate log: " + body));
+                                sender.sendMessage(Files.getInstance().convert("&eDownloading " + name + "! &6Your version is &6v" + version));
+                                sender.sendMessage(Files.getInstance().convert("&aUpdate log: " + parsebody));
                                 new BukkitRunnable() {
 
                                     @Override
