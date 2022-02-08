@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Cooldown {
-    public static final int DEFAULT_COOLDOWN = 120;
     private static Cooldown instance;
     private final Map<UUID, Integer> cooldowns = new HashMap<>();
 

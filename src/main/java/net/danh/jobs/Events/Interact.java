@@ -55,7 +55,7 @@ public class Interact implements Listener {
                     Player bn = Objects.requireNonNull(Bukkit.getPlayerExact(name)).getPlayer();
                     int timeLeft = Cooldown.getInstance().getCooldown(Objects.requireNonNull(bn).getUniqueId());
                     if (timeLeft == 0) {
-                        Cooldown.getInstance().setCooldown(bn.getUniqueId(), Cooldown.DEFAULT_COOLDOWN);
+                        Cooldown.getInstance().setCooldown(bn.getUniqueId(), 300);
                         new BukkitRunnable() {
                             @Override
                             public void run() {
