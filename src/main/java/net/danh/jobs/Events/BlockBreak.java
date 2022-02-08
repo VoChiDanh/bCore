@@ -3,7 +3,6 @@ package net.danh.jobs.Events;
 import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
@@ -69,6 +68,62 @@ public class BlockBreak implements Listener {
                             e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
                                     .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                     .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                            if (b.getType() == XMaterial.COAL_ORE.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack coal = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("coal.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("coal.AMOUNT"));
+                                ItemMeta meta = coal.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE2"))));
+                                meta.setLore(lore);
+                                coal.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(coal);
+                            } else if (b.getType() == XMaterial.IRON_ORE.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack iron = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("iron.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("iron.AMOUNT"));
+                                ItemMeta meta = iron.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE2"))));
+                                meta.setLore(lore);
+                                iron.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(iron);
+                            } else if (b.getType() == XMaterial.GOLD_ORE.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack gold = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("gold.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("gold.AMOUNT"));
+                                ItemMeta meta = gold.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE2"))));
+                                meta.setLore(lore);
+                                gold.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(gold);
+                            } else if (b.getType() == XMaterial.DIAMOND_ORE.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack diamond = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("diamond.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("diamond.AMOUNT"));
+                                ItemMeta meta = diamond.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE2"))));
+                                meta.setLore(lore);
+                                diamond.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(diamond);
+                            } else if (b.getType() == XMaterial.EMERALD_ORE.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack emerald = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("emerald.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("emerald.AMOUNT"));
+                                ItemMeta meta = emerald.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE2"))));
+                                meta.setLore(lore);
+                                emerald.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(emerald);
+                            }
                             return;
                         }
                         Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
@@ -181,12 +236,46 @@ public class BlockBreak implements Listener {
                             e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
                                     .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                     .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                            if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.DARK_OAK_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.JUNGLE_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.OAK_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.SPRUCE_LOG.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack log = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("log.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("log.AMOUNT"));
+                                ItemMeta meta = log.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE2"))));
+                                meta.setLore(lore);
+                                log.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(log);
+                            }
                             return;
                         }
                         Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
                         Files.getInstance().removePower(p, 1);
                         if (Files.getInstance().getconfig().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
+                            if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.DARK_OAK_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.JUNGLE_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.OAK_LOG.parseMaterial()
+                                    || b.getType() == XMaterial.SPRUCE_LOG.parseMaterial()) {
+                                b.getDrops().clear();
+                                ItemStack log = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("log.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("log.AMOUNT"));
+                                ItemMeta meta = log.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE2"))));
+                                meta.setLore(lore);
+                                log.setItemMeta(meta);
+                                e.getPlayer().getInventory().addItem(log);
+                            }
                         }
                         return;
                     }

@@ -34,3 +34,9 @@ emerald:
   DISPLAY_NAME: "&aEmerald"
   LORE1: ""
   LORE2: "&fUsed to trade/sell with other player"
+log:
+  MATERIAL: OAK_PLANKS
+  AMOUNT: 1
+  DISPLAY_NAME: "&aLog"
+  LORE1: ""
+  LORE2: "&fUsed to trade/sell with other player"
