@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public final class Jobs extends JavaPlugin implements Listener {
@@ -83,11 +84,11 @@ public final class Jobs extends JavaPlugin implements Listener {
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            getLogger().log(Level.INFO, "Hooked onto PlaceholderAPI");
+            getLogger().log(Level.INFO, "Hooked with PlaceholderAPI");
             new PlaceholderAPI().register();
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
-            getLogger().log(Level.INFO, "Hooked onto Vault");
+            getLogger().log(Level.INFO, "Hooked with Vault");
         }
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new Join(), this);
@@ -96,8 +97,8 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Regen(), this);
         getServer().getPluginManager().registerEvents(new Eating(), this);
         getServer().getPluginManager().registerEvents(new Death(), this);
-        getCommand("jobs").setExecutor(new Commands());
-        getCommand("jobs").setTabCompleter(new TabCommand());
+        Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
         Files.getInstance().createconfig();
         if (getNMSVersion().contains("v1_12_R1")
                 || getNMSVersion().contains("v1_11_R1")
