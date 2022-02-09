@@ -37,6 +37,7 @@ public class Commands implements CommandExecutor {
         String DONE = Files.getInstance().getlanguage().getString("DONE");
         String NOT_ENOUGH_MONEY = Files.getInstance().getlanguage().getString("NOT_ENOUGH_MONEY");
         String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
+        String UNKNOW_PLAYER = Files.getInstance().getlanguage().getString("UNKNOW_PLAYER");
 
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
@@ -108,350 +109,402 @@ public class Commands implements CommandExecutor {
                 } else {
                     sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
                 }
-                if (args.length == 2) {
+            }
+            if (args.length == 2) {
+                if (sender.hasPermission("jobs.user")) {
+                    if (args[0].equalsIgnoreCase("info")) {
+                        if (Bukkit.getPlayer(args[1]) != null) {
+                            for (String check_info : Files.getInstance().getlanguage().getStringList("INFO_CHECK")) {
+                                sender.sendMessage(Files.getInstance().convert(check_info
+                                        .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
+                                        .replaceAll("%jobs%", Files.getInstance().getJobs(Objects.requireNonNull(Bukkit.getPlayer(args[1]))))
+                                        .replaceAll("%plevel%", String.valueOf(Files.getInstance().getAge(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%xp", String.valueOf(Files.getInstance().getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%glevel%", String.valueOf(Files.getInstance().getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%power%", String.valueOf(Files.getInstance().getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%leveluptimes%", String.valueOf(Files.getInstance().getleveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
+                            }
+                        } else {
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                        }
+                    }
+                } else {
+                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
+                }
+            }
+            if (args.length == 4) {
+                if (sender.hasPermission("jobs.admin")) {
+                    if (args[0].equalsIgnoreCase("plevel")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("xp")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("power")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("glevel")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("levelup")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("maxpower")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                        } else {
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("restorepower")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("luckychance")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                }
+            }
+            if (args.length == 2) {
+                if (sender instanceof Player) {
                     if (sender.hasPermission("jobs.user")) {
-                        if (args[0].equalsIgnoreCase("info")) {
-                            if (Bukkit.getPlayer(args[1]) != null) {
-                                for (String check_info : Files.getInstance().getlanguage().getStringList("INFO_CHECK")) {
-                                    sender.sendMessage(Files.getInstance().convert(check_info
-                                            .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
-                                            .replaceAll("%jobs%", Files.getInstance().getJobs(Objects.requireNonNull(Bukkit.getPlayer(args[1]))))
-                                            .replaceAll("%plevel%", String.valueOf(Files.getInstance().getAge(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                            .replaceAll("%xp", String.valueOf(Files.getInstance().getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                            .replaceAll("%glevel%", String.valueOf(Files.getInstance().getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                            .replaceAll("%power%", String.valueOf(Files.getInstance().getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                            .replaceAll("%leveluptimes%", String.valueOf(Files.getInstance().getleveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
-                                }
+                        if (args[0].equalsIgnoreCase("select")) {
+                            if (args[1].equalsIgnoreCase("Miner")) {
+                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
-                        }
-                    }
-                }
-                if (args.length == 4) {
-                    if (sender.hasPermission("jobs.admin")) {
-                        if (args[0].equalsIgnoreCase("plevel")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
+                            if (args[1].equalsIgnoreCase("Farmer")) {
+                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
+                            if (args[1].equalsIgnoreCase("Woodcutter")) {
+                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
+                            if (args[1].equalsIgnoreCase("Fisher")) {
+                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
-                        }
-                        if (args[0].equalsIgnoreCase("xp")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("power")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("glevel")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("levelup")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("maxpower")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("restorepower")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("luckychance")) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().setLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().addLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Files.getInstance().removeLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                    }
-                }
-                if (args.length == 2) {
-                    if (sender instanceof Player) {
-                        if (sender.hasPermission("jobs.user")) {
-                            if (args[0].equalsIgnoreCase("select")) {
-                                if (args[1].equalsIgnoreCase("Miner")) {
-                                    Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("Farmer")) {
-                                    Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("Woodcutter")) {
-                                    Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("Fisher")) {
-                                    Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("Doctor")) {
-                                    Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                            }
-                        }
-                    }
-                }
-                if (args.length == 2) {
-                    if (sender instanceof Player) {
-                        if (args[0].equalsIgnoreCase("items")) {
                             if (args[1].equalsIgnoreCase("Doctor")) {
-                                if (Files.getInstance().getJobs(Objects.requireNonNull(((Player) sender).getPlayer())).equals(args[1].toUpperCase())) {
-                                    if (Jobs.economy.getBalance(((Player) sender).getPlayer()) >= Files.getInstance().getconfig().getInt("doctor_price_medicine")) {
-                                        ItemStack items = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("doctor_items.MATERIAL")), Files.getInstance().getitems().getInt("doctor_items.AMOUNT"));
-                                        ItemMeta meta = items.getItemMeta();
-                                        Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.DISPLAY_NAME"))));
-                                        ArrayList<String> lore = new ArrayList<>();
-                                        lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE1"))));
-                                        lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE2"))));
-                                        meta.setLore(lore);
-                                        items.setItemMeta(meta);
-                                        ((Player) sender).getInventory().addItem(items);
-                                        Jobs.economy.withdrawPlayer(((Player) sender).getPlayer(), Files.getInstance().getconfig().getInt("doctor_price_medicine"));
-                                        sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                    } else {
-                                        sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_MONEY));
-                                    }
-                                } else {
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
-                                }
+                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
-                            if (sender.hasPermission("jobs.admin")) {
-                                if (args[1].equalsIgnoreCase("coal")) {
-                                    ItemStack coal = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("coal.MATERIAL")), Files.getInstance().getitems().getInt("coal.AMOUNT"));
-                                    ItemMeta meta = coal.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.DISPLAY_NAME"))));
+                        }
+                    }
+                }
+            }
+            if (args.length == 2) {
+                if (sender instanceof Player) {
+                    if (args[0].equalsIgnoreCase("items")) {
+                        if (args[1].equalsIgnoreCase("Doctor")) {
+                            if (Files.getInstance().getJobs(Objects.requireNonNull(((Player) sender).getPlayer())).equals(args[1].toUpperCase())) {
+                                if (Jobs.economy.getBalance(((Player) sender).getPlayer()) >= Files.getInstance().getconfig().getInt("doctor_price_medicine")) {
+                                    ItemStack items = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("doctor_items.MATERIAL")), Files.getInstance().getitems().getInt("doctor_items.AMOUNT"));
+                                    ItemMeta meta = items.getItemMeta();
+                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.DISPLAY_NAME"))));
                                     ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE2"))));
+                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE1"))));
+                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE2"))));
                                     meta.setLore(lore);
-                                    coal.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(coal);
+                                    items.setItemMeta(meta);
+                                    ((Player) sender).getInventory().addItem(items);
+                                    Jobs.economy.withdrawPlayer(((Player) sender).getPlayer(), Files.getInstance().getconfig().getInt("doctor_price_medicine"));
                                     sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("iron")) {
-                                    ItemStack iron = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("iron.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("iron.AMOUNT"));
-                                    ItemMeta meta = iron.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE2"))));
-                                    meta.setLore(lore);
-                                    iron.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(iron);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("gold")) {
-                                    ItemStack gold = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("gold.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("gold.AMOUNT"));
-                                    ItemMeta meta = gold.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE2"))));
-                                    meta.setLore(lore);
-                                    gold.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(gold);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("diamond")) {
-                                    ItemStack diamond = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("diamond.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("diamond.AMOUNT"));
-                                    ItemMeta meta = diamond.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE2"))));
-                                    meta.setLore(lore);
-                                    diamond.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(diamond);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("emerald")) {
-                                    ItemStack emerald = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("emerald.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("emerald.AMOUNT"));
-                                    ItemMeta meta = emerald.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE2"))));
-                                    meta.setLore(lore);
-                                    emerald.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(emerald);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("log")) {
-                                    ItemStack log = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("log.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("log.AMOUNT"));
-                                    ItemMeta meta = log.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE2"))));
-                                    meta.setLore(lore);
-                                    log.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(log);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("wheat")) {
-                                    ItemStack wheat = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("wheat.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("wheat.AMOUNT"));
-                                    ItemMeta meta = wheat.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.LORE2"))));
-                                    meta.setLore(lore);
-                                    wheat.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(wheat);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                }
-                                if (args[1].equalsIgnoreCase("potato")) {
-                                    ItemStack potato = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("potato.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("potato.AMOUNT"));
-                                    ItemMeta meta = potato.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.LORE2"))));
-                                    meta.setLore(lore);
-                                    potato.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(potato);
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_MONEY));
                                 }
                             } else {
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
                             }
+                        }
+                        if (sender.hasPermission("jobs.admin")) {
+                            if (args[1].equalsIgnoreCase("coal")) {
+                                ItemStack coal = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("coal.MATERIAL")), Files.getInstance().getitems().getInt("coal.AMOUNT"));
+                                ItemMeta meta = coal.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("coal.LORE2"))));
+                                meta.setLore(lore);
+                                coal.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(coal);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("iron")) {
+                                ItemStack iron = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("iron.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("iron.AMOUNT"));
+                                ItemMeta meta = iron.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("iron.LORE2"))));
+                                meta.setLore(lore);
+                                iron.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(iron);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("gold")) {
+                                ItemStack gold = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("gold.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("gold.AMOUNT"));
+                                ItemMeta meta = gold.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("gold.LORE2"))));
+                                meta.setLore(lore);
+                                gold.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(gold);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("diamond")) {
+                                ItemStack diamond = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("diamond.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("diamond.AMOUNT"));
+                                ItemMeta meta = diamond.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("diamond.LORE2"))));
+                                meta.setLore(lore);
+                                diamond.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(diamond);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("emerald")) {
+                                ItemStack emerald = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("emerald.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("emerald.AMOUNT"));
+                                ItemMeta meta = emerald.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("emerald.LORE2"))));
+                                meta.setLore(lore);
+                                emerald.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(emerald);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("log")) {
+                                ItemStack log = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("log.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("log.AMOUNT"));
+                                ItemMeta meta = log.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("log.LORE2"))));
+                                meta.setLore(lore);
+                                log.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(log);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("wheat")) {
+                                ItemStack wheat = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("wheat.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("wheat.AMOUNT"));
+                                ItemMeta meta = wheat.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("wheat.LORE2"))));
+                                meta.setLore(lore);
+                                wheat.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(wheat);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("potato")) {
+                                ItemStack potato = new ItemStack(Objects.requireNonNull(XMaterial.valueOf(Files.getInstance().getitems().getString("potato.MATERIAL")).parseMaterial()), Files.getInstance().getitems().getInt("potato.AMOUNT"));
+                                ItemMeta meta = potato.getItemMeta();
+                                Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.DISPLAY_NAME"))));
+                                ArrayList<String> lore = new ArrayList<>();
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.LORE1"))));
+                                lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("potato.LORE2"))));
+                                meta.setLore(lore);
+                                potato.setItemMeta(meta);
+                                ((Player) sender).getInventory().addItem(potato);
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                        } else {
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
                         }
                     }
                 }
-                return true;
             }
+            return true;
         }
         return true;
     }
