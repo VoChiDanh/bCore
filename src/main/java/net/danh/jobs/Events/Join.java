@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.time.chrono.MinguoEra;
+
 public class Join implements Listener {
 
 
@@ -13,7 +15,7 @@ public class Join implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if (Files.getInstance().getJobs(p) == null) {
-            Files.getInstance().createJobs(p);
+            Files.getInstance().setJobs(p, "MINER".toUpperCase());
             Files.getInstance().setAge(p, 1);
             Files.getInstance().setXP(p, 0);
             Files.getInstance().setRestorePower(p, Files.getInstance().getconfig().getInt("Restore_Power"));

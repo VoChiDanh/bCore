@@ -350,27 +350,22 @@ public class Commands implements CommandExecutor {
                         if (args[0].equalsIgnoreCase("select")) {
                             if (args[1].equalsIgnoreCase("Miner")) {
                                 Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
                             if (args[1].equalsIgnoreCase("Farmer")) {
                                 Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
                             if (args[1].equalsIgnoreCase("Woodcutter")) {
                                 Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
                             if (args[1].equalsIgnoreCase("Fisher")) {
                                 Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
                             if (args[1].equalsIgnoreCase("Doctor")) {
                                 Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             }
                         }
