@@ -70,7 +70,7 @@ public class Interact implements Listener {
 
                     } else {
                         //Hasn't expired yet, shows how many seconds left until it does
-                        bs.sendMessage(Files.getInstance().convert(PREFIX + COOLDOWN_DOCTOR.replaceAll("%time%", String.valueOf(timeLeft))));
+                        bs.sendMessage(Files.getInstance().convert(PREFIX + Objects.requireNonNull(COOLDOWN_DOCTOR).replaceAll("%time%", String.valueOf(timeLeft))));
                         return;
                     }
                     if (bn instanceof Player) {

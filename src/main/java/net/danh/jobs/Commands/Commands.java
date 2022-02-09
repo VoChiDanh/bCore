@@ -501,6 +501,21 @@ public class Commands implements CommandExecutor {
             }
             return true;
         }
+        if (label.equalsIgnoreCase("gang")) {
+            if (sender instanceof Player) {
+                if (sender.hasPermission("jobs.user")) {
+                    if (args.length == 4) {
+                        if (args[0].equalsIgnoreCase("create")) {
+                            if (args[1] != null) {
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         return true;
     }
 }
