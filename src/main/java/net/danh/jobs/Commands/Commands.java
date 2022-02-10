@@ -38,6 +38,8 @@ public class Commands implements CommandExecutor {
         String NOT_ENOUGH_MONEY = Files.getInstance().getlanguage().getString("NOT_ENOUGH_MONEY");
         String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
         String UNKNOW_PLAYER = Files.getInstance().getlanguage().getString("UNKNOW_PLAYER");
+        String UNKNOW_GANG = Files.getInstance().getlanguage().getString("UNKNOW_GANG");
+        String CANNOT_LEAVE = Files.getInstance().getlanguage().getString("CANNOT_LEAVE");
 
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
@@ -508,7 +510,32 @@ public class Commands implements CommandExecutor {
                         if (args[0].equalsIgnoreCase("create")) {
                             if (args[1] != null) {
                                 Files.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                Files.getInstance().setGangOwner(((Player) sender).getPlayer());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                        }
+                        if (args[0].equalsIgnoreCase("join")) {
+                            if (Bukkit.getPlayer(args[1]) != null) {
+                                if (Files.getInstance().getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))) != null) {
+                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), Files.getInstance().getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))));
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_GANG));
+                                }
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args.length == 3) {
+                        if (args[0].equalsIgnoreCase("leave")) {
+                            if (Files.getInstance().getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
+                                if (!(Files.getInstance().isGangOwner(((Player) sender).getPlayer()))) {
+                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), "");
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + CANNOT_LEAVE));
+                                }
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_GANG));
                             }
                         }
                     }

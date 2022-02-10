@@ -14,11 +14,13 @@ public class TabCommand implements TabCompleter {
     List<String> argg = new ArrayList<>();
     List<String> arggg = new ArrayList<>();
     List<String> argggg = new ArrayList<>();
+    List<String> gang = new ArrayList<>();
 
     List<String> arg1 = new ArrayList<String>();
     List<String> arg2 = new ArrayList<String>();
     List<String> arg3 = new ArrayList<String>();
     List<String> arg4 = new ArrayList<String>();
+    List<String> gang1 = new ArrayList<String>();
 
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("jobs")) {
@@ -72,12 +74,24 @@ public class TabCommand implements TabCompleter {
                 }
             }
         }
+        if (label.equalsIgnoreCase("gang")) {
+            gang.add("create");
+            gang.add("join");
+            gang.add("leave");
+        }
         if (args.length == 1) {
             for (String a1 : arg) {
                 if (a1.toLowerCase().startsWith(args[0].toLowerCase()))
                     arg1.add(a1);
             }
             return arg1;
+        }
+        if (args.length == 1) {
+            for (String gang : gang) {
+                if (gang.toLowerCase().startsWith(args[0].toLowerCase()))
+                    gang1.add(gang);
+            }
+            return gang1;
         }
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("plevel")

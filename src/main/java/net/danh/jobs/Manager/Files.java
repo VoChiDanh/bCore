@@ -109,12 +109,6 @@ public class Files {
         return getdata().getInt("players." + p.getName() + ".Power");
     }
 
-    public void createJobs(Player p) {
-        getdata().set("players." + p.getName() + ".Jobs", "NOTHING");
-        setPower(p, 100);
-        savedata();
-    }
-
     public void setJobs(Player p, String name) {
         getdata().set("players." + p.getName() + ".Jobs", name);
         if (getXP(p) == 0) {
@@ -232,6 +226,16 @@ public class Files {
     public void addMemberGang(Player p) {
         getdata().set("gangs." + getGang(p) + ".Member", getMemberGang(p) + 1);
         savedata();
+    }
+
+    public void setGangOwner(Player p) {
+        getdata().set("gangs." + getGang(p) + ".Owner", p.getName());
+        getdata().set("players." + p.getName() + ".Gang", true);
+        savedata();
+    }
+
+    public boolean isGangOwner(Player p) {
+        return getdata().getBoolean("players." + p.getName() + " .Gang");
     }
 
     public int getLevelGang(Player p) {

@@ -4,22 +4,23 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class PlaceholderAPI extends PlaceholderExpansion {
 
 
     @Override
-    public String getAuthor() {
+    public @NotNull String getAuthor() {
         return Jobs.getInstance().getDescription().getAuthors().toString();
     }
 
     @Override
-    public String getIdentifier() {
+    public @NotNull String getIdentifier() {
         return "jobs";
     }
 
     @Override
-    public String getVersion() {
+    public @NotNull String getVersion() {
         return Jobs.getInstance().getDescription().getVersion();
     }
 
@@ -30,7 +31,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
     }
 
     @Override
-    public String onPlaceholderRequest(Player p, String identifier) {
+    public String onPlaceholderRequest(Player p, @NotNull String identifier) {
         if (p == null) {
             return "Player not online";
         }
@@ -51,18 +52,17 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Files.getInstance().getXP(p));
         }
         if (identifier.equalsIgnoreCase("ganglevel")) {
-            if (Files.getInstance().getJobs(p).equals("NOTHING")) {
-                return "";
-            } else {
+            {
                 return String.valueOf(Files.getInstance().getLevelGang(p));
             }
         }
         if (identifier.equalsIgnoreCase("gangpoints")) {
-            if (Files.getInstance().getJobs(p).equals("NOTHING")) {
-                return "";
-            } else {
+            {
                 return String.valueOf(Files.getInstance().getleveluptimes(p));
             }
+        }
+        if (identifier.equalsIgnoreCase("gang")) {
+            return Files.getInstance().getGang(p);
         }
         if (identifier.equalsIgnoreCase("restorepower")) {
             return String.valueOf(Files.getInstance().getRestorePower(p));
