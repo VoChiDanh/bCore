@@ -17,7 +17,7 @@ public class Regen implements Listener {
         EntityRegainHealthEvent.RegainReason r = e.getRegainReason();
         if (r == EntityRegainHealthEvent.RegainReason.EATING || r == EntityRegainHealthEvent.RegainReason.MAGIC || r == EntityRegainHealthEvent.RegainReason.MAGIC_REGEN || r == EntityRegainHealthEvent.RegainReason.REGEN || r == EntityRegainHealthEvent.RegainReason.SATIATED) {
             e.setCancelled(true);
-            if (e.getEntity().hasPermission("heal.bypass"))
+            if (e.getEntity().hasPermission("jobs.admin"))
                 e.setCancelled(false);
         }
     }
