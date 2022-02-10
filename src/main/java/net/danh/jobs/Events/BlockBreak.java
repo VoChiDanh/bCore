@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class BlockBreak implements Listener {
@@ -63,7 +64,7 @@ public class BlockBreak implements Listener {
                                 Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             }
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
+                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
                                     .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                     .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                             return;
@@ -121,7 +122,7 @@ public class BlockBreak implements Listener {
                                 Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             }
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
+                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
                                     .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                     .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                             return;
@@ -175,7 +176,7 @@ public class BlockBreak implements Listener {
                                     Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                                 }
                                 Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                                e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
+                                e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
                                         .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                         .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
 
