@@ -39,14 +39,19 @@ public class Fishing implements Listener {
                         double systemchance = Math.random() * 100.0D;
                         double playerchance = Files.getInstance().getLuckyChance(e.getPlayer());
                         if (playerchance >= systemchance) {
-                            Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                                Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            }
                             Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
                             e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
                                     .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                     .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                             return;
                         }
-                        Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+
+                        if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                            Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                        }
                         Files.getInstance().removePower(e.getPlayer(), 1);
                         e.setCancelled(false);
                     } else {

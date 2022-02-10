@@ -228,16 +228,6 @@ public class Files {
         savedata();
     }
 
-    public void setGangOwner(Player p) {
-        getdata().set("gangs." + getGang(p) + ".Owner", p.getName());
-        getdata().set("players." + p.getName() + ".Gang", true);
-        savedata();
-    }
-
-    public boolean isGangOwner(Player p) {
-        return getdata().getBoolean("players." + p.getName() + " .Gang");
-    }
-
     public int getLevelGang(Player p) {
         return getdata().getInt("gangs." + getGang(p) + ".Level");
     }

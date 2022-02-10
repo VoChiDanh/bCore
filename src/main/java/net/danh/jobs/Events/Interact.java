@@ -108,14 +108,18 @@ public class Interact implements Listener {
 
                                 }
                                 if (playerchance >= systemchance) {
-                                    Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                                    if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                                        Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                                    }
                                     Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
                                     e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
                                             .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                             .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                                     return;
                                 }
-                                Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                                if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                                    Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                                }
                                 EconomyResponse err = Jobs.economy.depositPlayer(bs.getName(), 600);
                                 Files.getInstance().removePower(e.getPlayer(), 1);
                             }
