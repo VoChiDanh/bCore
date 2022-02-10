@@ -99,6 +99,8 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Death(), this);
         Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
+        Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
         Files.getInstance().createconfig();
         if (getNMSVersion().contains("v1_12_R1")
                 || getNMSVersion().contains("v1_11_R1")
