@@ -30,6 +30,10 @@ public class BlockBreak implements Listener {
         Integer LEVELUP = Files.getInstance().getleveluptimes(e.getPlayer());
         String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
         String NOT_CORRECT_ITEMS = Files.getInstance().getlanguage().getString("NOT_CORRECT_ITEMS");
+        if (e.getPlayer().hasPermission("jobs.admin")) {
+            e.setCancelled(false);
+            return;
+        }
         if (b.getType() == XMaterial.COAL_ORE.parseMaterial()
                 || b.getType() == XMaterial.IRON_ORE.parseMaterial()
                 || b.getType() == XMaterial.GOLD_ORE.parseMaterial()
