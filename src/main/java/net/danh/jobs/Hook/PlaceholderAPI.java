@@ -3,6 +3,7 @@ package net.danh.jobs.Hook;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,14 +53,10 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Files.getInstance().getXP(p));
         }
         if (identifier.equalsIgnoreCase("ganglevel")) {
-            {
-                return String.valueOf(Files.getInstance().getLevelGang(p));
-            }
+            return String.valueOf(Files.getInstance().getLevelGang(p));
         }
         if (identifier.equalsIgnoreCase("gangpoints")) {
-            {
-                return String.valueOf(Files.getInstance().getleveluptimes(p));
-            }
+            return String.valueOf(Files.getInstance().getleveluptimes(p));
         }
         if (identifier.equalsIgnoreCase("gang")) {
             return Files.getInstance().getGang(p);
@@ -69,6 +66,19 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
         if (identifier.equalsIgnoreCase("maxpower")) {
             return String.valueOf(Files.getInstance().getMaxPower(p));
+        }
+        if (identifier.equalsIgnoreCase("weight")) {
+            return String.valueOf(Files.getInstance().getWeight(p));
+        }
+        if (identifier.equalsIgnoreCase("maxweight")){
+            return String.valueOf(Files.getInstance().getMaxWeight(p));
+        }
+        if (identifier.startsWith("storage_")){
+            String name = identifier.substring(7).toUpperCase();
+            if (Material.getMaterial(name) != null) {
+                return String.valueOf(Files.getInstance().getStorage(p, name));
+            }
+            return "Unknow Material";
         }
         return null;
     }

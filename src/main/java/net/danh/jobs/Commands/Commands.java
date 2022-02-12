@@ -1,6 +1,5 @@
 package net.danh.jobs.Commands;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.danh.jobs.Jobs;
@@ -39,7 +38,6 @@ public class Commands implements CommandExecutor {
         String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
         String UNKNOW_PLAYER = Files.getInstance().getlanguage().getString("UNKNOW_PLAYER");
         String UNKNOW_GANG = Files.getInstance().getlanguage().getString("UNKNOW_GANG");
-        String CANNOT_LEAVE = Files.getInstance().getlanguage().getString("CANNOT_LEAVE");
 
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
@@ -344,6 +342,90 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("weight")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("maxweight")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().setMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().addMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Files.getInstance().removeMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                }
+            }
+            if (args.length == 5) {
+                if (sender.hasPermission("jobs.admin")) {
+                    if (args[0].equalsIgnoreCase("storage")) {
+                        if (Material.getMaterial(args[3]) != null) {
+                            if (args[1].equalsIgnoreCase("set")) {
+                                if (Bukkit.getPlayer(args[2]) != null) {
+                                    Files.getInstance().setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                }
+                            }
+                            if (args[1].equalsIgnoreCase("add")) {
+                                if (Bukkit.getPlayer(args[2]) != null) {
+                                    Files.getInstance().addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                }
+                            }
+                            if (args[1].equalsIgnoreCase("remove")) {
+                                if (Bukkit.getPlayer(args[2]) != null) {
+                                    Files.getInstance().removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                } else {
+                                    sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (args.length == 2) {
@@ -429,8 +511,8 @@ public class Commands implements CommandExecutor {
                     if (args.length == 1) {
                         if (args[0].equalsIgnoreCase("leave")) {
                             if (Files.getInstance().getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
-                                    Files.getInstance().selectGang(((Player) sender).getPlayer(), Files.getInstance().getJobs(((Player) sender).getPlayer()));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), Files.getInstance().getJobs(((Player) sender).getPlayer()));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_GANG));
                             }

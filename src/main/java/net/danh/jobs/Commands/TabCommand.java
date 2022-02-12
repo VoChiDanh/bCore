@@ -38,6 +38,10 @@ public class TabCommand implements TabCompleter {
                 arg.add("maxpower");
                 arg.add("restorepower");
                 arg.add("luckychance");
+                arg.add("weight");
+                arg.add("maxweight");
+                arg.add("storage");
+                arg.add("luckychance");
                 arg.add("update");
             }
             if (args[0].equalsIgnoreCase("select")) {
@@ -55,7 +59,9 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("levelup")
                         || args[0].equalsIgnoreCase("maxpower")
                         || args[0].equalsIgnoreCase("restorepower")
-                        || args[0].equalsIgnoreCase("luckychance")) {
+                        || args[0].equalsIgnoreCase("luckychance")
+                        || args[0].equalsIgnoreCase("weight")
+                        || args[0].equalsIgnoreCase("maxweight")) {
                     argg.add("set");
                     argg.add("add");
                     argg.add("remove");

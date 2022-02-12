@@ -5,6 +5,7 @@ import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 
@@ -12,7 +13,7 @@ import java.util.logging.Level;
 
 public class Fishing implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onFishing(PlayerFishEvent e) {
         String NEED_MORE_POWER = Files.getInstance().getlanguage().getString("NEED_MORE_POWER");
         String PREFIX = Files.getInstance().getlanguage().getString("PREFIX");

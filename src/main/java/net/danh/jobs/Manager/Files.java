@@ -9,11 +9,12 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class Files {
     private static Files instance;
-    private File configFile, languageFile, dataFile, itemsFile;
-    private FileConfiguration config, language, data, items;
+    private File configFile, languageFile, dataFile, itemsFile, storageFile;
+    private FileConfiguration config, language, data, items, storage;
 
     public static Files getInstance() {
 
@@ -28,21 +29,25 @@ public class Files {
         languageFile = new File(Jobs.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
         itemsFile = new File(Jobs.getInstance().getDataFolder(), "items.yml");
+        storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
 
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
         if (!dataFile.exists()) Jobs.getInstance().saveResource("data.yml", false);
         if (!itemsFile.exists()) Jobs.getInstance().saveResource("items.yml", false);
+        if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         items = new YamlConfiguration();
+        storage = new YamlConfiguration();
 
         try {
             config.load(configFile);
             language.load(languageFile);
             data.load(dataFile);
             items.load(itemsFile);
+            storage.load(storageFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -63,6 +68,10 @@ public class Files {
 
     public FileConfiguration getitems() {
         return items;
+    }
+
+    public FileConfiguration getstorage() {
+        return storage;
     }
 
     public void reloadconfig() {
@@ -99,6 +108,19 @@ public class Files {
             data.save(dataFile);
         } catch (IOException ignored) {
         }
+    }
+
+    public void savestorage() {
+        try {
+            storage.save(storageFile);
+        } catch (IOException ignored) {
+        }
+    }
+
+    public int getRandomNumber(int min, int max) {
+        Random r = new Random();
+        int randomNumber = r.nextInt(max - min) + min;
+        return randomNumber;
     }
 
     public String getJobs(Player p) {
@@ -356,6 +378,72 @@ public class Files {
             getdata().set("players." + p.getName() + ".LuckyChance", getconfig().getInt("Default_Lucky_Chance"));
         }
         savedata();
+    }
+
+    public int getWeight(Player p) {
+        return getdata().getInt("players." + p.getName() + ".Weight");
+    }
+
+    public void setWeight(Player p, int number) {
+        getdata().set("players." + p.getName() + ".Weight", number);
+        savedata();
+    }
+
+    public void addWeight(Player p, int number) {
+        getdata().set("players." + p.getName() + ".Weight", getWeight(p) + number);
+        savedata();
+    }
+
+    public void removeWeight(Player p, int number) {
+        if (getWeight(p) > 1) {
+            getdata().set("players." + p.getName() + ".Weight", getWeight(p) - number);
+        } else {
+            getdata().set("players." + p.getName() + ".Weight", 0);
+        }
+        savedata();
+    }
+
+    public int getMaxWeight(Player p) {
+        return getdata().getInt("players." + p.getName() + ".MaxWeight");
+    }
+
+
+    public void setMaxWeight(Player p, int number) {
+        getdata().set("players." + p.getName() + ".MaxWeight", number);
+        savedata();
+    }
+
+    public void addMaxWeight(Player p, int number) {
+        getdata().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) + number);
+        savedata();
+    }
+
+    public void removeMaxWeight(Player p, int number) {
+        if (getMaxWeight(p) > 10) {
+            getdata().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) - number);
+        } else {
+            getdata().set("players." + p.getName() + ".MaxWeight", 10);
+        }
+        savedata();
+    }
+
+    public int getStorage(Player p, String name) {
+        return getstorage().getInt("players." + p.getName() + ".Blocks." + name);
+    }
+
+    public void setStorage(Player p, String name, Integer number) {
+        getstorage().set("players." + p.getName() + ".Blocks." + name, number);
+        savestorage();
+    }
+
+    public void addStorage(Player p, String name, Integer number) {
+        getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
+        savestorage();
+    }
+
+    public void removeStorage(Player p, String name, Integer number) {
+        getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
+        savestorage();
     }
 
     public String convert(String s) {

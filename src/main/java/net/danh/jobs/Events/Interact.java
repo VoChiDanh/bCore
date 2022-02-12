@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +22,7 @@ import java.util.logging.Level;
 
 public class Interact implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onRev(PlayerInteractAtEntityEvent e) {
         Player bs = e.getPlayer();
         String NEED_MORE_POWER = Files.getInstance().getlanguage().getString("NEED_MORE_POWER");
@@ -112,7 +113,7 @@ public class Interact implements Listener {
                                         Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                                     }
                                     Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                                    e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
+                                    e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
                                             .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                             .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                                     return;

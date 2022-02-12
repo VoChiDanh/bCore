@@ -11,3 +11,37 @@ Per_Max_Power: 100
 Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
+Blocks:
+  COAL_ORE:
+    max: 3
+    min: 1
+  IRON_ORE:
+    max: 5
+    min: 3
+  GOLD_ORE:
+    max: 10
+    min: 5
+  DIAMOND_ORE:
+    max: 15
+    min: 10
+  EMERALD_ORE:
+    max: 20
+    min: 15
+  ACACIA_LOG:
+    max: 5
+    min: 1
+  BIRCH_LOG:
+    max: 5
+    min: 1
+  DARK_OAK_LOG:
+    max: 5
+    min: 1
+  JUNGLE_LOG:
+    max: 5
+    min: 1
+  OAK_LOG:
+    max: 5
+    min: 1
+  SPRUCE_LOG:
+    max: 5
+    min: 1
