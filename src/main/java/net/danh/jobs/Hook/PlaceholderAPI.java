@@ -86,6 +86,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             if (Material.getMaterial(name) != null) {
                 return String.valueOf(Price.getInstance().getPrice(name));
             }
+            return "Unknow Price";
         }
         return null;
     }
