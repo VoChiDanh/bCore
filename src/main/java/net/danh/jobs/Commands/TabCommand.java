@@ -27,6 +27,7 @@ public class TabCommand implements TabCompleter {
             if (sender.hasPermission("jobs.user")) {
                 arg.add("select");
                 arg.add("items");
+                arg.add("sell");
             }
             if (sender.hasPermission("jobs.admin")) {
                 arg.add("info");
@@ -44,7 +45,6 @@ public class TabCommand implements TabCompleter {
                 arg.add("luckychance");
                 arg.add("update");
                 arg.add("price");
-                arg.add("sell");
             }
             if (args[0].equalsIgnoreCase("select")) {
                 arggg.add("Miner");
