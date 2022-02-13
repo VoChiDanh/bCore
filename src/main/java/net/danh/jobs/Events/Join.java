@@ -21,7 +21,7 @@ public class Join implements Listener {
             Files.getInstance().setLuckyChance(p, Files.getInstance().getconfig().getInt("Default_Lucky_Chance"));
             Files.getInstance().setPower(p, Files.getInstance().getMaxPower(p));
             Files.getInstance().setWeight(p, 0);
-            Files.getInstance().setMaxWeight(p, 10);
+            Files.getInstance().setMaxWeight(p, 100);
             Files.getInstance().setStorage(p, "BEDROCK", 0);
             Files.getInstance().savedata();
         }

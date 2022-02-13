@@ -2,6 +2,7 @@ package net.danh.jobs.Commands;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.danh.jobs.Gui.SellBlocks;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import net.danh.jobs.Manager.Price;
@@ -412,11 +413,11 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            if (args.length == 3) {
+            if (args.length == 1) {
                 if (sender.hasPermission("jobs.user")) {
                     if (args[0].equalsIgnoreCase("sell")) { //TODO Make gui to sell item and replace command
                         if (sender instanceof Player) {
-                            Price.getInstance().Sell(((Player) sender).getPlayer(), args[1].toUpperCase(), Integer.parseInt(args[2]));
+                            SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
                         }
                     }
                 }
