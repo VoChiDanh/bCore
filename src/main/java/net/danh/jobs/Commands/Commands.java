@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
+import net.danh.jobs.Manager.Price;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -391,6 +392,34 @@ public class Commands implements CommandExecutor {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("price")) {
+                        if (Material.getMaterial(args[2]) != null) {
+                            if (args[1].equalsIgnoreCase("set")) {
+                                Price.getInstance().setPrice(args[2], Double.valueOf(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+
+                            }
+                            if (args[1].equalsIgnoreCase("add")) {
+                                Price.getInstance().addPrice(args[2], Double.valueOf(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                            if (args[1].equalsIgnoreCase("remove")) {
+                                Price.getInstance().removePrice(args[2], Double.valueOf(args[3]));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("sell")) {
+                        if (sender instanceof Player) {
+                            if (Material.getMaterial(args[2]) != null) {
+                                if (Integer.parseInt(args[3]) != 0) {
+                                    Price.getInstance().Sell(((Player) sender).getPlayer(), args[2], Integer.parseInt(args[3]));
+                                }
                             }
                         }
                     }

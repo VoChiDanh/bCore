@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class Files {
     private static Files instance;
-    private File configFile, languageFile, dataFile, itemsFile, storageFile;
-    private FileConfiguration config, language, data, items, storage;
+    private File configFile, languageFile, dataFile, itemsFile, storageFile, priceFile;
+    private FileConfiguration config, language, data, items, storage, price;
 
     public static Files getInstance() {
 
@@ -30,17 +30,20 @@ public class Files {
         dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
         itemsFile = new File(Jobs.getInstance().getDataFolder(), "items.yml");
         storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
+        priceFile = new File(Jobs.getInstance().getDataFolder(), "price.yml");
 
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
         if (!dataFile.exists()) Jobs.getInstance().saveResource("data.yml", false);
         if (!itemsFile.exists()) Jobs.getInstance().saveResource("items.yml", false);
         if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
+        if (!priceFile.exists()) Jobs.getInstance().saveResource("price.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         items = new YamlConfiguration();
         storage = new YamlConfiguration();
+        price = new YamlConfiguration();
 
         try {
             config.load(configFile);
@@ -48,6 +51,7 @@ public class Files {
             data.load(dataFile);
             items.load(itemsFile);
             storage.load(storageFile);
+            price.load(priceFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -72,6 +76,9 @@ public class Files {
 
     public FileConfiguration getstorage() {
         return storage;
+    }
+    public FileConfiguration getprice() {
+        return price;
     }
 
     public void reloadconfig() {
@@ -113,6 +120,13 @@ public class Files {
     public void savestorage() {
         try {
             storage.save(storageFile);
+        } catch (IOException ignored) {
+        }
+    }
+
+    public void saveprice() {
+        try {
+            price.save(priceFile);
         } catch (IOException ignored) {
         }
     }

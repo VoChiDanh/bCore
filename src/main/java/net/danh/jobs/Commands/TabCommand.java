@@ -43,6 +43,8 @@ public class TabCommand implements TabCompleter {
                 arg.add("storage");
                 arg.add("luckychance");
                 arg.add("update");
+                arg.add("price");
+                arg.add("sell");
             }
             if (args[0].equalsIgnoreCase("select")) {
                 arggg.add("Miner");
@@ -61,22 +63,14 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("restorepower")
                         || args[0].equalsIgnoreCase("luckychance")
                         || args[0].equalsIgnoreCase("weight")
-                        || args[0].equalsIgnoreCase("maxweight")) {
+                        || args[0].equalsIgnoreCase("maxweight")
+                        || args[0].equalsIgnoreCase("price")) {
                     argg.add("set");
                     argg.add("add");
                     argg.add("remove");
                 }
                 if (args[0].equalsIgnoreCase("items")) {
                     argggg.add("Doctor");
-                    argggg.add("coal");
-                    argggg.add("iron");
-                    argggg.add("gold");
-                    argggg.add("diamond");
-                    argggg.add("emerald");
-                    argggg.add("log");
-                    argggg.add("wheat");
-                    argggg.add("carrot");
-                    argggg.add("potato");
                 }
             }
         }

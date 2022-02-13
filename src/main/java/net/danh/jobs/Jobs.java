@@ -5,6 +5,7 @@ import net.danh.jobs.Commands.TabCommand;
 import net.danh.jobs.Events.*;
 import net.danh.jobs.Hook.PlaceholderAPI;
 import net.danh.jobs.Manager.Files;
+import net.danh.jobs.Manager.Price;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,7 +16,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -119,9 +119,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         }
         (new BukkitRunnable() {
             public void run() {
-                Iterator var2 = Bukkit.getOnlinePlayers().iterator();
-                while (var2.hasNext()) {
-                    Player p = (Player) var2.next();
+                for (Player p : Bukkit.getOnlinePlayers()) {
                     if (Files.getInstance().getAge(p) == 1) {
                         if (Files.getInstance().getPower(p) > Files.getInstance().getMaxPower(p)) {
                             Files.getInstance().setPower(p, Files.getInstance().getMaxPower(p));
@@ -137,17 +135,82 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
-                Iterator var2 = Bukkit.getOnlinePlayers().iterator();
-                while (var2.hasNext()) {
-                    Player p = (Player) var2.next();
+                for (Player p : Bukkit.getOnlinePlayers()) {
                     if (Files.getInstance().getconfig().getBoolean("EnableAge")) {
                         Files.getInstance().addAge(p, 1);
-                    } else {
-                        continue;
                     }
                 }
             }
         }).runTaskTimer(this, Files.getInstance().getconfig().getInt("AgeTime") * 20L, Files.getInstance().getconfig().getInt("AgeTime") * 20L);
+
+        (new BukkitRunnable() {
+            public void run() {
+                double number = Files.getInstance().getRandomNumber(1, 100);
+                if (Price.getInstance().getPrice("COAL_ORE") == 0.0D) {
+                    Price.getInstance().addPrice("COAL_ORE", 1.0);
+                }
+
+                if (Price.getInstance().getPrice("IRON_ORE") == 0.0D) {
+                    Price.getInstance().addPrice("IRON_ORE", 3.0);
+                }
+                if (Price.getInstance().getPrice("GOLD_ORE") == 0.0D) {
+                    Price.getInstance().addPrice("GOLD_ORE", 5.0);
+                }
+
+                if (Price.getInstance().getPrice("DIAMOND_ORE") == 0.0D) {
+                    Price.getInstance().addPrice("DIAMOND_ORE", 7.0);
+                }
+                if (Price.getInstance().getPrice("EMERALD_ORE") == 0.0D) {
+                    Price.getInstance().setPrice("EMERALD_ORE", 10.0);
+                }
+
+                if (Price.getInstance().getPrice("ACACIA_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("ACACIA_LOG", 5.0);
+                }
+                if (Price.getInstance().getPrice("BIRCH_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("BIRCH_LOG", 5.0);
+                }
+
+                if (Price.getInstance().getPrice("DARK_OAK_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("DARK_OAK_LOG", 5.0);
+                }
+                if (Price.getInstance().getPrice("JUNGLE_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("JUNGLE_LOG", 5.0);
+                }
+
+                if (Price.getInstance().getPrice("OAK_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("OAK_LOG", 5.0);
+                }
+                if (Price.getInstance().getPrice("SPRUCE_LOG") == 0.0D) {
+                    Price.getInstance().setPrice("SPRUCE_LOG", 5.0);
+                }
+                if (number < 50) {
+                    Price.getInstance().removePrice("COAL_ORE", number / 100);
+                    Price.getInstance().removePrice("IRON_ORE", number / 100);
+                    Price.getInstance().removePrice("GOLD_ORE", number / 100);
+                    Price.getInstance().removePrice("DIAMOND_ORE", number / 100);
+                    Price.getInstance().removePrice("EMERALD_ORE", number / 100);
+                    Price.getInstance().removePrice("ACACIA_LOG", number / 100);
+                    Price.getInstance().removePrice("BIRCH_LOG", number / 100);
+                    Price.getInstance().removePrice("DARK_OAK_LOG", number / 100);
+                    Price.getInstance().removePrice("JUNGLE_LOG", number / 100);
+                    Price.getInstance().removePrice("OAK_LOG", number / 100);
+                    Price.getInstance().removePrice("SPRUCE_LOG", number / 100);
+                } else {
+                    Price.getInstance().addPrice("COAL_ORE", number / 100);
+                    Price.getInstance().addPrice("IRON_ORE", number / 100);
+                    Price.getInstance().addPrice("GOLD_ORE", number / 100);
+                    Price.getInstance().addPrice("DIAMOND_ORE", number / 100);
+                    Price.getInstance().addPrice("EMERALD_ORE", number / 100);
+                    Price.getInstance().addPrice("ACACIA_LOG", number / 100);
+                    Price.getInstance().addPrice("BIRCH_LOG", number / 100);
+                    Price.getInstance().addPrice("DARK_OAK_LOG", number / 100);
+                    Price.getInstance().addPrice("JUNGLE_LOG", number / 100);
+                    Price.getInstance().addPrice("OAK_LOG", number / 100);
+                    Price.getInstance().addPrice("SPRUCE_LOG", number / 100);
+                }
+            }
+        }).runTaskTimer(this, 300 * 20L, 300 * 20L);
     }
 
     @Override
