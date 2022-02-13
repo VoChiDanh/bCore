@@ -144,7 +144,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, Files.getInstance().getconfig().getInt("AgeTime") * 20L, Files.getInstance().getconfig().getInt("AgeTime") * 20L);
 
         (new BukkitRunnable() {
-            public void run() {
+            public void run() { //TODO Need do something with this
                 double number = Files.getInstance().getRandomNumber(1, 100);
                 if (Price.getInstance().getPrice("COAL_ORE") == 0.0D) {
                     Price.getInstance().addPrice("COAL_ORE", 1.0);
