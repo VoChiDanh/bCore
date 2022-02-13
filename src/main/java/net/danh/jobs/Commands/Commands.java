@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import net.danh.jobs.Manager.Price;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -107,8 +108,6 @@ public class Commands implements CommandExecutor {
                             e.printStackTrace();
                         }
                     }
-                } else {
-                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
                 }
             }
             if (args.length == 2) {
@@ -129,8 +128,6 @@ public class Commands implements CommandExecutor {
                             sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
                         }
                     }
-                } else {
-                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_PERMISSION));
                 }
             }
             if (args.length == 4) {
@@ -414,13 +411,13 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                }
+            }
+            if (args.length == 3){
+                if (sender.hasPermission("jobs.user")) {
                     if (args[0].equalsIgnoreCase("sell")) {
                         if (sender instanceof Player) {
-                            if (Material.getMaterial(args[2]) != null) {
-                                if (Integer.parseInt(args[3]) != 0) {
-                                    Price.getInstance().Sell(((Player) sender).getPlayer(), args[2], Integer.parseInt(args[3]));
-                                }
-                            }
+                            Price.getInstance().Sell(((Player) sender).getPlayer(), args[1].toUpperCase(), Integer.parseInt(args[2]));
                         }
                     }
                 }
