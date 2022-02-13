@@ -3,6 +3,7 @@ package net.danh.jobs.Hook;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
+import net.danh.jobs.Manager.Price;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -70,15 +71,21 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("weight")) {
             return String.valueOf(Files.getInstance().getWeight(p));
         }
-        if (identifier.equalsIgnoreCase("maxweight")){
+        if (identifier.equalsIgnoreCase("maxweight")) {
             return String.valueOf(Files.getInstance().getMaxWeight(p));
         }
-        if (identifier.startsWith("storage_")){
+        if (identifier.startsWith("storage_")) {
             String name = identifier.substring(7).toUpperCase();
             if (Material.getMaterial(name) != null) {
                 return String.valueOf(Files.getInstance().getStorage(p, name));
             }
-            return "Unknow Material";
+            return "Unknown Material";
+        }
+        if (identifier.startsWith("price_")) {
+            String name = identifier.substring(6).toUpperCase();
+            if (Material.getMaterial(name) != null) {
+                return String.valueOf(Price.getInstance().getPrice(name));
+            }
         }
         return null;
     }

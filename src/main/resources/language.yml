@@ -16,6 +16,7 @@ AGE_UP:
 HELP_USER:
   - "&9/Jobs select [Miner/Woodcutter/Doctor/Farmer/Fisher] - &bSelect your jobs"
   - "&9/Jobs info [Player] - &bCheck info player"
+  - "&9/Jobs sell [Block Type] [Number] - &cSell blocks"
   - "&9/Jobs items Doctor - &bTake medicine to restore patient health | ONLY DOCTOR JOBS"
 HELP_ADMIN:
   - "&9/Jobs plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Age"
@@ -29,7 +30,6 @@ HELP_ADMIN:
   - "&9/Jobs maxweight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Weight"
   - "&9/Jobs storage [add/set/remove] [Player] [Block Type] [Number] - &cAdd/Set/Remove Storage"
   - "&9/Jobs price [add/set/remove] [Block Type] [Number] - &cAdd/Set/Remove Price"
-  - "&9/Jobs sell [Block Type] [Number] - &cSell blocks"
   - "&9/Jobs reload - &aReload config"
   - "&9/Jobs update - &aUpdate plugins to lastest DevBuid"
 DONE: "&aDone"

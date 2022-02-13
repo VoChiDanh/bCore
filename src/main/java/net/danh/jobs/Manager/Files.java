@@ -77,6 +77,7 @@ public class Files {
     public FileConfiguration getstorage() {
         return storage;
     }
+
     public FileConfiguration getprice() {
         return price;
     }
