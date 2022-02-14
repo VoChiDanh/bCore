@@ -2,14 +2,14 @@ PREFIX: "&f[&bJobs&f] "
 RELOAD: "&aReloaded"
 NOT_ENOUGH_PERMISSION: "&cYou are not enough permission"
 INFO_CHECK:
-  - "&6%player% - %jobs%"
+  - "&6%player%"
   - "&6Player Level: %plevel%"
   - "&6Gang Level: %glevel%"
   - "&6Levelup Times: %leveluptimes%"
   - "&6XP: %xp%"
   - "&6Power: %power%"
-AGE_UP:
-  - "&dYour age increase to %age%"
+LEVEL_UP:
+  - "&dYour level increase to %level%"
   - "&dYou unlocked:"
   - "&dMax power: %mpower%"
   - "&dRestore power when drink: %rpower%"
@@ -19,7 +19,7 @@ HELP_USER:
   - "&9/Jobs sell [Block Type] [Number] - &cSell blocks"
   - "&9/Jobs items Doctor - &bTake medicine to restore patient health | ONLY DOCTOR JOBS"
 HELP_ADMIN:
-  - "&9/Jobs plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Age"
+  - "&9/Jobs plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level"
   - "&9/Jobs xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP"
   - "&9/Jobs power [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Power"
   - "&9/Jobs glevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Gang Level"

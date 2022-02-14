@@ -142,16 +142,16 @@ public class Files {
         return getdata().getInt("players." + p.getName() + ".Power");
     }
 
-    public int getAge(Player p) {
-        return getdata().getInt("players." + p.getName() + ".Age");
+    public int getLevel(Player p) {
+        return getdata().getInt("players." + p.getName() + ".Level");
     }
 
     public int getXP(Player p) {
         return getdata().getInt("players." + p.getName() + ".XP");
     }
 
-    public void setAge(Player p, int number) {
-        getdata().set("players." + p.getName() + ".Age", number);
+    public void setLevel(Player p, int number) {
+        getdata().set("players." + p.getName() + ".Level", number);
         savedata();
     }
 
@@ -160,15 +160,15 @@ public class Files {
         savedata();
     }
 
-    public void addAge(Player p, int number) {
-        getdata().set("players." + p.getName() + ".Age", getAge(p) + number);
+    public void addLevel(Player p, int number) {
+        getdata().set("players." + p.getName() + ".Level", getLevel(p) + number);
         savedata();
         addMaxPower(p, getconfig().getInt("Per_Max_Power"));
         addRestorePower(p, getconfig().getInt("Per_Restore_Power"));
-        for (String age_up : Files.getInstance().getlanguage().getStringList("AGE_UP")) {
+        for (String age_up : Files.getInstance().getlanguage().getStringList("LEVEL_UP")) {
             p.sendMessage(Files.getInstance().convert(age_up
                     .replaceAll("%mpower%", String.valueOf(getMaxPower(p)))
-                    .replaceAll("%age%", String.valueOf(getAge(p)))
+                    .replaceAll("%level%", String.valueOf(getLevel(p)))
                     .replaceAll("%rpower%", String.valueOf(getRestorePower(p)))));
         }
     }
@@ -179,12 +179,12 @@ public class Files {
         savedata();
     }
 
-    public void removeAge(Player p, int number) {
-        if (getAge(p) > number) {
-            getdata().set("players." + p.getName() + ".Age", getAge(p) - number);
+    public void removeLevel(Player p, int number) {
+        if (getLevel(p) > number) {
+            getdata().set("players." + p.getName() + ".Level", getLevel(p) - number);
             savedata();
         } else {
-            getdata().set("players." + p.getName() + ".Age", 1);
+            getdata().set("players." + p.getName() + ".Level", 1);
             savedata();
         }
     }
@@ -283,7 +283,7 @@ public class Files {
     }
 
     public void checkLevelUp(Player p) {
-        if (getXP(p) >= (((getAge(p) + getLevelGang(p)) / 2)) * 1000) {
+        if (getXP(p) >= (((getLevel(p) + getLevelGang(p)) / 2)) * 1000) {
             addLevelGang(p, 1);
             setXP(p, 0);
             addLeveluptimes(p, 1);

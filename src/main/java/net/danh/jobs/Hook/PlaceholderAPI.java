@@ -42,7 +42,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
 
         if (identifier.equalsIgnoreCase("age")) {
-            return String.valueOf(Files.getInstance().getAge(p));
+            return String.valueOf(Files.getInstance().getLevel(p));
         }
 
         if (identifier.equalsIgnoreCase("xp")) {

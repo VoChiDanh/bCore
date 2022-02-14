@@ -119,7 +119,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (Files.getInstance().getAge(p) == 1) {
+                    if (Files.getInstance().getLevel(p) == 1) {
                         if (Files.getInstance().getPower(p) > Files.getInstance().getMaxPower(p)) {
                             Files.getInstance().setPower(p, Files.getInstance().getMaxPower(p));
                         }
@@ -135,16 +135,6 @@ public final class Jobs extends JavaPlugin implements Listener {
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
-        (new BukkitRunnable() {
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (Files.getInstance().getconfig().getBoolean("EnableAge")) {
-                        Files.getInstance().addAge(p, 1);
-                    }
-                }
-            }
-        }).runTaskTimer(this, Files.getInstance().getconfig().getInt("AgeTime") * 20L, Files.getInstance().getconfig().getInt("AgeTime") * 20L);
-
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 double number = Files.getInstance().getRandomNumber(1, 100);

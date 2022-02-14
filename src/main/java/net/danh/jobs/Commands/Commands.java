@@ -113,7 +113,7 @@ public class Commands implements CommandExecutor {
                             for (String check_info : Files.getInstance().getlanguage().getStringList("INFO_CHECK")) {
                                 sender.sendMessage(Files.getInstance().convert(check_info
                                         .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
-                                        .replaceAll("%plevel%", String.valueOf(Files.getInstance().getAge(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%plevel%", String.valueOf(Files.getInstance().getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%xp", String.valueOf(Files.getInstance().getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%glevel%", String.valueOf(Files.getInstance().getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%power%", String.valueOf(Files.getInstance().getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
@@ -130,7 +130,7 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("plevel")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Files.getInstance().setAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Files.getInstance().setLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -138,7 +138,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Files.getInstance().addAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Files.getInstance().addLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -146,7 +146,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Files.getInstance().removeAge(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Files.getInstance().removeLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_PLAYER));
