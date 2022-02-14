@@ -1,9 +1,11 @@
 package net.danh.jobs.Gui;
 
 import com.cryptomorin.xseries.XMaterial;
+import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import net.danh.jobs.Manager.Price;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class SellBlocks implements Listener {
 
@@ -27,7 +31,7 @@ public class SellBlocks implements Listener {
     }
 
     public Inventory getSellGui(Player p) {
-        Inventory sellgui = Bukkit.createInventory(p, 9, "Sell Gui");
+        Inventory sellgui = Bukkit.createInventory(p, Files.getInstance().getgui().getInt("GUI.SellGui.Size"), Files.getInstance().getgui().getString(Files.getInstance().convert("GUI.SellGui.Title")));
         ItemStack coal = coal(p);
         ItemStack iron = iron(p);
         ItemStack gold = gold(p);
@@ -35,145 +39,135 @@ public class SellBlocks implements Listener {
         ItemStack emerald = emerald(p);
         ItemStack log = log(p);
         ItemStack player = playerinfo(p);
-        sellgui.setItem(1, coal);
-        sellgui.setItem(2, iron);
-        sellgui.setItem(3, gold);
-        sellgui.setItem(4, player);
-        sellgui.setItem(5, diamond);
-        sellgui.setItem(6, emerald);
-        sellgui.setItem(7, log);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Coal.Slot"), coal);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Iron.Slot"), iron);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Gold.Slot"), gold);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.PlayerInfo.Slot"), player);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Diamond.Slot"), diamond);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Emerald.Slot"), emerald);
+        sellgui.setItem(Files.getInstance().getgui().getInt("GUI.SellGui.Log.Slot"), log);
         return sellgui;
     }
 
 
     public ItemStack playerinfo(Player p) {
-        ItemStack player = new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial());
-        SkullMeta playermeta = (SkullMeta) player.getItemMeta();
-        playermeta.setOwner(p.getName());
-        ArrayList<String> loreinfo = new ArrayList<String>();
-        player.setItemMeta(playermeta);
-        loreinfo.add("");
-        loreinfo.add(Files.getInstance().convert("&aWeight: " + Files.getInstance().getWeight(p) + "/" + Files.getInstance().getMaxWeight(p)));
-        loreinfo.add("");
-        loreinfo.add(Files.getInstance().convert("&9Logs:&e " + Files.getInstance().getStorage(p, "LOG".toUpperCase()) + "kg"));
-        loreinfo.add(Files.getInstance().convert("&7Coal:&e " + Files.getInstance().getStorage(p, "COAL".toUpperCase()) + "kg"));
-        loreinfo.add(Files.getInstance().convert("&fIron:&e " + Files.getInstance().getStorage(p, "IRON_INGOT".toUpperCase()) + "kg"));
-        loreinfo.add(Files.getInstance().convert("&6Gold:&e " + Files.getInstance().getStorage(p, "GOLD_INGOT".toUpperCase()) + "kg"));
-        loreinfo.add(Files.getInstance().convert("&bDiamond:&e " + Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()) + "kg"));
-        loreinfo.add(Files.getInstance().convert("&aEmerald:&e " + Files.getInstance().getStorage(p, "EMERALD".toUpperCase()) + "kg"));
-        playermeta.setLore(loreinfo);
-        playermeta.setDisplayName(Files.getInstance().convert("&6" + p.getName()));
-        player.setItemMeta(playermeta);
-        return player;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.PlayerInfo.Material"))));
+        SkullMeta meta = (SkullMeta) item.getItemMeta();
+        meta.setOwner(p.getName());
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.PlayerInfo.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%weight%", String.valueOf(Files.getInstance().getWeight(p)))
+                    .replaceAll("%maxweight%", String.valueOf(Files.getInstance().getMaxWeight(p)))
+                    .replaceAll("%log%", String.valueOf(Files.getInstance().getStorage(p, "LOG".toUpperCase())))
+                    .replaceAll("%coal%", String.valueOf(Files.getInstance().getStorage(p, "COAL".toUpperCase())))
+                    .replaceAll("%iron%", String.valueOf(Files.getInstance().getStorage(p, "IRON".toUpperCase())))
+                    .replaceAll("%gold%", String.valueOf(Files.getInstance().getStorage(p, "GOLD".toUpperCase())))
+                    .replaceAll("%diamond%", String.valueOf(Files.getInstance().getStorage(p, "DIAMOND".toUpperCase())))
+                    .replaceAll("%emerald%", String.valueOf(Files.getInstance().getStorage(p, "EMERALD".toUpperCase())))
+                    .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(p.getPlayer()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.PlayerInfo.Display").replaceAll("%player%", p.getName())));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack log(Player p) {
-        ItemStack log = new ItemStack(XMaterial.OAK_LOG.parseMaterial());
-        ItemMeta logmeta = log.getItemMeta();
-        ArrayList<String> lorelog = new ArrayList<String>();
-        log.setItemMeta(logmeta);
-        lorelog.add("");
-        lorelog.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("LOG".toUpperCase()) + "$/kg"));
-        lorelog.add("");
-        lorelog.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "LOG".toUpperCase()) + "&a Log in Storage"));
-        lorelog.add("");
-        lorelog.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        lorelog.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        logmeta.setLore(lorelog);
-        logmeta.setDisplayName(Files.getInstance().convert("&7Log"));
-        log.setItemMeta(logmeta);
-        return log;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Log.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Log.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("LOG".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "LOG".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Log.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack coal(Player p) {
-        ItemStack coal = new ItemStack(XMaterial.COAL.parseMaterial());
-        ItemMeta coalmeta = coal.getItemMeta();
-        ArrayList<String> lorecoal = new ArrayList<String>();
-        coal.setItemMeta(coalmeta);
-        lorecoal.add("");
-        lorecoal.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("COAL".toUpperCase()) + "$/kg"));
-        lorecoal.add("");
-        lorecoal.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "COAL".toUpperCase()) + "&a Coal in Storage"));
-        lorecoal.add("");
-        lorecoal.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        lorecoal.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        coalmeta.setLore(lorecoal);
-        coalmeta.setDisplayName(Files.getInstance().convert("&7Coal"));
-        coal.setItemMeta(coalmeta);
-        return coal;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Coal.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Coal.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("COAL".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "COAL".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Coal.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack iron(Player p) {
-        ItemStack iron = new ItemStack(XMaterial.IRON_INGOT.parseMaterial());
-        ItemMeta ironmeta = iron.getItemMeta();
-        ArrayList<String> loreiron = new ArrayList<String>();
-        iron.setItemMeta(ironmeta);
-        loreiron.add("");
-        loreiron.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("IRON_INGOT".toUpperCase()) + "$/kg"));
-        loreiron.add("");
-        loreiron.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "IRON_INGOT".toUpperCase()) + "&a Iron in Storage"));
-        loreiron.add("");
-        loreiron.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        loreiron.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        ironmeta.setLore(loreiron);
-        ironmeta.setDisplayName(Files.getInstance().convert("&7Iron"));
-        iron.setItemMeta(ironmeta);
-        return iron;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Iron.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Iron.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("IRON".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "IRON".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Iron.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack gold(Player p) {
-
-        ItemStack gold = new ItemStack(XMaterial.GOLD_INGOT.parseMaterial());
-        ItemMeta goldmeta = gold.getItemMeta();
-        ArrayList<String> loregold = new ArrayList<String>();
-        gold.setItemMeta(goldmeta);
-        loregold.add("");
-        loregold.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("GOLD_INGOT".toUpperCase()) + "$/kg"));
-        loregold.add("");
-        loregold.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "GOLD_INGOT".toUpperCase()) + "&a Gold in Storage"));
-        loregold.add("");
-        loregold.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        loregold.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        goldmeta.setLore(loregold);
-        goldmeta.setDisplayName(Files.getInstance().convert("&6Gold"));
-        gold.setItemMeta(goldmeta);
-        return gold;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Gold.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Gold.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("GOLD".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "GOLD".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Gold.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack diamond(Player p) {
-        ItemStack diamond = new ItemStack(XMaterial.DIAMOND.parseMaterial());
-        ItemMeta diamondmeta = diamond.getItemMeta();
-        ArrayList<String> lorediamond = new ArrayList<String>();
-        diamond.setItemMeta(diamondmeta);
-        lorediamond.add("");
-        lorediamond.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("DIAMOND".toUpperCase()) + "$/kg"));
-        lorediamond.add("");
-        lorediamond.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()) + "&a Diamond in Storage"));
-        lorediamond.add("");
-        lorediamond.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        lorediamond.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        diamondmeta.setLore(lorediamond);
-        diamondmeta.setDisplayName(Files.getInstance().convert("&bDiamond"));
-        diamond.setItemMeta(diamondmeta);
-        return diamond;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Diamond.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Diamond.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("DIAMOND".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Diamond.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack emerald(Player p) {
-        ItemStack emerald = new ItemStack(XMaterial.EMERALD.parseMaterial());
-        ItemMeta emeraldmeta = emerald.getItemMeta();
-        ArrayList<String> loreemerald = new ArrayList<String>();
-        emerald.setItemMeta(emeraldmeta);
-        loreemerald.add("");
-        loreemerald.add(Files.getInstance().convert("&aPrice: " + Price.getInstance().getPrice("EMERALD".toUpperCase()) + "$/kg"));
-        loreemerald.add("");
-        loreemerald.add(Files.getInstance().convert("&aYou have &6" + Files.getInstance().getStorage(p, "EMERALD".toUpperCase()) + "&a Emerald in Storage"));
-        loreemerald.add("");
-        loreemerald.add(Files.getInstance().convert("&aLeft click to sell 1kg"));
-        loreemerald.add(Files.getInstance().convert("&aRight click to sell 10kg"));
-        emeraldmeta.setLore(loreemerald);
-        emeraldmeta.setDisplayName(Files.getInstance().convert("&aEmerald"));
-        emerald.setItemMeta(emeraldmeta);
-        return emerald;
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Files.getInstance().getgui().getString("GUI.SellGui.Emerald.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Emerald.Lore")){
+            lore.add(Files.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("EMERALD".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "EMERALD".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Files.getInstance().convert(Files.getInstance().getgui().getString("GUI.SellGui.Emerald.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public void openSellGui(Player p) {

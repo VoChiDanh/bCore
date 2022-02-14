@@ -1,81 +1,135 @@
 package net.danh.jobs.Events;
 
-import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Gui.SellBlocks;
+import net.danh.jobs.Manager.Files;
 import net.danh.jobs.Manager.Price;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+
+import java.util.Objects;
 
 public class Inventory implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (e.getView().getTitle().equals("Sell Gui")) {
+        if (e.getView().getTitle().equals(Files.getInstance().getgui().getString(Files.getInstance().convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
-            if (e.getCurrentItem().getType() != null) {
-                if (e.getCurrentItem().getType() == XMaterial.COAL.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "COAL".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "COAL".toUpperCase(), 10);
-                    }
+            Objects.requireNonNull(e.getCurrentItem()).getType();
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Coal.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "COAL".toUpperCase(), 1);
                 }
-                if (e.getCurrentItem().getType() == XMaterial.IRON_INGOT.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "IRON_INGOT".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "IRON_INGOT".toUpperCase(), 10);
-                    }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "COAL".toUpperCase(), 5);
                 }
-                if (e.getCurrentItem().getType() == XMaterial.GOLD_INGOT.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "GOLD_INGOT".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "GOLD_INGOT".toUpperCase(), 10);
-                    }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "COAL".toUpperCase(), Files.getInstance().getStorage(p, "COAL".toUpperCase()));
                 }
-                if (e.getCurrentItem().getType() == XMaterial.DIAMOND.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 10);
-                    }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "COAL".toUpperCase(), 10);
                 }
-                if (e.getCurrentItem().getType() == XMaterial.EMERALD.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 10);
-                    }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "COAL".toUpperCase(), 50);
                 }
-                if (e.getCurrentItem().getType() == XMaterial.OAK_LOG.parseMaterial()) {
-                    if (e.isLeftClick()) {
-                        Price.getInstance().Sell(p, "LOG".toUpperCase(), 1);
-                    }
-                    if (e.isRightClick()) {
-                        Price.getInstance().Sell(p, "LOG".toUpperCase(), 10);
-                    }
+            }
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Iron.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "IRON".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "IRON".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "IRON".toUpperCase(), Files.getInstance().getStorage(p, "IRON".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "IRON".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "IRON".toUpperCase(), 50);
+                }
+            }
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Gold.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "GOLD".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "GOLD".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "GOLD".toUpperCase(), Files.getInstance().getStorage(p, "GOLD".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "GOLD".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "GOLD".toUpperCase(), 50);
+                }
+            }
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Diamond.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 50);
+                }
+            }
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Emerald.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "EMERALD".toUpperCase(), Files.getInstance().getStorage(p, "EMERALD".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 50);
+                }
+            }
+            if (e.getSlot() == Files.getInstance().getgui().getInt("GUI.SellGui.Log.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "LOG".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "LOG".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "LOG".toUpperCase(), Files.getInstance().getStorage(p, "LOG".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "LOG".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "LOG".toUpperCase(), 50);
                 }
             }
             p.closeInventory();
             p.openInventory(SellBlocks.getInstance().getSellGui(p));
         }
     }
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnDragInventory(InventoryDragEvent e) {
-        Player p = (Player) e.getWhoClicked();
-        if (e.getView().getTitle().equals("Sell Gui")) {
+        if (e.getView().getTitle().equals(Files.getInstance().getgui().getString(Files.getInstance().convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
         }
     }

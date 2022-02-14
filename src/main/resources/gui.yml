@@ -1,0 +1,109 @@
+GUI:
+  SellGui:
+    Title: "Sell Gui"
+    Size: 9
+    Coal:
+      Slot: 1
+      Material: COAL
+      Display: "&7Coal"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
+    Iron:
+      Slot: 2
+      Material: IRON_INGOT
+      Display: "&fIron"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
+    Gold:
+      Slot: 3
+      Material: GOLD_INGOT
+      Display: "&6Gold"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
+    PlayerInfo:
+      Slot: 4
+      Material: PLAYER_HEAD
+      Display: "&6%player%"
+      Lore:
+        - ""
+        - "&aWeight: %weight%/%maxweight% kg"
+        - "&dMoney:&3 %money%$"
+        - ""
+        - "&9Log:&e %log% kg"
+        - "&7Coal:&e %coal% kg"
+        - "&fIron:&e %iron% kg"
+        - "&6Gold:&e %gold% kg"
+        - "&bDiamond:&e %diamond% kg"
+        - "&aEmerald:&e %emerald% kg"
+    Diamond:
+      Slot: 5
+      Material: DIAMOND
+      Display: "&bDiamond"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
+    Emerald:
+      Slot: 6
+      Material: EMERALD
+      Display: "&aEmerald"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
+    Log:
+      Slot: 7
+      Material: OAK_LOG
+      Display: "&7Log"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg""

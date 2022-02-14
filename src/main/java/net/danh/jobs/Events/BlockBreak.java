@@ -101,10 +101,10 @@ public class BlockBreak implements Listener {
                                         Files.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
                                     } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
                                             || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "IRON_INGOT".toUpperCase(), kg);
+                                        Files.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), kg);
                                     } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
                                             || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "GOLD_INGOT".toUpperCase(), kg);
+                                        Files.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), kg);
                                     } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
                                             || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
                                         Files.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);

@@ -1,7 +1,7 @@
 Price:
   COAL: 1.0
-  IRON_INGOT: 3.0
-  GOLD_INGOT: 5.0
+  IRON: 3.0
+  GOLD: 5.0
   DIAMOND: 7.0
   EMERALD: 9.0
   LOG: 5.0

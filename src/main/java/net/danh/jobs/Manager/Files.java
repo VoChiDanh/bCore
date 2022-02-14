@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class Files {
     private static Files instance;
-    private File configFile, languageFile, dataFile, itemsFile, storageFile, priceFile;
-    private FileConfiguration config, language, data, items, storage, price;
+    private File configFile, languageFile, dataFile, itemsFile, storageFile, priceFile, guiFile;
+    private FileConfiguration config, language, data, items, storage, price, gui;
 
     public static Files getInstance() {
 
@@ -31,6 +31,7 @@ public class Files {
         itemsFile = new File(Jobs.getInstance().getDataFolder(), "items.yml");
         storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
         priceFile = new File(Jobs.getInstance().getDataFolder(), "price.yml");
+        guiFile = new File(Jobs.getInstance().getDataFolder(), "gui.yml");
 
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
@@ -38,12 +39,14 @@ public class Files {
         if (!itemsFile.exists()) Jobs.getInstance().saveResource("items.yml", false);
         if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
         if (!priceFile.exists()) Jobs.getInstance().saveResource("price.yml", false);
+        if (!guiFile.exists()) Jobs.getInstance().saveResource("gui.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         items = new YamlConfiguration();
         storage = new YamlConfiguration();
         price = new YamlConfiguration();
+        gui = new YamlConfiguration();
 
         try {
             config.load(configFile);
@@ -52,6 +55,7 @@ public class Files {
             items.load(itemsFile);
             storage.load(storageFile);
             price.load(priceFile);
+            gui.load(guiFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -82,10 +86,15 @@ public class Files {
         return price;
     }
 
+    public FileConfiguration getgui() {
+        return gui;
+    }
+
     public void reloadconfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
         items = YamlConfiguration.loadConfiguration(itemsFile);
+        gui = YamlConfiguration.loadConfiguration(guiFile);
     }
 
     public void saveconfig() {
@@ -128,6 +137,12 @@ public class Files {
     public void saveprice() {
         try {
             price.save(priceFile);
+        } catch (IOException ignored) {
+        }
+    }
+    public void savegui() {
+        try {
+            gui.save(guiFile);
         } catch (IOException ignored) {
         }
     }
@@ -455,7 +470,7 @@ public class Files {
         getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
         p.sendMessage(convert(getlanguage().getString("ADD_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))
-                .replaceAll("%block%", name)
+                .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(getWeight(p)))
                 .replaceAll("%maxweight%", String.valueOf(getMaxWeight(p)))));
         savestorage();
@@ -465,7 +480,7 @@ public class Files {
         getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
         p.sendMessage(convert(getlanguage().getString("REMOVE_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))
-                .replaceAll("%block%", name)
+                .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(getWeight(p) - number))
                 .replaceAll("%maxweight%", String.valueOf(getMaxWeight(p)))));
         savestorage();

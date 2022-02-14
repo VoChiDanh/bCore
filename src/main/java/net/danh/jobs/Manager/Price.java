@@ -4,6 +4,8 @@ import net.danh.jobs.Jobs;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
+
 public class Price {
 
     private static Price instance;
@@ -28,7 +30,7 @@ public class Price {
     public void addPrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, getPrice(name) + price);
         Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("INCREASE_PRICE")
-                .replaceAll("%block%", name)
+                .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%price%", String.valueOf(getPrice(name)))));
         Files.getInstance().saveprice();
     }
@@ -36,7 +38,7 @@ public class Price {
     public void removePrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, getPrice(name) - price);
         Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("DECREASE_PRICE")
-                .replaceAll("%block%", name)
+                .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%price%", String.valueOf(getPrice(name)))));
         Files.getInstance().saveprice();
     }

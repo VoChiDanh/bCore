@@ -131,6 +131,9 @@ public final class Jobs extends JavaPlugin implements Listener {
                             p.removePotionEffect(PotionEffectType.CONFUSION);
                         }
                     }
+                    if (Files.getInstance().getWeight(p) == ((Files.getInstance().getMaxWeight(p))/(10/9))){
+
+                    }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
@@ -147,38 +150,39 @@ public final class Jobs extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 double number = Files.getInstance().getRandomNumber(1, 100);
-                if (Price.getInstance().getPrice("COAL") == 0.0D) {
-                    Price.getInstance().addPrice("COAL", 1.0);
-                }
 
-                if (Price.getInstance().getPrice("IRON_INGOT") == 0.0D) {
-                    Price.getInstance().addPrice("IRON_INGOT", 3.0);
-                }
-                if (Price.getInstance().getPrice("GOLD_INGOT") == 0.0D) {
-                    Price.getInstance().addPrice("GOLD_INGOT", 5.0);
-                }
-
-                if (Price.getInstance().getPrice("DIAMOND") == 0.0D) {
-                    Price.getInstance().addPrice("DIAMOND", 7.0);
-                }
-                if (Price.getInstance().getPrice("EMERALD") == 0.0D) {
-                    Price.getInstance().setPrice("EMERALD", 10.0);
-                }
-
-                if (Price.getInstance().getPrice("LOG") == 0.0D) {
-                    Price.getInstance().setPrice("LOG", 5.0);
-                }
                 if (number < 50) {
                     Price.getInstance().removePrice("COAL", number / 100);
-                    Price.getInstance().removePrice("IRON_INGOT", number / 100);
-                    Price.getInstance().removePrice("GOLD_INGOT", number / 100);
+                    if (Price.getInstance().getPrice("COAL") == 0.0D) {
+                        Price.getInstance().addPrice("COAL", 1.0);
+                    }
+
+                    Price.getInstance().removePrice("IRON", number / 100);
+                    if (Price.getInstance().getPrice("IRON") == 0.0D) {
+                        Price.getInstance().addPrice("IRON", 3.0);
+                    }
+                    Price.getInstance().removePrice("GOLD", number / 100);
+
+                    if (Price.getInstance().getPrice("GOLD") == 0.0D) {
+                        Price.getInstance().addPrice("GOLD", 5.0);
+                    }
+
                     Price.getInstance().removePrice("DIAMOND", number / 100);
+                    if (Price.getInstance().getPrice("DIAMOND") == 0.0D) {
+                        Price.getInstance().addPrice("DIAMOND", 7.0);
+                    }
                     Price.getInstance().removePrice("EMERALD", number / 100);
+                    if (Price.getInstance().getPrice("EMERALD") == 0.0D) {
+                        Price.getInstance().setPrice("EMERALD", 10.0);
+                    }
                     Price.getInstance().removePrice("LOG", number / 100);
+                    if (Price.getInstance().getPrice("LOG") == 0.0D) {
+                        Price.getInstance().setPrice("LOG", 5.0);
+                    }
                 } else {
                     Price.getInstance().addPrice("COAL", number / 100);
-                    Price.getInstance().addPrice("IRON_INGOT", number / 100);
-                    Price.getInstance().addPrice("GOLD_INGOT", number / 100);
+                    Price.getInstance().addPrice("IRON", number / 100);
+                    Price.getInstance().addPrice("GOLD", number / 100);
                     Price.getInstance().addPrice("DIAMOND", number / 100);
                     Price.getInstance().addPrice("EMERALD", number / 100);
                     Price.getInstance().addPrice("LOG", number / 100);
@@ -192,6 +196,9 @@ public final class Jobs extends JavaPlugin implements Listener {
         Files.getInstance().savedata();
         Files.getInstance().saveconfig();
         Files.getInstance().savelanguage();
+        Files.getInstance().savegui();
+        Files.getInstance().saveprice();
+        Files.getInstance().saveitems();
         getLogger().log(Level.INFO, "Saved data");
     }
 
