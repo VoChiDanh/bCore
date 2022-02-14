@@ -453,11 +453,13 @@ public class Files {
 
     public void addStorage(Player p, String name, Integer number) {
         getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
+        p.sendMessage(convert("&a+ " + number + "kg " + name + "&7 (" + getWeight(p) + "/" + getMaxWeight(p) + "&7 kg)"));
         savestorage();
     }
 
     public void removeStorage(Player p, String name, Integer number) {
         getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
+        p.sendMessage(convert("&c- " + number + "kg " + name + "&7 (" + (getWeight(p) - number) + "/" + getMaxWeight(p) + "&7 kg)"));
         savestorage();
     }
 

@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 
@@ -33,13 +34,37 @@ public class SellBlocks implements Listener {
         ItemStack diamond = diamond(p);
         ItemStack emerald = emerald(p);
         ItemStack log = log(p);
+        ItemStack player = playerinfo(p);
         sellgui.setItem(1, coal);
         sellgui.setItem(2, iron);
         sellgui.setItem(3, gold);
-        sellgui.setItem(4, diamond);
-        sellgui.setItem(5, emerald);
-        sellgui.setItem(6, log);
+        sellgui.setItem(4, player);
+        sellgui.setItem(5, diamond);
+        sellgui.setItem(6, emerald);
+        sellgui.setItem(7, log);
         return sellgui;
+    }
+
+
+    public ItemStack playerinfo(Player p) {
+        ItemStack player = new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial());
+        SkullMeta playermeta = (SkullMeta) player.getItemMeta();
+        playermeta.setOwner(p.getName());
+        ArrayList<String> loreinfo = new ArrayList<String>();
+        player.setItemMeta(playermeta);
+        loreinfo.add("");
+        loreinfo.add(Files.getInstance().convert("&aWeight: " + Files.getInstance().getWeight(p) + "/" + Files.getInstance().getMaxWeight(p)));
+        loreinfo.add("");
+        loreinfo.add(Files.getInstance().convert("&9Logs:&e " + Files.getInstance().getStorage(p, "LOG".toUpperCase()) + "kg"));
+        loreinfo.add(Files.getInstance().convert("&7Coal:&e " + Files.getInstance().getStorage(p, "COAL".toUpperCase()) + "kg"));
+        loreinfo.add(Files.getInstance().convert("&fIron:&e " + Files.getInstance().getStorage(p, "IRON_INGOT".toUpperCase()) + "kg"));
+        loreinfo.add(Files.getInstance().convert("&6Gold:&e " + Files.getInstance().getStorage(p, "GOLD_INGOT".toUpperCase()) + "kg"));
+        loreinfo.add(Files.getInstance().convert("&bDiamond:&e " + Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()) + "kg"));
+        loreinfo.add(Files.getInstance().convert("&aEmerald:&e " + Files.getInstance().getStorage(p, "EMERALD".toUpperCase()) + "kg"));
+        playermeta.setLore(loreinfo);
+        playermeta.setDisplayName(Files.getInstance().convert("&6" + p.getName()));
+        player.setItemMeta(playermeta);
+        return player;
     }
 
     public ItemStack log(Player p) {
