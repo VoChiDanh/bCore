@@ -15,18 +15,33 @@ Blocks:
   COAL_ORE:
     max: 3
     min: 1
+  COAL_BLOCK:
+    max: 5
+    min: 2
   IRON_ORE:
     max: 5
     min: 3
+  IRON_BLOCK:
+    max: 7
+    min: 4
   GOLD_ORE:
     max: 10
     min: 5
+  GOLD_BLOCK:
+    max: 12
+    min: 6
   DIAMOND_ORE:
     max: 15
     min: 10
+  DIAMOND_BLOCK:
+    max: 17
+    min: 11
   EMERALD_ORE:
     max: 20
     min: 15
+  EMERALD_BLOCK:
+    max: 22
+    min: 16
   ACACIA_LOG:
     max: 5
     min: 1

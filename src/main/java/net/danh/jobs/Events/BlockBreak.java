@@ -42,7 +42,12 @@ public class BlockBreak implements Listener {
                 || b.getType() == XMaterial.IRON_ORE.parseMaterial()
                 || b.getType() == XMaterial.GOLD_ORE.parseMaterial()
                 || b.getType() == XMaterial.DIAMOND_ORE.parseMaterial()
-                || b.getType() == XMaterial.EMERALD_ORE.parseMaterial()) {
+                || b.getType() == XMaterial.EMERALD_ORE.parseMaterial()
+                || b.getType() == XMaterial.COAL_BLOCK.parseMaterial()
+                || b.getType() == XMaterial.IRON_BLOCK.parseMaterial()
+                || b.getType() == XMaterial.GOLD_BLOCK.parseMaterial()
+                || b.getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()
+                || b.getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
 
             if (p.getItemInHand().getType() == XMaterial.STONE_PICKAXE.parseMaterial()
                     || p.getItemInHand().getType() == XMaterial.IRON_PICKAXE.parseMaterial()
@@ -91,7 +96,22 @@ public class BlockBreak implements Listener {
                                 }
                                 if (kg != 0) {
                                     Files.getInstance().addWeight(e.getPlayer(), kg);
-                                    Files.getInstance().addStorage(e.getPlayer(), blocks, kg);
+                                    if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "IRON_INGOT".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "GOLD_INGOT".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
+                                    }
                                 }
                             } else {
                                 e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
@@ -184,7 +204,14 @@ public class BlockBreak implements Listener {
                                 }
                                 if (kg != 0) {
                                     Files.getInstance().addWeight(e.getPlayer(), kg);
-                                    Files.getInstance().addStorage(e.getPlayer(), blocks, kg);
+                                    if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
+                                            || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
+                                            || b.getType() == XMaterial.DARK_OAK_LOG.parseMaterial()
+                                            || b.getType() == XMaterial.JUNGLE_LOG.parseMaterial()
+                                            || b.getType() == XMaterial.OAK_LOG.parseMaterial()
+                                            || b.getType() == XMaterial.SPRUCE_LOG.parseMaterial()) {
+                                        Files.getInstance().addStorage(e.getPlayer(), "LOG".toUpperCase(), kg);
+                                    }
                                 }
                             } else {
                                 e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
