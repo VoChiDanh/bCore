@@ -101,21 +101,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
         Files.getInstance().createconfig();
-        if (getNMSVersion().contains("v1_12_R1")
-                || getNMSVersion().contains("v1_11_R1")
-                || getNMSVersion().contains("v1_10_R1")
-                || getNMSVersion().contains("v1_9_R2")
-                || getNMSVersion().contains("v1_9_R1")
-                || getNMSVersion().contains("v1_8_R3")
-                || getNMSVersion().contains("v1_8_R2")
-                || getNMSVersion().contains("v1_8_R1")) {
-            getLogger().log(Level.WARNING, "Your server version is " + formatNMSVersion(getNMSVersion()));
-            getLogger().log(Level.WARNING, "This plugins version doesnt support legacy version");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        } else {
-            getLogger().log(Level.INFO, "Loading data for " + formatNMSVersion(getNMSVersion()));
-        }
+        getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -123,14 +109,18 @@ public final class Jobs extends JavaPlugin implements Listener {
                         if (Files.getInstance().getPower(p) > Files.getInstance().getMaxPower(p)) {
                             Files.getInstance().setPower(p, Files.getInstance().getMaxPower(p));
                         }
-                        if (Files.getInstance().getPower(p) <= Files.getInstance().getconfig().getInt("minimum_power")) {
+                        if (Files.getInstance().getPower(p) >= Files.getInstance().getMaxPower(p) * 0.9D) {
                             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, Integer.MIN_VALUE));
                         } else {
                             p.removePotionEffect(PotionEffectType.CONFUSION);
                         }
                     }
-                    if (Files.getInstance().getWeight(p) == ((Files.getInstance().getMaxWeight(p)) / (10 / 9))) {
-
+                    if (Files.getInstance().getWeight(p) >= Files.getInstance().getMaxWeight(p) * 0.9D) {
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.MIN_VALUE));
+                    } else {
+                        p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+                        p.removePotionEffect(PotionEffectType.SLOW);
                     }
                 }
             }

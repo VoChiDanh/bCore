@@ -22,4 +22,4 @@ jobs:
           prerelease: false
           title: "v0.2.2-SNAPSHOT Build 2"
           files: |
-            ./target/Jobs.jar
+            ./target/Jobs-0.2.2-SNAPSHOT.jar
