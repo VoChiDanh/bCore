@@ -131,32 +131,11 @@ public final class Jobs extends JavaPlugin implements Listener {
 
                 if (number < 50) {
                     Price.getInstance().removePrice("COAL", number / 100);
-                    if (Price.getInstance().getPrice("COAL") == 0.0D) {
-                        Price.getInstance().addPrice("COAL", 1.0);
-                    }
-
                     Price.getInstance().removePrice("IRON", number / 100);
-                    if (Price.getInstance().getPrice("IRON") == 0.0D) {
-                        Price.getInstance().addPrice("IRON", 3.0);
-                    }
                     Price.getInstance().removePrice("GOLD", number / 100);
-
-                    if (Price.getInstance().getPrice("GOLD") == 0.0D) {
-                        Price.getInstance().addPrice("GOLD", 5.0);
-                    }
-
                     Price.getInstance().removePrice("DIAMOND", number / 100);
-                    if (Price.getInstance().getPrice("DIAMOND") == 0.0D) {
-                        Price.getInstance().addPrice("DIAMOND", 7.0);
-                    }
                     Price.getInstance().removePrice("EMERALD", number / 100);
-                    if (Price.getInstance().getPrice("EMERALD") == 0.0D) {
-                        Price.getInstance().setPrice("EMERALD", 10.0);
-                    }
                     Price.getInstance().removePrice("LOG", number / 100);
-                    if (Price.getInstance().getPrice("LOG") == 0.0D) {
-                        Price.getInstance().setPrice("LOG", 5.0);
-                    }
                 } else {
                     Price.getInstance().addPrice("COAL", number / 100);
                     Price.getInstance().addPrice("IRON", number / 100);

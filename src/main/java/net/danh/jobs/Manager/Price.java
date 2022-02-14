@@ -35,12 +35,18 @@ public class Price {
 
     public void removePrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, getPrice(name) - price);
-        Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("DECREASE_PRICE")
-                .replaceAll("%block%", name.toLowerCase())
-                .replaceAll("%price%", String.valueOf(getPrice(name)))));
-        Files.getInstance().saveprice();
-    }
+        if (getPrice(name) == 0) {
+            addPrice(name, 1.0);
+            Files.getInstance().saveprice();
+            return;
+        } else {
+            Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("DECREASE_PRICE")
+                    .replaceAll("%block%", name.toLowerCase())
+                    .replaceAll("%price%", String.valueOf(getPrice(name)))));
+            Files.getInstance().saveprice();
+        }
 
+    }
     public void Sell(Player p, String name, Integer number) {
         if (Files.getInstance().getStorage(p, name.toUpperCase()) >= number && Files.getInstance().getWeight(p) >= number) {
             Files.getInstance().removeStorage(p, name, number);
