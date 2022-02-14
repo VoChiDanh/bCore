@@ -97,7 +97,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Regen(), this);
         getServer().getPluginManager().registerEvents(new Eating(), this);
         getServer().getPluginManager().registerEvents(new Death(), this);
-        getServer().getPluginManager().registerEvents(new InventoryClick(), this);
+        getServer().getPluginManager().registerEvents(new Inventory(), this);
         Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());

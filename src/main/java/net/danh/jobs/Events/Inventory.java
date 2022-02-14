@@ -10,7 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 
-public class InventoryClick implements Listener {
+public class Inventory implements Listener {
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();

@@ -1,6 +1,6 @@
 xp: 1
 EnableAge: false
-AgeTime: 900s #seconds
+AgeTime: 90000 #seconds
 debug: false
 doctor_price_medicine: 100
 minimum_power: 30

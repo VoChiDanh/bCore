@@ -415,7 +415,7 @@ public class Commands implements CommandExecutor {
             }
             if (args.length == 1) {
                 if (sender.hasPermission("jobs.user")) {
-                    if (args[0].equalsIgnoreCase("sell")) { //TODO Make gui to sell item and replace command
+                    if (args[0].equalsIgnoreCase("sell")) {
                         if (sender instanceof Player) {
                             SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
                         }
