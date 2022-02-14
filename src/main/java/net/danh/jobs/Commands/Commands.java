@@ -76,7 +76,7 @@ public class Commands implements CommandExecutor {
                             String parsename = name.replaceAll("v", "");
                             String parsebody = body.replaceAll("## Commits", "");
                             if (!(parsename.equalsIgnoreCase(version))) {
-                                URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs.jar");
+                                URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs-0.2.2-SNAPSHOT.jar");
                                 sender.sendMessage(Files.getInstance().convert("&eDownloading " + name + "! &6Your version is &6v" + version));
                                 sender.sendMessage(Files.getInstance().convert("&aUpdate log: " + parsebody));
                                 new BukkitRunnable() {
