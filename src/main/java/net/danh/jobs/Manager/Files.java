@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class Files {
     private static Files instance;
-    private File configFile, languageFile, dataFile, itemsFile, storageFile, priceFile, guiFile;
-    private FileConfiguration config, language, data, items, storage, price, gui;
+    private File configFile, languageFile, dataFile, storageFile, priceFile, guiFile;
+    private FileConfiguration config, language, data, storage, price, gui;
 
     public static Files getInstance() {
 
@@ -28,7 +28,6 @@ public class Files {
         configFile = new File(Jobs.getInstance().getDataFolder(), "config.yml");
         languageFile = new File(Jobs.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
-        itemsFile = new File(Jobs.getInstance().getDataFolder(), "items.yml");
         storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
         priceFile = new File(Jobs.getInstance().getDataFolder(), "price.yml");
         guiFile = new File(Jobs.getInstance().getDataFolder(), "gui.yml");
@@ -36,14 +35,12 @@ public class Files {
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
         if (!dataFile.exists()) Jobs.getInstance().saveResource("data.yml", false);
-        if (!itemsFile.exists()) Jobs.getInstance().saveResource("items.yml", false);
         if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
         if (!priceFile.exists()) Jobs.getInstance().saveResource("price.yml", false);
         if (!guiFile.exists()) Jobs.getInstance().saveResource("gui.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
-        items = new YamlConfiguration();
         storage = new YamlConfiguration();
         price = new YamlConfiguration();
         gui = new YamlConfiguration();
@@ -52,7 +49,6 @@ public class Files {
             config.load(configFile);
             language.load(languageFile);
             data.load(dataFile);
-            items.load(itemsFile);
             storage.load(storageFile);
             price.load(priceFile);
             gui.load(guiFile);
@@ -74,10 +70,6 @@ public class Files {
         return data;
     }
 
-    public FileConfiguration getitems() {
-        return items;
-    }
-
     public FileConfiguration getstorage() {
         return storage;
     }
@@ -93,7 +85,6 @@ public class Files {
     public void reloadconfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
-        items = YamlConfiguration.loadConfiguration(itemsFile);
         gui = YamlConfiguration.loadConfiguration(guiFile);
     }
 
@@ -108,13 +99,6 @@ public class Files {
     public void savelanguage() {
         try {
             language.save(languageFile);
-        } catch (IOException ignored) {
-        }
-    }
-
-    public void saveitems() {
-        try {
-            items.save(itemsFile);
         } catch (IOException ignored) {
         }
     }

@@ -196,7 +196,6 @@ public final class Jobs extends JavaPlugin implements Listener {
         Files.getInstance().savelanguage();
         Files.getInstance().savegui();
         Files.getInstance().saveprice();
-        Files.getInstance().saveitems();
         getLogger().log(Level.INFO, "Saved data");
     }
 
