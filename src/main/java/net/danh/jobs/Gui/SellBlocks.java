@@ -1,6 +1,5 @@
 package net.danh.jobs.Gui;
 
-import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import net.danh.jobs.Manager.Price;
@@ -56,7 +55,7 @@ public class SellBlocks implements Listener {
         meta.setOwner(p.getName());
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.PlayerInfo.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.PlayerInfo.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%weight%", String.valueOf(Files.getInstance().getWeight(p)))
                     .replaceAll("%maxweight%", String.valueOf(Files.getInstance().getMaxWeight(p)))
@@ -79,7 +78,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Log.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Log.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("LOG".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "LOG".toUpperCase()))));
@@ -95,7 +94,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Coal.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Coal.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("COAL".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "COAL".toUpperCase()))));
@@ -111,7 +110,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Iron.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Iron.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("IRON".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "IRON".toUpperCase()))));
@@ -127,7 +126,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Gold.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Gold.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("GOLD".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "GOLD".toUpperCase()))));
@@ -143,7 +142,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Diamond.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Diamond.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("DIAMOND".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "DIAMOND".toUpperCase()))));
@@ -159,7 +158,7 @@ public class SellBlocks implements Listener {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
-        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Emerald.Lore")){
+        for (String loreconfig : Files.getInstance().getgui().getStringList("GUI.SellGui.Emerald.Lore")) {
             lore.add(Files.getInstance().convert(loreconfig)
                     .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("EMERALD".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Files.getInstance().getStorage(p, "EMERALD".toUpperCase()))));

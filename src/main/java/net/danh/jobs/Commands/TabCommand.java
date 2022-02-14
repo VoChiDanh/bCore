@@ -25,8 +25,6 @@ public class TabCommand implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("jobs")) {
             if (sender.hasPermission("jobs.user")) {
-                arg.add("select");
-                arg.add("items");
                 arg.add("sell");
             }
             if (sender.hasPermission("jobs.admin")) {
@@ -45,13 +43,6 @@ public class TabCommand implements TabCompleter {
                 arg.add("luckychance");
                 arg.add("update");
                 arg.add("price");
-            }
-            if (args[0].equalsIgnoreCase("select")) {
-                arggg.add("Miner");
-                arggg.add("WoodCutter");
-                arggg.add("Farmer");
-                arggg.add("Fisher");
-                arggg.add("Doctor");
             }
             if (sender.hasPermission("jobs.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")
@@ -108,13 +99,6 @@ public class TabCommand implements TabCompleter {
                 return arg2;
             }
 
-            if (args[0].equalsIgnoreCase("select")) {
-                for (String a3 : arggg) {
-                    if (a3.toLowerCase().startsWith(args[1].toLowerCase()))
-                        arg3.add(a3);
-                }
-                return arg3;
-            }
 
             if (args[0].equalsIgnoreCase("items")) {
                 for (String a4 : argggg) {

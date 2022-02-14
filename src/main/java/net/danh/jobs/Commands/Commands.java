@@ -12,8 +12,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +23,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Commands implements CommandExecutor {
@@ -33,7 +30,6 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
 
         String RELOADED = Files.getInstance().getlanguage().getString("RELOAD");
-        String NOT_ENOUGH_PERMISSION = Files.getInstance().getlanguage().getString("NOT_ENOUGH_PERMISSION");
         String PREFIX = Files.getInstance().getlanguage().getString("PREFIX");
         String DONE = Files.getInstance().getlanguage().getString("DONE");
         String NOT_ENOUGH_MONEY = Files.getInstance().getlanguage().getString("NOT_ENOUGH_MONEY");
@@ -117,7 +113,6 @@ public class Commands implements CommandExecutor {
                             for (String check_info : Files.getInstance().getlanguage().getStringList("INFO_CHECK")) {
                                 sender.sendMessage(Files.getInstance().convert(check_info
                                         .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
-                                        .replaceAll("%jobs%", Files.getInstance().getJobs(Objects.requireNonNull(Bukkit.getPlayer(args[1]))))
                                         .replaceAll("%plevel%", String.valueOf(Files.getInstance().getAge(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%xp", String.valueOf(Files.getInstance().getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%glevel%", String.valueOf(Files.getInstance().getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
@@ -454,61 +449,6 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            if (args.length == 2) {
-                if (sender instanceof Player) {
-                    if (sender.hasPermission("jobs.user")) {
-                        if (args[0].equalsIgnoreCase("select")) {
-                            if (args[1].equalsIgnoreCase("Miner")) {
-                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                            if (args[1].equalsIgnoreCase("Farmer")) {
-                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                            if (args[1].equalsIgnoreCase("Woodcutter")) {
-                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                            if (args[1].equalsIgnoreCase("Fisher")) {
-                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                            if (args[1].equalsIgnoreCase("Doctor")) {
-                                Files.getInstance().setJobs(Objects.requireNonNull(((Player) sender).getPlayer()), args[1].toUpperCase());
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                        }
-                    }
-                }
-            }
-            if (args.length == 2) {
-                if (sender instanceof Player) {
-                    if (args[0].equalsIgnoreCase("items")) {
-                        if (args[1].equalsIgnoreCase("Doctor")) {
-                            if (Files.getInstance().getJobs(Objects.requireNonNull(((Player) sender).getPlayer())).equals(args[1].toUpperCase())) {
-                                if (Jobs.economy.getBalance(((Player) sender).getPlayer()) >= Files.getInstance().getconfig().getInt("doctor_price_medicine")) {
-                                    ItemStack items = new ItemStack(Material.valueOf(Files.getInstance().getitems().getString("doctor_items.MATERIAL")), Files.getInstance().getitems().getInt("doctor_items.AMOUNT"));
-                                    ItemMeta meta = items.getItemMeta();
-                                    Objects.requireNonNull(meta).setDisplayName(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.DISPLAY_NAME"))));
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE1"))));
-                                    lore.add(Files.getInstance().convert(Objects.requireNonNull(Files.getInstance().getitems().getString("doctor_items.LORE2"))));
-                                    meta.setLore(lore);
-                                    items.setItemMeta(meta);
-                                    ((Player) sender).getInventory().addItem(items);
-                                    Jobs.economy.withdrawPlayer(((Player) sender).getPlayer(), Files.getInstance().getconfig().getInt("doctor_price_medicine"));
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                } else {
-                                    sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_ENOUGH_MONEY));
-                                }
-                            } else {
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
-                            }
-                        }
-                    }
-                }
-            }
             return true;
         }
         if (label.equalsIgnoreCase("gang")) {
@@ -537,7 +477,7 @@ public class Commands implements CommandExecutor {
                     if (args.length == 1) {
                         if (args[0].equalsIgnoreCase("leave")) {
                             if (Files.getInstance().getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
-                                Files.getInstance().selectGang(((Player) sender).getPlayer(), Files.getInstance().getJobs(((Player) sender).getPlayer()));
+                                Files.getInstance().selectGang(((Player) sender).getPlayer(), "Server".toUpperCase());
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Files.getInstance().convert(PREFIX + UNKNOW_GANG));

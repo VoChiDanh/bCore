@@ -4,8 +4,6 @@ import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Files;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.Ageable;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,7 +26,6 @@ public class BlockBreak implements Listener {
         Integer POWER = Files.getInstance().getconfig().getInt("Lucky_Power");
         Integer XP = Files.getInstance().getconfig().getInt("Lucky_XP");
         Integer LEVELUP = Files.getInstance().getleveluptimes(e.getPlayer());
-        String NOT_CORRECT_JOBS = Files.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
         String NOT_CORRECT_ITEMS = Files.getInstance().getlanguage().getString("NOT_CORRECT_ITEMS");
         String FULL_STORAGE = Files.getInstance().getlanguage().getString("FULL_STORAGE");
         String blocks = e.getBlock().getType().toString();
@@ -59,93 +56,83 @@ public class BlockBreak implements Listener {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
                 }
 
-                if (Files.getInstance().getJobs(p).equals("MINER")) {
-
+                if (Files.getInstance().getPower(e.getPlayer()) <= Files.getInstance().getconfig().getInt("minimum_power")) {
+                    e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + NEED_MORE_POWER));
+                    e.setCancelled(true);
+                } else {
                     if (Files.getInstance().getconfig().getBoolean("debug")) {
-                        Jobs.getInstance().getLogger().log(Level.INFO, "Check Jobs");
+                        Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
-
-                    if (Files.getInstance().getPower(e.getPlayer()) <= Files.getInstance().getconfig().getInt("minimum_power")) {
-                        e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + NEED_MORE_POWER));
-                        e.setCancelled(true);
-                    } else {
+                    e.setDropItems(false);
+                    e.getBlock().getDrops().clear();
+                    if (!e.isDropItems()) {
                         if (Files.getInstance().getconfig().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
+                            Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        e.setDropItems(false);
-                        e.getBlock().getDrops().clear();
-                        if (!e.isDropItems()) {
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
+                        for (String getBlockType : Files.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
+                            if (blocks.equalsIgnoreCase(getBlockType)) {
+                                max = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
+                                min = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
+                                break;
                             }
-                            for (String getBlockType : Files.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
-                                if (blocks.equalsIgnoreCase(getBlockType)) {
-                                    max = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
-                                    min = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
-                                    break;
-                                }
-                            }
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
-                            }
-                            int kg = Files.getInstance().getRandomNumber(min, max);
-                            if (Files.getInstance().getWeight(e.getPlayer()) + kg <= Files.getInstance().getMaxWeight(e.getPlayer())) {
+                        }
+                        if (Files.getInstance().getconfig().getBoolean("debug")) {
+                            Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
+                        }
+                        int kg = Files.getInstance().getRandomNumber(min, max);
+                        if (Files.getInstance().getWeight(e.getPlayer()) + kg <= Files.getInstance().getMaxWeight(e.getPlayer())) {
 
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
-                                }
-                                if (kg != 0) {
-                                    Files.getInstance().addWeight(e.getPlayer(), kg);
-                                    if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
-                                            || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
-                                    } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
-                                            || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), kg);
-                                    } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
-                                            || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), kg);
-                                    } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
-                                            || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);
-                                    } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
-                                            || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
-                                    }
-                                }
-                            } else {
-                                e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
-                                }
-                                e.setCancelled(true);
-                                return;
+                            if (Files.getInstance().getconfig().getBoolean("debug")) {
+                                Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
-                        }
-                        if (playerchance >= systemchance) {
-                            if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                                Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            if (kg != 0) {
+                                Files.getInstance().addWeight(e.getPlayer(), kg);
+                                if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
+                                } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), kg);
+                                } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), kg);
+                                } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);
+                                } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
+                                }
                             }
-                            Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
-                                    .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                                    .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                        } else {
+                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
+                            if (Files.getInstance().getconfig().getBoolean("debug")) {
+                                Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
+                            }
+                            e.setCancelled(true);
                             return;
                         }
+                    }
+                    if (playerchance >= systemchance) {
                         if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                            Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                         }
-                        Files.getInstance().removePower(p, 1);
-                        if (Files.getInstance().getconfig().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
-                        }
+                        Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                        e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
+                                .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
+                                .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                         return;
                     }
-                } else {
-                    p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
-                    e.setCancelled(true);
+                    if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                        Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                    }
+                    Files.getInstance().removePower(p, 1);
+                    if (Files.getInstance().getconfig().getBoolean("debug")) {
+                        Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
+                    }
                     return;
                 }
+
             } else {
                 p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_ITEMS));
                 e.setCancelled(true);
@@ -168,178 +155,80 @@ public class BlockBreak implements Listener {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Check block");
                 }
 
-                if (Files.getInstance().getJobs(p).equals("WOODCUTTER")) {
+                if (Files.getInstance().getPower(e.getPlayer()) <= Files.getInstance().getconfig().getInt("minimum_power")) {
+                    e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + NEED_MORE_POWER));
+                    e.setCancelled(true);
+                } else {
                     if (Files.getInstance().getconfig().getBoolean("debug")) {
-                        Jobs.getInstance().getLogger().log(Level.INFO, "Check Jobs");
+                        Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
-
-                    if (Files.getInstance().getPower(e.getPlayer()) <= Files.getInstance().getconfig().getInt("minimum_power")) {
-                        e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + NEED_MORE_POWER));
-                        e.setCancelled(true);
-                    } else {
+                    e.setDropItems(false);
+                    e.getBlock().getDrops().clear();
+                    if (!e.isDropItems()) {
                         if (Files.getInstance().getconfig().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
+                            Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        e.setDropItems(false);
-                        e.getBlock().getDrops().clear();
-                        if (!e.isDropItems()) {
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
+                        for (String getBlockType : Files.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
+                            if (blocks.equalsIgnoreCase(getBlockType)) {
+                                max = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
+                                min = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
+                                break;
                             }
-                            for (String getBlockType : Files.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
-                                if (blocks.equalsIgnoreCase(getBlockType)) {
-                                    max = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
-                                    min = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
-                                    break;
-                                }
-                            }
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
-                            }
-                            int kg = Files.getInstance().getRandomNumber(min, max);
-                            if (Files.getInstance().getWeight(e.getPlayer()) + kg <= Files.getInstance().getMaxWeight(e.getPlayer())) {
+                        }
+                        if (Files.getInstance().getconfig().getBoolean("debug")) {
+                            Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
+                        }
+                        int kg = Files.getInstance().getRandomNumber(min, max);
+                        if (Files.getInstance().getWeight(e.getPlayer()) + kg <= Files.getInstance().getMaxWeight(e.getPlayer())) {
 
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
-                                }
-                                if (kg != 0) {
-                                    Files.getInstance().addWeight(e.getPlayer(), kg);
-                                    if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
-                                            || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
-                                            || b.getType() == XMaterial.DARK_OAK_LOG.parseMaterial()
-                                            || b.getType() == XMaterial.JUNGLE_LOG.parseMaterial()
-                                            || b.getType() == XMaterial.OAK_LOG.parseMaterial()
-                                            || b.getType() == XMaterial.SPRUCE_LOG.parseMaterial()) {
-                                        Files.getInstance().addStorage(e.getPlayer(), "LOG".toUpperCase(), kg);
-                                    }
-                                }
-                            } else {
-                                e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
-                                }
-                                e.setCancelled(true);
-                                return;
+                            if (Files.getInstance().getconfig().getBoolean("debug")) {
+                                Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
-                        }
-                        if (playerchance >= systemchance) {
-                            if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                                Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            if (kg != 0) {
+                                Files.getInstance().addWeight(e.getPlayer(), kg);
+                                if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
+                                        || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
+                                        || b.getType() == XMaterial.DARK_OAK_LOG.parseMaterial()
+                                        || b.getType() == XMaterial.JUNGLE_LOG.parseMaterial()
+                                        || b.getType() == XMaterial.OAK_LOG.parseMaterial()
+                                        || b.getType() == XMaterial.SPRUCE_LOG.parseMaterial()) {
+                                    Files.getInstance().addStorage(e.getPlayer(), "LOG".toUpperCase(), kg);
+                                }
                             }
-                            Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
-                                    .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                                    .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                        } else {
+                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
+                            if (Files.getInstance().getconfig().getBoolean("debug")) {
+                                Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
+                            }
+                            e.setCancelled(true);
                             return;
                         }
+                    }
+                    if (playerchance >= systemchance) {
                         if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                            Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                            Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
                         }
-                        Files.getInstance().removePower(p, 1);
-                        if (Files.getInstance().getconfig().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
-                        }
+                        Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
+                        e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
+                                .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
+                                .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                         return;
                     }
-                } else {
-                    p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
-                    e.setCancelled(true);
+                    if (Files.getInstance().getGang(e.getPlayer()) != null) {
+                        Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
+                    }
+                    Files.getInstance().removePower(p, 1);
+                    if (Files.getInstance().getconfig().getBoolean("debug")) {
+                        Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
+                    }
                     return;
                 }
+
             } else {
                 p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_ITEMS));
                 e.setCancelled(true);
                 return;
             }
-        }
-        if (p.getItemInHand().getType() == XMaterial.WOODEN_HOE.parseMaterial()
-                || p.getItemInHand().getType() == XMaterial.IRON_HOE.parseMaterial()
-                || p.getItemInHand().getType() == XMaterial.STONE_HOE.parseMaterial()
-                || p.getItemInHand().getType() == XMaterial.GOLDEN_HOE.parseMaterial()
-                || p.getItemInHand().getType() == XMaterial.DIAMOND_HOE.parseMaterial()
-                || p.getItemInHand().getType() == XMaterial.NETHERITE_HOE.parseMaterial()) {
-            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                Jobs.getInstance().getLogger().log(Level.INFO, "Check item");
-            }
-            BlockData bdata = b.getBlockData();
-            if (bdata instanceof Ageable) {
-                if (((Ageable) bdata).getAge() == ((Ageable) bdata).getMaximumAge()) {
-                    if (Files.getInstance().getconfig().getBoolean("debug")) {
-                        Jobs.getInstance().getLogger().log(Level.INFO, "Check age block");
-                    }
-                    if (Files.getInstance().getJobs(p).equals("FARMER")) {
-
-                        if (Files.getInstance().getPower(e.getPlayer()) <= Files.getInstance().getconfig().getInt("minimum_power")) {
-                            e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + NEED_MORE_POWER));
-                            e.setCancelled(true);
-                        } else {
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
-                            }
-                            e.setDropItems(false);
-                            e.getBlock().getDrops().clear();
-                            if (!e.isDropItems()) {
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
-                                }
-                                for (String getBlockType : Files.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
-                                    if (blocks.equalsIgnoreCase(getBlockType)) {
-                                        max = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
-                                        min = Files.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
-                                        break;
-                                    }
-                                }
-                                if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                    Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
-                                }
-                                int kg = Files.getInstance().getRandomNumber(min, max);
-                                if (Files.getInstance().getWeight(e.getPlayer()) + kg <= Files.getInstance().getMaxWeight(e.getPlayer())) {
-
-                                    if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                        Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
-                                    }
-                                    if (kg != 0) {
-                                        Files.getInstance().addWeight(e.getPlayer(), kg);
-                                        Files.getInstance().addStorage(e.getPlayer(), blocks, kg);
-                                    }
-                                } else {
-                                    e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + FULL_STORAGE));
-                                    if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                        Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
-                                    }
-                                    e.setCancelled(true);
-                                    return;
-                                }
-                            }
-                            if (playerchance >= systemchance) {
-                                if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                                    Files.getInstance().addXP(e.getPlayer(), 2 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                                }
-                                Files.getInstance().addPower(e.getPlayer(), 5 + Files.getInstance().getleveluptimes(e.getPlayer()));
-                                e.getPlayer().sendMessage(Files.getInstance().convert(PREFIX + LUCKY
-                                        .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                                        .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
-
-                            }
-                            if (Files.getInstance().getGang(e.getPlayer()) != null) {
-                                Files.getInstance().addXP(e.getPlayer(), Files.getInstance().getconfig().getInt("xp") + Files.getInstance().getleveluptimes(e.getPlayer()));
-                            }
-                            Files.getInstance().removePower(p, 1);
-                            if (Files.getInstance().getconfig().getBoolean("debug")) {
-                                Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
-                            }
-                        }
-                    } else {
-                        p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_JOBS));
-                        e.setCancelled(true);
-                    }
-                } else {
-                    e.setCancelled(true);
-                }
-            }
-        } else {
-            p.sendMessage(Files.getInstance().convert(PREFIX + NOT_CORRECT_ITEMS));
-            e.setCancelled(true);
         }
     }
 }

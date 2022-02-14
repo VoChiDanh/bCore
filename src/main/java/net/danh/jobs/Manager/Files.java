@@ -140,6 +140,7 @@ public class Files {
         } catch (IOException ignored) {
         }
     }
+
     public void savegui() {
         try {
             gui.save(guiFile);
@@ -153,20 +154,8 @@ public class Files {
         return randomNumber;
     }
 
-    public String getJobs(Player p) {
-        return getdata().getString("players." + p.getName() + ".Jobs");
-    }
-
     public int getPower(Player p) {
         return getdata().getInt("players." + p.getName() + ".Power");
-    }
-
-    public void setJobs(Player p, String name) {
-        getdata().set("players." + p.getName() + ".Jobs", name);
-        if (getXP(p) == 0) {
-            setXP(p, 0);
-        }
-        savedata();
     }
 
     public int getAge(Player p) {

@@ -93,8 +93,6 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new Join(), this);
         getServer().getPluginManager().registerEvents(new Fishing(), this);
-        getServer().getPluginManager().registerEvents(new Interact(), this);
-        getServer().getPluginManager().registerEvents(new Regen(), this);
         getServer().getPluginManager().registerEvents(new Eating(), this);
         getServer().getPluginManager().registerEvents(new Death(), this);
         getServer().getPluginManager().registerEvents(new Inventory(), this);
@@ -131,7 +129,7 @@ public final class Jobs extends JavaPlugin implements Listener {
                             p.removePotionEffect(PotionEffectType.CONFUSION);
                         }
                     }
-                    if (Files.getInstance().getWeight(p) == ((Files.getInstance().getMaxWeight(p))/(10/9))){
+                    if (Files.getInstance().getWeight(p) == ((Files.getInstance().getMaxWeight(p)) / (10 / 9))) {
 
                     }
                 }

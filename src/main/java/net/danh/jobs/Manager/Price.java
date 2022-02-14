@@ -4,8 +4,6 @@ import net.danh.jobs.Jobs;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 
-import java.util.Locale;
-
 public class Price {
 
     private static Price instance;

@@ -37,11 +37,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (p == null) {
             return "Player not online";
         }
-
-        if (identifier.equalsIgnoreCase("name")) {
-            return Files.getInstance().getJobs(p);
-        }
-
         if (identifier.equalsIgnoreCase("power")) {
             return String.valueOf(Files.getInstance().getPower(p));
         }

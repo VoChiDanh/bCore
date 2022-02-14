@@ -127,6 +127,7 @@ public class Inventory implements Listener {
             p.openInventory(SellBlocks.getInstance().getSellGui(p));
         }
     }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnDragInventory(InventoryDragEvent e) {
         if (e.getView().getTitle().equals(Files.getInstance().getgui().getString(Files.getInstance().convert("GUI.SellGui.Title")))) {
