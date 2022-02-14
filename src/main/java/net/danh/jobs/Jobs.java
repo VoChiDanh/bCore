@@ -147,68 +147,41 @@ public final class Jobs extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 double number = Files.getInstance().getRandomNumber(1, 100);
-                if (Price.getInstance().getPrice("COAL_ORE") == 0.0D) {
-                    Price.getInstance().addPrice("COAL_ORE", 1.0);
+                if (Price.getInstance().getPrice("COAL") == 0.0D) {
+                    Price.getInstance().addPrice("COAL", 1.0);
                 }
 
-                if (Price.getInstance().getPrice("IRON_ORE") == 0.0D) {
-                    Price.getInstance().addPrice("IRON_ORE", 3.0);
+                if (Price.getInstance().getPrice("IRON_INGOT") == 0.0D) {
+                    Price.getInstance().addPrice("IRON_INGOT", 3.0);
                 }
-                if (Price.getInstance().getPrice("GOLD_ORE") == 0.0D) {
-                    Price.getInstance().addPrice("GOLD_ORE", 5.0);
-                }
-
-                if (Price.getInstance().getPrice("DIAMOND_ORE") == 0.0D) {
-                    Price.getInstance().addPrice("DIAMOND_ORE", 7.0);
-                }
-                if (Price.getInstance().getPrice("EMERALD_ORE") == 0.0D) {
-                    Price.getInstance().setPrice("EMERALD_ORE", 10.0);
+                if (Price.getInstance().getPrice("GOLD_INGOT") == 0.0D) {
+                    Price.getInstance().addPrice("GOLD_INGOT", 5.0);
                 }
 
-                if (Price.getInstance().getPrice("ACACIA_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("ACACIA_LOG", 5.0);
+                if (Price.getInstance().getPrice("DIAMOND") == 0.0D) {
+                    Price.getInstance().addPrice("DIAMOND", 7.0);
                 }
-                if (Price.getInstance().getPrice("BIRCH_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("BIRCH_LOG", 5.0);
-                }
-
-                if (Price.getInstance().getPrice("DARK_OAK_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("DARK_OAK_LOG", 5.0);
-                }
-                if (Price.getInstance().getPrice("JUNGLE_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("JUNGLE_LOG", 5.0);
+                if (Price.getInstance().getPrice("EMERALD") == 0.0D) {
+                    Price.getInstance().setPrice("EMERALD", 10.0);
                 }
 
-                if (Price.getInstance().getPrice("OAK_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("OAK_LOG", 5.0);
-                }
-                if (Price.getInstance().getPrice("SPRUCE_LOG") == 0.0D) {
-                    Price.getInstance().setPrice("SPRUCE_LOG", 5.0);
+                if (Price.getInstance().getPrice("LOG") == 0.0D) {
+                    Price.getInstance().setPrice("LOG", 5.0);
                 }
                 if (number < 50) {
-                    Price.getInstance().removePrice("COAL_ORE", number / 100);
-                    Price.getInstance().removePrice("IRON_ORE", number / 100);
-                    Price.getInstance().removePrice("GOLD_ORE", number / 100);
-                    Price.getInstance().removePrice("DIAMOND_ORE", number / 100);
-                    Price.getInstance().removePrice("EMERALD_ORE", number / 100);
-                    Price.getInstance().removePrice("ACACIA_LOG", number / 100);
-                    Price.getInstance().removePrice("BIRCH_LOG", number / 100);
-                    Price.getInstance().removePrice("DARK_OAK_LOG", number / 100);
-                    Price.getInstance().removePrice("JUNGLE_LOG", number / 100);
-                    Price.getInstance().removePrice("OAK_LOG", number / 100);
-                    Price.getInstance().removePrice("SPRUCE_LOG", number / 100);
+                    Price.getInstance().removePrice("COAL", number / 100);
+                    Price.getInstance().removePrice("IRON_INGOT", number / 100);
+                    Price.getInstance().removePrice("GOLD_INGOT", number / 100);
+                    Price.getInstance().removePrice("DIAMOND", number / 100);
+                    Price.getInstance().removePrice("EMERALD", number / 100);
+                    Price.getInstance().removePrice("LOG", number / 100);
                 } else {
-                    Price.getInstance().addPrice("COAL_ORE", number / 100);
-                    Price.getInstance().addPrice("IRON_ORE", number / 100);
-                    Price.getInstance().addPrice("GOLD_ORE", number / 100);
-                    Price.getInstance().addPrice("DIAMOND_ORE", number / 100);
-                    Price.getInstance().addPrice("EMERALD_ORE", number / 100);
-                    Price.getInstance().addPrice("ACACIA_LOG", number / 100);
-                    Price.getInstance().addPrice("BIRCH_LOG", number / 100);
-                    Price.getInstance().addPrice("DARK_OAK_LOG", number / 100);
-                    Price.getInstance().addPrice("JUNGLE_LOG", number / 100);
-                    Price.getInstance().addPrice("OAK_LOG", number / 100);
-                    Price.getInstance().addPrice("SPRUCE_LOG", number / 100);
+                    Price.getInstance().addPrice("COAL", number / 100);
+                    Price.getInstance().addPrice("IRON_INGOT", number / 100);
+                    Price.getInstance().addPrice("GOLD_INGOT", number / 100);
+                    Price.getInstance().addPrice("DIAMOND", number / 100);
+                    Price.getInstance().addPrice("EMERALD", number / 100);
+                    Price.getInstance().addPrice("LOG", number / 100);
                 }
             }
         }).runTaskTimer(this, 300 * 20L, 300 * 20L);
