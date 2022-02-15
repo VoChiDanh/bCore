@@ -37,15 +37,15 @@ public final class Jobs extends JavaPlugin implements Listener {
     public static String formatNMSVersion(String nms) {
         switch (nms) {
             case "v1_8_R1":
-                return "1.8.x";
+                return "1.8";
             case "v1_8_R2":
-                return "1.8.x";
+                return "1.8.3";
             case "v1_8_R3":
                 return "1.8.x";
             case "v1_9_R1":
                 return "1.9.x";
             case "v1_9_R2":
-                return "1.9.x";
+                return "1.9.4";
             case "v1_10_R1":
                 return "1.10.x";
             case "v1_11_R1":
@@ -53,7 +53,7 @@ public final class Jobs extends JavaPlugin implements Listener {
             case "v1_12_R1":
                 return "1.12.x";
             case "v1_13_R1":
-                return "1.13.x";
+                return "1.13";
             case "v1_13_R2":
                 return "1.13.x";
             case "v1_14_R1":
@@ -61,18 +61,18 @@ public final class Jobs extends JavaPlugin implements Listener {
             case "v1_15_R1":
                 return "1.15.x";
             case "v1_16_R1":
-                return "1.16.x";
+                return "1.16.1";
             case "v1_16_R2":
-                return "1.16.x";
+                return "1.16.2 / 1.16.3";
             case "v1_16_R3":
-                return "1.16.x";
+                return "1.16.4 / 1.16.5";
             case "v1_17_R1":
                 return "1.17.x";
             case "v1_18_R1":
                 return "1.18.x";
 
         }
-        throw new IllegalArgumentException("Your sever version is " + nms + ". Plugin doesnt support this version!");
+        throw new IllegalArgumentException("Your sever version is " + nms + ". Plugin does not support this version!");
     }
 
     @Override
@@ -127,22 +127,41 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
-                double number = Files.getInstance().getRandomNumber(1, 100);
-
-                if (number < 50) {
-                    Price.getInstance().removePrice("COAL", number / 100);
-                    Price.getInstance().removePrice("IRON", number / 100);
-                    Price.getInstance().removePrice("GOLD", number / 100);
-                    Price.getInstance().removePrice("DIAMOND", number / 100);
-                    Price.getInstance().removePrice("EMERALD", number / 100);
-                    Price.getInstance().removePrice("LOG", number / 100);
+                double coal = Files.getInstance().getRandomNumber(1, 1000);
+                double iron = Files.getInstance().getRandomNumber(1, 1000);
+                double gold = Files.getInstance().getRandomNumber(1, 1000);
+                double diamond = Files.getInstance().getRandomNumber(1, 1000);
+                double emerald = Files.getInstance().getRandomNumber(1, 1000);
+                double log = Files.getInstance().getRandomNumber(1, 1000);
+                if (coal < 500) {
+                    Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
                 } else {
-                    Price.getInstance().addPrice("COAL", number / 100);
-                    Price.getInstance().addPrice("IRON", number / 100);
-                    Price.getInstance().addPrice("GOLD", number / 100);
-                    Price.getInstance().addPrice("DIAMOND", number / 100);
-                    Price.getInstance().addPrice("EMERALD", number / 100);
-                    Price.getInstance().addPrice("LOG", number / 100);
+                    Price.getInstance().addPrice("COAL".toUpperCase(), coal / 100);
+                }
+                if (iron < 500) {
+                    Price.getInstance().removePrice("IRON".toUpperCase(), iron / 100);
+                } else {
+                    Price.getInstance().addPrice("IRON".toUpperCase(), iron / 100);
+                }
+                if (gold < 500) {
+                    Price.getInstance().removePrice("GOLD".toUpperCase(), gold / 100);
+                } else {
+                    Price.getInstance().addPrice("GOLD".toUpperCase(), gold / 100);
+                }
+                if (diamond < 500) {
+                    Price.getInstance().removePrice("DIAMOND".toUpperCase(), diamond / 100);
+                } else {
+                    Price.getInstance().addPrice("DIAMOND".toUpperCase(), diamond / 100);
+                }
+                if (emerald < 500) {
+                    Price.getInstance().removePrice("EMERALD".toUpperCase(), emerald / 100);
+                } else {
+                    Price.getInstance().addPrice("EMERALD".toUpperCase(), emerald / 100);
+                }
+                if (log < 500) {
+                    Price.getInstance().removePrice("LOG".toUpperCase(), log / 100);
+                } else {
+                    Price.getInstance().addPrice("LOG".toUpperCase(), log / 100);
                 }
             }
         }).runTaskTimer(this, 300 * 20L, 300 * 20L);
