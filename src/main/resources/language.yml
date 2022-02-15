@@ -15,7 +15,7 @@ LEVEL_UP:
   - "&dRestore power when drink: %rpower%"
 HELP_USER:
   - "&9/Jobs info [Player] - &bCheck info player"
-  - "&9/Jobs sell [Block Type] [Number] - &cSell blocks"
+  - "&9/Storage- &cOpen sell gui"
 HELP_ADMIN:
   - "&9/Jobs plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level"
   - "&9/Jobs xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP"
@@ -31,7 +31,6 @@ HELP_ADMIN:
   - "&9/Jobs reload - &aReload config"
   - "&9/Jobs update - &aUpdate plugins to lastest DevBuid"
 DONE: "&aDone"
-NOT_ENOUGH_MONEY: "&cYou are not enough money"
 NOT_CORRECT_ITEMS: "&cYou can not break that block with this item"
 NEED_MORE_POWER: "&cYou need more power to working"
 NOT_FISH: "&cThat item is not fish so you can not caught that"

@@ -24,9 +24,6 @@ public class TabCommand implements TabCompleter {
 
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("jobs")) {
-            if (sender.hasPermission("jobs.user")) {
-                arg.add("sell");
-            }
             if (sender.hasPermission("jobs.admin")) {
                 arg.add("info");
                 arg.add("plevel");

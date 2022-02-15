@@ -11,4 +11,6 @@ commands:
     description: Main commands
   gang:
     description: Gang commands
+  storage:
+    description: Storage commands
 

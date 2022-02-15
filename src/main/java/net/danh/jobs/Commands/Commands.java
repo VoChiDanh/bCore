@@ -31,8 +31,6 @@ public class Commands implements CommandExecutor {
         String RELOADED = Data.getInstance().getlanguage().getString("RELOAD");
         String PREFIX = Data.getInstance().getlanguage().getString("PREFIX");
         String DONE = Data.getInstance().getlanguage().getString("DONE");
-        String NOT_ENOUGH_MONEY = Data.getInstance().getlanguage().getString("NOT_ENOUGH_MONEY");
-        String NOT_CORRECT_JOBS = Data.getInstance().getlanguage().getString("NOT_CORRECT_JOBS");
         String UNKNOW_PLAYER = Data.getInstance().getlanguage().getString("UNKNOW_PLAYER");
         String UNKNOW_GANG = Data.getInstance().getlanguage().getString("UNKNOW_GANG");
 
@@ -420,15 +418,6 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            if (args.length == 1) {
-                if (sender.hasPermission("jobs.user")) {
-                    if (args[0].equalsIgnoreCase("sell")) {
-                        if (sender instanceof Player) {
-                            SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
-                        }
-                    }
-                }
-            }
             if (args.length == 5) {
                 if (sender.hasPermission("jobs.admin")) {
                     if (args[0].equalsIgnoreCase("storage")) {
@@ -458,6 +447,16 @@ public class Commands implements CommandExecutor {
                                 }
                             }
                         }
+                    }
+                }
+            }
+            return true;
+        }
+        if (label.equalsIgnoreCase("storage")) {
+            if (sender instanceof Player) {
+                if (args.length == 0) {
+                    if (sender.hasPermission("jobs.user")) {
+                        SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
                     }
                 }
             }
