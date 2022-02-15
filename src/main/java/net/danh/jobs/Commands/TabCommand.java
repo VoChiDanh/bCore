@@ -43,6 +43,7 @@ public class TabCommand implements TabCompleter {
                 arg.add("luckychance");
                 arg.add("update");
                 arg.add("price");
+                arg.add("baseprice");
             }
             if (sender.hasPermission("jobs.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")
@@ -91,7 +92,12 @@ public class TabCommand implements TabCompleter {
                     || args[0].equalsIgnoreCase("glevel")
                     || args[0].equalsIgnoreCase("levelup")
                     || args[0].equalsIgnoreCase("maxpower")
-                    || args[0].equalsIgnoreCase("restorepower")) {
+                    || args[0].equalsIgnoreCase("restorepower")
+                    || args[0].equalsIgnoreCase("luckychance")
+                    || args[0].equalsIgnoreCase("weight")
+                    || args[0].equalsIgnoreCase("maxweight")
+                    || args[0].equalsIgnoreCase("price")
+                    || args[0].equalsIgnoreCase("baseprice")) {
                 for (String a2 : argg) {
                     if (a2.toLowerCase().startsWith(args[1].toLowerCase()))
                         arg2.add(a2);

@@ -1,4 +1,11 @@
 Price:
+  COAL: 10.0
+  IRON: 30.0
+  GOLD: 50.0
+  DIAMOND: 70.0
+  EMERALD: 90.0
+  LOG: 50.0
+BasePrice:
   COAL: 1.0
   IRON: 3.0
   GOLD: 5.0

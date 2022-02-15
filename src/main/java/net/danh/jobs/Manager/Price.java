@@ -20,8 +20,17 @@ public class Price {
         return Files.getInstance().getprice().getInt("Price." + name);
     }
 
+    public double getBasePrice(String name){
+        return Files.getInstance().getprice().getInt("BasePrice." + name);
+    }
+
     public void setPrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, price);
+        Files.getInstance().saveprice();
+    }
+
+    public void setBasePrice(String name, Double price) {
+        Files.getInstance().getprice().set("BasePrice." + name, price);
         Files.getInstance().saveprice();
     }
 
@@ -33,10 +42,15 @@ public class Price {
         Files.getInstance().saveprice();
     }
 
+    public void addBasePrice(String name, Double price) {
+        Files.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) + price);
+        Files.getInstance().saveprice();
+    }
+
     public void removePrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, getPrice(name) - price);
         if (getPrice(name) == 0) {
-            addPrice(name, 1.0);
+            addPrice(name, getBasePrice(name));
             Files.getInstance().saveprice();
             return;
         } else {
@@ -46,6 +60,14 @@ public class Price {
             Files.getInstance().saveprice();
         }
 
+    }
+    public void removeBasePrice(String name, Double price) {
+        Files.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) - price);
+        if (getBasePrice(name) == 0) {
+            addBasePrice(name, 1.0);
+            Files.getInstance().saveprice();
+            return;
+        }
     }
     public void Sell(Player p, String name, Integer number) {
         if (Files.getInstance().getStorage(p, name.toUpperCase()) >= number && Files.getInstance().getWeight(p) >= number) {

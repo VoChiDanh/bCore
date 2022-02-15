@@ -388,22 +388,35 @@ public class Commands implements CommandExecutor {
                         }
                     }
                     if (args[0].equalsIgnoreCase("price")) {
-                        if (Material.getMaterial(args[2]) != null) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                Price.getInstance().setPrice(args[2], Double.valueOf(args[3]));
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                Price.getInstance().addPrice(args[2], Double.valueOf(args[3]));
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                Price.getInstance().removePrice(args[2], Double.valueOf(args[3]));
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                                sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
-                            }
+                        if (args[1].equalsIgnoreCase("set")) {
+                            Price.getInstance().setPrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            Price.getInstance().addPrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            Price.getInstance().removePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("baseprice")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            Price.getInstance().setBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            Price.getInstance().addBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            Price.getInstance().removeBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
+                            sender.sendMessage(Files.getInstance().convert(PREFIX + DONE));
                         }
                     }
                 }
