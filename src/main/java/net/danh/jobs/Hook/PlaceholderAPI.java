@@ -77,7 +77,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Weight.getInstance().getMaxWeight(p));
         }
         if (identifier.startsWith("storage_")) {
-            String name = identifier.substring(7).toUpperCase();
+            String name = identifier.substring(8).toUpperCase();
             return String.valueOf(Storage.getInstance().getStorage(p, name));
         }
         if (identifier.startsWith("price_")) {
