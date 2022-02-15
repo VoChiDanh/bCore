@@ -49,7 +49,7 @@ public class Price {
 
     public void removePrice(String name, Double price) {
         Files.getInstance().getprice().set("Price." + name, getPrice(name) - price);
-        if (getPrice(name) == 0) {
+        if (getPrice(name) <= 0) {
             addPrice(name, getBasePrice(name));
             Files.getInstance().saveprice();
             return;
