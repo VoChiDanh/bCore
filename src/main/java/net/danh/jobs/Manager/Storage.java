@@ -1,0 +1,46 @@
+package net.danh.jobs.Manager;
+
+import org.bukkit.entity.Player;
+
+public class Storage {
+
+    private static Storage instance;
+
+    public static Storage getInstance() {
+
+        if (instance == null) {
+            instance = new Storage();
+        }
+        return instance;
+    }
+
+
+    public int getStorage(Player p, String name) {
+        return Data.getInstance().getstorage().getInt("players." + p.getName() + ".Blocks." + name);
+    }
+
+    public void setStorage(Player p, String name, Integer number) {
+        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, number);
+        Data.getInstance().savestorage();
+    }
+
+    public void addStorage(Player p, String name, Integer number) {
+        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
+        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("ADD_STORAGE")
+                .replaceAll("%amount%", String.valueOf(number))
+                .replaceAll("%block%", name.toLowerCase())
+                .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p)))
+                .replaceAll("%maxweight%", String.valueOf(Weight.getInstance().getMaxWeight(p)))));
+        Data.getInstance().savestorage();
+    }
+
+    public void removeStorage(Player p, String name, Integer number) {
+        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
+        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("REMOVE_STORAGE")
+                .replaceAll("%amount%", String.valueOf(number))
+                .replaceAll("%block%", name.toLowerCase())
+                .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p) - number))
+                .replaceAll("%maxweight%", String.valueOf(Weight.getInstance().getMaxWeight(p)))));
+        Data.getInstance().savestorage();
+    }
+}

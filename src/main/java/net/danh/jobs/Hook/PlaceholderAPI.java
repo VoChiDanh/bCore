@@ -2,8 +2,7 @@ package net.danh.jobs.Hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.Files;
-import net.danh.jobs.Manager.Price;
+import net.danh.jobs.Manager.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -38,41 +37,41 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return "Player not online";
         }
         if (identifier.equalsIgnoreCase("power")) {
-            return String.valueOf(Files.getInstance().getPower(p));
+            return String.valueOf(Power.getInstance().getPower(p));
         }
 
         if (identifier.equalsIgnoreCase("age")) {
-            return String.valueOf(Files.getInstance().getLevel(p));
+            return String.valueOf(PlayerData.getInstance().getLevel(p));
         }
 
         if (identifier.equalsIgnoreCase("xp")) {
-            return String.valueOf(Files.getInstance().getXP(p));
+            return String.valueOf(PlayerData.getInstance().getXP(p));
         }
         if (identifier.equalsIgnoreCase("ganglevel")) {
-            return String.valueOf(Files.getInstance().getLevelGang(p));
+            return String.valueOf(Gang.getInstance().getLevelGang(p));
         }
         if (identifier.equalsIgnoreCase("gangpoints")) {
-            return String.valueOf(Files.getInstance().getleveluptimes(p));
+            return String.valueOf(Gang.getInstance().getleveluptimes(p));
         }
         if (identifier.equalsIgnoreCase("gang")) {
-            return Files.getInstance().getGang(p);
+            return Gang.getInstance().getGang(p);
         }
         if (identifier.equalsIgnoreCase("restorepower")) {
-            return String.valueOf(Files.getInstance().getRestorePower(p));
+            return String.valueOf(Power.getInstance().getRestorePower(p));
         }
         if (identifier.equalsIgnoreCase("maxpower")) {
-            return String.valueOf(Files.getInstance().getMaxPower(p));
+            return String.valueOf(Power.getInstance().getMaxPower(p));
         }
         if (identifier.equalsIgnoreCase("weight")) {
-            return String.valueOf(Files.getInstance().getWeight(p));
+            return String.valueOf(Weight.getInstance().getWeight(p));
         }
         if (identifier.equalsIgnoreCase("maxweight")) {
-            return String.valueOf(Files.getInstance().getMaxWeight(p));
+            return String.valueOf(Weight.getInstance().getMaxWeight(p));
         }
         if (identifier.startsWith("storage_")) {
             String name = identifier.substring(7).toUpperCase();
             if (Material.getMaterial(name) != null) {
-                return String.valueOf(Files.getInstance().getStorage(p, name));
+                return String.valueOf(Storage.getInstance().getStorage(p, name));
             }
             return "Unknown Material";
         }

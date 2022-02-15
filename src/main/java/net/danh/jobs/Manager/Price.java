@@ -17,71 +17,73 @@ public class Price {
     }
 
     public double getPrice(String name) {
-        return Files.getInstance().getprice().getInt("Price." + name);
+        return Data.getInstance().getprice().getInt("Price." + name);
     }
 
-    public double getBasePrice(String name){
-        return Files.getInstance().getprice().getInt("BasePrice." + name);
+    public double getBasePrice(String name) {
+        return Data.getInstance().getprice().getInt("BasePrice." + name);
     }
 
     public void setPrice(String name, Double price) {
-        Files.getInstance().getprice().set("Price." + name, price);
-        Files.getInstance().saveprice();
+        Data.getInstance().getprice().set("Price." + name, price);
+        Data.getInstance().saveprice();
     }
 
     public void setBasePrice(String name, Double price) {
-        Files.getInstance().getprice().set("BasePrice." + name, price);
-        Files.getInstance().saveprice();
+        Data.getInstance().getprice().set("BasePrice." + name, price);
+        Data.getInstance().saveprice();
     }
 
     public void addPrice(String name, Double price) {
-        Files.getInstance().getprice().set("Price." + name, getPrice(name) + price);
-        Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("INCREASE_PRICE")
+        Data.getInstance().getprice().set("Price." + name, getPrice(name) + price);
+        Jobs.getInstance().getServer().broadcastMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("INCREASE_PRICE")
                 .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%price%", String.valueOf(getPrice(name)))));
-        Files.getInstance().saveprice();
+        Data.getInstance().saveprice();
     }
 
     public void addBasePrice(String name, Double price) {
-        Files.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) + price);
-        Files.getInstance().saveprice();
+        Data.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) + price);
+        Data.getInstance().saveprice();
     }
 
     public void removePrice(String name, Double price) {
-        Files.getInstance().getprice().set("Price." + name, getPrice(name) - price);
+        Data.getInstance().getprice().set("Price." + name, getPrice(name) - price);
         if (getPrice(name) <= 0) {
             addPrice(name, getBasePrice(name));
-            Files.getInstance().saveprice();
+            Data.getInstance().saveprice();
             return;
         } else {
-            Jobs.getInstance().getServer().broadcastMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("DECREASE_PRICE")
+            Jobs.getInstance().getServer().broadcastMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("DECREASE_PRICE")
                     .replaceAll("%block%", name.toLowerCase())
                     .replaceAll("%price%", String.valueOf(getPrice(name)))));
-            Files.getInstance().saveprice();
+            Data.getInstance().saveprice();
         }
 
     }
+
     public void removeBasePrice(String name, Double price) {
-        Files.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) - price);
+        Data.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) - price);
         if (getBasePrice(name) == 0) {
             addBasePrice(name, 1.0);
-            Files.getInstance().saveprice();
+            Data.getInstance().saveprice();
             return;
         }
     }
+
     public void Sell(Player p, String name, Integer number) {
-        if (Files.getInstance().getStorage(p, name.toUpperCase()) >= number && Files.getInstance().getWeight(p) >= number) {
-            Files.getInstance().removeStorage(p, name, number);
-            Files.getInstance().removeWeight(p, number);
-            Files.getInstance().savestorage();
-            Files.getInstance().savedata();
+        if (Storage.getInstance().getStorage(p, name.toUpperCase()) >= number && Weight.getInstance().getWeight(p) >= number) {
+            Storage.getInstance().removeStorage(p, name, number);
+            Weight.getInstance().removeWeight(p, number);
+            Data.getInstance().savestorage();
+            Data.getInstance().savedata();
             double money = getPrice(name) * number;
             EconomyResponse r = Jobs.economy.depositPlayer(p.getPlayer(), money);
             if (r.transactionSuccess()) {
-                p.sendMessage(Files.getInstance().convert("&a+ " + money + "$"));
+                p.sendMessage(Data.getInstance().convert("&a+ " + money + "$"));
             }
         } else {
-            p.sendMessage(Files.getInstance().convert(Files.getInstance().getlanguage().getString("NOT_ENOUGH_MATERIAL")));
+            p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("NOT_ENOUGH_MATERIAL")));
         }
     }
 }

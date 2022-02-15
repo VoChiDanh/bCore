@@ -4,8 +4,7 @@ import net.danh.jobs.Commands.Commands;
 import net.danh.jobs.Commands.TabCommand;
 import net.danh.jobs.Events.*;
 import net.danh.jobs.Hook.PlaceholderAPI;
-import net.danh.jobs.Manager.Files;
-import net.danh.jobs.Manager.Price;
+import net.danh.jobs.Manager.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -100,22 +99,22 @@ public final class Jobs extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
-        Files.getInstance().createconfig();
+        Data.getInstance().createconfig();
         getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (Files.getInstance().getLevel(p) == 1) {
-                        if (Files.getInstance().getPower(p) > Files.getInstance().getMaxPower(p)) {
-                            Files.getInstance().setPower(p, Files.getInstance().getMaxPower(p));
+                    if (PlayerData.getInstance().getLevel(p) == 1) {
+                        if (Power.getInstance().getPower(p) > Power.getInstance().getMaxPower(p)) {
+                            Power.getInstance().setPower(p, Power.getInstance().getMaxPower(p));
                         }
-                        if (Files.getInstance().getPower(p) >= Files.getInstance().getMaxPower(p) * 0.9D) {
+                        if (Power.getInstance().getPower(p) >= Power.getInstance().getMaxPower(p) * 0.9D) {
                             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, Integer.MIN_VALUE));
                         } else {
                             p.removePotionEffect(PotionEffectType.CONFUSION);
                         }
                     }
-                    if (Files.getInstance().getWeight(p) >= Files.getInstance().getMaxWeight(p) * 0.9D) {
+                    if (Weight.getInstance().getWeight(p) >= Weight.getInstance().getMaxWeight(p) * 0.9D) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.MIN_VALUE));
                     } else {
@@ -127,12 +126,12 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
-                double coal = Files.getInstance().getRandomNumber(1, 1000);
-                double iron = Files.getInstance().getRandomNumber(1, 1000);
-                double gold = Files.getInstance().getRandomNumber(1, 1000);
-                double diamond = Files.getInstance().getRandomNumber(1, 1000);
-                double emerald = Files.getInstance().getRandomNumber(1, 1000);
-                double log = Files.getInstance().getRandomNumber(1, 1000);
+                double coal = Data.getInstance().getRandomNumber(1, 1000);
+                double iron = Data.getInstance().getRandomNumber(1, 1000);
+                double gold = Data.getInstance().getRandomNumber(1, 1000);
+                double diamond = Data.getInstance().getRandomNumber(1, 1000);
+                double emerald = Data.getInstance().getRandomNumber(1, 1000);
+                double log = Data.getInstance().getRandomNumber(1, 1000);
                 if (coal < 500) {
                     Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
                 } else {
@@ -169,11 +168,11 @@ public final class Jobs extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        Files.getInstance().savedata();
-        Files.getInstance().saveconfig();
-        Files.getInstance().savelanguage();
-        Files.getInstance().savegui();
-        Files.getInstance().saveprice();
+        Data.getInstance().savedata();
+        Data.getInstance().saveconfig();
+        Data.getInstance().savelanguage();
+        Data.getInstance().savegui();
+        Data.getInstance().saveprice();
         getLogger().log(Level.INFO, "Saved data");
     }
 
