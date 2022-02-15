@@ -125,12 +125,18 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
+                double stone = Data.getInstance().getRandomNumber(1, 1000);
                 double coal = Data.getInstance().getRandomNumber(1, 1000);
                 double iron = Data.getInstance().getRandomNumber(1, 1000);
                 double gold = Data.getInstance().getRandomNumber(1, 1000);
                 double diamond = Data.getInstance().getRandomNumber(1, 1000);
                 double emerald = Data.getInstance().getRandomNumber(1, 1000);
                 double log = Data.getInstance().getRandomNumber(1, 1000);
+                if (stone < 500) {
+                    Price.getInstance().removePrice("STONE".toUpperCase(), stone / 100);
+                } else {
+                    Price.getInstance().addPrice("STONE".toUpperCase(), stone / 100);
+                }
                 if (coal < 500) {
                     Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
                 } else {

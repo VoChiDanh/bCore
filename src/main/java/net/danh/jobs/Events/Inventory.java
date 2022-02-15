@@ -22,6 +22,23 @@ public class Inventory implements Listener {
         if (e.getView().getTitle().equals(Data.getInstance().getgui().getString(Data.getInstance().convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
             Objects.requireNonNull(e.getCurrentItem()).getType();
+            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Stone.Slot")) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    Price.getInstance().Sell(p, "STONE".toUpperCase(), 1);
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    Price.getInstance().Sell(p, "STONE".toUpperCase(), 5);
+                }
+                if (e.getClick().equals(ClickType.MIDDLE)) {
+                    Price.getInstance().Sell(p, "STONE".toUpperCase(), Storage.getInstance().getStorage(p, "STONE".toUpperCase()));
+                }
+                if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
+                    Price.getInstance().Sell(p, "STONE".toUpperCase(), 10);
+                }
+                if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                    Price.getInstance().Sell(p, "STONE".toUpperCase(), 50);
+                }
+            }
             if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Coal.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "COAL".toUpperCase(), 1);

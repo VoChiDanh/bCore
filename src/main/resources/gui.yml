@@ -2,6 +2,21 @@ GUI:
   SellGui:
     Title: "Sell Gui"
     Size: 9
+    Stone:
+      Slot: 0
+      Material: STONE
+      Display: "&8Stone"
+      Lore:
+        - ""
+        - "&aPrice:&3 %price%$/kg"
+        - ""
+        - "&aStorage:&3 %amount% kg"
+        - ""
+        - "&e&oLeft click to sell 1kg"
+        - "&e&oRight click to sell 5kg"
+        - "&b&oMiddle click to sell %amount%kg"
+        - "&6&oShift Left click to sell 10kg"
+        - "&6&oShift Right click to sell 5kg"
     Coal:
       Slot: 1
       Material: COAL

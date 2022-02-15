@@ -40,7 +40,9 @@ public class SellBlocks implements Listener {
         ItemStack emerald = emerald(p);
         ItemStack log = log(p);
         ItemStack player = playerinfo(p);
+        ItemStack stone = stone(p);
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Coal.Slot"), coal);
+        sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Stone.Slot"), stone);
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Iron.Slot"), iron);
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Gold.Slot"), gold);
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.PlayerInfo.Slot"), player);
@@ -48,6 +50,22 @@ public class SellBlocks implements Listener {
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Emerald.Slot"), emerald);
         sellgui.setItem(Data.getInstance().getgui().getInt("GUI.SellGui.Log.Slot"), log);
         return sellgui;
+    }
+
+    public ItemStack stone(Player p) {
+        ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Data.getInstance().getgui().getString("GUI.SellGui.Stone.Material"))));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        item.setItemMeta(meta);
+        for (String loreconfig : Data.getInstance().getgui().getStringList("GUI.SellGui.Stone.Lore")) {
+            lore.add(Data.getInstance().convert(loreconfig)
+                    .replaceAll("%price%", String.valueOf(Price.getInstance().getPrice("STONE".toUpperCase())))
+                    .replaceAll("%amount%", String.valueOf(Storage.getInstance().getStorage(p, "STONE".toUpperCase()))));
+        }
+        meta.setLore(lore);
+        meta.setDisplayName(Data.getInstance().convert(Data.getInstance().getgui().getString("GUI.SellGui.Stone.Display")));
+        item.setItemMeta(meta);
+        return item;
     }
 
 

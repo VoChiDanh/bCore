@@ -11,6 +11,12 @@ Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
 Blocks:
+  STONE:
+    max: 5
+    min: 1
+  COBBLESTONE:
+    max: 6
+    min: 2
   COAL_ORE:
     max: 3
     min: 1

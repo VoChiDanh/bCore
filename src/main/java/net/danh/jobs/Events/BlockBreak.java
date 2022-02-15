@@ -44,7 +44,9 @@ public class BlockBreak implements Listener {
                 || b.getType() == XMaterial.IRON_BLOCK.parseMaterial()
                 || b.getType() == XMaterial.GOLD_BLOCK.parseMaterial()
                 || b.getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()
-                || b.getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
+                || b.getType() == XMaterial.EMERALD_BLOCK.parseMaterial()
+                || b.getType() == XMaterial.STONE.parseMaterial()
+                || b.getType() == XMaterial.COBBLESTONE.parseMaterial()) {
 
             if (p.getItemInHand().getType() == XMaterial.STONE_PICKAXE.parseMaterial()
                     || p.getItemInHand().getType() == XMaterial.IRON_PICKAXE.parseMaterial()
@@ -102,6 +104,9 @@ public class BlockBreak implements Listener {
                                 } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
                                         || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
                                     Storage.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
+                                }else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
+                                        || e.getBlock().getType() == XMaterial.COBBLESTONE.parseMaterial()) {
+                                    Storage.getInstance().addStorage(e.getPlayer(), "STONE".toUpperCase(), kg);
                                 }
                             }
                         } else {
