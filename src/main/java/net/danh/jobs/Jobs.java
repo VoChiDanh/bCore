@@ -126,47 +126,49 @@ public final class Jobs extends JavaPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
-                double stone = Data.getInstance().getRandomNumber(1, 1000);
-                double coal = Data.getInstance().getRandomNumber(1, 1000);
-                double iron = Data.getInstance().getRandomNumber(1, 1000);
-                double gold = Data.getInstance().getRandomNumber(1, 1000);
-                double diamond = Data.getInstance().getRandomNumber(1, 1000);
-                double emerald = Data.getInstance().getRandomNumber(1, 1000);
-                double log = Data.getInstance().getRandomNumber(1, 1000);
-                if (stone < 500) {
-                    Price.getInstance().removePrice("STONE".toUpperCase(), stone / 100);
-                } else {
-                    Price.getInstance().addPrice("STONE".toUpperCase(), stone / 100);
-                }
-                if (coal < 500) {
-                    Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
-                } else {
-                    Price.getInstance().addPrice("COAL".toUpperCase(), coal / 100);
-                }
-                if (iron < 500) {
-                    Price.getInstance().removePrice("IRON".toUpperCase(), iron / 100);
-                } else {
-                    Price.getInstance().addPrice("IRON".toUpperCase(), iron / 100);
-                }
-                if (gold < 500) {
-                    Price.getInstance().removePrice("GOLD".toUpperCase(), gold / 100);
-                } else {
-                    Price.getInstance().addPrice("GOLD".toUpperCase(), gold / 100);
-                }
-                if (diamond < 500) {
-                    Price.getInstance().removePrice("DIAMOND".toUpperCase(), diamond / 100);
-                } else {
-                    Price.getInstance().addPrice("DIAMOND".toUpperCase(), diamond / 100);
-                }
-                if (emerald < 500) {
-                    Price.getInstance().removePrice("EMERALD".toUpperCase(), emerald / 100);
-                } else {
-                    Price.getInstance().addPrice("EMERALD".toUpperCase(), emerald / 100);
-                }
-                if (log < 500) {
-                    Price.getInstance().removePrice("LOG".toUpperCase(), log / 100);
-                } else {
-                    Price.getInstance().addPrice("LOG".toUpperCase(), log / 100);
+                if (getServer().getOnlinePlayers().size() > 0) {
+                    double stone = Data.getInstance().getRandomNumber(1, 1000);
+                    double coal = Data.getInstance().getRandomNumber(1, 1000);
+                    double iron = Data.getInstance().getRandomNumber(1, 1000);
+                    double gold = Data.getInstance().getRandomNumber(1, 1000);
+                    double diamond = Data.getInstance().getRandomNumber(1, 1000);
+                    double emerald = Data.getInstance().getRandomNumber(1, 1000);
+                    double log = Data.getInstance().getRandomNumber(1, 1000);
+                    if (stone < 500) {
+                        Price.getInstance().removePrice("STONE".toUpperCase(), stone / 100);
+                    } else {
+                        Price.getInstance().addPrice("STONE".toUpperCase(), stone / 100);
+                    }
+                    if (coal < 500) {
+                        Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
+                    } else {
+                        Price.getInstance().addPrice("COAL".toUpperCase(), coal / 100);
+                    }
+                    if (iron < 500) {
+                        Price.getInstance().removePrice("IRON".toUpperCase(), iron / 100);
+                    } else {
+                        Price.getInstance().addPrice("IRON".toUpperCase(), iron / 100);
+                    }
+                    if (gold < 500) {
+                        Price.getInstance().removePrice("GOLD".toUpperCase(), gold / 100);
+                    } else {
+                        Price.getInstance().addPrice("GOLD".toUpperCase(), gold / 100);
+                    }
+                    if (diamond < 500) {
+                        Price.getInstance().removePrice("DIAMOND".toUpperCase(), diamond / 100);
+                    } else {
+                        Price.getInstance().addPrice("DIAMOND".toUpperCase(), diamond / 100);
+                    }
+                    if (emerald < 500) {
+                        Price.getInstance().removePrice("EMERALD".toUpperCase(), emerald / 100);
+                    } else {
+                        Price.getInstance().addPrice("EMERALD".toUpperCase(), emerald / 100);
+                    }
+                    if (log < 500) {
+                        Price.getInstance().removePrice("LOG".toUpperCase(), log / 100);
+                    } else {
+                        Price.getInstance().addPrice("LOG".toUpperCase(), log / 100);
+                    }
                 }
             }
         }).runTaskTimer(this, 300 * 20L, 300 * 20L);
