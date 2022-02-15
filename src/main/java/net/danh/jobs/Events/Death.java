@@ -3,6 +3,7 @@ package net.danh.jobs.Events;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.Data;
 import net.danh.jobs.Manager.PlayerData;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -14,8 +15,8 @@ public class Death implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         String DEAD = Data.getInstance().getlanguage().getString("DEAD");
-        assert DEAD != null;
-        e.getPlayer().sendMessage(Data.getInstance().convert(DEAD
+        Player p = e.getEntity().getPlayer();
+        Objects.requireNonNull(p).sendMessage(Data.getInstance().convert(Objects.requireNonNull(DEAD)
                 .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2))
                 .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(e.getPlayer()) / 4))));
         PlayerData.getInstance().removeXP(e.getEntity().getPlayer(), PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2);

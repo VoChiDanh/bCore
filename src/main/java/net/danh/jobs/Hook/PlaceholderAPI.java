@@ -76,6 +76,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("maxweight")) {
             return String.valueOf(Weight.getInstance().getMaxWeight(p));
         }
+        if (identifier.equalsIgnoreCase("luckychance")) {
+            return String.valueOf(Lucky.getInstance().getLuckyChance(p));
+        }
         if (identifier.startsWith("storage_")) {
             String name = identifier.substring(8).toUpperCase();
             return String.valueOf(Storage.getInstance().getStorage(p, name));

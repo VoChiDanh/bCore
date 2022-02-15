@@ -12,14 +12,31 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        PlayerData.getInstance().setXP(p, 0);
-        Power.getInstance().setRestorePower(p, Data.getInstance().getconfig().getInt("Restore_Power"));
-        Power.getInstance().setMaxPower(p, Data.getInstance().getconfig().getInt("Max_Power"));
-        Lucky.getInstance().setLuckyChance(p, Data.getInstance().getconfig().getInt("Default_Lucky_Chance"));
-        Power.getInstance().setPower(p, Power.getInstance().getMaxPower(p));
-        Weight.getInstance().setWeight(p, 0);
-        Weight.getInstance().setMaxWeight(p, 100);
-        Storage.getInstance().setStorage(p, "BEDROCK", 0);
+        if (PlayerData.getInstance().getXP(p) == 0) {
+            PlayerData.getInstance().setXP(p, 0);
+        }
+        if (Power.getInstance().getRestorePower(p) == 0) {
+            Power.getInstance().setRestorePower(p, Data.getInstance().getconfig().getInt("Restore_Power"));
+        }
+        if (Power.getInstance().getMaxPower(p) == 0) {
+            Power.getInstance().setMaxPower(p, Data.getInstance().getconfig().getInt("Max_Power"));
+        }
+        if (Lucky.getInstance().getLuckyChance(p) == 0) {
+            Lucky.getInstance().setLuckyChance(p, Data.getInstance().getconfig().getInt("Default_Lucky_Chance"));
+        }
+
+        if (Power.getInstance().getPower(p) == 0) {
+            Power.getInstance().setPower(p, Power.getInstance().getMaxPower(p));
+        }
+        if (Weight.getInstance().getWeight(p) == 0) {
+            Weight.getInstance().setWeight(p, 0);
+        }
+        if (Weight.getInstance().getMaxWeight(p) == 0) {
+            Weight.getInstance().setMaxWeight(p, 100);
+        }
+        if (Storage.getInstance().getStorage(p, "LOG".toUpperCase()) == 0) {
+            Storage.getInstance().setStorage(p, "LOG".toUpperCase(), 0);
+        }
         Data.getInstance().savedata();
     }
 }
