@@ -116,7 +116,6 @@ public final class Jobs extends JavaPlugin implements Listener {
                     }
                     if (Weight.getInstance().getWeight(p) >= Weight.getInstance().getMaxWeight(p) * 0.9D) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.MIN_VALUE));
                     } else {
                         p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
                         p.removePotionEffect(PotionEffectType.SLOW);
