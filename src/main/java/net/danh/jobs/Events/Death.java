@@ -17,10 +17,10 @@ public class Death implements Listener {
         String DEAD = Data.getInstance().getlanguage().getString("DEAD");
         Player p = e.getEntity().getPlayer();
         Objects.requireNonNull(p).sendMessage(Data.getInstance().convert(Objects.requireNonNull(DEAD)
-                .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2))
-                .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(e.getPlayer()) / 4))));
-        PlayerData.getInstance().removeXP(e.getEntity().getPlayer(), PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2);
-        Jobs.economy.withdrawPlayer(e.getPlayer(), Jobs.economy.getBalance(e.getPlayer()) / 4);
+                .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(p)) / 2))
+                .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(p) / 4))));
+        PlayerData.getInstance().removeXP(p, PlayerData.getInstance().getXP(Objects.requireNonNull(p)) / 2);
+        Jobs.economy.withdrawPlayer(p, Jobs.economy.getBalance(p) / 4);
 
     }
 }
