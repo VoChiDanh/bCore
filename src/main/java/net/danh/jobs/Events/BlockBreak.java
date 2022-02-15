@@ -104,7 +104,7 @@ public class BlockBreak implements Listener {
                                 } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
                                         || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
                                     Storage.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
-                                }else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
+                                } else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
                                         || e.getBlock().getType() == XMaterial.COBBLESTONE.parseMaterial()) {
                                     Storage.getInstance().addStorage(e.getPlayer(), "STONE".toUpperCase(), kg);
                                 }

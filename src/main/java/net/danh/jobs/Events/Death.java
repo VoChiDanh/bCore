@@ -14,8 +14,8 @@ public class Death implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         String DEAD = Data.getInstance().getlanguage().getString("DEAD");
-        String PREFIX = Data.getInstance().getlanguage().getString("PREFIX");
-        e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + DEAD
+        assert DEAD != null;
+        e.getPlayer().sendMessage(Data.getInstance().convert(DEAD
                 .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2))
                 .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(e.getPlayer()) / 4))));
         PlayerData.getInstance().removeXP(e.getEntity().getPlayer(), PlayerData.getInstance().getXP(Objects.requireNonNull(e.getEntity().getPlayer())) / 2);

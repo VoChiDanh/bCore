@@ -3,7 +3,6 @@ package net.danh.jobs.Hook;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.*;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +39,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Power.getInstance().getPower(p));
         }
 
-        if (identifier.equalsIgnoreCase("age")) {
+        if (identifier.equalsIgnoreCase("level")) {
             return String.valueOf(PlayerData.getInstance().getLevel(p));
         }
 
@@ -48,13 +47,22 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(PlayerData.getInstance().getXP(p));
         }
         if (identifier.equalsIgnoreCase("ganglevel")) {
-            return String.valueOf(Gang.getInstance().getLevelGang(p));
+            if (Gang.getInstance().getGang(p) != null) {
+                return String.valueOf(Gang.getInstance().getLevelGang(p));
+            }
+            return "";
         }
         if (identifier.equalsIgnoreCase("gangpoints")) {
-            return String.valueOf(Gang.getInstance().getleveluptimes(p));
+            if (Gang.getInstance().getGang(p) != null) {
+                return String.valueOf(Gang.getInstance().getleveluptimes(p));
+            }
+            return "";
         }
         if (identifier.equalsIgnoreCase("gang")) {
-            return Gang.getInstance().getGang(p);
+            if (Gang.getInstance().getGang(p) != null) {
+                return Gang.getInstance().getGang(p);
+            }
+            return "";
         }
         if (identifier.equalsIgnoreCase("restorepower")) {
             return String.valueOf(Power.getInstance().getRestorePower(p));
@@ -70,17 +78,11 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
         if (identifier.startsWith("storage_")) {
             String name = identifier.substring(7).toUpperCase();
-            if (Material.getMaterial(name) != null) {
-                return String.valueOf(Storage.getInstance().getStorage(p, name));
-            }
-            return "Unknown Material";
+            return String.valueOf(Storage.getInstance().getStorage(p, name));
         }
         if (identifier.startsWith("price_")) {
             String name = identifier.substring(6).toUpperCase();
-            if (Material.getMaterial(name) != null) {
-                return String.valueOf(Price.getInstance().getPrice(name));
-            }
-            return "Unknown Price";
+            return String.valueOf(Price.getInstance().getPrice(name));
         }
         return null;
     }
