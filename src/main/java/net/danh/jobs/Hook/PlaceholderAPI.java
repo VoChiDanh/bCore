@@ -92,7 +92,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             if (name.equalsIgnoreCase("money")) {
                 return String.valueOf(Bank.getInstance().getBankMoney(p));
             }
-            if (name.equalsIgnoreCase("max_money")){
+            if (name.equalsIgnoreCase("max_money")) {
                 return String.valueOf(Bank.getInstance().getBankMaxMoney(p));
             }
             return "";

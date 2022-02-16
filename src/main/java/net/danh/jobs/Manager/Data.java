@@ -137,6 +137,7 @@ public class Data {
         } catch (IOException ignored) {
         }
     }
+
     public void savebank() {
         try {
             bank.save(bankFile);
