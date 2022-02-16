@@ -99,7 +99,9 @@ public final class Jobs extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
+        Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
         Data.getInstance().createconfig();
         getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
@@ -181,6 +183,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         Data.getInstance().savelanguage();
         Data.getInstance().savegui();
         Data.getInstance().saveprice();
+        Data.getInstance().savebank();
         getLogger().log(Level.INFO, "Saved data");
     }
 

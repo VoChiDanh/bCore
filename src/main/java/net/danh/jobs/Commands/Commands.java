@@ -28,21 +28,21 @@ public class Commands implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
 
-        String RELOADED = Data.getInstance().getlanguage().getString("RELOAD");
-        String PREFIX = Data.getInstance().getlanguage().getString("PREFIX");
-        String DONE = Data.getInstance().getlanguage().getString("DONE");
-        String UNKNOW_PLAYER = Data.getInstance().getlanguage().getString("UNKNOW_PLAYER");
-        String UNKNOW_GANG = Data.getInstance().getlanguage().getString("UNKNOW_GANG");
+        String RELOADED = Data.getInstance().getlanguagefile().getString("RELOAD");
+        String PREFIX = Data.getInstance().getlanguagefile().getString("PREFIX");
+        String DONE = Data.getInstance().getlanguagefile().getString("DONE");
+        String UNKNOW_PLAYER = Data.getInstance().getlanguagefile().getString("UNKNOW_PLAYER");
+        String UNKNOW_GANG = Data.getInstance().getlanguagefile().getString("UNKNOW_GANG");
 
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
                 if (sender.hasPermission("jobs.user")) {
-                    for (String user : Data.getInstance().getlanguage().getStringList("HELP_USER")) {
+                    for (String user : Data.getInstance().getlanguagefile().getStringList("HELP_USER")) {
                         sender.sendMessage(Data.getInstance().convert(user));
                     }
                 }
                 if (sender.hasPermission("jobs.admin")) {
-                    for (String admin : Data.getInstance().getlanguage().getStringList("HELP_ADMIN")) {
+                    for (String admin : Data.getInstance().getlanguagefile().getStringList("HELP_ADMIN")) {
                         sender.sendMessage(Data.getInstance().convert(admin));
                     }
                 }
@@ -107,7 +107,7 @@ public class Commands implements CommandExecutor {
                 if (sender.hasPermission("jobs.user")) {
                     if (args[0].equalsIgnoreCase("info")) {
                         if (Bukkit.getPlayer(args[1]) != null) {
-                            for (String check_info : Data.getInstance().getlanguage().getStringList("INFO_CHECK")) {
+                            for (String check_info : Data.getInstance().getlanguagefile().getStringList("INFO_CHECK")) {
                                 sender.sendMessage(Data.getInstance().convert(check_info
                                         .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
                                         .replaceAll("%plevel%", String.valueOf(PlayerData.getInstance().getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
@@ -416,6 +416,58 @@ public class Commands implements CommandExecutor {
                             sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                         }
                     }
+                    if (args[0].equalsIgnoreCase("bankmoney")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().setBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().addBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().removeBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("bankmaxmoney")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().setBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().addBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Bank.getInstance().removeBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
                 }
             }
             if (args.length == 5) {
@@ -457,6 +509,27 @@ public class Commands implements CommandExecutor {
                 if (args.length == 0) {
                     if (sender.hasPermission("jobs.user")) {
                         SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
+                    }
+                }
+            }
+            return true;
+        }
+        if (label.equalsIgnoreCase("bank")) {
+            if (sender instanceof Player) {
+                if (args.length == 0) {
+                    sender.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("BANK"))
+                            .replaceAll("%money%", String.valueOf(Bank.getInstance().getBankMoney(Objects.requireNonNull(((Player) sender).getPlayer())))))));
+                }
+                if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("deposit")) {
+                        if (Integer.parseInt(args[1]) != 0) {
+                            Bank.getInstance().depositBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("withdraw")) {
+                        if (Integer.parseInt(args[1]) != 0) {
+                            Bank.getInstance().withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
+                        }
                     }
                 }
             }

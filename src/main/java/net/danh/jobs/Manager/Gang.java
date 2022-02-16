@@ -17,14 +17,14 @@ public class Gang {
     }
 
     public String getGang(Player p) {
-        return Data.getInstance().getdata().getString("players." + p.getName() + ".Gang");
+        return Data.getInstance().getdatafile().getString("players." + p.getName() + ".Gang");
     }
 
     public void selectGang(Player p, String name) {
         if (getGang(p) != null) {
             removeMemberGang(p);
         }
-        Data.getInstance().getdata().set("players." + p.getName() + ".Gang", name.toUpperCase());
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".Gang", name.toUpperCase());
         if (getLevelGang(p) == 0) {
             setLevelGang(p);
         }
@@ -36,44 +36,44 @@ public class Gang {
     }
 
     public int getMemberGang(Player p) {
-        return Data.getInstance().getdata().getInt("gangs." + getGang(p) + ".Member");
+        return Data.getInstance().getdatafile().getInt("gangs." + getGang(p) + ".Member");
     }
 
     public void removeMemberGang(Player p) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".Member", getMemberGang(p) - 1);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Member", getMemberGang(p) - 1);
         Data.getInstance().savedata();
     }
 
     public void addMemberGang(Player p) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".Member", getMemberGang(p) + 1);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Member", getMemberGang(p) + 1);
         Data.getInstance().savedata();
     }
 
     public int getLevelGang(Player p) {
-        return Data.getInstance().getdata().getInt("gangs." + getGang(p) + ".Level");
+        return Data.getInstance().getdatafile().getInt("gangs." + getGang(p) + ".Level");
     }
 
     public void addLevelGang(Player p, Integer number) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".Level", getLevelGang(p) + number);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Level", getLevelGang(p) + number);
         Data.getInstance().savedata();
     }
 
     public void setLevelGang(Player p) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".Level", 1);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Level", 1);
         Data.getInstance().savedata();
     }
 
 
     public void setLevelGang(Player p, Integer number) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".Level", number);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Level", number);
         Data.getInstance().savedata();
     }
 
     public void removeLevelGang(Player p, Integer number) {
         if (getLevelGang(p) > 1) {
-            Data.getInstance().getdata().set("gangs." + getGang(p) + ".Level", getLevelGang(p) - number);
+            Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Level", getLevelGang(p) - number);
         } else {
-            Data.getInstance().getdata().set("gangs." + getGang(p) + ".Level", 1);
+            Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".Level", 1);
         }
         Data.getInstance().savedata();
     }
@@ -83,30 +83,30 @@ public class Gang {
             addLevelGang(p, 1);
             PlayerData.getInstance().setXP(p, 0);
             addLeveluptimes(p, 1);
-            p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguage().getString("LEVEL_UP_GANG"))));
+            p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("LEVEL_UP_GANG"))));
         }
     }
 
     public int getleveluptimes(Player p) {
-        return Data.getInstance().getdata().getInt("gangs." + getGang(p) + ".LevelUpTimes." + p.getName());
+        return Data.getInstance().getdatafile().getInt("gangs." + getGang(p) + ".LevelUpTimes." + p.getName());
     }
 
     public void addLeveluptimes(Player p, Integer number) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), getleveluptimes(p) + number);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), getleveluptimes(p) + number);
         Data.getInstance().savedata();
     }
 
     public void removeLeveluptimes(Player p, Integer number) {
         if (getleveluptimes(p) > 1) {
-            Data.getInstance().getdata().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), getleveluptimes(p) - number);
+            Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), getleveluptimes(p) - number);
         } else {
-            Data.getInstance().getdata().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), 0);
+            Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), 0);
         }
         Data.getInstance().savedata();
     }
 
     public void setLeveluptimes(Player p, Integer number) {
-        Data.getInstance().getdata().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), number);
+        Data.getInstance().getdatafile().set("gangs." + getGang(p) + ".LevelUpTimes." + p.getName(), number);
         Data.getInstance().savedata();
     }
 }

@@ -16,17 +16,17 @@ public class Storage {
 
 
     public int getStorage(Player p, String name) {
-        return Data.getInstance().getstorage().getInt("players." + p.getName() + ".Blocks." + name);
+        return Data.getInstance().getstoragefile().getInt("players." + p.getName() + ".Blocks." + name);
     }
 
     public void setStorage(Player p, String name, Integer number) {
-        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, number);
+        Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, number);
         Data.getInstance().savestorage();
     }
 
     public void addStorage(Player p, String name, Integer number) {
-        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
-        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("ADD_STORAGE")
+        Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
+        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("ADD_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))
                 .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p)))
@@ -35,8 +35,8 @@ public class Storage {
     }
 
     public void removeStorage(Player p, String name, Integer number) {
-        Data.getInstance().getstorage().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
-        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("REMOVE_STORAGE")
+        Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
+        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("REMOVE_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))
                 .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p) - number))

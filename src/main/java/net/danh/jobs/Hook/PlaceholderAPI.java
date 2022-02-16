@@ -87,6 +87,16 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             String name = identifier.substring(6).toUpperCase();
             return String.valueOf(Price.getInstance().getPrice(name));
         }
+        if (identifier.equalsIgnoreCase("bank_")) {
+            String name = identifier.substring(5).toLowerCase();
+            if (name.equalsIgnoreCase("money")) {
+                return String.valueOf(Bank.getInstance().getBankMoney(p));
+            }
+            if (name.equalsIgnoreCase("max_money")){
+                return String.valueOf(Bank.getInstance().getBankMaxMoney(p));
+            }
+            return "";
+        }
         return null;
     }
 }

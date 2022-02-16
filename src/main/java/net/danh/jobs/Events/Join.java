@@ -16,13 +16,13 @@ public class Join implements Listener {
             PlayerData.getInstance().setXP(p, 0);
         }
         if (Power.getInstance().getRestorePower(p) == 0) {
-            Power.getInstance().setRestorePower(p, Data.getInstance().getconfig().getInt("Restore_Power"));
+            Power.getInstance().setRestorePower(p, Data.getInstance().getconfigfile().getInt("Restore_Power"));
         }
         if (Power.getInstance().getMaxPower(p) == 0) {
-            Power.getInstance().setMaxPower(p, Data.getInstance().getconfig().getInt("Max_Power"));
+            Power.getInstance().setMaxPower(p, Data.getInstance().getconfigfile().getInt("Max_Power"));
         }
         if (Lucky.getInstance().getLuckyChance(p) == 0) {
-            Lucky.getInstance().setLuckyChance(p, Data.getInstance().getconfig().getInt("Default_Lucky_Chance"));
+            Lucky.getInstance().setLuckyChance(p, Data.getInstance().getconfigfile().getInt("Default_Lucky_Chance"));
         }
 
         if (Power.getInstance().getPower(p) == 0) {

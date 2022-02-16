@@ -20,14 +20,14 @@ public class BlockBreak implements Listener {
         Player p = e.getPlayer();
         double systemchance = Math.random() * 100.0D;
         double playerchance = Lucky.getInstance().getLuckyChance(e.getPlayer());
-        String NEED_MORE_POWER = Data.getInstance().getlanguage().getString("NEED_MORE_POWER");
-        String PREFIX = Data.getInstance().getlanguage().getString("PREFIX");
-        String LUCKY = Data.getInstance().getlanguage().getString("LUCKY");
-        Integer POWER = Data.getInstance().getconfig().getInt("Lucky_Power");
-        Integer XP = Data.getInstance().getconfig().getInt("Lucky_XP");
+        String NEED_MORE_POWER = Data.getInstance().getlanguagefile().getString("NEED_MORE_POWER");
+        String PREFIX = Data.getInstance().getlanguagefile().getString("PREFIX");
+        String LUCKY = Data.getInstance().getlanguagefile().getString("LUCKY");
+        Integer POWER = Data.getInstance().getconfigfile().getInt("Lucky_Power");
+        Integer XP = Data.getInstance().getconfigfile().getInt("Lucky_XP");
         Integer LEVELUP = Gang.getInstance().getleveluptimes(e.getPlayer());
-        String NOT_CORRECT_ITEMS = Data.getInstance().getlanguage().getString("NOT_CORRECT_ITEMS");
-        String FULL_STORAGE = Data.getInstance().getlanguage().getString("FULL_STORAGE");
+        String NOT_CORRECT_ITEMS = Data.getInstance().getlanguagefile().getString("NOT_CORRECT_ITEMS");
+        String FULL_STORAGE = Data.getInstance().getlanguagefile().getString("FULL_STORAGE");
         String blocks = e.getBlock().getType().toString();
         int max = 0;
         int min = 0;
@@ -54,37 +54,37 @@ public class BlockBreak implements Listener {
                     || p.getItemInHand().getType() == XMaterial.DIAMOND_PICKAXE.parseMaterial()
                     || p.getItemInHand().getType() == XMaterial.NETHERITE_PICKAXE.parseMaterial()) {
 
-                if (Data.getInstance().getconfig().getBoolean("debug")) {
+                if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
                 }
 
-                if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfig().getInt("minimum_power")) {
+                if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfigfile().getInt("minimum_power")) {
                     e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + NEED_MORE_POWER));
                     e.setCancelled(true);
                 } else {
-                    if (Data.getInstance().getconfig().getBoolean("debug")) {
+                    if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                         Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
                     e.setDropItems(false);
                     e.getBlock().getDrops().clear();
                     if (!e.isDropItems()) {
-                        if (Data.getInstance().getconfig().getBoolean("debug")) {
+                        if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        for (String getBlockType : Data.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
+                        for (String getBlockType : Data.getInstance().getconfigfile().getConfigurationSection("Blocks.").getKeys(false)) {
                             if (blocks.equalsIgnoreCase(getBlockType)) {
-                                max = Data.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
-                                min = Data.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
+                                max = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".max");
+                                min = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".min");
                                 break;
                             }
                         }
-                        if (Data.getInstance().getconfig().getBoolean("debug")) {
+                        if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
                         }
                         int kg = Data.getInstance().getRandomNumber(min, max);
                         if (Weight.getInstance().getWeight(e.getPlayer()) + kg <= Weight.getInstance().getMaxWeight(e.getPlayer())) {
 
-                            if (Data.getInstance().getconfig().getBoolean("debug")) {
+                            if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
                             if (kg != 0) {
@@ -111,7 +111,7 @@ public class BlockBreak implements Listener {
                             }
                         } else {
                             e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + FULL_STORAGE));
-                            if (Data.getInstance().getconfig().getBoolean("debug")) {
+                            if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
                             }
                             e.setCancelled(true);
@@ -129,10 +129,10 @@ public class BlockBreak implements Listener {
                         return;
                     }
                     if (Gang.getInstance().getGang(e.getPlayer()) != null) {
-                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfig().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
+                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfigfile().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
                     }
                     Power.getInstance().removePower(p, 1);
-                    if (Data.getInstance().getconfig().getBoolean("debug")) {
+                    if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                         Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
                     }
                     return;
@@ -156,37 +156,37 @@ public class BlockBreak implements Listener {
                     || p.getItemInHand().getType() == XMaterial.GOLDEN_AXE.parseMaterial()
                     || p.getItemInHand().getType() == XMaterial.DIAMOND_AXE.parseMaterial()
                     || p.getItemInHand().getType() == XMaterial.NETHERITE_AXE.parseMaterial()) {
-                if (Data.getInstance().getconfig().getBoolean("debug")) {
+                if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Check block");
                 }
 
-                if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfig().getInt("minimum_power")) {
+                if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfigfile().getInt("minimum_power")) {
                     e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + NEED_MORE_POWER));
                     e.setCancelled(true);
                 } else {
-                    if (Data.getInstance().getconfig().getBoolean("debug")) {
+                    if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                         Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
                     e.setDropItems(false);
                     e.getBlock().getDrops().clear();
                     if (!e.isDropItems()) {
-                        if (Data.getInstance().getconfig().getBoolean("debug")) {
+                        if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        for (String getBlockType : Data.getInstance().getconfig().getConfigurationSection("Blocks.").getKeys(false)) {
+                        for (String getBlockType : Data.getInstance().getconfigfile().getConfigurationSection("Blocks.").getKeys(false)) {
                             if (blocks.equalsIgnoreCase(getBlockType)) {
-                                max = Data.getInstance().getconfig().getInt("Blocks." + blocks + ".max");
-                                min = Data.getInstance().getconfig().getInt("Blocks." + blocks + ".min");
+                                max = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".max");
+                                min = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".min");
                                 break;
                             }
                         }
-                        if (Data.getInstance().getconfig().getBoolean("debug")) {
+                        if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
                         }
                         int kg = Data.getInstance().getRandomNumber(min, max);
                         if (Weight.getInstance().getWeight(e.getPlayer()) + kg <= Weight.getInstance().getMaxWeight(e.getPlayer())) {
 
-                            if (Data.getInstance().getconfig().getBoolean("debug")) {
+                            if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
                             if (kg != 0) {
@@ -202,7 +202,7 @@ public class BlockBreak implements Listener {
                             }
                         } else {
                             e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + FULL_STORAGE));
-                            if (Data.getInstance().getconfig().getBoolean("debug")) {
+                            if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
                             }
                             e.setCancelled(true);
@@ -220,10 +220,10 @@ public class BlockBreak implements Listener {
                         return;
                     }
                     if (Gang.getInstance().getGang(e.getPlayer()) != null) {
-                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfig().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
+                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfigfile().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
                     }
                     Power.getInstance().removePower(p, 1);
-                    if (Data.getInstance().getconfig().getBoolean("debug")) {
+                    if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                         Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
                     }
                     return;

@@ -13,4 +13,6 @@ commands:
     description: Gang commands
   storage:
     description: Storage commands
+  bank:
+    description: Bank commands
 

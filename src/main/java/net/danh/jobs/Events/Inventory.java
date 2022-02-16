@@ -19,10 +19,10 @@ public class Inventory implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (e.getView().getTitle().equals(Data.getInstance().getgui().getString(Data.getInstance().convert("GUI.SellGui.Title")))) {
+        if (e.getView().getTitle().equals(Data.getInstance().getguifile().getString(Data.getInstance().convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
             Objects.requireNonNull(e.getCurrentItem()).getType();
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Stone.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Stone.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "STONE".toUpperCase(), 1);
                 }
@@ -39,7 +39,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "STONE".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Coal.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Coal.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "COAL".toUpperCase(), 1);
                 }
@@ -56,7 +56,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "COAL".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Iron.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Iron.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "IRON".toUpperCase(), 1);
                 }
@@ -73,7 +73,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "IRON".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Gold.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Gold.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "GOLD".toUpperCase(), 1);
                 }
@@ -90,7 +90,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "GOLD".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Diamond.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Diamond.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 1);
                 }
@@ -107,7 +107,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "DIAMOND".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Emerald.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Emerald.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 1);
                 }
@@ -124,7 +124,7 @@ public class Inventory implements Listener {
                     Price.getInstance().Sell(p, "EMERALD".toUpperCase(), 50);
                 }
             }
-            if (e.getSlot() == Data.getInstance().getgui().getInt("GUI.SellGui.Log.Slot")) {
+            if (e.getSlot() == Data.getInstance().getguifile().getInt("GUI.SellGui.Log.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.getInstance().Sell(p, "LOG".toUpperCase(), 1);
                 }
@@ -148,7 +148,7 @@ public class Inventory implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnDragInventory(InventoryDragEvent e) {
-        if (e.getView().getTitle().equals(Data.getInstance().getgui().getString(Data.getInstance().convert("GUI.SellGui.Title")))) {
+        if (e.getView().getTitle().equals(Data.getInstance().getguifile().getString(Data.getInstance().convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
         }
     }

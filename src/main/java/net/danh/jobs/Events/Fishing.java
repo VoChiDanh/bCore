@@ -12,14 +12,14 @@ public class Fishing implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onFishing(PlayerFishEvent e) {
-        String NEED_MORE_POWER = Data.getInstance().getlanguage().getString("NEED_MORE_POWER");
-        String PREFIX = Data.getInstance().getlanguage().getString("PREFIX");
-        String LUCKY = Data.getInstance().getlanguage().getString("LUCKY");
-        String NOT_FISH = Data.getInstance().getlanguage().getString("NOT_FISH");
-        Integer POWER = Data.getInstance().getconfig().getInt("Lucky_Power");
-        Integer XP = Data.getInstance().getconfig().getInt("Lucky_XP");
+        String NEED_MORE_POWER = Data.getInstance().getlanguagefile().getString("NEED_MORE_POWER");
+        String PREFIX = Data.getInstance().getlanguagefile().getString("PREFIX");
+        String LUCKY = Data.getInstance().getlanguagefile().getString("LUCKY");
+        String NOT_FISH = Data.getInstance().getlanguagefile().getString("NOT_FISH");
+        Integer POWER = Data.getInstance().getconfigfile().getInt("Lucky_Power");
+        Integer XP = Data.getInstance().getconfigfile().getInt("Lucky_XP");
         Integer LEVELUP = Gang.getInstance().getleveluptimes(e.getPlayer());
-        if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfig().getInt("minimum_power")) {
+        if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfigfile().getInt("minimum_power")) {
             e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + NEED_MORE_POWER));
             e.setCancelled(true);
             return;
@@ -43,7 +43,7 @@ public class Fishing implements Listener {
                     }
 
                     if (Gang.getInstance().getGang(e.getPlayer()) != null) {
-                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfig().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
+                        PlayerData.getInstance().addXP(e.getPlayer(), Data.getInstance().getconfigfile().getInt("xp") + Gang.getInstance().getleveluptimes(e.getPlayer()));
                     }
                     Power.getInstance().removePower(e.getPlayer(), 1);
                     e.setCancelled(false);

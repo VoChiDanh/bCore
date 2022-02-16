@@ -23,6 +23,10 @@ public class TabCommand implements TabCompleter {
     List<String> gang1 = new ArrayList<String>();
 
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if (label.equalsIgnoreCase("bank")) {
+            arggg.add("deposit");
+            arggg.add("withdraw");
+        }
         if (label.equalsIgnoreCase("jobs")) {
             if (sender.hasPermission("jobs.admin")) {
                 arg.add("info");
@@ -41,6 +45,8 @@ public class TabCommand implements TabCompleter {
                 arg.add("update");
                 arg.add("price");
                 arg.add("baseprice");
+                arg.add("bankmoney");
+                arg.add("bankmaxmoney");
             }
             if (sender.hasPermission("jobs.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")
@@ -53,13 +59,13 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("luckychance")
                         || args[0].equalsIgnoreCase("weight")
                         || args[0].equalsIgnoreCase("maxweight")
-                        || args[0].equalsIgnoreCase("price")) {
+                        || args[0].equalsIgnoreCase("price")
+                        || args[0].equalsIgnoreCase("baseprice")
+                        || args[0].equalsIgnoreCase("bankmoney")
+                        || args[0].equalsIgnoreCase("bankmaxmoney")) {
                     argg.add("set");
                     argg.add("add");
                     argg.add("remove");
-                }
-                if (args[0].equalsIgnoreCase("items")) {
-                    argggg.add("Doctor");
                 }
             }
         }
@@ -74,6 +80,13 @@ public class TabCommand implements TabCompleter {
                     arg1.add(a1);
             }
             return arg1;
+        }
+        if (args.length == 1) {
+            for (String a3 : argggg) {
+                if (a3.toLowerCase().startsWith(args[0].toLowerCase()))
+                    arg3.add(a3);
+            }
+            return arg3;
         }
         if (args.length == 1) {
             for (String gang : gang) {
@@ -94,14 +107,15 @@ public class TabCommand implements TabCompleter {
                     || args[0].equalsIgnoreCase("weight")
                     || args[0].equalsIgnoreCase("maxweight")
                     || args[0].equalsIgnoreCase("price")
-                    || args[0].equalsIgnoreCase("baseprice")) {
+                    || args[0].equalsIgnoreCase("baseprice")
+                    || args[0].equalsIgnoreCase("bankmoney")
+                    || args[0].equalsIgnoreCase("bankmaxmoney")) {
                 for (String a2 : argg) {
                     if (a2.toLowerCase().startsWith(args[1].toLowerCase()))
                         arg2.add(a2);
                 }
                 return arg2;
             }
-
 
             if (args[0].equalsIgnoreCase("items")) {
                 for (String a4 : argggg) {

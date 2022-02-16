@@ -14,7 +14,7 @@ public class Death implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        String DEAD = Data.getInstance().getlanguage().getString("DEAD");
+        String DEAD = Data.getInstance().getlanguagefile().getString("DEAD");
         Player p = e.getEntity().getPlayer();
         Objects.requireNonNull(p).sendMessage(Data.getInstance().convert(Objects.requireNonNull(DEAD)
                 .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(p)) / 2))

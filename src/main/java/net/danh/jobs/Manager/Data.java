@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class Data {
     private static Data instance;
-    private File configFile, languageFile, dataFile, storageFile, priceFile, guiFile;
-    private FileConfiguration config, language, data, storage, price, gui;
+    private File configFile, languageFile, dataFile, storageFile, priceFile, guiFile, bankFile;
+    private FileConfiguration config, language, data, storage, price, gui, bank;
 
     public static Data getInstance() {
 
@@ -29,6 +29,7 @@ public class Data {
         storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
         priceFile = new File(Jobs.getInstance().getDataFolder(), "price.yml");
         guiFile = new File(Jobs.getInstance().getDataFolder(), "gui.yml");
+        bankFile = new File(Jobs.getInstance().getDataFolder(), "bank.yml");
 
         if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
@@ -36,12 +37,14 @@ public class Data {
         if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
         if (!priceFile.exists()) Jobs.getInstance().saveResource("price.yml", false);
         if (!guiFile.exists()) Jobs.getInstance().saveResource("gui.yml", false);
+        if (!bankFile.exists()) Jobs.getInstance().saveResource("bank.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         storage = new YamlConfiguration();
         price = new YamlConfiguration();
         gui = new YamlConfiguration();
+        bank = new YamlConfiguration();
 
         try {
             config.load(configFile);
@@ -50,34 +53,39 @@ public class Data {
             storage.load(storageFile);
             price.load(priceFile);
             gui.load(guiFile);
+            bank.load(bankFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
 
 
-    public FileConfiguration getconfig() {
+    public FileConfiguration getconfigfile() {
         return config;
     }
 
-    public FileConfiguration getlanguage() {
+    public FileConfiguration getlanguagefile() {
         return language;
     }
 
-    public FileConfiguration getdata() {
+    public FileConfiguration getdatafile() {
         return data;
     }
 
-    public FileConfiguration getstorage() {
+    public FileConfiguration getstoragefile() {
         return storage;
     }
 
-    public FileConfiguration getprice() {
+    public FileConfiguration getpricefile() {
         return price;
     }
 
-    public FileConfiguration getgui() {
+    public FileConfiguration getguifile() {
         return gui;
+    }
+
+    public FileConfiguration getbankfile() {
+        return bank;
     }
 
     public void reloadconfig() {
@@ -126,6 +134,12 @@ public class Data {
     public void savegui() {
         try {
             gui.save(guiFile);
+        } catch (IOException ignored) {
+        }
+    }
+    public void savebank() {
+        try {
+            bank.save(bankFile);
         } catch (IOException ignored) {
         }
     }

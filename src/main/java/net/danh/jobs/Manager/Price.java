@@ -17,35 +17,35 @@ public class Price {
     }
 
     public double getPrice(String name) {
-        return Data.getInstance().getprice().getInt("Price." + name);
+        return Data.getInstance().getpricefile().getInt("Price." + name);
     }
 
     public double getBasePrice(String name) {
-        return Data.getInstance().getprice().getInt("BasePrice." + name);
+        return Data.getInstance().getpricefile().getInt("BasePrice." + name);
     }
 
     public void setPrice(String name, Double price) {
-        Data.getInstance().getprice().set("Price." + name, price);
+        Data.getInstance().getpricefile().set("Price." + name, price);
         Data.getInstance().saveprice();
     }
 
     public void setBasePrice(String name, Double price) {
-        Data.getInstance().getprice().set("BasePrice." + name, price);
+        Data.getInstance().getpricefile().set("BasePrice." + name, price);
         Data.getInstance().saveprice();
     }
 
     public void addPrice(String name, Double price) {
-        Data.getInstance().getprice().set("Price." + name, getPrice(name) + price);
+        Data.getInstance().getpricefile().set("Price." + name, getPrice(name) + price);
         Data.getInstance().saveprice();
     }
 
     public void addBasePrice(String name, Double price) {
-        Data.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) + price);
+        Data.getInstance().getpricefile().set("BasePrice." + name, getBasePrice(name) + price);
         Data.getInstance().saveprice();
     }
 
     public void removePrice(String name, Double price) {
-        Data.getInstance().getprice().set("Price." + name, getPrice(name) - price);
+        Data.getInstance().getpricefile().set("Price." + name, getPrice(name) - price);
         if (getPrice(name) <= 0) {
             addPrice(name, getBasePrice(name));
             Data.getInstance().saveprice();
@@ -56,7 +56,7 @@ public class Price {
     }
 
     public void removeBasePrice(String name, Double price) {
-        Data.getInstance().getprice().set("BasePrice." + name, getBasePrice(name) - price);
+        Data.getInstance().getpricefile().set("BasePrice." + name, getBasePrice(name) - price);
         if (getBasePrice(name) == 0) {
             addBasePrice(name, 1.0);
             Data.getInstance().saveprice();
@@ -76,7 +76,7 @@ public class Price {
                 p.sendMessage(Data.getInstance().convert("&a+ " + money + "$"));
             }
         } else {
-            p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("NOT_ENOUGH_MATERIAL")));
+            p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("NOT_ENOUGH_MATERIAL")));
         }
     }
 }

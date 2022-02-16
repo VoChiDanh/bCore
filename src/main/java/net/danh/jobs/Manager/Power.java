@@ -15,73 +15,73 @@ public class Power {
     }
 
     public int getPower(Player p) {
-        return Data.getInstance().getdata().getInt("players." + p.getName() + ".Power");
+        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".Power");
     }
 
 
     public void setPower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".Power", number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".Power", number);
         Data.getInstance().savedata();
     }
 
     public void addPower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".Power", getPower(p) + number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".Power", getPower(p) + number);
         Data.getInstance().savedata();
     }
 
 
     public void removePower(Player p, int number) {
         if (getPower(p) > number) {
-            Data.getInstance().getdata().set("players." + p.getName() + ".Power", getPower(p) - number);
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".Power", getPower(p) - number);
             Data.getInstance().savedata();
         } else {
-            Data.getInstance().getdata().set("players." + p.getName() + ".Power", 0);
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".Power", 0);
             Data.getInstance().savedata();
         }
     }
 
     public int getMaxPower(Player p) {
-        return Data.getInstance().getdata().getInt("players." + p.getName() + ".MaxPower");
+        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".MaxPower");
     }
 
     public void setMaxPower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".MaxPower", number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".MaxPower", number);
         Data.getInstance().savedata();
     }
 
     public void addMaxPower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".MaxPower", getMaxPower(p) + number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".MaxPower", getMaxPower(p) + number);
         Data.getInstance().savedata();
     }
 
     public void removeMaxPower(Player p, int number) {
-        if (getMaxPower(p) > Data.getInstance().getconfig().getInt("Max_Power")) {
-            Data.getInstance().getdata().set("players." + p.getName() + ".MaxPower", getMaxPower(p) - number);
+        if (getMaxPower(p) > Data.getInstance().getconfigfile().getInt("Max_Power")) {
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".MaxPower", getMaxPower(p) - number);
         } else {
-            Data.getInstance().getdata().set("players." + p.getName() + ".MaxPower", Data.getInstance().getconfig().getInt("Max_Power"));
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".MaxPower", Data.getInstance().getconfigfile().getInt("Max_Power"));
         }
         Data.getInstance().savedata();
     }
 
     public int getRestorePower(Player p) {
-        return Data.getInstance().getdata().getInt("players." + p.getName() + ".RestorePower");
+        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".RestorePower");
     }
 
     public void setRestorePower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".RestorePower", number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".RestorePower", number);
         Data.getInstance().savedata();
     }
 
     public void addRestorePower(Player p, int number) {
-        Data.getInstance().getdata().set("players." + p.getName() + ".RestorePower", getRestorePower(p) + number);
+        Data.getInstance().getdatafile().set("players." + p.getName() + ".RestorePower", getRestorePower(p) + number);
         Data.getInstance().savedata();
     }
 
     public void removeRestorePower(Player p, int number) {
-        if (getMaxPower(p) > Data.getInstance().getconfig().getInt("Restore_Power")) {
-            Data.getInstance().getdata().set("players." + p.getName() + ".RestorePower", getRestorePower(p) - number);
+        if (getMaxPower(p) > Data.getInstance().getconfigfile().getInt("Restore_Power")) {
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".RestorePower", getRestorePower(p) - number);
         } else {
-            Data.getInstance().getdata().set("players." + p.getName() + ".RestorePower", Data.getInstance().getconfig().getInt("Restore_Power"));
+            Data.getInstance().getdatafile().set("players." + p.getName() + ".RestorePower", Data.getInstance().getconfigfile().getInt("Restore_Power"));
         }
         Data.getInstance().savedata();
     }
