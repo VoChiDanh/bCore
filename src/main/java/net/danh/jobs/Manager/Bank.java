@@ -63,7 +63,7 @@ public class Bank {
         if (getBankMaxMoney(p) >= number) {
             Data.getInstance().getbankfile().set("banks." + p.getName() + ".maxmoney", getBankMaxMoney(p) - number);
         } else {
-            Data.getInstance().getbankfile().set("banks." + p.getName() + ".maxmoney", 1000);
+            Data.getInstance().getbankfile().set("banks." + p.getName() + ".maxmoney", 10000);
         }
         Data.getInstance().savebank();
     }
