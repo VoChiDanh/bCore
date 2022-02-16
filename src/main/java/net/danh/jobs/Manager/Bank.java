@@ -28,9 +28,13 @@ public class Bank {
     }
 
     public void addBankMoney(Player p, Integer number) {
+        if (getBankMaxMoney(p) < (getBankMoney(p) + number) || getBankMaxMoney(p) < getBankMoney(p)) {
+            p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("FULL_BANK"))));
+        } else {
             Data.getInstance().getbankfile().set("banks." + p.getName() + ".money", getBankMoney(p) + number);
             Data.getInstance().savebank();
         }
+    }
 
     public void removeBankMoney(Player p, Integer number) {
         if (getBankMoney(p) >= number) {
@@ -65,7 +69,7 @@ public class Bank {
     }
 
     public void depositBank(Player p, Integer number) {
-        if (getBankMaxMoney(p) <= (getBankMoney(p) + number) || getBankMaxMoney(p) <= getBankMoney(p)) {
+        if (getBankMaxMoney(p) < (getBankMoney(p) + number) || getBankMaxMoney(p) < getBankMoney(p)) {
             p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("FULL_BANK"))));
         } else {
             if (Jobs.economy.getBalance(p) >= number) {
