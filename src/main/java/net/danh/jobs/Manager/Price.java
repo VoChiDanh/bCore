@@ -36,9 +36,6 @@ public class Price {
 
     public void addPrice(String name, Double price) {
         Data.getInstance().getprice().set("Price." + name, getPrice(name) + price);
-        Jobs.getInstance().getServer().broadcastMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("INCREASE_PRICE")
-                .replaceAll("%block%", name.toLowerCase())
-                .replaceAll("%price%", String.valueOf(getPrice(name)))));
         Data.getInstance().saveprice();
     }
 
@@ -52,11 +49,7 @@ public class Price {
         if (getPrice(name) <= 0) {
             addPrice(name, getBasePrice(name));
             Data.getInstance().saveprice();
-            return;
         } else {
-            Jobs.getInstance().getServer().broadcastMessage(Data.getInstance().convert(Data.getInstance().getlanguage().getString("DECREASE_PRICE")
-                    .replaceAll("%block%", name.toLowerCase())
-                    .replaceAll("%price%", String.valueOf(getPrice(name)))));
             Data.getInstance().saveprice();
         }
 
