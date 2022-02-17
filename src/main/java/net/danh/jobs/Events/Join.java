@@ -37,7 +37,7 @@ public class Join implements Listener {
         if (Storage.getInstance().getStorage(p, "LOG".toUpperCase()) == 0) {
             Storage.getInstance().setStorage(p, "LOG".toUpperCase(), 0D);
         }
-        if (Bank.getInstance().getBankMaxMoney(p) == 0){
+        if (Bank.getInstance().getBankMaxMoney(p) == 0) {
             Bank.getInstance().setBankMaxMoney(p, 10000);
         }
     }

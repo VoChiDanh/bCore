@@ -4,6 +4,8 @@ import net.danh.jobs.Jobs;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class Price {
 
     private static Price instance;
@@ -60,7 +62,6 @@ public class Price {
         if (getBasePrice(name) == 0) {
             addBasePrice(name, 1.0);
             Data.getInstance().saveprice();
-            return;
         }
     }
 
@@ -76,7 +77,7 @@ public class Price {
                 p.sendMessage(Data.getInstance().convert("&a+ " + money + "$"));
             }
         } else {
-            p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("NOT_ENOUGH_MATERIAL")));
+            p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
         }
     }
 }

@@ -2,6 +2,8 @@ package net.danh.jobs.Manager;
 
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class Storage {
 
     private static Storage instance;
@@ -26,7 +28,7 @@ public class Storage {
 
     public void addStorage(Player p, String name, Double number) {
         Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
-        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("ADD_STORAGE")
+        p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("ADD_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))
                 .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p)))
@@ -36,7 +38,7 @@ public class Storage {
 
     public void removeStorage(Player p, String name, Double number) {
         Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
-        p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("REMOVE_STORAGE")
+        p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("REMOVE_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))
                 .replaceAll("%block%", name.toLowerCase())
                 .replaceAll("%weight%", String.valueOf(Weight.getInstance().getWeight(p) - number))

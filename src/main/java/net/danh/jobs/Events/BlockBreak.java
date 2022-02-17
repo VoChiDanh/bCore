@@ -96,7 +96,7 @@ public class BlockBreak implements Listener {
                                     int fortunelevel = e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
                                     double fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getInstance().getLuckyChance(e.getPlayer()));
                                     if (Data.getInstance().getRandomNumber(fortunelevel, fortunelevel * 100) <= fortunechance) {
-                                        double fortuneblocks = ((fortunechance + kg) *  fortunelevel);
+                                        double fortuneblocks = ((fortunechance + kg) * fortunelevel);
                                         Weight.getInstance().addWeight(e.getPlayer(), fortuneblocks);
                                         if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
                                                 || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
@@ -155,7 +155,7 @@ public class BlockBreak implements Listener {
                             PlayerData.getInstance().addXP(e.getPlayer(), 2 + Gang.getInstance().getleveluptimes(e.getPlayer()));
                         }
                         Power.getInstance().addPower(e.getPlayer(), 5 + Gang.getInstance().getleveluptimes(e.getPlayer()));
-                        e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + LUCKY
+                        e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
                                 .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                 .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                         return;
@@ -205,7 +205,7 @@ public class BlockBreak implements Listener {
                         if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        for (String getBlockType : Data.getInstance().getconfigfile().getConfigurationSection("Blocks.").getKeys(false)) {
+                        for (String getBlockType : Objects.requireNonNull(Data.getInstance().getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
                             if (blocks.equalsIgnoreCase(getBlockType)) {
                                 max = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".max");
                                 min = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".min");
@@ -246,7 +246,7 @@ public class BlockBreak implements Listener {
                             PlayerData.getInstance().addXP(e.getPlayer(), 2 + Gang.getInstance().getleveluptimes(e.getPlayer()));
                         }
                         Power.getInstance().addPower(e.getPlayer(), 5 + Gang.getInstance().getleveluptimes(e.getPlayer()));
-                        e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + LUCKY
+                        e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + Objects.requireNonNull(LUCKY)
                                 .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                                 .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                         return;
@@ -258,13 +258,11 @@ public class BlockBreak implements Listener {
                     if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                         Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
                     }
-                    return;
                 }
 
             } else {
                 p.sendMessage(Data.getInstance().convert(PREFIX + NOT_CORRECT_ITEMS));
                 e.setCancelled(true);
-                return;
             }
         }
     }
