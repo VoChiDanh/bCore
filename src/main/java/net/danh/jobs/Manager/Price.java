@@ -64,7 +64,7 @@ public class Price {
         }
     }
 
-    public void Sell(Player p, String name, Integer number) {
+    public void Sell(Player p, String name, Double number) {
         if (Storage.getInstance().getStorage(p, name.toUpperCase()) >= number && Weight.getInstance().getWeight(p) >= number) {
             Storage.getInstance().removeStorage(p, name, number);
             Weight.getInstance().removeWeight(p, number);

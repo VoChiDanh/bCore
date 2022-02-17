@@ -15,16 +15,16 @@ public class Storage {
     }
 
 
-    public int getStorage(Player p, String name) {
+    public double getStorage(Player p, String name) {
         return Data.getInstance().getstoragefile().getInt("players." + p.getName() + ".Blocks." + name);
     }
 
-    public void setStorage(Player p, String name, Integer number) {
+    public void setStorage(Player p, String name, Double number) {
         Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, number);
         Data.getInstance().savestorage();
     }
 
-    public void addStorage(Player p, String name, Integer number) {
+    public void addStorage(Player p, String name, Double number) {
         Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
         p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("ADD_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))
@@ -34,7 +34,7 @@ public class Storage {
         Data.getInstance().savestorage();
     }
 
-    public void removeStorage(Player p, String name, Integer number) {
+    public void removeStorage(Player p, String name, Double number) {
         Data.getInstance().getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
         p.sendMessage(Data.getInstance().convert(Data.getInstance().getlanguagefile().getString("REMOVE_STORAGE")
                 .replaceAll("%amount%", String.valueOf(number))

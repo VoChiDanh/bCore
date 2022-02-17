@@ -145,7 +145,7 @@ public class Data {
         }
     }
 
-    public int getRandomNumber(int min, int max) {
+    public double getRandomNumber(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min) + min;
     }

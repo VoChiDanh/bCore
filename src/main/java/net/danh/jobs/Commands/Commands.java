@@ -335,7 +335,7 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("weight")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().setWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().setWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -343,7 +343,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().addWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().addWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -351,7 +351,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().removeWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().removeWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -361,7 +361,7 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("maxweight")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().setMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().setMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -369,7 +369,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().addMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().addMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -377,7 +377,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().removeMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Weight.getInstance().removeMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -476,7 +476,7 @@ public class Commands implements CommandExecutor {
                         if (Material.getMaterial(args[3]) != null) {
                             if (args[1].equalsIgnoreCase("set")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    Storage.getInstance().setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                                 } else {
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -484,7 +484,7 @@ public class Commands implements CommandExecutor {
                             }
                             if (args[1].equalsIgnoreCase("add")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    Storage.getInstance().addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                                 } else {
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
@@ -492,7 +492,7 @@ public class Commands implements CommandExecutor {
                             }
                             if (args[1].equalsIgnoreCase("remove")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                    Storage.getInstance().removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                                 } else {
                                     sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));

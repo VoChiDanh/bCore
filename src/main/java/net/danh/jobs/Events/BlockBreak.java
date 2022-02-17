@@ -4,12 +4,14 @@ import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.*;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class BlockBreak implements Listener {
@@ -71,7 +73,7 @@ public class BlockBreak implements Listener {
                         if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
                         }
-                        for (String getBlockType : Data.getInstance().getconfigfile().getConfigurationSection("Blocks.").getKeys(false)) {
+                        for (String getBlockType : Objects.requireNonNull(Data.getInstance().getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
                             if (blocks.equalsIgnoreCase(getBlockType)) {
                                 max = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".max");
                                 min = Data.getInstance().getconfigfile().getInt("Blocks." + blocks + ".min");
@@ -81,32 +83,62 @@ public class BlockBreak implements Listener {
                         if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
                         }
-                        int kg = Data.getInstance().getRandomNumber(min, max);
+                        double kg = Data.getInstance().getRandomNumber(min, max);
                         if (Weight.getInstance().getWeight(e.getPlayer()) + kg <= Weight.getInstance().getMaxWeight(e.getPlayer())) {
 
                             if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
                             if (kg != 0) {
-                                Weight.getInstance().addWeight(e.getPlayer(), kg);
-                                if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
-                                } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), kg);
-                                } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), kg);
-                                } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);
-                                } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
-                                } else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
-                                        || e.getBlock().getType() == XMaterial.COBBLESTONE.parseMaterial()) {
-                                    Storage.getInstance().addStorage(e.getPlayer(), "STONE".toUpperCase(), kg);
+                                if (e.getPlayer().getItemInHand().hasItemMeta()
+                                        || e.getPlayer().getItemInHand().getItemMeta().hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
+                                        || e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
+                                    int fortunelevel = e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
+                                    double fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getInstance().getLuckyChance(e.getPlayer()));
+                                    if (Data.getInstance().getRandomNumber(fortunelevel, fortunelevel * 100) <= fortunechance) {
+                                        double fortuneblocks = ((fortunechance + kg) *  fortunelevel);
+                                        Weight.getInstance().addWeight(e.getPlayer(), fortuneblocks);
+                                        if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), fortuneblocks);
+                                        } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), fortuneblocks);
+                                        } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), fortuneblocks);
+                                        } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), fortuneblocks);
+                                        } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), fortuneblocks);
+                                        } else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
+                                                || e.getBlock().getType() == XMaterial.COBBLESTONE.parseMaterial()) {
+                                            Storage.getInstance().addStorage(e.getPlayer(), "STONE".toUpperCase(), fortuneblocks);
+                                        }
+                                    }
+                                } else {
+                                    Weight.getInstance().addWeight(e.getPlayer(), kg);
+                                    if (e.getBlock().getType() == XMaterial.COAL_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.COAL_BLOCK.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "COAL".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.IRON_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.IRON_BLOCK.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "IRON".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.GOLD_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.GOLD_BLOCK.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "GOLD".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.DIAMOND_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.DIAMOND_BLOCK.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.EMERALD_ORE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.EMERALD_BLOCK.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "EMERALD".toUpperCase(), kg);
+                                    } else if (e.getBlock().getType() == XMaterial.STONE.parseMaterial()
+                                            || e.getBlock().getType() == XMaterial.COBBLESTONE.parseMaterial()) {
+                                        Storage.getInstance().addStorage(e.getPlayer(), "STONE".toUpperCase(), kg);
+                                    }
                                 }
                             }
                         } else {
@@ -183,13 +215,13 @@ public class BlockBreak implements Listener {
                         if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                             Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
                         }
-                        int kg = Data.getInstance().getRandomNumber(min, max);
+                        double kg = Data.getInstance().getRandomNumber(min, max);
                         if (Weight.getInstance().getWeight(e.getPlayer()) + kg <= Weight.getInstance().getMaxWeight(e.getPlayer())) {
 
                             if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                                 Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
                             }
-                            if (kg != 0) {
+                            if (kg != 0.0) {
                                 Weight.getInstance().addWeight(e.getPlayer(), kg);
                                 if (b.getType() == XMaterial.ACACIA_LOG.parseMaterial()
                                         || b.getType() == XMaterial.BIRCH_LOG.parseMaterial()
