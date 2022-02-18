@@ -59,7 +59,6 @@ public class BlockBreak implements Listener {
                 if (Data.getInstance().getconfigfile().getBoolean("debug")) {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
                 }
-
                 if (Power.getInstance().getPower(e.getPlayer()) <= Data.getInstance().getconfigfile().getInt("minimum_power")) {
                     e.getPlayer().sendMessage(Data.getInstance().convert(PREFIX + NEED_MORE_POWER));
                     e.setCancelled(true);

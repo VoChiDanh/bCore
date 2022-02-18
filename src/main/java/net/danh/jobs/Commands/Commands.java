@@ -2,6 +2,7 @@ package net.danh.jobs.Commands;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.danh.jobs.CustomEnchantment.Money;
 import net.danh.jobs.Gui.SellBlocks;
 import net.danh.jobs.Jobs;
 import net.danh.jobs.Manager.*;
@@ -465,6 +466,39 @@ public class Commands implements CommandExecutor {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("enchant")) {
+                        if (sender instanceof Player) {
+                            if (args[1].equalsIgnoreCase("set")) {
+                                if (args[2].equals("Money")) {
+                                    Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), Integer.parseInt(args[3]));
+                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                }
+                            }
+                            if (args[1].equalsIgnoreCase("add")) {
+                                if (args[2].equals("Money")) {
+                                    if (Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().getEnchantmentLevel(new Money()) == 0) {
+                                        Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), 1);
+                                    } else {
+                                        Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) + Integer.parseInt(args[3]));
+                                        sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    }
+                                }
+                            }
+                            if (args[1].equalsIgnoreCase("remove")) {
+                                if (args[2].equals("Money")) {
+                                    if (Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().getEnchantmentLevel(new Money()) > 1) {
+                                        if (((Player) sender).getPlayer().getItemInHand().containsEnchantment(new Money())) {
+                                            Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) - Integer.parseInt(args[3]));
+                                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                        }
+                                    } else {
+                                        ((Player) sender).getPlayer().getItemInHand().removeEnchantment(new Money());
+                                        sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    }
+                                }
                             }
                         }
                     }

@@ -12,8 +12,8 @@
     <name>Jobs</name>
 
     <properties>
-        <java.version>8</java.version>
-        <devbuild.version>Build 10</devbuild.version>
+        <java.version>9</java.version>
+        <devbuild.version>Build 11</devbuild.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

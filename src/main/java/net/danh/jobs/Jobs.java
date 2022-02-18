@@ -2,11 +2,13 @@ package net.danh.jobs;
 
 import net.danh.jobs.Commands.Commands;
 import net.danh.jobs.Commands.TabCommand;
+import net.danh.jobs.CustomEnchantment.Money;
 import net.danh.jobs.Events.*;
 import net.danh.jobs.Hook.PlaceholderAPI;
 import net.danh.jobs.Manager.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -15,6 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -23,6 +26,8 @@ public final class Jobs extends JavaPlugin implements Listener {
 
     public static Economy economy;
     private static Jobs instance;
+
+    static Enchantment MONEY;
 
     public static Jobs getInstance() {
         return instance;
@@ -95,6 +100,7 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Eating(), this);
         getServer().getPluginManager().registerEvents(new Death(), this);
         getServer().getPluginManager().registerEvents(new Inventory(), this);
+        getServer().getPluginManager().registerEvents(new Money(), this);
         Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
@@ -102,6 +108,8 @@ public final class Jobs extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
+        MONEY = new Money();
+        registerEnchants(MONEY);
         Data.getInstance().createconfig();
         getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
@@ -192,5 +200,25 @@ public final class Jobs extends JavaPlugin implements Listener {
         if (economyProvider != null)
             economy = economyProvider.getProvider();
         return (economy != null);
+    }
+
+    private void registerEnchants(Enchantment ench) {
+        try {
+            try {
+                Field f = Enchantment.class.getDeclaredField("acceptingNew");
+                f.setAccessible(true);
+                f.set(null, true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                Enchantment.registerEnchantment(ench);
+                getLogger().log(Level.INFO, "Registered " + ench.getName());
+            } catch (IllegalArgumentException e) {
+                //if this is thrown it means the id is already taken.
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
