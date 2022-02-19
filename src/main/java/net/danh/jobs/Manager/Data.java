@@ -139,7 +139,7 @@ public class Data {
 
     public static double getRandomNumber(int min, int max) {
         Random r = new Random();
-        return r.nextInt(max - min) + min;
+        return r.nextDouble(max - min) + min;
     }
 
     public static String convert(String s) {

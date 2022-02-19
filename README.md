@@ -27,5 +27,5 @@
 ## Soft Depend
 [![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-red?style=for-the-badge)](https://www.spigotmc.org/resources/6245/) <br>
 [![vault](https://img.shields.io/badge/Vault-1.7.3-red?style=for-the-badge)](https://www.spigotmc.org/resources/34315/) <br>
-[![paper](https://img.shields.io/badge/Paper-1.12.x_--_1.18.x-red?style=for-the-badge)](https://papermc.io/downloads) <br>
-![java](https://img.shields.io/badge/Java_Version-9+-red?style=for-the-badge) <br>
+[![paper](https://img.shields.io/badge/Paper-1.12.x_--_1.18.1-red?style=for-the-badge)](https://papermc.io/downloads) <br>
+![java](https://img.shields.io/badge/Java_Version-17-red?style=for-the-badge) <br>

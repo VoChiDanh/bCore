@@ -1,6 +1,5 @@
 package net.danh.jobs.Events;
 
-import com.cryptomorin.xseries.XMaterial;
 import net.danh.jobs.Manager.*;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
@@ -26,33 +25,25 @@ public class Fishing implements Listener {
             e.setCancelled(true);
         } else {
             if (e.getCaught() instanceof Item) {
-                if (((Item) e.getCaught()).getItemStack().getType() == XMaterial.TROPICAL_FISH.parseMaterial()
-                        || (((Item) e.getCaught()).getItemStack().getType()) == XMaterial.PUFFERFISH.parseMaterial()
-                        || (((Item) e.getCaught()).getItemStack().getType()) == XMaterial.COD.parseMaterial()
-                        || (((Item) e.getCaught()).getItemStack().getType()) == XMaterial.SALMON.parseMaterial()) {
-                    double systemchance = Math.random() * 100.0D;
-                    double playerchance = Lucky.getLuckyChance(e.getPlayer());
-                    if (playerchance >= systemchance) {
-                        if (Gang.getGang(e.getPlayer()) != null) {
-                            PlayerData.addXP(e.getPlayer(), 2 + Gang.getleveluptimes(e.getPlayer()));
-                        }
-                        Power.addPower(e.getPlayer(), 5 + Gang.getleveluptimes(e.getPlayer()));
-                        e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
-                                .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                                .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
-                        return;
-                    }
-
+                ((Item) e.getCaught()).getItemStack().getType();
+                double systemchance = Math.random() * 100.0D;
+                double playerchance = Lucky.getLuckyChance(e.getPlayer());
+                if (playerchance >= systemchance) {
                     if (Gang.getGang(e.getPlayer()) != null) {
-                        PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + Gang.getleveluptimes(e.getPlayer()));
+                        PlayerData.addXP(e.getPlayer(), 2 + Gang.getleveluptimes(e.getPlayer()));
                     }
-                    Power.removePower(e.getPlayer(), 1);
-                    e.setCancelled(false);
-                } else {
-                    e.getPlayer().sendMessage(Data.convert(PREFIX + NOT_FISH));
-                    e.setCancelled(true);
+                    Power.addPower(e.getPlayer(), 5 + Gang.getleveluptimes(e.getPlayer()));
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
+                            .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
+                            .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                     return;
                 }
+
+                if (Gang.getGang(e.getPlayer()) != null) {
+                    PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + Gang.getleveluptimes(e.getPlayer()));
+                }
+                Power.removePower(e.getPlayer(), 1);
+                e.setCancelled(false);
                 if (((Item) e.getCaught()).getItemStack().getItemMeta().hasEnchants()) {
                     e.getPlayer().sendMessage(Data.convert(PREFIX + NOT_FISH));
                     e.setCancelled(true);
