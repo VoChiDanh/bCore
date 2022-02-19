@@ -4,70 +4,60 @@ import org.bukkit.entity.Player;
 
 public class PlayerData {
 
-    private static PlayerData instance;
-
-    public static PlayerData getInstance() {
-
-        if (instance == null) {
-            instance = new PlayerData();
-        }
-        return instance;
+    public static int getLevel(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Level");
     }
 
-    public int getLevel(Player p) {
-        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".Level");
+    public static int getXP(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".XP");
     }
 
-    public int getXP(Player p) {
-        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".XP");
+    public static void setLevel(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".Level", number);
+        Data.savedata();
     }
 
-    public void setLevel(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".Level", number);
-        Data.getInstance().savedata();
+    public static void setXP(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".XP", number);
+        Data.savedata();
     }
 
-    public void setXP(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".XP", number);
-        Data.getInstance().savedata();
-    }
-
-    public void addLevel(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".Level", getLevel(p) + number);
-        Data.getInstance().savedata();
-        Power.getInstance().addMaxPower(p, Data.getInstance().getconfigfile().getInt("Per_Max_Power"));
-        Power.getInstance().addRestorePower(p, Data.getInstance().getconfigfile().getInt("Per_Restore_Power"));
-        for (String age_up : Data.getInstance().getlanguagefile().getStringList("LEVEL_UP")) {
-            p.sendMessage(Data.getInstance().convert(age_up
-                    .replaceAll("%mpower%", String.valueOf(Power.getInstance().getMaxPower(p)))
+    public static void addLevel(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) + number);
+        Data.savedata();
+        Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
+        Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
+        for (String age_up : Data.getlanguagefile().getStringList("LEVEL_UP")) {
+            p.sendMessage(Data.convert(age_up
+                    .replaceAll("%mpower%", String.valueOf(Power.getMaxPower(p)))
                     .replaceAll("%level%", String.valueOf(getLevel(p)))
-                    .replaceAll("%rpower%", String.valueOf(Power.getInstance().getRestorePower(p)))));
+                    .replaceAll("%rpower%", String.valueOf(Power.getRestorePower(p)))));
         }
     }
 
-    public void addXP(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
-        Gang.getInstance().checkLevelUp(p);
-        Data.getInstance().savedata();
+    public static void addXP(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
+        Gang.checkLevelUp(p);
+        Data.savedata();
     }
 
-    public void removeLevel(Player p, int number) {
+    public static void removeLevel(Player p, int number) {
         if (getLevel(p) > number) {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".Level", getLevel(p) - number);
-            Data.getInstance().savedata();
+            Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) - number);
+            Data.savedata();
         } else {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".Level", 1);
-            Data.getInstance().savedata();
+            Data.getdatafile().set("players." + p.getName() + ".Level", 1);
+            Data.savedata();
         }
     }
 
-    public void removeXP(Player p, int number) {
+    public static void removeXP(Player p, int number) {
         if (getXP(p) > number) {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".XP", getXP(p) - number);
-            Data.getInstance().savedata();
+            Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) - number);
+            Data.savedata();
         } else {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".XP", 0);
-            Data.getInstance().savedata();
+            Data.getdatafile().set("players." + p.getName() + ".XP", 0);
+            Data.savedata();
         }
     }
 

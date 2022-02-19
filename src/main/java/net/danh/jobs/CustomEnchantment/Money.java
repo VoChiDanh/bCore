@@ -2,6 +2,7 @@ package net.danh.jobs.CustomEnchantment;
 
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.danh.jobs.Jobs;
+import net.danh.jobs.Manager.CheckMaterial;
 import net.danh.jobs.Manager.Data;
 import net.danh.jobs.Manager.Lucky;
 import net.kyori.adventure.key.Key;
@@ -32,43 +33,19 @@ public class Money extends Enchantment implements Listener {
     public void onBreak(@NotNull BlockBreakEvent e) {
         Material b = e.getBlock().getType();
         Player p = e.getPlayer();
-        double money = p.getItemInHand().getEnchantmentLevel(this) * Data.getInstance().getRandomNumber(1, 100);
-        if (isCoal(b) || isIron(b) || isGold(b) || isDiamond(b) || isEmerald(b) || isLog(b)) {
+        double money = p.getItemInHand().getEnchantmentLevel(this) * Data.getRandomNumber(1, 100);
+        if (CheckMaterial.isCoal(b) || CheckMaterial.isIron(b) || CheckMaterial.isGold(b) || CheckMaterial.isDiamond(b) || CheckMaterial.isEmerald(b) || CheckMaterial.isLog(b)) {
             if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().hasItemMeta()) {
                 if (p.getItemInHand().containsEnchantment(this)) {
-                    if (Data.getInstance().getRandomNumber(1, 100) <= Lucky.getInstance().getLuckyChance(p)) {
+                    if (Data.getRandomNumber(1, 100) <= Lucky.getLuckyChance(p)) {
                         EconomyResponse r = Jobs.economy.depositPlayer(p, money);
                         if (r.transactionSuccess()) {
-                            p.sendMessage(Data.getInstance().convert("&a+ " + money + "$ &7| " + b.toString().replaceAll("_", " ").toLowerCase()));
+                            p.sendMessage(Data.convert("&a+ " + money + "$ &7| " + b.toString().replaceAll("_", " ").toLowerCase()));
                         }
                     }
                 }
             }
         }
-    }
-
-    public boolean isCoal(@NotNull Material material) {
-        return material.name().contains("COAL");
-    }
-
-    public boolean isIron(@NotNull Material material) {
-        return material.name().contains("IRON");
-    }
-
-    public boolean isGold(@NotNull Material material) {
-        return material.name().contains("GOLD");
-    }
-
-    public boolean isDiamond(@NotNull Material material) {
-        return material.name().contains("DIAMOND");
-    }
-
-    public boolean isEmerald(@NotNull Material material) {
-        return material.name().contains("EMERALD");
-    }
-
-    public boolean isLog(@NotNull Material material) {
-        return material.name().contains("LOG");
     }
 
 
@@ -148,7 +125,7 @@ public class Money extends Enchantment implements Listener {
     }
 
     @Override
-    public @NotNull Key key(){ 
+    public @NotNull Key key() {
         return super.key();
     }
 }

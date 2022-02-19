@@ -8,76 +8,66 @@ import java.util.Objects;
 
 public class Price {
 
-    private static Price instance;
-
-    public static Price getInstance() {
-
-        if (instance == null) {
-            instance = new Price();
-        }
-        return instance;
+    public static double getPrice(String name) {
+        return Data.getpricefile().getInt("Price." + name);
     }
 
-    public double getPrice(String name) {
-        return Data.getInstance().getpricefile().getInt("Price." + name);
+    public static double getBasePrice(String name) {
+        return Data.getpricefile().getInt("BasePrice." + name);
     }
 
-    public double getBasePrice(String name) {
-        return Data.getInstance().getpricefile().getInt("BasePrice." + name);
+    public static void setPrice(String name, Double price) {
+        Data.getpricefile().set("Price." + name, price);
+        Data.saveprice();
     }
 
-    public void setPrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("Price." + name, price);
-        Data.getInstance().saveprice();
+    public static void setBasePrice(String name, Double price) {
+        Data.getpricefile().set("BasePrice." + name, price);
+        Data.saveprice();
     }
 
-    public void setBasePrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("BasePrice." + name, price);
-        Data.getInstance().saveprice();
+    public static void addPrice(String name, Double price) {
+        Data.getpricefile().set("Price." + name, getPrice(name) + price);
+        Data.saveprice();
     }
 
-    public void addPrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("Price." + name, getPrice(name) + price);
-        Data.getInstance().saveprice();
+    public static void addBasePrice(String name, Double price) {
+        Data.getpricefile().set("BasePrice." + name, getBasePrice(name) + price);
+        Data.saveprice();
     }
 
-    public void addBasePrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("BasePrice." + name, getBasePrice(name) + price);
-        Data.getInstance().saveprice();
-    }
-
-    public void removePrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("Price." + name, getPrice(name) - price);
+    public static void removePrice(String name, Double price) {
+        Data.getpricefile().set("Price." + name, getPrice(name) - price);
         if (getPrice(name) <= 0) {
             addPrice(name, getBasePrice(name));
-            Data.getInstance().saveprice();
+            Data.saveprice();
         } else {
-            Data.getInstance().saveprice();
+            Data.saveprice();
         }
 
     }
 
-    public void removeBasePrice(String name, Double price) {
-        Data.getInstance().getpricefile().set("BasePrice." + name, getBasePrice(name) - price);
+    public static void removeBasePrice(String name, Double price) {
+        Data.getpricefile().set("BasePrice." + name, getBasePrice(name) - price);
         if (getBasePrice(name) == 0) {
             addBasePrice(name, 1.0);
-            Data.getInstance().saveprice();
+            Data.saveprice();
         }
     }
 
-    public void Sell(Player p, String name, Double number) {
-        if (Storage.getInstance().getStorage(p, name.toUpperCase()) >= number && Weight.getInstance().getWeight(p) >= number) {
-            Storage.getInstance().removeStorage(p, name, number);
-            Weight.getInstance().removeWeight(p, number);
-            Data.getInstance().savestorage();
-            Data.getInstance().savedata();
+    public static void Sell(Player p, String name, Double number) {
+        if (Storage.getStorage(p, name.toUpperCase()) >= number && Weight.getWeight(p) >= number) {
+            Storage.removeStorage(p, name, number);
+            Weight.removeWeight(p, number);
+            Data.savestorage();
+            Data.savedata();
             double money = getPrice(name) * number;
             EconomyResponse r = Jobs.economy.depositPlayer(p.getPlayer(), money);
             if (r.transactionSuccess()) {
-                p.sendMessage(Data.getInstance().convert("&a+ " + money + "$"));
+                p.sendMessage(Data.convert("&a+ " + money + "$"));
             }
         } else {
-            p.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
+            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
         }
     }
 }

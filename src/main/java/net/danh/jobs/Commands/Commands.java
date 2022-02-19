@@ -29,30 +29,30 @@ public class Commands implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
 
-        String RELOADED = Data.getInstance().getlanguagefile().getString("RELOAD");
-        String PREFIX = Data.getInstance().getlanguagefile().getString("PREFIX");
-        String DONE = Data.getInstance().getlanguagefile().getString("DONE");
-        String UNKNOW_PLAYER = Data.getInstance().getlanguagefile().getString("UNKNOW_PLAYER");
-        String UNKNOW_GANG = Data.getInstance().getlanguagefile().getString("UNKNOW_GANG");
+        String RELOADED = Data.getlanguagefile().getString("RELOAD");
+        String PREFIX = Data.getlanguagefile().getString("PREFIX");
+        String DONE = Data.getlanguagefile().getString("DONE");
+        String UNKNOW_PLAYER = Data.getlanguagefile().getString("UNKNOW_PLAYER");
+        String UNKNOW_GANG = Data.getlanguagefile().getString("UNKNOW_GANG");
 
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
                 if (sender.hasPermission("jobs.user")) {
-                    for (String user : Data.getInstance().getlanguagefile().getStringList("HELP_USER")) {
-                        sender.sendMessage(Data.getInstance().convert(user));
+                    for (String user : Data.getlanguagefile().getStringList("HELP_USER")) {
+                        sender.sendMessage(Data.convert(user));
                     }
                 }
                 if (sender.hasPermission("jobs.admin")) {
-                    for (String admin : Data.getInstance().getlanguagefile().getStringList("HELP_ADMIN")) {
-                        sender.sendMessage(Data.getInstance().convert(admin));
+                    for (String admin : Data.getlanguagefile().getStringList("HELP_ADMIN")) {
+                        sender.sendMessage(Data.convert(admin));
                     }
                 }
             }
             if (args.length == 1) {
                 if (sender.hasPermission("jobs.admin")) {
                     if (args[0].equalsIgnoreCase("reload")) {
-                        Data.getInstance().reloadconfig();
-                        sender.sendMessage(Data.getInstance().convert(PREFIX + RELOADED));
+                        Data.reloadconfig();
+                        sender.sendMessage(Data.convert(PREFIX + RELOADED));
                     }
                     if (args[0].equalsIgnoreCase("update")) {
                         try {
@@ -75,8 +75,8 @@ public class Commands implements CommandExecutor {
                             String parsebody = body.replaceAll("## Commits", "");
                             if (!(parsename.equalsIgnoreCase(version))) {
                                 URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs-0.2.2-SNAPSHOT.jar");
-                                sender.sendMessage(Data.getInstance().convert("&eDownloading " + name + "! &6Your version is &6v" + version));
-                                sender.sendMessage(Data.getInstance().convert("&aUpdate log: " + parsebody));
+                                sender.sendMessage(Data.convert("&eDownloading " + name + "! &6Your version is &6v" + version));
+                                sender.sendMessage(Data.convert("&aUpdate log: " + parsebody));
                                 new BukkitRunnable() {
 
                                     @Override
@@ -89,14 +89,14 @@ public class Commands implements CommandExecutor {
                                             }
                                             Path path = new File("plugins/Jobs/update/" + File.separator + "Jobs.jar").toPath();
                                             java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-                                            sender.sendMessage(Data.getInstance().convert("&6Download finished, stop the server and check new jar in Jobs folder to get the new update"));
+                                            sender.sendMessage(Data.convert("&6Download finished, stop the server and check new jar in Jobs folder to get the new update"));
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
                                     }
                                 }.runTaskLaterAsynchronously(Jobs.getInstance(), 1);
                             } else {
-                                sender.sendMessage(Data.getInstance().convert("&aYou are on latest build"));
+                                sender.sendMessage(Data.convert("&aYou are on latest build"));
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -108,17 +108,17 @@ public class Commands implements CommandExecutor {
                 if (sender.hasPermission("jobs.user")) {
                     if (args[0].equalsIgnoreCase("info")) {
                         if (Bukkit.getPlayer(args[1]) != null) {
-                            for (String check_info : Data.getInstance().getlanguagefile().getStringList("INFO_CHECK")) {
-                                sender.sendMessage(Data.getInstance().convert(check_info
+                            for (String check_info : Data.getlanguagefile().getStringList("INFO_CHECK")) {
+                                sender.sendMessage(Data.convert(check_info
                                         .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
-                                        .replaceAll("%plevel%", String.valueOf(PlayerData.getInstance().getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%xp", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%glevel%", String.valueOf(Gang.getInstance().getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%power%", String.valueOf(Power.getInstance().getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%leveluptimes%", String.valueOf(Gang.getInstance().getleveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
+                                        .replaceAll("%plevel%", String.valueOf(PlayerData.getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%xp", String.valueOf(PlayerData.getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%glevel%", String.valueOf(Gang.getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%power%", String.valueOf(Power.getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
+                                        .replaceAll("%leveluptimes%", String.valueOf(Gang.getleveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
                             }
                         } else {
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                         }
                     }
                 }
@@ -128,344 +128,344 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("plevel")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().setLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.setLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().addLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.addLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().removeLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.removeLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("xp")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().setXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.setXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().addXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.addXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.getInstance().removeXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                PlayerData.removeXP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("power")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().setPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.setPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().removePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.removePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("glevel")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().setLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.setLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().addLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.addLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().removeLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.removeLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("levelup")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.getInstance().removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("maxpower")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().setMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.setMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().addMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.addMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().removeMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.removeMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             }
                         } else {
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                            sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                         }
                     }
                     if (args[0].equalsIgnoreCase("restorepower")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().setRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.setRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().addRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.addRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.getInstance().removeRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Power.removeRestorePower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("luckychance")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.getInstance().setLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Lucky.setLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.getInstance().addLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Lucky.addLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.getInstance().removeLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Lucky.removeLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("weight")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().setWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.setWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().addWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.addWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().removeWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.removeWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("maxweight")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().setMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.setMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().addMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.addMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Weight.getInstance().removeMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Weight.removeMaxWeight(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.valueOf(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("price")) {
                         if (args[1].equalsIgnoreCase("set")) {
-                            Price.getInstance().setPrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.setPrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("add")) {
-                            Price.getInstance().addPrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.addPrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
-                            Price.getInstance().removePrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.removePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                     }
                     if (args[0].equalsIgnoreCase("baseprice")) {
                         if (args[1].equalsIgnoreCase("set")) {
-                            Price.getInstance().setBasePrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.setBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("add")) {
-                            Price.getInstance().addBasePrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.addBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
-                            Price.getInstance().removeBasePrice(args[2], Double.valueOf(args[3]));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
-                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            Price.removeBasePrice(args[2], Double.valueOf(args[3]));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                     }
                     if (args[0].equalsIgnoreCase("bankmoney")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().setBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.setBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().addBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.addBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().removeBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.removeBankMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args[0].equalsIgnoreCase("bankmaxmoney")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().setBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.setBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().addBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.addBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.getInstance().removeBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Bank.removeBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
@@ -474,7 +474,7 @@ public class Commands implements CommandExecutor {
                             if (args[1].equalsIgnoreCase("set")) {
                                 if (args[2].equals("Money")) {
                                     Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
                                 }
                             }
                             if (args[1].equalsIgnoreCase("add")) {
@@ -483,7 +483,7 @@ public class Commands implements CommandExecutor {
                                         Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), 1);
                                     } else {
                                         Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) + Integer.parseInt(args[3]));
-                                        sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                        sender.sendMessage(Data.convert(PREFIX + DONE));
                                     }
                                 }
                             }
@@ -492,11 +492,11 @@ public class Commands implements CommandExecutor {
                                     if (Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().getEnchantmentLevel(new Money()) > 1) {
                                         if (((Player) sender).getPlayer().getItemInHand().containsEnchantment(new Money())) {
                                             Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) - Integer.parseInt(args[3]));
-                                            sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                            sender.sendMessage(Data.convert(PREFIX + DONE));
                                         }
                                     } else {
                                         ((Player) sender).getPlayer().getItemInHand().removeEnchantment(new Money());
-                                        sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                        sender.sendMessage(Data.convert(PREFIX + DONE));
                                     }
                                 }
                             }
@@ -510,26 +510,26 @@ public class Commands implements CommandExecutor {
                         if (Material.getMaterial(args[3]) != null) {
                             if (args[1].equalsIgnoreCase("set")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    Storage.setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
                                 } else {
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                                 }
                             }
                             if (args[1].equalsIgnoreCase("add")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    Storage.addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
                                 } else {
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                                 }
                             }
                             if (args[1].equalsIgnoreCase("remove")) {
                                 if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.getInstance().removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                    Storage.removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Double.valueOf(args[4]));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
                                 } else {
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                                 }
                             }
                         }
@@ -542,7 +542,7 @@ public class Commands implements CommandExecutor {
             if (sender instanceof Player) {
                 if (args.length == 0) {
                     if (sender.hasPermission("jobs.user")) {
-                        SellBlocks.getInstance().openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
+                        SellBlocks.openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
                     }
                 }
             }
@@ -551,18 +551,18 @@ public class Commands implements CommandExecutor {
         if (label.equalsIgnoreCase("bank")) {
             if (sender instanceof Player) {
                 if (args.length == 0) {
-                    sender.sendMessage(Data.getInstance().convert(Objects.requireNonNull(Objects.requireNonNull(Data.getInstance().getlanguagefile().getString("BANK"))
-                            .replaceAll("%money%", String.valueOf(Bank.getInstance().getBankMoney(Objects.requireNonNull(((Player) sender).getPlayer())))))));
+                    sender.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("BANK"))
+                            .replaceAll("%money%", String.valueOf(Bank.getBankMoney(Objects.requireNonNull(((Player) sender).getPlayer())))))));
                 }
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("deposit")) {
                         if (Integer.parseInt(args[1]) != 0) {
-                            Bank.getInstance().depositBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
+                            Bank.depositBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
                         }
                     }
                     if (args[0].equalsIgnoreCase("withdraw")) {
                         if (Integer.parseInt(args[1]) != 0) {
-                            Bank.getInstance().withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
+                            Bank.withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
                         }
                     }
                 }
@@ -575,30 +575,30 @@ public class Commands implements CommandExecutor {
                     if (args.length == 2) {
                         if (args[0].equalsIgnoreCase("create")) {
                             if (args[1] != null) {
-                                Gang.getInstance().selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                Gang.selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             }
                         }
                         if (args[0].equalsIgnoreCase("join")) {
                             if (Bukkit.getPlayer(args[1]) != null) {
-                                if (Gang.getInstance().getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))) != null) {
-                                    Gang.getInstance().selectGang(((Player) sender).getPlayer(), Gang.getInstance().getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))));
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                                if (Gang.getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))) != null) {
+                                    Gang.selectGang(((Player) sender).getPlayer(), Gang.getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
                                 } else {
-                                    sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_GANG));
+                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_GANG));
                                 }
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_PLAYER));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
                     }
                     if (args.length == 1) {
                         if (args[0].equalsIgnoreCase("leave")) {
-                            if (Gang.getInstance().getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
-                                Gang.getInstance().selectGang(((Player) sender).getPlayer(), "Server".toUpperCase());
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + DONE));
+                            if (Gang.getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
+                                Gang.selectGang(((Player) sender).getPlayer(), "Server".toUpperCase());
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
-                                sender.sendMessage(Data.getInstance().convert(PREFIX + UNKNOW_GANG));
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_GANG));
                             }
                         }
                     }

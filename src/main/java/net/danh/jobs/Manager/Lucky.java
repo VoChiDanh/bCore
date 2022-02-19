@@ -4,37 +4,27 @@ import org.bukkit.entity.Player;
 
 public class Lucky {
 
-    private static Lucky instance;
-
-    public static Lucky getInstance() {
-
-        if (instance == null) {
-            instance = new Lucky();
-        }
-        return instance;
+    public static int getLuckyChance(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Lucky");
     }
 
-    public int getLuckyChance(Player p) {
-        return Data.getInstance().getdatafile().getInt("players." + p.getName() + ".Lucky");
+    public static void setLuckyChance(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".Lucky", number);
+        Data.savedata();
     }
 
-    public void setLuckyChance(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".Lucky", number);
-        Data.getInstance().savedata();
+    public static void addLuckyChance(Player p, int number) {
+        Data.getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p) + number);
+        Data.savedata();
     }
 
-    public void addLuckyChance(Player p, int number) {
-        Data.getInstance().getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p) + number);
-        Data.getInstance().savedata();
-    }
-
-    public void removeLuckyChance(Player p, int number) {
-        if (getLuckyChance(p) > Data.getInstance().getconfigfile().getInt("Default_Lucky_Chance")) {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p) - number);
+    public static void removeLuckyChance(Player p, int number) {
+        if (getLuckyChance(p) > Data.getconfigfile().getInt("Default_Lucky_Chance")) {
+            Data.getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p) - number);
         } else {
-            Data.getInstance().getdatafile().set("players." + p.getName() + ".Lucky", Data.getInstance().getconfigfile().getInt("Default_Lucky_Chance"));
+            Data.getdatafile().set("players." + p.getName() + ".Lucky", Data.getconfigfile().getInt("Default_Lucky_Chance"));
         }
-        Data.getInstance().savedata();
+        Data.savedata();
     }
 
 }

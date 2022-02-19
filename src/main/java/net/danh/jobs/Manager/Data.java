@@ -10,19 +10,11 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Data {
-    private static Data instance;
-    private File configFile, languageFile, dataFile, storageFile, priceFile, guiFile, bankFile;
-    private FileConfiguration config, language, data, storage, price, gui, bank;
+    private static File configFile, languageFile, dataFile, storageFile, priceFile, guiFile, bankFile;
+    private static FileConfiguration config, language, data, storage, price, gui, bank;
 
-    public static Data getInstance() {
 
-        if (instance == null) {
-            instance = new Data();
-        }
-        return instance;
-    }
-
-    public void createconfig() {
+    public static void createconfig() {
         configFile = new File(Jobs.getInstance().getDataFolder(), "config.yml");
         languageFile = new File(Jobs.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
@@ -60,41 +52,41 @@ public class Data {
     }
 
 
-    public FileConfiguration getconfigfile() {
+    public static FileConfiguration getconfigfile() {
         return config;
     }
 
-    public FileConfiguration getlanguagefile() {
+    public static FileConfiguration getlanguagefile() {
         return language;
     }
 
-    public FileConfiguration getdatafile() {
+    public static FileConfiguration getdatafile() {
         return data;
     }
 
-    public FileConfiguration getstoragefile() {
+    public static FileConfiguration getstoragefile() {
         return storage;
     }
 
-    public FileConfiguration getpricefile() {
+    public static FileConfiguration getpricefile() {
         return price;
     }
 
-    public FileConfiguration getguifile() {
+    public static FileConfiguration getguifile() {
         return gui;
     }
 
-    public FileConfiguration getbankfile() {
+    public static FileConfiguration getbankfile() {
         return bank;
     }
 
-    public void reloadconfig() {
+    public static void reloadconfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
         gui = YamlConfiguration.loadConfiguration(guiFile);
     }
 
-    public void saveconfig() {
+    public static void saveconfig() {
         try {
             config.save(configFile);
         } catch (IOException ignored) {
@@ -102,7 +94,7 @@ public class Data {
     }
 
 
-    public void savelanguage() {
+    public static void savelanguage() {
         try {
             language.save(languageFile);
         } catch (IOException ignored) {
@@ -110,47 +102,47 @@ public class Data {
     }
 
 
-    public void savedata() {
+    public static void savedata() {
         try {
             data.save(dataFile);
         } catch (IOException ignored) {
         }
     }
 
-    public void savestorage() {
+    public static void savestorage() {
         try {
             storage.save(storageFile);
         } catch (IOException ignored) {
         }
     }
 
-    public void saveprice() {
+    public static void saveprice() {
         try {
             price.save(priceFile);
         } catch (IOException ignored) {
         }
     }
 
-    public void savegui() {
+    public static void savegui() {
         try {
             gui.save(guiFile);
         } catch (IOException ignored) {
         }
     }
 
-    public void savebank() {
+    public static void savebank() {
         try {
             bank.save(bankFile);
         } catch (IOException ignored) {
         }
     }
 
-    public double getRandomNumber(int min, int max) {
+    public static double getRandomNumber(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min) + min;
     }
 
-    public String convert(String s) {
+    public static String convert(String s) {
         return s.replaceAll("&", "§");
     }
 }

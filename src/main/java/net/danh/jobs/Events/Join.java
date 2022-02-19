@@ -12,33 +12,33 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (PlayerData.getInstance().getXP(p) == 0) {
-            PlayerData.getInstance().setXP(p, 0);
+        if (PlayerData.getXP(p) == 0) {
+            PlayerData.setXP(p, 0);
         }
-        if (Power.getInstance().getRestorePower(p) == 0) {
-            Power.getInstance().setRestorePower(p, Data.getInstance().getconfigfile().getInt("Restore_Power"));
+        if (Power.getRestorePower(p) == 0) {
+            Power.setRestorePower(p, Data.getconfigfile().getInt("Restore_Power"));
         }
-        if (Power.getInstance().getMaxPower(p) == 0) {
-            Power.getInstance().setMaxPower(p, Data.getInstance().getconfigfile().getInt("Max_Power"));
+        if (Power.getMaxPower(p) == 0) {
+            Power.setMaxPower(p, Data.getconfigfile().getInt("Max_Power"));
         }
-        if (Lucky.getInstance().getLuckyChance(p) == 0) {
-            Lucky.getInstance().setLuckyChance(p, Data.getInstance().getconfigfile().getInt("Default_Lucky_Chance"));
+        if (Lucky.getLuckyChance(p) == 0) {
+            Lucky.setLuckyChance(p, Data.getconfigfile().getInt("Default_Lucky_Chance"));
         }
 
-        if (Power.getInstance().getPower(p) == 0) {
-            Power.getInstance().setPower(p, Power.getInstance().getMaxPower(p));
+        if (Power.getPower(p) == 0) {
+            Power.setPower(p, Power.getMaxPower(p));
         }
-        if (Weight.getInstance().getWeight(p) == 0) {
-            Weight.getInstance().setWeight(p, 0D);
+        if (Weight.getWeight(p) == 0) {
+            Weight.setWeight(p, 0D);
         }
-        if (Weight.getInstance().getMaxWeight(p) == 0) {
-            Weight.getInstance().setMaxWeight(p, 5000D);
+        if (Weight.getMaxWeight(p) == 0) {
+            Weight.setMaxWeight(p, 5000D);
         }
-        if (Storage.getInstance().getStorage(p, "LOG".toUpperCase()) == 0) {
-            Storage.getInstance().setStorage(p, "LOG".toUpperCase(), 0D);
+        if (Storage.getStorage(p, "LOG".toUpperCase()) == 0) {
+            Storage.setStorage(p, "LOG".toUpperCase(), 0D);
         }
-        if (Bank.getInstance().getBankMaxMoney(p) == 0) {
-            Bank.getInstance().setBankMaxMoney(p, 10000);
+        if (Bank.getBankMaxMoney(p) == 0) {
+            Bank.setBankMaxMoney(p, 10000);
         }
     }
 }

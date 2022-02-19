@@ -25,9 +25,8 @@ public final class Jobs extends JavaPlugin implements Listener {
 
 
     public static Economy economy;
-    private static Jobs instance;
-
     static Enchantment MONEY;
+    private static Jobs instance;
 
     public static Jobs getInstance() {
         return instance;
@@ -110,22 +109,22 @@ public final class Jobs extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
         MONEY = new Money();
         registerEnchants(MONEY);
-        Data.getInstance().createconfig();
+        Data.createconfig();
         getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (PlayerData.getInstance().getLevel(p) == 1) {
-                        if (Power.getInstance().getPower(p) > Power.getInstance().getMaxPower(p)) {
-                            Power.getInstance().setPower(p, Power.getInstance().getMaxPower(p));
+                    if (PlayerData.getLevel(p) == 1) {
+                        if (Power.getPower(p) > Power.getMaxPower(p)) {
+                            Power.setPower(p, Power.getMaxPower(p));
                         }
-                        if (Power.getInstance().getPower(p) >= Power.getInstance().getMaxPower(p) * 0.9D) {
+                        if (Power.getPower(p) >= Power.getMaxPower(p) * 0.9D) {
                             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, Integer.MIN_VALUE));
                         } else {
                             p.removePotionEffect(PotionEffectType.CONFUSION);
                         }
                     }
-                    if (Weight.getInstance().getWeight(p) >= Weight.getInstance().getMaxWeight(p) * 0.9D) {
+                    if (Weight.getWeight(p) >= Weight.getMaxWeight(p) * 0.9D) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
                     } else {
                         p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
@@ -137,47 +136,47 @@ public final class Jobs extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 if (getServer().getOnlinePlayers().size() > 0) {
-                    double stone = Data.getInstance().getRandomNumber(1, 1000);
-                    double coal = Data.getInstance().getRandomNumber(1, 1000);
-                    double iron = Data.getInstance().getRandomNumber(1, 1000);
-                    double gold = Data.getInstance().getRandomNumber(1, 1000);
-                    double diamond = Data.getInstance().getRandomNumber(1, 1000);
-                    double emerald = Data.getInstance().getRandomNumber(1, 1000);
-                    double log = Data.getInstance().getRandomNumber(1, 1000);
+                    double stone = Data.getRandomNumber(1, 1000);
+                    double coal = Data.getRandomNumber(1, 1000);
+                    double iron = Data.getRandomNumber(1, 1000);
+                    double gold = Data.getRandomNumber(1, 1000);
+                    double diamond = Data.getRandomNumber(1, 1000);
+                    double emerald = Data.getRandomNumber(1, 1000);
+                    double log = Data.getRandomNumber(1, 1000);
                     if (stone < 500) {
-                        Price.getInstance().removePrice("STONE".toUpperCase(), stone / 100);
+                        Price.removePrice("STONE".toUpperCase(), stone / 100);
                     } else {
-                        Price.getInstance().addPrice("STONE".toUpperCase(), stone / 100);
+                        Price.addPrice("STONE".toUpperCase(), stone / 100);
                     }
                     if (coal < 500) {
-                        Price.getInstance().removePrice("COAL".toUpperCase(), coal / 100);
+                        Price.removePrice("COAL".toUpperCase(), coal / 100);
                     } else {
-                        Price.getInstance().addPrice("COAL".toUpperCase(), coal / 100);
+                        Price.addPrice("COAL".toUpperCase(), coal / 100);
                     }
                     if (iron < 500) {
-                        Price.getInstance().removePrice("IRON".toUpperCase(), iron / 100);
+                        Price.removePrice("IRON".toUpperCase(), iron / 100);
                     } else {
-                        Price.getInstance().addPrice("IRON".toUpperCase(), iron / 100);
+                        Price.addPrice("IRON".toUpperCase(), iron / 100);
                     }
                     if (gold < 500) {
-                        Price.getInstance().removePrice("GOLD".toUpperCase(), gold / 100);
+                        Price.removePrice("GOLD".toUpperCase(), gold / 100);
                     } else {
-                        Price.getInstance().addPrice("GOLD".toUpperCase(), gold / 100);
+                        Price.addPrice("GOLD".toUpperCase(), gold / 100);
                     }
                     if (diamond < 500) {
-                        Price.getInstance().removePrice("DIAMOND".toUpperCase(), diamond / 100);
+                        Price.removePrice("DIAMOND".toUpperCase(), diamond / 100);
                     } else {
-                        Price.getInstance().addPrice("DIAMOND".toUpperCase(), diamond / 100);
+                        Price.addPrice("DIAMOND".toUpperCase(), diamond / 100);
                     }
                     if (emerald < 500) {
-                        Price.getInstance().removePrice("EMERALD".toUpperCase(), emerald / 100);
+                        Price.removePrice("EMERALD".toUpperCase(), emerald / 100);
                     } else {
-                        Price.getInstance().addPrice("EMERALD".toUpperCase(), emerald / 100);
+                        Price.addPrice("EMERALD".toUpperCase(), emerald / 100);
                     }
                     if (log < 500) {
-                        Price.getInstance().removePrice("LOG".toUpperCase(), log / 100);
+                        Price.removePrice("LOG".toUpperCase(), log / 100);
                     } else {
-                        Price.getInstance().addPrice("LOG".toUpperCase(), log / 100);
+                        Price.addPrice("LOG".toUpperCase(), log / 100);
                     }
                 }
             }
@@ -186,12 +185,12 @@ public final class Jobs extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        Data.getInstance().savedata();
-        Data.getInstance().saveconfig();
-        Data.getInstance().savelanguage();
-        Data.getInstance().savegui();
-        Data.getInstance().saveprice();
-        Data.getInstance().savebank();
+        Data.savedata();
+        Data.saveconfig();
+        Data.savelanguage();
+        Data.savegui();
+        Data.saveprice();
+        Data.savebank();
         getLogger().log(Level.INFO, "Saved data");
     }
 

@@ -14,12 +14,12 @@ public class Death implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        String DEAD = Data.getInstance().getlanguagefile().getString("DEAD");
+        String DEAD = Data.getlanguagefile().getString("DEAD");
         Player p = e.getEntity().getPlayer();
-        Objects.requireNonNull(p).sendMessage(Data.getInstance().convert(Objects.requireNonNull(DEAD)
-                .replaceAll("%xp%", String.valueOf(PlayerData.getInstance().getXP(Objects.requireNonNull(p)) / 2))
+        Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)
+                .replaceAll("%xp%", String.valueOf(PlayerData.getXP(Objects.requireNonNull(p)) / 2))
                 .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(p) / 4))));
-        PlayerData.getInstance().removeXP(p, PlayerData.getInstance().getXP(Objects.requireNonNull(p)) / 2);
+        PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
         Jobs.economy.withdrawPlayer(p, Jobs.economy.getBalance(p) / 4);
 
     }
