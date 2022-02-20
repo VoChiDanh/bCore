@@ -1,13 +1,13 @@
 name: '${project.name}'
 version: '${project.version} ${devbuild.version}'
-main: net.danh.jobs.bCore
+main: net.danh.bCore.bCore
 softdepend:
   - Vault
   - PlaceholderAPI
 authors: [ VoChiDanh ]
 api-version: 1.13
 commands:
-  jobs:
+  bCore:
     description: Main commands
   storage:
     description: Storage commands
