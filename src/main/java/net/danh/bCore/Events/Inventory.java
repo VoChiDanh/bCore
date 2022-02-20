@@ -24,9 +24,8 @@ public class Inventory implements Listener {
         Player p = (Player) e.getWhoClicked();
         if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
-            Objects.requireNonNull(e.getCurrentItem()).getType();
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Stone.Material"))) {
+            if (e.getCurrentItem() != null) return;
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "STONE".toUpperCase(), 1D);
                 }
@@ -43,8 +42,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "STONE".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Coal.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Coal.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Coal.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "COAL".toUpperCase(), 1D);
                 }
@@ -61,8 +59,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "COAL".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Iron.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Iron.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Iron.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "IRON".toUpperCase(), 1D);
                 }
@@ -79,8 +76,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "IRON".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Gold.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Gold.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Gold.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "GOLD".toUpperCase(), 1D);
                 }
@@ -97,8 +93,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "GOLD".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "DIAMOND".toUpperCase(), 1D);
                 }
@@ -115,8 +110,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "DIAMOND".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "EMERALD".toUpperCase(), 1D);
                 }
@@ -133,8 +127,7 @@ public class Inventory implements Listener {
                     Price.Sell(p, "EMERALD".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Log.Material"))) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "LOG".toUpperCase(), 1D);
                 }
@@ -156,9 +149,8 @@ public class Inventory implements Listener {
         }
         if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.EnchantGui.Title")))) {
             e.setCancelled(true);
-            Objects.requireNonNull(e.getCurrentItem()).getType();
-            if (e.getSlot() == Data.getguifile().getInt("GUI.EnchantGui.Money.Slot")
-                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.EnchantGui.Money.Material"))) {
+            if (e.getCurrentItem() != null) return;
+            if (e.getSlot() == Data.getguifile().getInt("GUI.EnchantGui.Money.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     if (PlayerData.getXP(p) >= Data.getguifile().getInt("GUI.EnchantGui.Money.Exp")) {
                         p.getItemInHand().addUnsafeEnchantment(new Money(), p.getItemInHand().getEnchantmentLevel(new Money()) + 1);

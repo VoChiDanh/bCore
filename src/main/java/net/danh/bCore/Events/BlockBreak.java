@@ -69,7 +69,7 @@ public class BlockBreak implements Listener {
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
                     }
-                    double kg = Data.getRandomNumber(min, max);
+                    double kg = Data.getRandomInt(min, max);
                     if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
 
                         if (Data.getconfigfile().getBoolean("debug")) {
@@ -77,11 +77,11 @@ public class BlockBreak implements Listener {
                         }
                         if (kg != 0) {
                             if (e.getPlayer().getItemInHand().hasItemMeta()
-                                    || Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
-                                    || e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
+                                    && Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
+                                    && e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
                                 int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
-                                double fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
-                                if (Data.getRandomNumber(fortunelevel, fortunelevel * 100) <= fortunechance) {
+                                int fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
+                                if (Data.getRandomInt(fortunelevel, fortunelevel * 100) <= fortunechance) {
                                     double fortuneblocks = ((fortunechance + kg) * fortunelevel);
                                     Weight.addWeight(e.getPlayer(), fortuneblocks);
                                     if (CheckMaterial.isCoal(b.getType())) {

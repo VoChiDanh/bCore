@@ -135,13 +135,13 @@ public final class bCore extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 if (getServer().getOnlinePlayers().size() > 0) {
-                    double stone = Data.getRandomNumber(1, 1000);
-                    double coal = Data.getRandomNumber(1, 1000);
-                    double iron = Data.getRandomNumber(1, 1000);
-                    double gold = Data.getRandomNumber(1, 1000);
-                    double diamond = Data.getRandomNumber(1, 1000);
-                    double emerald = Data.getRandomNumber(1, 1000);
-                    double log = Data.getRandomNumber(1, 1000);
+                    double stone = Data.getRandomDouble(1, 1000);
+                    double coal = Data.getRandomDouble(1, 1000);
+                    double iron = Data.getRandomDouble(1, 1000);
+                    double gold = Data.getRandomDouble(1, 1000);
+                    double diamond = Data.getRandomDouble(1, 1000);
+                    double emerald = Data.getRandomDouble(1, 1000);
+                    double log = Data.getRandomDouble(1, 1000);
                     if (stone < 500) {
                         Price.removePrice("STONE".toUpperCase(), stone / 100);
                     } else {

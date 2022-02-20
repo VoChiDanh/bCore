@@ -137,9 +137,14 @@ public class Data {
         }
     }
 
-    public static double getRandomNumber(int min, int max) {
+    public static double getRandomDouble(double min, double max) {
         Random r = new Random();
         return r.nextDouble(max - min) + min;
+    }
+
+    public static int getRandomInt(int min, int max) {
+        Random r = new Random();
+        return r.nextInt(max - min) + min;
     }
 
     public static String convert(String s) {

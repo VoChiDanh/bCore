@@ -26,11 +26,11 @@ public class Money extends Enchantment implements Listener {
     public void onBreak(@NotNull BlockBreakEvent e) {
         Material b = e.getBlock().getType();
         Player p = e.getPlayer();
-        double money = p.getItemInHand().getEnchantmentLevel(this) * Data.getRandomNumber(1, 100);
+        double money = p.getItemInHand().getEnchantmentLevel(this) * Data.getRandomDouble(1, 100);
         if (CheckMaterial.isCoal(b) || CheckMaterial.isIron(b) || CheckMaterial.isGold(b) || CheckMaterial.isDiamond(b) || CheckMaterial.isEmerald(b) || CheckMaterial.isLog(b)) {
             if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().hasItemMeta()) {
                 if (p.getItemInHand().containsEnchantment(this)) {
-                    if (Data.getRandomNumber(1, 100) <= Lucky.getLuckyChance(p)) {
+                    if (Data.getRandomInt(1, 100) <= Lucky.getLuckyChance(p)) {
                         EconomyResponse r = bCore.economy.depositPlayer(p, money);
                         if (r.transactionSuccess()) {
                             p.sendMessage(Data.convert("&a+ " + money + "$ &7| " + b.toString().replaceAll("_", " ").toLowerCase()));
