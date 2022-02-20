@@ -1,4 +1,4 @@
-package net.danh.jobs.Manager;
+package net.danh.bCore.Manager;
 
 import org.bukkit.entity.Player;
 

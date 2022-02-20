@@ -1,6 +1,6 @@
-package net.danh.jobs.Manager;
+package net.danh.bCore.Manager;
 
-import net.danh.jobs.Jobs;
+import net.danh.bCore.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 
@@ -62,7 +62,7 @@ public class Price {
             Data.savestorage();
             Data.savedata();
             double money = getPrice(name) * number;
-            EconomyResponse r = Jobs.economy.depositPlayer(p.getPlayer(), money);
+            EconomyResponse r = bCore.economy.depositPlayer(p.getPlayer(), money);
             if (r.transactionSuccess()) {
                 p.sendMessage(Data.convert("&a+ " + money + "$"));
             }

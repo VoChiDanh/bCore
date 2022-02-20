@@ -1,11 +1,11 @@
-package net.danh.jobs.Commands;
+package net.danh.bCore.Commands;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.danh.jobs.CustomEnchantment.Money;
-import net.danh.jobs.Gui.SellBlocks;
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.*;
+import net.danh.bCore.CustomEnchantment.Money;
+import net.danh.bCore.Gui.SellBlocks;
+import net.danh.bCore.bCore;
+import net.danh.bCore.Manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -33,21 +33,21 @@ public class Commands implements CommandExecutor {
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String DONE = Data.getlanguagefile().getString("DONE");
         String UNKNOW_PLAYER = Data.getlanguagefile().getString("UNKNOW_PLAYER");
-        if (label.equalsIgnoreCase("jobs")) {
+        if (label.equalsIgnoreCase("bCore")) {
             if (args.length == 0) {
-                if (sender.hasPermission("jobs.user")) {
+                if (sender.hasPermission("bCore.user")) {
                     for (String user : Data.getlanguagefile().getStringList("HELP_USER")) {
                         sender.sendMessage(Data.convert(user));
                     }
                 }
-                if (sender.hasPermission("jobs.admin")) {
+                if (sender.hasPermission("bCore.admin")) {
                     for (String admin : Data.getlanguagefile().getStringList("HELP_ADMIN")) {
                         sender.sendMessage(Data.convert(admin));
                     }
                 }
             }
             if (args.length == 1) {
-                if (sender.hasPermission("jobs.admin")) {
+                if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("reload")) {
                         Data.reloadconfig();
                         sender.sendMessage(Data.convert(PREFIX + RELOADED));
@@ -65,14 +65,14 @@ public class Commands implements CommandExecutor {
 
                             JsonObject json = new JsonParser().parse(new InputStreamReader(con.getInputStream())).getAsJsonObject();
                             tagname = json.get("tag_name").getAsString();
-                            version = Jobs.getInstance().getDescription().getVersion();
+                            version = bCore.getInstance().getDescription().getVersion();
                             body = json.get("body").getAsString();
                             name = json.get("name").getAsString();
 
                             String parsename = name.replaceAll("v", "");
                             String parsebody = body.replaceAll("## Commits", "");
                             if (!(parsename.equalsIgnoreCase(version))) {
-                                URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/Jobs-0.2.2-SNAPSHOT.jar");
+                                URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/bCore.jar");
                                 sender.sendMessage(Data.convert("&eDownloading " + name + "! &6Your version is &6v" + version));
                                 sender.sendMessage(Data.convert("&aUpdate log: " + parsebody));
                                 new BukkitRunnable() {
@@ -81,18 +81,18 @@ public class Commands implements CommandExecutor {
                                     public void run() {
                                         try {
                                             InputStream in = download.openStream();
-                                            File temp = new File("plugins/Jobs/update/");
+                                            File temp = new File("plugins/bCore/update/");
                                             if (!temp.exists()) {
                                                 temp.mkdir();
                                             }
-                                            Path path = new File("plugins/Jobs/update/" + File.separator + "Jobs.jar").toPath();
+                                            Path path = new File("plugins/bCore/update/" + File.separator + "bCore.jar").toPath();
                                             java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-                                            sender.sendMessage(Data.convert("&6Download finished, stop the server and check new jar in Jobs folder to get the new update"));
+                                            sender.sendMessage(Data.convert("&6Download finished, stop the server and check new jar in bCore folder to get the new update"));
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }.runTaskLaterAsynchronously(Jobs.getInstance(), 1);
+                                }.runTaskLaterAsynchronously(bCore.getInstance(), 1);
                             } else {
                                 sender.sendMessage(Data.convert("&aYou are on latest build"));
                             }
@@ -103,7 +103,7 @@ public class Commands implements CommandExecutor {
                 }
             }
             if (args.length == 2) {
-                if (sender.hasPermission("jobs.user")) {
+                if (sender.hasPermission("bCore.user")) {
                     if (args[0].equalsIgnoreCase("info")) {
                         if (Bukkit.getPlayer(args[1]) != null) {
                             for (String check_info : Data.getlanguagefile().getStringList("INFO_CHECK")) {
@@ -120,7 +120,7 @@ public class Commands implements CommandExecutor {
                 }
             }
             if (args.length == 4) {
-                if (sender.hasPermission("jobs.admin")) {
+                if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("plevel")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -475,7 +475,7 @@ public class Commands implements CommandExecutor {
                 }
             }
             if (args.length == 5) {
-                if (sender.hasPermission("jobs.admin")) {
+                if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("storage")) {
                         if (Material.getMaterial(args[3]) != null) {
                             if (args[1].equalsIgnoreCase("set")) {
@@ -511,7 +511,7 @@ public class Commands implements CommandExecutor {
         if (label.equalsIgnoreCase("storage")) {
             if (sender instanceof Player) {
                 if (args.length == 0) {
-                    if (sender.hasPermission("jobs.user")) {
+                    if (sender.hasPermission("bCore.user")) {
                         Objects.requireNonNull(((Player) sender).getPlayer()).openInventory(SellBlocks.getSellGui(((Player) sender).getPlayer()));
                     }
                 }

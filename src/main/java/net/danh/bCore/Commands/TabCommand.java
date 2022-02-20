@@ -1,4 +1,4 @@
-package net.danh.jobs.Commands;
+package net.danh.bCore.Commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -27,8 +27,8 @@ public class TabCommand implements TabCompleter {
             arggg.add("deposit");
             arggg.add("withdraw");
         }
-        if (label.equalsIgnoreCase("jobs")) {
-            if (sender.hasPermission("jobs.admin")) {
+        if (label.equalsIgnoreCase("bCore")) {
+            if (sender.hasPermission("bCore.admin")) {
                 arg.add("info");
                 arg.add("plevel");
                 arg.add("xp");
@@ -48,7 +48,7 @@ public class TabCommand implements TabCompleter {
                 arg.add("bankmoney");
                 arg.add("bankmaxmoney");
             }
-            if (sender.hasPermission("jobs.admin")) {
+            if (sender.hasPermission("bCore.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")
                         || args[0].equalsIgnoreCase("xp")
                         || args[0].equalsIgnoreCase("power")

@@ -1,9 +1,9 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.Lucky;
-import net.danh.jobs.Manager.PlayerData;
-import net.danh.jobs.Manager.Power;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.Lucky;
+import net.danh.bCore.Manager.PlayerData;
+import net.danh.bCore.Manager.Power;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

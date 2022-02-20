@@ -1,6 +1,6 @@
-package net.danh.jobs.Manager;
+package net.danh.bCore.Manager;
 
-import net.danh.jobs.Jobs;
+import net.danh.bCore.bCore;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,9 +63,9 @@ public class Bank {
         if (getBankMaxMoney(p) < (getBankMoney(p) + number) || getBankMaxMoney(p) < getBankMoney(p)) {
             p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("FULL_BANK"))));
         } else {
-            if (Jobs.economy.getBalance(p) >= number) {
+            if (bCore.economy.getBalance(p) >= number) {
                 addBankMoney(p, number);
-                Jobs.economy.withdrawPlayer(p, number);
+                bCore.economy.withdrawPlayer(p, number);
                 p.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("DEPOSIT_BANK"))
                         .replaceAll("%money%", String.valueOf(number)))));
             } else {
@@ -78,7 +78,7 @@ public class Bank {
     public static void withdrawBank(Player p, Integer number) {
         if (getBankMoney(p) >= number) {
             removeBankMoney(p, number);
-            Jobs.economy.depositPlayer(p, number);
+            bCore.economy.depositPlayer(p, number);
             p.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("WITHDRAW_BANK"))
                     .replaceAll("%money%", String.valueOf(number)))));
         } else {

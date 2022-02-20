@@ -1,7 +1,7 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.Gui.Enchant;
-import net.danh.jobs.Manager.CheckMaterial;
+import net.danh.bCore.Gui.Enchant;
+import net.danh.bCore.Manager.CheckMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

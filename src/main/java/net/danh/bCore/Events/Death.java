@@ -1,8 +1,8 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.PlayerData;
+import net.danh.bCore.bCore;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,9 +18,9 @@ public class Death implements Listener {
         Player p = e.getEntity().getPlayer();
         Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)
                 .replaceAll("%xp%", String.valueOf(PlayerData.getXP(Objects.requireNonNull(p)) / 2))
-                .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(p) / 4))));
+                .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p) / 4))));
         PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
-        Jobs.economy.withdrawPlayer(p, Jobs.economy.getBalance(p) / 4);
+        bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
 
     }
 }

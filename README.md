@@ -1,6 +1,6 @@
 
 ## Info
-![project](https://img.shields.io/badge/Jobs-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>
+![project](https://img.shields.io/badge/bCore-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>
 ![commit](https://img.shields.io/github/commit-activity/m/VoChiDanh/Jobs?style=for-the-badge) <br>
 [![discord](https://img.shields.io/badge/Discord%20Support-Click%20To%20Get%20Link-blue?style=for-the-badge)](https://discord.gg/CWjaq5fZN9) <br>
 ![server](https://img.shields.io/badge/Support%20Version-All%20Version-important?style=for-the-badge) <br>
@@ -27,5 +27,5 @@
 ## Soft Depend
 [![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-red?style=for-the-badge)](https://www.spigotmc.org/resources/6245/) <br>
 [![vault](https://img.shields.io/badge/Vault-1.7.3-red?style=for-the-badge)](https://www.spigotmc.org/resources/34315/) <br>
-[![paper](https://img.shields.io/badge/Paper-1.12.x_--_1.18.1-red?style=for-the-badge)](https://papermc.io/downloads) <br>
+[![paper](https://img.shields.io/badge/Spigot-1.12.x_--_1.18.1-red?style=for-the-badge)](https://papermc.io/downloads) <br>
 ![java](https://img.shields.io/badge/Java_Version-17-red?style=for-the-badge) <br>

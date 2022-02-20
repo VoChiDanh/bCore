@@ -1,8 +1,8 @@
-package net.danh.jobs.Gui;
+package net.danh.bCore.Gui;
 
-import net.danh.jobs.CustomEnchantment.Money;
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.PlayerData;
+import net.danh.bCore.CustomEnchantment.Money;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

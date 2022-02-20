@@ -1,11 +1,11 @@
-package net.danh.jobs;
+package net.danh.bCore;
 
-import net.danh.jobs.Commands.Commands;
-import net.danh.jobs.Commands.TabCommand;
-import net.danh.jobs.CustomEnchantment.Money;
-import net.danh.jobs.Events.*;
-import net.danh.jobs.Hook.PlaceholderAPI;
-import net.danh.jobs.Manager.*;
+import net.danh.bCore.Commands.Commands;
+import net.danh.bCore.Commands.TabCommand;
+import net.danh.bCore.CustomEnchantment.Money;
+import net.danh.bCore.Events.*;
+import net.danh.bCore.Hook.PlaceholderAPI;
+import net.danh.bCore.Manager.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
@@ -21,14 +21,14 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.logging.Level;
 
-public final class Jobs extends JavaPlugin implements Listener {
+public final class bCore extends JavaPlugin implements Listener {
 
 
     public static Economy economy;
     static Enchantment MONEY;
-    private static Jobs instance;
+    private static bCore instance;
 
-    public static Jobs getInstance() {
+    public static bCore getInstance() {
         return instance;
     }
 
@@ -101,9 +101,9 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Inventory(), this);
         getServer().getPluginManager().registerEvents(new Money(), this);
         getServer().getPluginManager().registerEvents(new Click(), this);
-        Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
+        Objects.requireNonNull(getCommand("bCore")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
         MONEY = new Money();

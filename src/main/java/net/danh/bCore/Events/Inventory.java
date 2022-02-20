@@ -1,12 +1,12 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.CustomEnchantment.Money;
-import net.danh.jobs.Gui.Enchant;
-import net.danh.jobs.Gui.SellBlocks;
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.PlayerData;
-import net.danh.jobs.Manager.Price;
-import net.danh.jobs.Manager.Storage;
+import net.danh.bCore.CustomEnchantment.Money;
+import net.danh.bCore.Gui.Enchant;
+import net.danh.bCore.Gui.SellBlocks;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.PlayerData;
+import net.danh.bCore.Manager.Price;
+import net.danh.bCore.Manager.Storage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

@@ -1,6 +1,6 @@
-package net.danh.jobs.Manager;
+package net.danh.bCore.Manager;
 
-import net.danh.jobs.Jobs;
+import net.danh.bCore.bCore;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,21 +15,21 @@ public class Data {
 
 
     public static void createconfig() {
-        configFile = new File(Jobs.getInstance().getDataFolder(), "config.yml");
-        languageFile = new File(Jobs.getInstance().getDataFolder(), "language.yml");
-        dataFile = new File(Jobs.getInstance().getDataFolder(), "data.yml");
-        storageFile = new File(Jobs.getInstance().getDataFolder(), "storage.yml");
-        priceFile = new File(Jobs.getInstance().getDataFolder(), "price.yml");
-        guiFile = new File(Jobs.getInstance().getDataFolder(), "gui.yml");
-        bankFile = new File(Jobs.getInstance().getDataFolder(), "bank.yml");
+        configFile = new File(bCore.getInstance().getDataFolder(), "config.yml");
+        languageFile = new File(bCore.getInstance().getDataFolder(), "language.yml");
+        dataFile = new File(bCore.getInstance().getDataFolder(), "data.yml");
+        storageFile = new File(bCore.getInstance().getDataFolder(), "storage.yml");
+        priceFile = new File(bCore.getInstance().getDataFolder(), "price.yml");
+        guiFile = new File(bCore.getInstance().getDataFolder(), "gui.yml");
+        bankFile = new File(bCore.getInstance().getDataFolder(), "bank.yml");
 
-        if (!configFile.exists()) Jobs.getInstance().saveResource("config.yml", false);
-        if (!languageFile.exists()) Jobs.getInstance().saveResource("language.yml", false);
-        if (!dataFile.exists()) Jobs.getInstance().saveResource("data.yml", false);
-        if (!storageFile.exists()) Jobs.getInstance().saveResource("storage.yml", false);
-        if (!priceFile.exists()) Jobs.getInstance().saveResource("price.yml", false);
-        if (!guiFile.exists()) Jobs.getInstance().saveResource("gui.yml", false);
-        if (!bankFile.exists()) Jobs.getInstance().saveResource("bank.yml", false);
+        if (!configFile.exists()) bCore.getInstance().saveResource("config.yml", false);
+        if (!languageFile.exists()) bCore.getInstance().saveResource("language.yml", false);
+        if (!dataFile.exists()) bCore.getInstance().saveResource("data.yml", false);
+        if (!storageFile.exists()) bCore.getInstance().saveResource("storage.yml", false);
+        if (!priceFile.exists()) bCore.getInstance().saveResource("price.yml", false);
+        if (!guiFile.exists()) bCore.getInstance().saveResource("gui.yml", false);
+        if (!bankFile.exists()) bCore.getInstance().saveResource("bank.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();

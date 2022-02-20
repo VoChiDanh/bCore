@@ -1,6 +1,6 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.Manager.Power;
+import net.danh.bCore.Manager.Power;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;

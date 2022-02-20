@@ -1,10 +1,10 @@
-package net.danh.jobs.Gui;
+package net.danh.bCore.Gui;
 
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.Price;
-import net.danh.jobs.Manager.Storage;
-import net.danh.jobs.Manager.Weight;
+import net.danh.bCore.bCore;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.Price;
+import net.danh.bCore.Manager.Storage;
+import net.danh.bCore.Manager.Weight;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -74,7 +74,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%gold%", String.valueOf(Storage.getStorage(p, "GOLD".toUpperCase())))
                     .replaceAll("%diamond%", String.valueOf(Storage.getStorage(p, "DIAMOND".toUpperCase())))
                     .replaceAll("%emerald%", String.valueOf(Storage.getStorage(p, "EMERALD".toUpperCase())))
-                    .replaceAll("%money%", String.valueOf(Jobs.economy.getBalance(p.getPlayer()))));
+                    .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p.getPlayer()))));
         }
         meta.setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Display")).replaceAll("%player%", p.getName())));

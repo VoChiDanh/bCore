@@ -1,32 +1,25 @@
-package net.danh.jobs.CustomEnchantment;
+package net.danh.bCore.CustomEnchantment;
 
-import io.papermc.paper.enchantments.EnchantmentRarity;
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.CheckMaterial;
-import net.danh.jobs.Manager.Data;
-import net.danh.jobs.Manager.Lucky;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.Component;
+import net.danh.bCore.Manager.CheckMaterial;
+import net.danh.bCore.Manager.Data;
+import net.danh.bCore.Manager.Lucky;
+import net.danh.bCore.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Set;
 
 public class Money extends Enchantment implements Listener {
 
     public Money() {
-        super(new NamespacedKey(Jobs.getInstance(), "Money"));
+        super(new NamespacedKey(bCore.getInstance(), "Money"));
     }
 
     @EventHandler
@@ -38,7 +31,7 @@ public class Money extends Enchantment implements Listener {
             if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().hasItemMeta()) {
                 if (p.getItemInHand().containsEnchantment(this)) {
                     if (Data.getRandomNumber(1, 100) <= Lucky.getLuckyChance(p)) {
-                        EconomyResponse r = Jobs.economy.depositPlayer(p, money);
+                        EconomyResponse r = bCore.economy.depositPlayer(p, money);
                         if (r.transactionSuccess()) {
                             p.sendMessage(Data.convert("&a+ " + money + "$ &7| " + b.toString().replaceAll("_", " ").toLowerCase()));
                         }
@@ -47,7 +40,6 @@ public class Money extends Enchantment implements Listener {
             }
         }
     }
-
 
     @Override
     public @NotNull String getName() {
@@ -89,44 +81,5 @@ public class Money extends Enchantment implements Listener {
         return true;
     }
 
-    @Override
-    public @NotNull Component displayName(int i) {
-        return Component.translatable("Money");
-    }
-
-    @Override
-    public boolean isTradeable() {
-        return true;
-    }
-
-    @Override
-    public boolean isDiscoverable() {
-        return false;
-    }
-
-    @Override
-    public @NotNull EnchantmentRarity getRarity() {
-        return EnchantmentRarity.COMMON;
-    }
-
-    @Override
-    public float getDamageIncrease(int i, @NotNull EntityCategory entityCategory) {
-        return 0;
-    }
-
-    @Override
-    public @NotNull Set<EquipmentSlot> getActiveSlots() {
-        return Set.of(EquipmentSlot.HAND);
-    }
-
-    @Override
-    public @NotNull String translationKey() {
-        return "Money";
-    }
-
-    @Override
-    public @NotNull Key key() {
-        return super.key();
-    }
 }
 

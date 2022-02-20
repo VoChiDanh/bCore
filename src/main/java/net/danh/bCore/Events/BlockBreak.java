@@ -1,7 +1,7 @@
-package net.danh.jobs.Events;
+package net.danh.bCore.Events;
 
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.*;
+import net.danh.bCore.bCore;
+import net.danh.bCore.Manager.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class BlockBreak implements Listener {
         String blocks = e.getBlock().getType().toString();
         int max = 0;
         int min = 0;
-        if (e.getPlayer().hasPermission("jobs.admin")) {
+        if (e.getPlayer().hasPermission("bCore.admin")) {
             e.setCancelled(false);
             return;
         }
@@ -43,20 +43,21 @@ public class BlockBreak implements Listener {
                 || CheckMaterial.isLog(b.getType())) {
 
             if (Data.getconfigfile().getBoolean("debug")) {
-                Jobs.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
+                bCore.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
             }
             if (Power.getPower(e.getPlayer()) <= Data.getconfigfile().getInt("minimum_power")) {
                 e.getPlayer().sendMessage(Data.convert(PREFIX + NEED_MORE_POWER));
                 e.setCancelled(true);
             } else {
                 if (Data.getconfigfile().getBoolean("debug")) {
-                    Jobs.getInstance().getLogger().log(Level.INFO, "Check power");
+                    bCore.getInstance().getLogger().log(Level.INFO, "Check power");
                 }
                 e.setDropItems(false);
                 e.getBlock().getDrops().clear();
+                e.setExpToDrop(0);
                 if (!e.isDropItems()) {
                     if (Data.getconfigfile().getBoolean("debug")) {
-                        Jobs.getInstance().getLogger().log(Level.INFO, "No drop");
+                        bCore.getInstance().getLogger().log(Level.INFO, "No drop");
                     }
                     for (String getBlockType : Objects.requireNonNull(Data.getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
                         if (blocks.equalsIgnoreCase(getBlockType)) {
@@ -66,13 +67,13 @@ public class BlockBreak implements Listener {
                         }
                     }
                     if (Data.getconfigfile().getBoolean("debug")) {
-                        Jobs.getInstance().getLogger().log(Level.INFO, "Correct block");
+                        bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
                     }
                     double kg = Data.getRandomNumber(min, max);
                     if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
 
                         if (Data.getconfigfile().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Enough space");
+                            bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
                         }
                         if (kg != 0) {
                             if (e.getPlayer().getItemInHand().hasItemMeta()
@@ -121,7 +122,7 @@ public class BlockBreak implements Listener {
                     } else {
                         e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
                         if (Data.getconfigfile().getBoolean("debug")) {
-                            Jobs.getInstance().getLogger().log(Level.INFO, "Not Enough space");
+                            bCore.getInstance().getLogger().log(Level.INFO, "Not Enough space");
                         }
                         e.setCancelled(true);
                         return;
@@ -138,7 +139,7 @@ public class BlockBreak implements Listener {
                 PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
                 Power.removePower(p, 1);
                 if (Data.getconfigfile().getBoolean("debug")) {
-                    Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");
+                    bCore.getInstance().getLogger().log(Level.INFO, "Add xp");
                 }
             }
 

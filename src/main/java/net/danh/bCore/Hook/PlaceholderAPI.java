@@ -1,8 +1,8 @@
-package net.danh.jobs.Hook;
+package net.danh.bCore.Hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.danh.jobs.Jobs;
-import net.danh.jobs.Manager.*;
+import net.danh.bCore.bCore;
+import net.danh.bCore.Manager.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,17 +11,17 @@ public class PlaceholderAPI extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getAuthor() {
-        return Jobs.getInstance().getDescription().getAuthors().toString();
+        return bCore.getInstance().getDescription().getAuthors().toString();
     }
 
     @Override
     public @NotNull String getIdentifier() {
-        return "jobs";
+        return "bCore";
     }
 
     @Override
     public @NotNull String getVersion() {
-        return Jobs.getInstance().getDescription().getVersion();
+        return bCore.getInstance().getDescription().getVersion();
     }
 
 
