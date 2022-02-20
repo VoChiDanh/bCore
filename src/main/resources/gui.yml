@@ -122,3 +122,22 @@ GUI:
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
         - "&6&oShift Right click to sell 5kg"
+  EnchantGui:
+    Title: "Enchant Gui"
+    Size: 9
+    Money:
+      Slot: 0
+      Material: ENCHANTED_BOOK
+      Exp: 1000
+      Display: "&bEnchant Money [Lv.%level%]"
+      Lore:
+        - ""
+        - "&aDesc: When you has this enchant"
+        - "&ayou will get chance to get money"
+        - "&awhen break blocks"
+        - ""
+        - "&6Req: &c%exp% XP / Level"
+        - "&6You have %xp% XP"
+        - ""
+        - "&3&oLeft click to enchant"
+        - "&3&oRight click to unenchant"

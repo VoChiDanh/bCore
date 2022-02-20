@@ -26,7 +26,7 @@ public class BlockBreak implements Listener {
         String LUCKY = Data.getlanguagefile().getString("LUCKY");
         Integer POWER = Data.getconfigfile().getInt("Lucky_Power");
         Integer XP = Data.getconfigfile().getInt("Lucky_XP");
-        Integer LEVELUP = Gang.getleveluptimes(e.getPlayer());
+        Integer LEVELUP = PlayerData.getleveluptimes(e.getPlayer());
         String FULL_STORAGE = Data.getlanguagefile().getString("FULL_STORAGE");
         String blocks = e.getBlock().getType().toString();
         int max = 0;
@@ -128,18 +128,14 @@ public class BlockBreak implements Listener {
                     }
                 }
                 if (playerchance >= systemchance) {
-                    if (Gang.getGang(e.getPlayer()) != null) {
-                        PlayerData.addXP(e.getPlayer(), 2 + Gang.getleveluptimes(e.getPlayer()));
-                    }
-                    Power.addPower(e.getPlayer(), 5 + Gang.getleveluptimes(e.getPlayer()));
+                    PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
+                    Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
                     e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
                             .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                             .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                     return;
                 }
-                if (Gang.getGang(e.getPlayer()) != null) {
-                    PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + Gang.getleveluptimes(e.getPlayer()));
-                }
+                PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
                 Power.removePower(p, 1);
                 if (Data.getconfigfile().getBoolean("debug")) {
                     Jobs.getInstance().getLogger().log(Level.INFO, "Add xp");

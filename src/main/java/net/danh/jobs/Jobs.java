@@ -100,12 +100,11 @@ public final class Jobs extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Death(), this);
         getServer().getPluginManager().registerEvents(new Inventory(), this);
         getServer().getPluginManager().registerEvents(new Money(), this);
+        getServer().getPluginManager().registerEvents(new Click(), this);
         Objects.requireNonNull(getCommand("jobs")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("jobs")).setTabCompleter(new TabCommand());
-        Objects.requireNonNull(getCommand("gang")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("gang")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
         MONEY = new Money();
         registerEnchants(MONEY);

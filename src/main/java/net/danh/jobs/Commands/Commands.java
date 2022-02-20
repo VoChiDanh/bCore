@@ -33,8 +33,6 @@ public class Commands implements CommandExecutor {
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String DONE = Data.getlanguagefile().getString("DONE");
         String UNKNOW_PLAYER = Data.getlanguagefile().getString("UNKNOW_PLAYER");
-        String UNKNOW_GANG = Data.getlanguagefile().getString("UNKNOW_GANG");
-
         if (label.equalsIgnoreCase("jobs")) {
             if (args.length == 0) {
                 if (sender.hasPermission("jobs.user")) {
@@ -113,9 +111,7 @@ public class Commands implements CommandExecutor {
                                         .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
                                         .replaceAll("%plevel%", String.valueOf(PlayerData.getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
                                         .replaceAll("%xp", String.valueOf(PlayerData.getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%glevel%", String.valueOf(Gang.getLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%power%", String.valueOf(Power.getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%leveluptimes%", String.valueOf(Gang.getleveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
+                                        .replaceAll("%power%", String.valueOf(Power.getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
                             }
                         } else {
                             sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -203,36 +199,10 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("glevel")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.setLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.addLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.removeLevelGang(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                    }
                     if (args[0].equalsIgnoreCase("levelup")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                PlayerData.setLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -240,7 +210,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                PlayerData.addLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -248,7 +218,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Gang.removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                PlayerData.removeLeveluptimes(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -542,7 +512,7 @@ public class Commands implements CommandExecutor {
             if (sender instanceof Player) {
                 if (args.length == 0) {
                     if (sender.hasPermission("jobs.user")) {
-                        SellBlocks.openSellGui(Objects.requireNonNull(((Player) sender).getPlayer()));
+                        Objects.requireNonNull(((Player) sender).getPlayer()).openInventory(SellBlocks.getSellGui(((Player) sender).getPlayer()));
                     }
                 }
             }
@@ -563,43 +533,6 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("withdraw")) {
                         if (Integer.parseInt(args[1]) != 0) {
                             Bank.withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        if (label.equalsIgnoreCase("gang")) {
-            if (sender instanceof Player) {
-                if (sender.hasPermission("jobs.user")) {
-                    if (args.length == 2) {
-                        if (args[0].equalsIgnoreCase("create")) {
-                            if (args[1] != null) {
-                                Gang.selectGang(((Player) sender).getPlayer(), args[1].toUpperCase());
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            }
-                        }
-                        if (args[0].equalsIgnoreCase("join")) {
-                            if (Bukkit.getPlayer(args[1]) != null) {
-                                if (Gang.getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))) != null) {
-                                    Gang.selectGang(((Player) sender).getPlayer(), Gang.getGang(Objects.requireNonNull(Bukkit.getPlayer(args[1]))));
-                                    sender.sendMessage(Data.convert(PREFIX + DONE));
-                                } else {
-                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_GANG));
-                                }
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                    }
-                    if (args.length == 1) {
-                        if (args[0].equalsIgnoreCase("leave")) {
-                            if (Gang.getGang(Objects.requireNonNull(((Player) sender).getPlayer())) != null) {
-                                Gang.selectGang(((Player) sender).getPlayer(), "Server".toUpperCase());
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_GANG));
-                            }
                         }
                     }
                 }

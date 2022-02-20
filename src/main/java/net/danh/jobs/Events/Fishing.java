@@ -1,6 +1,9 @@
 package net.danh.jobs.Events;
 
-import net.danh.jobs.Manager.*;
+import net.danh.jobs.Manager.Data;
+import net.danh.jobs.Manager.Lucky;
+import net.danh.jobs.Manager.PlayerData;
+import net.danh.jobs.Manager.Power;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,7 +22,7 @@ public class Fishing implements Listener {
         String NOT_FISH = Data.getlanguagefile().getString("NOT_FISH");
         Integer POWER = Data.getconfigfile().getInt("Lucky_Power");
         Integer XP = Data.getconfigfile().getInt("Lucky_XP");
-        Integer LEVELUP = Gang.getleveluptimes(e.getPlayer());
+        Integer LEVELUP = PlayerData.getleveluptimes(e.getPlayer());
         if (Power.getPower(e.getPlayer()) <= Data.getconfigfile().getInt("minimum_power")) {
             e.getPlayer().sendMessage(Data.convert(PREFIX + NEED_MORE_POWER));
             e.setCancelled(true);
@@ -29,19 +32,15 @@ public class Fishing implements Listener {
                 double systemchance = Math.random() * 100.0D;
                 double playerchance = Lucky.getLuckyChance(e.getPlayer());
                 if (playerchance >= systemchance) {
-                    if (Gang.getGang(e.getPlayer()) != null) {
-                        PlayerData.addXP(e.getPlayer(), 2 + Gang.getleveluptimes(e.getPlayer()));
-                    }
-                    Power.addPower(e.getPlayer(), 5 + Gang.getleveluptimes(e.getPlayer()));
+                    PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
+                    Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
                     e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
                             .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
                             .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                     return;
                 }
 
-                if (Gang.getGang(e.getPlayer()) != null) {
-                    PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + Gang.getleveluptimes(e.getPlayer()));
-                }
+                PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
                 Power.removePower(e.getPlayer(), 1);
                 e.setCancelled(false);
                 if (((Item) e.getCaught()).getItemStack().getItemMeta().hasEnchants()) {

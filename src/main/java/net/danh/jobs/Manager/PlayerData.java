@@ -27,17 +27,11 @@ public class PlayerData {
         Data.savedata();
         Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
         Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
-        for (String age_up : Data.getlanguagefile().getStringList("LEVEL_UP")) {
-            p.sendMessage(Data.convert(age_up
-                    .replaceAll("%mpower%", String.valueOf(Power.getMaxPower(p)))
-                    .replaceAll("%level%", String.valueOf(getLevel(p)))
-                    .replaceAll("%rpower%", String.valueOf(Power.getRestorePower(p)))));
-        }
     }
 
     public static void addXP(Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
-        Gang.checkLevelUp(p);
+        checkLevelUp(p);
         Data.savedata();
     }
 
@@ -61,5 +55,42 @@ public class PlayerData {
         }
     }
 
+
+    public static void checkLevelUp(Player p) {
+        if (getXP(p) > getLevel(p) * 10000) {
+            setXP(p, 0);
+            addLevel(p, 1);
+            addLeveluptimes(p, 1);
+            for (String age_up : Data.getlanguagefile().getStringList("LEVEL_UP")) {
+                p.sendMessage(Data.convert(age_up
+                        .replaceAll("%mpower%", String.valueOf(Power.getMaxPower(p)))
+                        .replaceAll("%level%", String.valueOf(getLevel(p)))
+                        .replaceAll("%rpower%", String.valueOf(Power.getRestorePower(p)))));
+            }
+        }
+    }
+
+    public static int getleveluptimes(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes");
+    }
+
+    public static void addLeveluptimes(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p) + number);
+        Data.savedata();
+    }
+
+    public static void removeLeveluptimes(Player p, Integer number) {
+        if (getleveluptimes(p) > 1) {
+            Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p) - number);
+        } else {
+            Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", 0);
+        }
+        Data.savedata();
+    }
+
+    public static void setLeveluptimes(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", number);
+        Data.savedata();
+    }
 
 }

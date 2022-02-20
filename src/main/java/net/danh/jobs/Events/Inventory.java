@@ -1,7 +1,10 @@
 package net.danh.jobs.Events;
 
+import net.danh.jobs.CustomEnchantment.Money;
+import net.danh.jobs.Gui.Enchant;
 import net.danh.jobs.Gui.SellBlocks;
 import net.danh.jobs.Manager.Data;
+import net.danh.jobs.Manager.PlayerData;
 import net.danh.jobs.Manager.Price;
 import net.danh.jobs.Manager.Storage;
 import org.bukkit.entity.Player;
@@ -22,7 +25,8 @@ public class Inventory implements Listener {
         if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
             Objects.requireNonNull(e.getCurrentItem()).getType();
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Stone.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "STONE".toUpperCase(), 1D);
                 }
@@ -39,7 +43,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "STONE".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Coal.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Coal.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Coal.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "COAL".toUpperCase(), 1D);
                 }
@@ -56,7 +61,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "COAL".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Iron.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Iron.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Iron.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "IRON".toUpperCase(), 1D);
                 }
@@ -73,7 +79,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "IRON".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Gold.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Gold.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Gold.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "GOLD".toUpperCase(), 1D);
                 }
@@ -90,7 +97,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "GOLD".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "DIAMOND".toUpperCase(), 1D);
                 }
@@ -107,7 +115,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "DIAMOND".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "EMERALD".toUpperCase(), 1D);
                 }
@@ -124,7 +133,8 @@ public class Inventory implements Listener {
                     Price.Sell(p, "EMERALD".toUpperCase(), 50D);
                 }
             }
-            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")) {
+            if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.SellGui.Log.Material"))) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "LOG".toUpperCase(), 1D);
                 }
@@ -144,11 +154,40 @@ public class Inventory implements Listener {
             p.closeInventory();
             p.openInventory(SellBlocks.getSellGui(p));
         }
+        if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.EnchantGui.Title")))) {
+            e.setCancelled(true);
+            Objects.requireNonNull(e.getCurrentItem()).getType();
+            if (e.getSlot() == Data.getguifile().getInt("GUI.EnchantGui.Money.Slot")
+                    && e.getCurrentItem().getType().toString().equals(Data.getguifile().getString("GUI.EnchantGui.Money.Material"))) {
+                if (e.getClick().equals(ClickType.LEFT)) {
+                    if (PlayerData.getXP(p) >= Data.getguifile().getInt("GUI.EnchantGui.Money.Exp")) {
+                        p.getItemInHand().addUnsafeEnchantment(new Money(), p.getItemInHand().getEnchantmentLevel(new Money()) + 1);
+                        PlayerData.removeXP(p, Data.getguifile().getInt("GUI.EnchantGui.Money.Exp"));
+                    } else {
+                        p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_EXP"))));
+                    }
+                }
+                if (e.getClick().equals(ClickType.RIGHT)) {
+                    if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().containsEnchantment(new Money())) {
+                        int level = p.getItemInHand().getEnchantmentLevel(new Money());
+                        if (level > 1) {
+                            p.getItemInHand().addUnsafeEnchantment(new Money(), p.getItemInHand().getEnchantmentLevel(new Money()) - 1);
+                        } else {
+                            p.getItemInHand().removeEnchantment(new Money());
+                        }
+                        PlayerData.addXP(p, 1000);
+                    }
+                }
+            }
+            p.closeInventory();
+            p.openInventory(Enchant.getEnchantGui(p));
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void OnDragInventory(InventoryDragEvent e) {
-        if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.SellGui.Title")))) {
+        if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.SellGui.Title")))
+                || e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.EnchantGui.Title")))) {
             e.setCancelled(true);
         }
     }

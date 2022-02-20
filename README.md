@@ -9,7 +9,7 @@
 
 ## Features 
 
-![gang](https://img.shields.io/badge/Gang-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>
+![gang](https://img.shields.io/badge/Gang--[Removed]-0.2.2%20SNAPSHOT-red?style=for-the-badge) <br>
 ![bank](https://img.shields.io/badge/Bank-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>
 ![enchant](https://img.shields.io/badge/Custom%20Enchants-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>
 ![chance](https://img.shields.io/badge/Lucky%20Chance-0.2.2%20SNAPSHOT-yellow?style=for-the-badge) <br>

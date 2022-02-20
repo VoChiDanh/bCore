@@ -46,23 +46,8 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("xp")) {
             return String.valueOf(PlayerData.getXP(p));
         }
-        if (identifier.equalsIgnoreCase("ganglevel")) {
-            if (Gang.getGang(p) != null) {
-                return String.valueOf(Gang.getLevelGang(p));
-            }
-            return "";
-        }
-        if (identifier.equalsIgnoreCase("gangpoints")) {
-            if (Gang.getGang(p) != null) {
-                return String.valueOf(Gang.getleveluptimes(p));
-            }
-            return "";
-        }
-        if (identifier.equalsIgnoreCase("gang")) {
-            if (Gang.getGang(p) != null) {
-                return Gang.getGang(p);
-            }
-            return "";
+        if (identifier.equalsIgnoreCase("leveluptimes")) {
+            return String.valueOf(PlayerData.getleveluptimes(p));
         }
         if (identifier.equalsIgnoreCase("restorepower")) {
             return String.valueOf(Power.getRestorePower(p));

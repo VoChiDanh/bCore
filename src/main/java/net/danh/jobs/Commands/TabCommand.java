@@ -69,11 +69,6 @@ public class TabCommand implements TabCompleter {
                 }
             }
         }
-        if (label.equalsIgnoreCase("gang")) {
-            gang.add("create");
-            gang.add("join");
-            gang.add("leave");
-        }
         if (args.length == 1) {
             for (String a1 : arg) {
                 if (a1.toLowerCase().startsWith(args[0].toLowerCase()))
@@ -115,14 +110,6 @@ public class TabCommand implements TabCompleter {
                         arg2.add(a2);
                 }
                 return arg2;
-            }
-
-            if (args[0].equalsIgnoreCase("items")) {
-                for (String a4 : argggg) {
-                    if (a4.toLowerCase().startsWith(args[1].toLowerCase()))
-                        arg4.add(a4);
-                }
-                return arg4;
             }
         }
         return null;

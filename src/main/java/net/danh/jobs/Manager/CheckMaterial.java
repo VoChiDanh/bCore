@@ -34,4 +34,11 @@ public class CheckMaterial {
         return material.name().contains("LOG");
     }
 
+    public static boolean isPickaxe(@NotNull Material material) {
+        return material.name().contains("PICKAXE");
+    }
+
+    public static boolean isAxe(@NotNull Material material) {
+        return material.name().contains("AXE");
+    }
 }
