@@ -43,7 +43,7 @@ public class Fishing implements Listener {
                 PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
                 Power.removePower(e.getPlayer(), 1);
                 e.setCancelled(false);
-                if (((Item) e.getCaught()).getItemStack().getItemMeta().hasEnchants()) {
+                if (Objects.requireNonNull(((Item) e.getCaught()).getItemStack().getItemMeta()).hasEnchants()) {
                     e.getPlayer().sendMessage(Data.convert(PREFIX + NOT_FISH));
                     e.setCancelled(true);
                 }

@@ -1,10 +1,10 @@
 package net.danh.bCore.Gui;
 
-import net.danh.bCore.bCore;
 import net.danh.bCore.Manager.Data;
 import net.danh.bCore.Manager.Price;
 import net.danh.bCore.Manager.Storage;
 import net.danh.bCore.Manager.Weight;
+import net.danh.bCore.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -51,7 +51,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("STONE".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "STONE".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -61,7 +61,7 @@ public class SellBlocks implements Listener {
     public static ItemStack playerinfo(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Material")))));
         SkullMeta meta = (SkullMeta) item.getItemMeta();
-        meta.setOwner(p.getName());
+        Objects.requireNonNull(meta).setOwningPlayer(p);
         List<String> lore = new ArrayList<>();
         item.setItemMeta(meta);
         for (String loreconfig : Data.getguifile().getStringList("GUI.SellGui.PlayerInfo.Lore")) {
@@ -92,7 +92,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("LOG".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "LOG".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -108,7 +108,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("COAL".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "COAL".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -124,7 +124,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("IRON".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "IRON".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -140,7 +140,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("GOLD".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "GOLD".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -156,7 +156,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("DIAMOND".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "DIAMOND".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Display"))));
         item.setItemMeta(meta);
         return item;
@@ -172,7 +172,7 @@ public class SellBlocks implements Listener {
                     .replaceAll("%price%", String.valueOf(Price.getPrice("EMERALD".toUpperCase())))
                     .replaceAll("%amount%", String.valueOf(Storage.getStorage(p, "EMERALD".toUpperCase()))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Display"))));
         item.setItemMeta(meta);
         return item;

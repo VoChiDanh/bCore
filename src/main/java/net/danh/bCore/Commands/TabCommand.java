@@ -3,6 +3,7 @@ package net.danh.bCore.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,12 @@ public class TabCommand implements TabCompleter {
     List<String> argggg = new ArrayList<>();
     List<String> gang = new ArrayList<>();
 
-    List<String> arg1 = new ArrayList<String>();
-    List<String> arg2 = new ArrayList<String>();
-    List<String> arg3 = new ArrayList<String>();
-    List<String> arg4 = new ArrayList<String>();
-    List<String> gang1 = new ArrayList<String>();
+    List<String> arg1 = new ArrayList<>();
+    List<String> arg2 = new ArrayList<>();
+    List<String> arg3 = new ArrayList<>();
+    List<String> gang1 = new ArrayList<>();
 
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("bank")) {
             arggg.add("deposit");
             arggg.add("withdraw");

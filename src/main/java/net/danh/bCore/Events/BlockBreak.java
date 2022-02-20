@@ -1,7 +1,7 @@
 package net.danh.bCore.Events;
 
-import net.danh.bCore.bCore;
 import net.danh.bCore.Manager.*;
+import net.danh.bCore.bCore;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -77,9 +77,9 @@ public class BlockBreak implements Listener {
                         }
                         if (kg != 0) {
                             if (e.getPlayer().getItemInHand().hasItemMeta()
-                                    || e.getPlayer().getItemInHand().getItemMeta().hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
+                                    || Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
                                     || e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
-                                int fortunelevel = e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
+                                int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
                                 double fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
                                 if (Data.getRandomNumber(fortunelevel, fortunelevel * 100) <= fortunechance) {
                                     double fortuneblocks = ((fortunechance + kg) * fortunelevel);

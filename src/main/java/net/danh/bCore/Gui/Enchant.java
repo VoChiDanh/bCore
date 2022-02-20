@@ -34,7 +34,7 @@ public class Enchant implements Listener {
                     .replaceAll("%xp%", String.valueOf(PlayerData.getXP(p)))
                     .replaceAll("%exp%", String.valueOf(Data.getguifile().getInt("GUI.EnchantGui.Money.Exp"))));
         }
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().getItemMeta().hasEnchants() && p.getItemInHand().containsEnchantment(new Money())) {
             meta.setDisplayName(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getguifile().getString("GUI.EnchantGui.Money.Display"))
                     .replaceAll("%level%", String.valueOf(p.getItemInHand().getItemMeta().getEnchantLevel(new Money()))))));

@@ -211,7 +211,7 @@ public final class bCore extends JavaPlugin implements Listener {
             }
             try {
                 Enchantment.registerEnchantment(ench);
-                getLogger().log(Level.INFO, "Registered " + ench.getName());
+                getLogger().log(Level.INFO, "Registered Enchantments " + ench.getName());
             } catch (IllegalArgumentException e) {
                 //if this is thrown it means the id is already taken.
             }

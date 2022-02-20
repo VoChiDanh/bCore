@@ -1,8 +1,8 @@
 package net.danh.bCore.Events;
 
-import net.danh.bCore.bCore;
 import net.danh.bCore.Manager.Data;
 import net.danh.bCore.Manager.PlayerData;
+import net.danh.bCore.bCore;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
