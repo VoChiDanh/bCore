@@ -40,5 +40,11 @@ public class Join implements Listener {
         if (Bank.getBankMaxMoney(p) == 0) {
             Bank.setBankMaxMoney(p, 10000);
         }
+        if (PlayerData.getBlocks(p) == 0) {
+            PlayerData.setBlocks(p, 0);
+        }
+        if (PlayerData.getKill(p) == 0) {
+            PlayerData.setKill(p, 0);
+        }
     }
 }

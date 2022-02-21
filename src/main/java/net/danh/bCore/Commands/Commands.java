@@ -2,6 +2,9 @@ package net.danh.bCore.Commands;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import me.NoChance.PvPManager.Managers.PlayerHandler;
+import me.NoChance.PvPManager.PvPManager;
+import me.NoChance.PvPManager.PvPlayer;
 import net.danh.bCore.CustomEnchantment.Money;
 import net.danh.bCore.Gui.SellBlocks;
 import net.danh.bCore.Manager.*;
@@ -54,10 +57,10 @@ public class Commands implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("update")) {
                         try {
-                            String tagname = null;
-                            String version = null;
-                            String body = null;
-                            String name = null;
+                            String tagname;
+                            String version;
+                            String body;
+                            String name;
                             URL api = new URL("https://api.github.com/repos/VoChiDanh/Jobs/releases/latest");
                             URLConnection con = api.openConnection();
                             con.setConnectTimeout(15000);
@@ -472,6 +475,58 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("blocks")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.setBlocks(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.addBlocks(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.removeBlocks(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("kills")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.setKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.addKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.removeKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
                 }
             }
             if (args.length == 5) {
@@ -536,6 +591,24 @@ public class Commands implements CommandExecutor {
                         }
                     }
                 }
+            }
+            return true;
+        }
+        if (label.equalsIgnoreCase("pvp")) {
+            if (bCore.getInstance().getServer().getPluginManager().isPluginEnabled("PvPManager")) {
+                if (sender instanceof Player) {
+                    if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
+                        PvPManager pvpmanager = PvPManager.getInstance();
+                        PlayerHandler ph = pvpmanager.getPlayerHandler();
+                        PvPlayer pvpPlayer = ph.get(Objects.requireNonNull(((Player) sender).getPlayer()));
+                        pvpPlayer.setPvP(!pvpPlayer.hasPvPEnabled());
+                        Storage.removeStorage(((Player) sender).getPlayer(), "LOG".toUpperCase(), 5D);
+                    } else {
+                        sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
+                    }
+                }
+            } else {
+                sender.sendMessage(Data.convert("&cYou need plugins PvPManager to use this Command!"));
             }
             return true;
         }

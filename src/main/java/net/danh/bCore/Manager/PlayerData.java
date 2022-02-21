@@ -93,4 +93,44 @@ public class PlayerData {
         Data.savedata();
     }
 
+
+    public static Integer getBlocks(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
+    }
+
+    public static void setBlocks(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", number);
+        Data.savedata();
+    }
+
+    public static void addBlocks(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) + number);
+        Data.savedata();
+    }
+
+    public static void removeBlocks(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) - number);
+        Data.savedata();
+    }
+
+    public static Integer getKill(Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Kills");
+    }
+
+    public static void setKill(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Kills", number);
+        Data.savedata();
+    }
+
+    public static void addKill(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) + number);
+        Data.savedata();
+    }
+
+    public static void removeKill(Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) - number);
+        Data.savedata();
+    }
+
+
 }

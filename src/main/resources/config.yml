@@ -10,6 +10,7 @@ Per_Max_Power: 100
 Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
+Req_Log_To_PvP: 5
 Blocks:
   STONE:
     max: 5
@@ -65,3 +66,18 @@ Blocks:
   SPRUCE_LOG:
     max: 5
     min: 1
+Vanilla:
+  Default:
+    min: 1
+    max: 2
+    chance: 30
+  ZOMBIE:
+    min: 1
+    max: 2
+MythicMobs:
+  Default:
+    min: 1
+    max: 3
+  Test:
+    min: 1
+    max: 2

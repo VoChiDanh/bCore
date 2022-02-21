@@ -47,6 +47,8 @@ public class TabCommand implements TabCompleter {
                 arg.add("baseprice");
                 arg.add("bankmoney");
                 arg.add("bankmaxmoney");
+                arg.add("blocks");
+                arg.add("kills");
             }
             if (sender.hasPermission("bCore.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")
@@ -62,7 +64,9 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("price")
                         || args[0].equalsIgnoreCase("baseprice")
                         || args[0].equalsIgnoreCase("bankmoney")
-                        || args[0].equalsIgnoreCase("bankmaxmoney")) {
+                        || args[0].equalsIgnoreCase("bankmaxmoney")
+                        || args[0].equalsIgnoreCase("blocks")
+                        || args[0].equalsIgnoreCase("kills")) {
                     argg.add("set");
                     argg.add("add");
                     argg.add("remove");
@@ -104,7 +108,9 @@ public class TabCommand implements TabCompleter {
                     || args[0].equalsIgnoreCase("price")
                     || args[0].equalsIgnoreCase("baseprice")
                     || args[0].equalsIgnoreCase("bankmoney")
-                    || args[0].equalsIgnoreCase("bankmaxmoney")) {
+                    || args[0].equalsIgnoreCase("bankmaxmoney")
+                    || args[0].equalsIgnoreCase("blocks")
+                    || args[0].equalsIgnoreCase("kills")) {
                 for (String a2 : argg) {
                     if (a2.toLowerCase().startsWith(args[1].toLowerCase()))
                         arg2.add(a2);

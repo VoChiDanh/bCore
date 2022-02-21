@@ -4,6 +4,8 @@ main: net.danh.bCore.bCore
 softdepend:
   - Vault
   - PlaceholderAPI
+  - MythicMobs
+  - PvPManager
 authors: [ VoChiDanh ]
 api-version: 1.13
 commands:
@@ -13,4 +15,6 @@ commands:
     description: Storage commands
   bank:
     description: Bank commands
+  pvp:
+    description: PvP commands
 

@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class Fishing implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onFishing(PlayerFishEvent e) {
         String NEED_MORE_POWER = Data.getlanguagefile().getString("NEED_MORE_POWER");
         String PREFIX = Data.getlanguagefile().getString("PREFIX");

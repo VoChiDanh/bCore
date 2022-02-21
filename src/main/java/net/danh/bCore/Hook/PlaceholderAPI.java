@@ -82,6 +82,12 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             }
             return "";
         }
+        if (identifier.equalsIgnoreCase("blocks")) {
+            return String.valueOf(PlayerData.getBlocks(p));
+        }
+        if (identifier.equalsIgnoreCase("kills")) {
+            return String.valueOf(PlayerData.getKill(p));
+        }
         return null;
     }
 }

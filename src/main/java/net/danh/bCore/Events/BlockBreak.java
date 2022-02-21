@@ -15,7 +15,7 @@ import java.util.logging.Level;
 
 public class BlockBreak implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent e) {
         Block b = e.getBlock();
         Player p = e.getPlayer();
@@ -31,6 +31,7 @@ public class BlockBreak implements Listener {
         String blocks = e.getBlock().getType().toString();
         int max = 0;
         int min = 0;
+        PlayerData.addBlocks(p, 1);
         if (e.getPlayer().hasPermission("bCore.admin")) {
             e.setCancelled(false);
             return;

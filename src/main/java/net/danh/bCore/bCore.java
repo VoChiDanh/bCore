@@ -1,9 +1,11 @@
 package net.danh.bCore;
 
+import me.NoChance.PvPManager.PvPManager;
 import net.danh.bCore.Commands.Commands;
 import net.danh.bCore.Commands.TabCommand;
 import net.danh.bCore.CustomEnchantment.Money;
 import net.danh.bCore.Events.*;
+import net.danh.bCore.Hook.MythicMobs;
 import net.danh.bCore.Hook.PlaceholderAPI;
 import net.danh.bCore.Manager.*;
 import net.milkbowl.vault.economy.Economy;
@@ -37,61 +39,28 @@ public final class bCore extends JavaPlugin implements Listener {
         return v.substring(v.lastIndexOf('.') + 1);
     }
 
-    public static String formatNMSVersion(String nms) {
-        switch (nms) {
-            case "v1_8_R1":
-                return "1.8";
-            case "v1_8_R2":
-                return "1.8.3";
-            case "v1_8_R3":
-                return "1.8.x";
-            case "v1_9_R1":
-                return "1.9.x";
-            case "v1_9_R2":
-                return "1.9.4";
-            case "v1_10_R1":
-                return "1.10.x";
-            case "v1_11_R1":
-                return "1.11.x";
-            case "v1_12_R1":
-                return "1.12.x";
-            case "v1_13_R1":
-                return "1.13";
-            case "v1_13_R2":
-                return "1.13.x";
-            case "v1_14_R1":
-                return "1.14.x";
-            case "v1_15_R1":
-                return "1.15.x";
-            case "v1_16_R1":
-                return "1.16.1";
-            case "v1_16_R2":
-                return "1.16.2 / 1.16.3";
-            case "v1_16_R3":
-                return "1.16.4 / 1.16.5";
-            case "v1_17_R1":
-                return "1.17.x";
-            case "v1_18_R1":
-                return "1.18.x";
-
-        }
-        throw new IllegalArgumentException("Your sever version is " + nms + ". Plugin does not support this version!");
-    }
-
     @Override
     public void onEnable() {
         instance = this;
+        getLogger().log(Level.INFO, "Loading data matching server version " + getNMSVersion());
         if (!setupEconomy()) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            getLogger().log(Level.INFO, "Hooked with PlaceholderAPI");
+            getLogger().log(Level.INFO, "Hooked with PlaceholderAPI v" + me.clip.placeholderapi.PlaceholderAPIPlugin.getInstance().getDescription().getVersion());
             new PlaceholderAPI().register();
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
             getLogger().log(Level.INFO, "Hooked with Vault");
+        }
+        if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
+            getServer().getPluginManager().registerEvents(new MythicMobs(), this);
+            getLogger().log(Level.INFO, "Hooked with MythicMobs v" + io.lumine.xikage.mythicmobs.MythicMobs.inst().getDescription().getVersion());
+        }
+        if (getServer().getPluginManager().isPluginEnabled("PvPManager")) {
+            getLogger().log(Level.INFO, "Hooked with PvPManager v" + PvPManager.getInstance().getDescription().getVersion());
         }
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new Join(), this);
@@ -101,15 +70,18 @@ public final class bCore extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Inventory(), this);
         getServer().getPluginManager().registerEvents(new Money(), this);
         getServer().getPluginManager().registerEvents(new Click(), this);
+        getServer().getPluginManager().registerEvents(new Kill(), this);
+        getLogger().log(Level.INFO, "Registed all Events");
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bCore")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
+        Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
+        getLogger().log(Level.INFO, "Registed all Commands");
         MONEY = new Money();
         registerEnchants(MONEY);
         Data.createconfig();
-        getLogger().log(Level.INFO, "Loading data matching server version " + formatNMSVersion(getNMSVersion()));
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
