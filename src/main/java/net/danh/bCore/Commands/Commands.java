@@ -601,6 +601,7 @@ public class Commands implements CommandExecutor {
                         sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOff"))));
                     }
                     Storage.removeStorage(((Player) sender).getPlayer(), "LOG".toUpperCase(), 5D);
+                    Weight.removeWeight(((Player) sender).getPlayer(), 5D);
                 } else {
                     sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
                 }
