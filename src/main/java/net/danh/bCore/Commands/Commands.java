@@ -2,9 +2,6 @@ package net.danh.bCore.Commands;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.NoChance.PvPManager.Managers.PlayerHandler;
-import me.NoChance.PvPManager.PvPManager;
-import me.NoChance.PvPManager.PvPlayer;
 import net.danh.bCore.CustomEnchantment.Money;
 import net.danh.bCore.Gui.SellBlocks;
 import net.danh.bCore.Manager.*;
@@ -595,20 +592,18 @@ public class Commands implements CommandExecutor {
             return true;
         }
         if (label.equalsIgnoreCase("pvp")) {
-            if (bCore.getInstance().getServer().getPluginManager().isPluginEnabled("PvPManager")) {
-                if (sender instanceof Player) {
-                    if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
-                        PvPManager pvpmanager = PvPManager.getInstance();
-                        PlayerHandler ph = pvpmanager.getPlayerHandler();
-                        PvPlayer pvpPlayer = ph.get(Objects.requireNonNull(((Player) sender).getPlayer()));
-                        pvpPlayer.setPvP(!pvpPlayer.hasPvPEnabled());
-                        Storage.removeStorage(((Player) sender).getPlayer(), "LOG".toUpperCase(), 5D);
-                    } else {
-                        sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
+            if (sender instanceof Player) {
+                if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
+                    PvPPlayer.PvPToggle(((Player) sender).getPlayer());
+                    if (PvPPlayer.getPvPStatus(((Player) sender).getPlayer())) {
+                        sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOn"))));
+                    } else if (!PvPPlayer.getPvPStatus(((Player) sender).getPlayer())) {
+                        sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOff"))));
                     }
+                    Storage.removeStorage(((Player) sender).getPlayer(), "LOG".toUpperCase(), 5D);
+                } else {
+                    sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
                 }
-            } else {
-                sender.sendMessage(Data.convert("&cYou need plugins PvPManager to use this Command!"));
             }
             return true;
         }

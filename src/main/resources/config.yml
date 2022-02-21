@@ -11,6 +11,9 @@ Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
 Req_Log_To_PvP: 5
+Boolean:
+  true: "on"
+  false: "off"
 Blocks:
   STONE:
     max: 5

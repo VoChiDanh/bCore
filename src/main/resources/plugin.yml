@@ -5,7 +5,6 @@ softdepend:
   - Vault
   - PlaceholderAPI
   - MythicMobs
-  - PvPManager
 authors: [ VoChiDanh ]
 api-version: 1.13
 commands:
@@ -16,5 +15,5 @@ commands:
   bank:
     description: Bank commands
   pvp:
-    description: PvP commands
+    description: PvPPlayer commands
 

@@ -1,6 +1,5 @@
 package net.danh.bCore;
 
-import me.NoChance.PvPManager.PvPManager;
 import net.danh.bCore.Commands.Commands;
 import net.danh.bCore.Commands.TabCommand;
 import net.danh.bCore.CustomEnchantment.Money;
@@ -59,9 +58,6 @@ public final class bCore extends JavaPlugin implements Listener {
             getServer().getPluginManager().registerEvents(new MythicMobs(), this);
             getLogger().log(Level.INFO, "Hooked with MythicMobs v" + io.lumine.xikage.mythicmobs.MythicMobs.inst().getDescription().getVersion());
         }
-        if (getServer().getPluginManager().isPluginEnabled("PvPManager")) {
-            getLogger().log(Level.INFO, "Hooked with PvPManager v" + PvPManager.getInstance().getDescription().getVersion());
-        }
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new Join(), this);
         getServer().getPluginManager().registerEvents(new Fishing(), this);
@@ -71,6 +67,7 @@ public final class bCore extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Money(), this);
         getServer().getPluginManager().registerEvents(new Click(), this);
         getServer().getPluginManager().registerEvents(new Kill(), this);
+        getServer().getPluginManager().registerEvents(new PvP(), this);
         getLogger().log(Level.INFO, "Registed all Events");
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
