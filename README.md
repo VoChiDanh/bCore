@@ -24,11 +24,12 @@
 ![jobs](https://img.shields.io/badge/Command-/Jobs-green?style=for-the-badge) <br>
 ![storage](https://img.shields.io/badge/Command-/Storage-green?style=for-the-badge) <br>
 ![bank](https://img.shields.io/badge/Command-/Bank-green?style=for-the-badge) <br>
+![pvp](https://img.shields.io/badge/Command-/PvP-green?style=for-the-badge) <br>
 
 ## Soft Depend
 
 [![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-red?style=for-the-badge)](https://www.spigotmc.org/resources/6245/) <br>
 [![vault](https://img.shields.io/badge/Vault-1.7-red?style=for-the-badge)](https://www.spigotmc.org/resources/34315/) <br>
 [![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.0--SNAPSHOT-red?style=for-the-badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/) <br>
-[![paper](https://img.shields.io/badge/Spigot-1.12.x_--_1.18.1-red?style=for-the-badge)](https://getbukkit.org/download/spigot) <br>
+[![spigot](https://img.shields.io/badge/Spigot-1.18.1-red?style=for-the-badge)](https://getbukkit.org/download/spigot) <br>
 ![java](https://img.shields.io/badge/Java_Version-17-red?style=for-the-badge) <br>

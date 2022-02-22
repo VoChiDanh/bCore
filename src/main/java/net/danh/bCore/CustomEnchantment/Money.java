@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class Money extends Enchantment implements Listener {
 
     public Money() {
-        super(new NamespacedKey(bCore.getInstance(), "Money"));
+        super(NamespacedKey.minecraft("Money"));
     }
 
     @EventHandler
