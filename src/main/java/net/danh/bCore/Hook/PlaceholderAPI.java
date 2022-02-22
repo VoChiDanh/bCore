@@ -89,10 +89,10 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(PlayerData.getKill(p));
         }
         if (identifier.equalsIgnoreCase("pvp")) {
-            if (PvPPlayer.getPvPStatus(p)){
+            if (PvPPlayer.getPvPStatus(p)) {
                 return Data.getconfigfile().getString("Boolean.true");
             }
-            if (!PvPPlayer.getPvPStatus(p)){
+            if (!PvPPlayer.getPvPStatus(p)) {
                 return Data.getconfigfile().getString("Boolean.false");
             }
             return "";
