@@ -11,6 +11,7 @@ Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
 Req_Log_To_PvP: 5
+Level_Bank: 10000
 Boolean:
   true: "on"
   false: "off"

@@ -413,10 +413,10 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("bankmaxmoney")) {
+                    if (args[0].equalsIgnoreCase("banklevel")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.setBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Bank.setBankLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -424,7 +424,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.addBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Bank.addBankLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
@@ -432,7 +432,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
-                                Bank.removeBankMaxMoney(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Bank.removeBankLevel(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));

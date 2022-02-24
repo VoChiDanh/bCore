@@ -78,7 +78,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
                 return String.valueOf(Bank.getBankMoney(p));
             }
             if (name.equalsIgnoreCase("max_money")) {
-                return String.valueOf(Bank.getBankMaxMoney(p));
+                return String.valueOf(Bank.getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank"));
             }
             return "";
         }
