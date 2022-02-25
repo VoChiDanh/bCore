@@ -132,5 +132,15 @@ public class PlayerData {
         Data.savedata();
     }
 
-
+    public static Integer getPlayerLimit(Player p, String perm) {
+        int limit = 0;
+        for (int i = 0; i <= 1000000000; i++) {
+            if (p.hasPermission(perm + "." + i)) {
+                if (limit < i) {
+                    limit = i;
+                }
+            }
+        }
+        return limit;
+    }
 }

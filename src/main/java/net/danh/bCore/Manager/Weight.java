@@ -4,21 +4,21 @@ import org.bukkit.entity.Player;
 
 public class Weight {
 
-    public static double getWeight(Player p) {
+    public static Integer getWeight(Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Weight");
     }
 
-    public static void setWeight(Player p, Double number) {
+    public static void setWeight(Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Weight", number);
         Data.savedata();
     }
 
-    public static void addWeight(Player p, Double number) {
+    public static void addWeight(Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Weight", getWeight(p) + number);
         Data.savedata();
     }
 
-    public static void removeWeight(Player p, Double number) {
+    public static void removeWeight(Player p, Integer number) {
         if (getWeight(p) > 1) {
             Data.getdatafile().set("players." + p.getName() + ".Weight", getWeight(p) - number);
         } else {
@@ -32,17 +32,17 @@ public class Weight {
     }
 
 
-    public static void setMaxWeight(Player p, Double number) {
+    public static void setMaxWeight(Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxWeight", number);
         Data.savedata();
     }
 
-    public static void addMaxWeight(Player p, Double number) {
+    public static void addMaxWeight(Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) + number);
         Data.savedata();
     }
 
-    public static void removeMaxWeight(Player p, Double number) {
+    public static void removeMaxWeight(Player p, Integer number) {
         if (getMaxWeight(p) > 10) {
             Data.getdatafile().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) - number);
         } else {

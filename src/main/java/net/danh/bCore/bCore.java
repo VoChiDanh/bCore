@@ -96,7 +96,9 @@ public final class bCore extends JavaPlugin implements Listener {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
                     } else {
                         p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
-                        p.removePotionEffect(PotionEffectType.SLOW);
+                    }
+                    if (PlayerData.getPlayerLimit(p, "storage") > 0) {
+                        Weight.setMaxWeight(p, PlayerData.getPlayerLimit(p, "storage"));
                     }
                 }
             }
@@ -104,13 +106,13 @@ public final class bCore extends JavaPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() { //TODO Need do something with this
                 if (getServer().getOnlinePlayers().size() > 0) {
-                    double stone = Data.getRandomDouble(1, 1000);
-                    double coal = Data.getRandomDouble(1, 1000);
-                    double iron = Data.getRandomDouble(1, 1000);
-                    double gold = Data.getRandomDouble(1, 1000);
-                    double diamond = Data.getRandomDouble(1, 1000);
-                    double emerald = Data.getRandomDouble(1, 1000);
-                    double log = Data.getRandomDouble(1, 1000);
+                    int stone = Data.getRandomInt(1, 1000);
+                    int coal = Data.getRandomInt(1, 1000);
+                    int iron = Data.getRandomInt(1, 1000);
+                    int gold = Data.getRandomInt(1, 1000);
+                    int diamond = Data.getRandomInt(1, 1000);
+                    int emerald = Data.getRandomInt(1, 1000);
+                    int log = Data.getRandomInt(1, 1000);
                     if (stone < 500) {
                         Price.removePrice("STONE".toUpperCase(), stone / 100);
                     } else {

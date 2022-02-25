@@ -70,7 +70,7 @@ public class BlockBreak implements Listener {
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
                     }
-                    double kg = Data.getRandomInt(min, max);
+                    int kg = Data.getRandomInt(min, max);
                     if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
 
                         if (Data.getconfigfile().getBoolean("debug")) {
@@ -83,7 +83,7 @@ public class BlockBreak implements Listener {
                                 int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
                                 int fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
                                 if (Data.getRandomInt(fortunelevel, fortunelevel * 100) <= fortunechance) {
-                                    double fortuneblocks = ((fortunechance + kg) * fortunelevel);
+                                    int fortuneblocks = ((fortunechance + kg) * fortunelevel);
                                     Weight.addWeight(e.getPlayer(), fortuneblocks);
                                     if (CheckMaterial.isCoal(b.getType())) {
                                         Storage.addStorage(e.getPlayer(), "COAL".toUpperCase(), fortuneblocks);

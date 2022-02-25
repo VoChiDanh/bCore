@@ -29,13 +29,13 @@ public class Join implements Listener {
             Power.setPower(p, Power.getMaxPower(p));
         }
         if (Weight.getWeight(p) == 0) {
-            Weight.setWeight(p, 0D);
+            Weight.setWeight(p, 0);
         }
         if (Weight.getMaxWeight(p) == 0) {
-            Weight.setMaxWeight(p, 5000D);
+            Weight.setMaxWeight(p, 0);
         }
         if (Storage.getStorage(p, "LOG".toUpperCase()) == 0) {
-            Storage.setStorage(p, "LOG".toUpperCase(), 0D);
+            Storage.setStorage(p, "LOG".toUpperCase(), 0);
         }
         if (Bank.getBankLevel(p) == 0) {
             Bank.setBankLevel(p, 1);

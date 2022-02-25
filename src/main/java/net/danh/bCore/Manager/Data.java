@@ -80,7 +80,7 @@ public class Data {
         return bank;
     }
 
-    public static void reloadconfig() {
+    public static void reloadfiles() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
         gui = YamlConfiguration.loadConfiguration(guiFile);
@@ -137,6 +137,7 @@ public class Data {
         }
     }
 
+    @Deprecated
     public static double getRandomDouble(double min, double max) {
         Random r = new Random();
         return r.nextDouble(max - min) + min;
