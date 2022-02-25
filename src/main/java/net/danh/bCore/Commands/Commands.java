@@ -58,7 +58,7 @@ public class Commands implements CommandExecutor {
                             String version;
                             String body;
                             String name;
-                            URL api = new URL("https://api.github.com/repos/VoChiDanh/Jobs/releases/latest");
+                            URL api = new URL("https://api.github.com/repos/VoChiDanh/bCore/releases/latest");
                             URLConnection con = api.openConnection();
                             con.setConnectTimeout(15000);
                             con.setReadTimeout(15000);
@@ -72,7 +72,7 @@ public class Commands implements CommandExecutor {
                             String parsename = name.replaceAll("v", "");
                             String parsebody = body.replaceAll("## Commits", "");
                             if (!(parsename.equalsIgnoreCase(version))) {
-                                URL download = new URL("https://github.com/VoChiDanh/Jobs/releases/download/" + tagname + "/bCore.jar");
+                                URL download = new URL("https://github.com/VoChiDanh/bCore/releases/download/" + tagname + "/bCore.jar");
                                 sender.sendMessage(Data.convert("&eDownloading " + name + "! &6Your version is &6v" + version));
                                 sender.sendMessage(Data.convert("&aUpdate log: " + parsebody));
                                 new BukkitRunnable() {
