@@ -32,7 +32,7 @@ public class Join implements Listener {
             Weight.setWeight(p, 0);
         }
         if (Weight.getMaxWeight(p) == 0) {
-            Weight.setMaxWeight(p, 0);
+            Weight.setMaxWeight(p, 5000);
         }
         if (Storage.getStorage(p, "LOG".toUpperCase()) == 0) {
             Storage.setStorage(p, "LOG".toUpperCase(), 0);

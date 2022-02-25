@@ -20,6 +20,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "v0.2"
           prerelease: false
-          title: "v0.2.2-SNAPSHOT Build 24"
+          title: "v0.2.2-SNAPSHOT Build 25"
           files: |
             ./target/bCore.jar

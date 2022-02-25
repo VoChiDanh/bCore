@@ -97,9 +97,6 @@ public final class bCore extends JavaPlugin implements Listener {
                     } else {
                         p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
                     }
-                    if (PlayerData.getPlayerLimit(p, "storage") > 0) {
-                        Weight.setMaxWeight(p, PlayerData.getPlayerLimit(p, "storage"));
-                    }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
