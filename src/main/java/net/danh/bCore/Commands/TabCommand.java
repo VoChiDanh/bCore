@@ -42,7 +42,6 @@ public class TabCommand implements TabCompleter {
                 arg.add("maxweight");
                 arg.add("storage");
                 arg.add("luckychance");
-                arg.add("update");
                 arg.add("price");
                 arg.add("baseprice");
                 arg.add("bankmoney");

@@ -1,28 +1,16 @@
 package net.danh.bCore.Commands;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import net.danh.bCore.CustomEnchantment.Money;
 import net.danh.bCore.Gui.SellBlocks;
 import net.danh.bCore.Manager.*;
-import net.danh.bCore.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 public class Commands implements CommandExecutor {
@@ -51,55 +39,6 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("reload")) {
                         Data.reloadfiles();
                         sender.sendMessage(Data.convert(PREFIX + RELOADED));
-                    }
-                    if (args[0].equalsIgnoreCase("update")) {
-                        try {
-                            String tagname;
-                            String version;
-                            String body;
-                            String name;
-                            String plugins = bCore.getInstance().getDescription().getName();
-                            URL api = new URL("https://api.github.com/repos/VoChiDanh/" + plugins + "/releases/latest");
-                            URLConnection con = api.openConnection();
-                            con.setConnectTimeout(15000);
-                            con.setReadTimeout(15000);
-
-                            JsonObject json = new JsonParser().parse(new InputStreamReader(con.getInputStream())).getAsJsonObject();
-                            tagname = json.get("tag_name").getAsString();
-                            version = bCore.getInstance().getDescription().getVersion();
-                            body = json.get("body").getAsString();
-                            name = json.get("name").getAsString();
-
-                            String parsename = name.replaceAll("v", "");
-                            String parsebody = body.replaceAll("## Commits", "");
-                            if (!(parsename.equalsIgnoreCase(version))) {
-                                URL download = new URL("https://github.com/VoChiDanh/" + plugins + "/releases/download/" + tagname + "/" + plugins + ".jar");
-                                sender.sendMessage(Data.convert("&eDownloading " + name + "! &6Your version is &6v" + version));
-                                sender.sendMessage(Data.convert("&aUpdate log: " + parsebody));
-                                new BukkitRunnable() {
-
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            InputStream in = download.openStream();
-                                            File temp = new File("plugins/" + plugins + "/update/");
-                                            if (!temp.exists()) {
-                                                temp.mkdir();
-                                            }
-                                            Path path = new File("plugins/" + plugins + "/update/" + File.separator + "" + plugins + ".jar").toPath();
-                                            java.nio.file.Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-                                            sender.sendMessage(Data.convert("&6Download finished, stop the server and check new jar in " + plugins + " folder to get the new update"));
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }.runTaskLaterAsynchronously(bCore.getInstance(), 1);
-                            } else {
-                                sender.sendMessage(Data.convert("&aYou are on latest build"));
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }

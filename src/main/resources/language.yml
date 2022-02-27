@@ -33,7 +33,6 @@ HELP_ADMIN:
   - "&9/bCore bankmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Money"
   - "&9/bCore bankmaxmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Max Money"
   - "&9/bCore reload - &aReload config"
-  - "&9/bCore update - &aUpdate plugins to lastest DevBuid"
 DONE: "&aDone"
 NOT_CORRECT_ITEMS: "&cYou can not break that block with this item"
 NEED_MORE_POWER: "&cYou need more power to working"
