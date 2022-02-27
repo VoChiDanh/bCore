@@ -4,6 +4,7 @@ public class NMSAssistant {
 
     /**
      * Method to get the NMS Version which stands for the current server-version.
+     *
      * @return {@link NMSVersion}.
      */
     public NMSVersion getNMSVersion() {
@@ -12,6 +13,7 @@ public class NMSAssistant {
 
     /**
      * Method to determine if the server version is greater than the given version.
+     *
      * @param version to test against.
      * @return {@code true} if it is.
      */
@@ -21,6 +23,7 @@ public class NMSAssistant {
 
     /**
      * Method to determine if the server version is less than the given version.
+     *
      * @param version to test against.
      * @return {@code true} if it is.
      */
@@ -30,6 +33,7 @@ public class NMSAssistant {
 
     /**
      * Method to determine if the server is currently running this specific version.
+     *
      * @param version to check against.
      * @return {@code true} if it is.
      */
@@ -39,6 +43,7 @@ public class NMSAssistant {
 
     /**
      * Method to determine if the sever isn't currently running this specific version.
+     *
      * @param version to check against.
      * @return {@code true} if it isn't.
      */

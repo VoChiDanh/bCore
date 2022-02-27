@@ -180,7 +180,7 @@ public final class bCore extends JavaPlugin implements Listener {
         getLogger().log(Level.INFO, "Registed all Commands");
     }
 
-    private void RegisterEnchantments(){
+    private void RegisterEnchantments() {
         /*
           Money Enchant
          */
