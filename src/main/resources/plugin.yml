@@ -1,6 +1,6 @@
 name: '${project.name}'
-version: '${project.version} ${devbuild.version}'
-main: net.danh.bCore.bCore
+version: '${project.version}'
+main: net.danh.main.bCore
 softdepend:
   - Vault
   - PlaceholderAPI
