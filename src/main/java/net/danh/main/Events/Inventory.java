@@ -24,7 +24,7 @@ public class Inventory implements Listener {
         Player p = (Player) e.getWhoClicked();
         if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.SellGui.Title")))) {
             e.setCancelled(true);
-            if (e.getCurrentItem() != null) return;
+            if (e.getCurrentItem() == null) return;
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     Price.Sell(p, "STONE".toUpperCase(), 1);
@@ -149,7 +149,7 @@ public class Inventory implements Listener {
         }
         if (e.getView().getTitle().equals(Data.getguifile().getString(Data.convert("GUI.EnchantGui.Title")))) {
             e.setCancelled(true);
-            if (e.getCurrentItem() != null) return;
+            if (e.getCurrentItem() == null) return;
             if (e.getSlot() == Data.getguifile().getInt("GUI.EnchantGui.Money.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
                     if (PlayerData.getXP(p) >= Data.getguifile().getInt("GUI.EnchantGui.Money.Exp")) {

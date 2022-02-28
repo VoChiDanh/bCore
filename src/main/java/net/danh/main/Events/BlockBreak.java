@@ -77,29 +77,26 @@ public class BlockBreak implements Listener {
                             bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
                         }
                         if (kg != 0) {
-                            if (e.getPlayer().getItemInHand().hasItemMeta()
-                                    && Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)
-                                    && e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
+                            if (Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS) &&
+                                    e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
                                 int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
                                 int fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
-                                if (Data.getRandomInt(fortunelevel, fortunelevel * 100) <= fortunechance) {
-                                    int fortuneblocks = ((fortunechance + kg) * fortunelevel);
-                                    Weight.addWeight(e.getPlayer(), fortuneblocks);
-                                    if (CheckMaterial.isCoal(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "COAL".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isIron(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "IRON".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isGold(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "GOLD".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isDiamond(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isEmerald(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "EMERALD".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isStone(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "STONE".toUpperCase(), fortuneblocks);
-                                    } else if (CheckMaterial.isLog(b.getType())) {
-                                        Storage.addStorage(e.getPlayer(), "LOG".toUpperCase(), fortuneblocks);
-                                    }
+                                int fortuneblocks = ((fortunechance + kg) * fortunelevel);
+                                Weight.addWeight(e.getPlayer(), fortuneblocks);
+                                if (CheckMaterial.isCoal(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "COAL".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isIron(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "IRON".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isGold(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "GOLD".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isDiamond(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "DIAMOND".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isEmerald(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "EMERALD".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isStone(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "STONE".toUpperCase(), fortuneblocks);
+                                } else if (CheckMaterial.isLog(b.getType())) {
+                                    Storage.addStorage(e.getPlayer(), "LOG".toUpperCase(), fortuneblocks);
                                 }
                             } else {
                                 Weight.addWeight(e.getPlayer(), kg);
