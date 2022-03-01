@@ -50,16 +50,6 @@ public final class bCore extends JavaPlugin implements Listener {
                         if (Power.getPower(p) > Power.getMaxPower(p)) {
                             Power.setPower(p, Power.getMaxPower(p));
                         }
-                        if (Power.getPower(p) >= Power.getMaxPower(p) * 0.9D) {
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, Integer.MIN_VALUE));
-                        } else {
-                            p.removePotionEffect(PotionEffectType.CONFUSION);
-                        }
-                    }
-                    if (Weight.getWeight(p) >= Weight.getMaxWeight(p) * 0.9D) {
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.MIN_VALUE));
-                    } else {
-                        p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
                     }
                 }
             }
