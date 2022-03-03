@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
 import preponderous.ponder.minecraft.bukkit.tools.MaterialChecker;
 
 import java.util.Objects;
@@ -17,7 +18,7 @@ import java.util.logging.Level;
 public class BlockBreak implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockBreak(BlockBreakEvent e) {
+    public void onBlockBreak(@NotNull BlockBreakEvent e) {
         Block b = e.getBlock();
         Player p = e.getPlayer();
         double systemchance = Math.random() * 100.0D;

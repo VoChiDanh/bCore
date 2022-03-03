@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 public class SellBlocks implements Listener {
 
-    public static Inventory getSellGui(Player p) {
+    public static @NotNull Inventory getSellGui(Player p) {
         Inventory sellgui = Bukkit.createInventory(p, Data.getguifile().getInt("GUI.SellGui.Size"), Objects.requireNonNull(Data.getguifile().getString(Data.convert("GUI.SellGui.Title"))));
         ItemStack coal = coal(p);
         ItemStack iron = iron(p);
@@ -41,7 +42,7 @@ public class SellBlocks implements Listener {
         return sellgui;
     }
 
-    public static ItemStack stone(Player p) {
+    public static @NotNull ItemStack stone(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -58,7 +59,7 @@ public class SellBlocks implements Listener {
     }
 
 
-    public static ItemStack playerinfo(Player p) {
+    public static @NotNull ItemStack playerinfo(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Material")))));
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         Objects.requireNonNull(meta).setOwningPlayer(p);
@@ -82,7 +83,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack log(Player p) {
+    public static @NotNull ItemStack log(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -98,7 +99,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack coal(Player p) {
+    public static @NotNull ItemStack coal(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -114,7 +115,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack iron(Player p) {
+    public static @NotNull ItemStack iron(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -130,7 +131,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack gold(Player p) {
+    public static @NotNull ItemStack gold(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -146,7 +147,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack diamond(Player p) {
+    public static @NotNull ItemStack diamond(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -162,7 +163,7 @@ public class SellBlocks implements Listener {
         return item;
     }
 
-    public static ItemStack emerald(Player p) {
+    public static @NotNull ItemStack emerald(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")))));
         ItemMeta meta = item.getItemMeta();
         List<String> lore = new ArrayList<>();

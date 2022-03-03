@@ -7,13 +7,14 @@ import net.danh.main.bCore;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class MythicMobs implements Listener {
 
     @EventHandler
-    public void onMythicMobsKill(MythicMobDeathEvent mme) {
+    public void onMythicMobsKill(@NotNull MythicMobDeathEvent mme) {
         Player p = (Player) mme.getKiller();
         String mobname = mme.getMobType().getInternalName();
         String mob = mme.getMob().getName();

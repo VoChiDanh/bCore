@@ -1,19 +1,20 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class Weight {
 
-    public static Integer getWeight(Player p) {
+    public static @NotNull Integer getWeight(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Weight");
     }
 
-    public static void setWeight(Player p, Integer number) {
+    public static void setWeight(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Weight", number);
         Data.savedata();
     }
 
-    public static void addWeight(Player p, Integer number) {
+    public static void addWeight(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Weight", getWeight(p) + number);
         Data.savedata();
     }
@@ -27,17 +28,17 @@ public class Weight {
         Data.savedata();
     }
 
-    public static int getMaxWeight(Player p) {
+    public static int getMaxWeight(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".MaxWeight");
     }
 
 
-    public static void setMaxWeight(Player p, Integer number) {
+    public static void setMaxWeight(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxWeight", number);
         Data.savedata();
     }
 
-    public static void addMaxWeight(Player p, Integer number) {
+    public static void addMaxWeight(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) + number);
         Data.savedata();
     }

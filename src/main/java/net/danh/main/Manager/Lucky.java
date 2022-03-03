@@ -1,19 +1,20 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class Lucky {
 
-    public static int getLuckyChance(Player p) {
+    public static int getLuckyChance(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Lucky");
     }
 
-    public static void setLuckyChance(Player p, int number) {
+    public static void setLuckyChance(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Lucky", number);
         Data.savedata();
     }
 
-    public static void addLuckyChance(Player p, int number) {
+    public static void addLuckyChance(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p) + number);
         Data.savedata();
     }

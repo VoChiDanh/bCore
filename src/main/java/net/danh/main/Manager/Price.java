@@ -61,7 +61,7 @@ public class Price {
             Weight.removeWeight(p, number);
             Data.savestorage();
             Data.savedata();
-            Integer money = getPrice(name) * number;
+            int money = getPrice(name) * number;
             EconomyResponse r = bCore.economy.depositPlayer(p.getPlayer(), money);
             if (r.transactionSuccess()) {
                 p.sendMessage(Data.convert("&a+ " + money + "$"));

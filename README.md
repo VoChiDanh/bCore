@@ -2,7 +2,7 @@
 
 ## Features
 
-### Bank 
+### Bank
 
 > You can deposit/withdraw money to Bank
 
@@ -20,7 +20,7 @@
 
 ### Storage / Price
 
-> You will have a virtual storage to storage listed blocks in config, when you mine block was listed in config, you'll get block to virtual storage. You can sell it or take it to physical item
+> You will have a virtual storage to storage listed blocks in config, when you mine block was listed in config, you'll get block to virtual storage. You can sell it!
 
 > Price will auto update by 5 minutes
 
@@ -34,9 +34,7 @@
 
 ### Custom Enchants
 
-
 > Money - You'll get chance to get money when mining
-
 
 ## Commands
 

@@ -1,21 +1,22 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class Power {
 
 
-    public static int getPower(Player p) {
+    public static int getPower(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Power");
     }
 
 
-    public static void setPower(Player p, int number) {
+    public static void setPower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Power", number);
         Data.savedata();
     }
 
-    public static void addPower(Player p, int number) {
+    public static void addPower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Power", getPower(p) + number);
         Data.savedata();
     }
@@ -31,16 +32,16 @@ public class Power {
         }
     }
 
-    public static int getMaxPower(Player p) {
+    public static int getMaxPower(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".MaxPower");
     }
 
-    public static void setMaxPower(Player p, int number) {
+    public static void setMaxPower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxPower", number);
         Data.savedata();
     }
 
-    public static void addMaxPower(Player p, int number) {
+    public static void addMaxPower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".MaxPower", getMaxPower(p) + number);
         Data.savedata();
     }
@@ -54,16 +55,16 @@ public class Power {
         Data.savedata();
     }
 
-    public static int getRestorePower(Player p) {
+    public static int getRestorePower(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".RestorePower");
     }
 
-    public static void setRestorePower(Player p, int number) {
+    public static void setRestorePower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".RestorePower", number);
         Data.savedata();
     }
 
-    public static void addRestorePower(Player p, int number) {
+    public static void addRestorePower(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".RestorePower", getRestorePower(p) + number);
         Data.savedata();
     }

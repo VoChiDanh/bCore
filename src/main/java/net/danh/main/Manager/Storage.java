@@ -1,21 +1,22 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class Storage {
 
-    public static Integer getStorage(Player p, String name) {
+    public static @NotNull Integer getStorage(@NotNull Player p, String name) {
         return Data.getstoragefile().getInt("players." + p.getName() + ".Blocks." + name);
     }
 
-    public static void setStorage(Player p, String name, Integer number) {
+    public static void setStorage(@NotNull Player p, String name, Integer number) {
         Data.getstoragefile().set("players." + p.getName() + ".Blocks." + name, number);
         Data.savestorage();
     }
 
-    public static void addStorage(Player p, String name, Integer number) {
+    public static void addStorage(@NotNull Player p, String name, Integer number) {
         Data.getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
         p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("ADD_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))
@@ -25,7 +26,7 @@ public class Storage {
         Data.savestorage();
     }
 
-    public static void removeStorage(Player p, String name, Integer number) {
+    public static void removeStorage(@NotNull Player p, String name, Integer number) {
         Data.getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
         p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("REMOVE_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))

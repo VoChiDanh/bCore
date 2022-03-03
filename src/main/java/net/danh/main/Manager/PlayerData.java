@@ -1,35 +1,36 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerData {
 
-    public static int getLevel(Player p) {
+    public static int getLevel(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Level");
     }
 
-    public static int getXP(Player p) {
+    public static int getXP(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".XP");
     }
 
-    public static void setLevel(Player p, int number) {
+    public static void setLevel(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Level", number);
         Data.savedata();
     }
 
-    public static void setXP(Player p, int number) {
+    public static void setXP(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".XP", number);
         Data.savedata();
     }
 
-    public static void addLevel(Player p, int number) {
+    public static void addLevel(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) + number);
         Data.savedata();
         Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
         Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
     }
 
-    public static void addXP(Player p, int number) {
+    public static void addXP(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
         checkLevelUp(p);
         Data.savedata();
@@ -70,11 +71,11 @@ public class PlayerData {
         }
     }
 
-    public static int getleveluptimes(Player p) {
+    public static int getleveluptimes(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes");
     }
 
-    public static void addLeveluptimes(Player p, Integer number) {
+    public static void addLeveluptimes(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p) + number);
         Data.savedata();
     }
@@ -88,50 +89,51 @@ public class PlayerData {
         Data.savedata();
     }
 
-    public static void setLeveluptimes(Player p, Integer number) {
+    public static void setLeveluptimes(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", number);
         Data.savedata();
     }
 
 
-    public static Integer getBlocks(Player p) {
+    public static @NotNull Integer getBlocks(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
     }
 
-    public static void setBlocks(Player p, Integer number) {
+    public static void setBlocks(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Blocks", number);
         Data.savedata();
     }
 
-    public static void addBlocks(Player p, Integer number) {
+    public static void addBlocks(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) + number);
         Data.savedata();
     }
 
-    public static void removeBlocks(Player p, Integer number) {
+    public static void removeBlocks(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) - number);
         Data.savedata();
     }
 
-    public static Integer getKill(Player p) {
+    public static @NotNull Integer getKill(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Kills");
     }
 
-    public static void setKill(Player p, Integer number) {
+    public static void setKill(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Kills", number);
         Data.savedata();
     }
 
-    public static void addKill(Player p, Integer number) {
+    public static void addKill(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) + number);
         Data.savedata();
     }
 
-    public static void removeKill(Player p, Integer number) {
+    public static void removeKill(@NotNull Player p, Integer number) {
         Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) - number);
         Data.savedata();
     }
 
+    @Deprecated
     public static Integer getPlayerLimit(Player p, String perm) {
         int limit = 0;
         for (int i = 0; i <= 1000000000; i++) {

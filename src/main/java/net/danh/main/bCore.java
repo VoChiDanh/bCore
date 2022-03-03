@@ -6,10 +6,7 @@ import net.danh.main.CustomEnchantment.Money;
 import net.danh.main.Events.*;
 import net.danh.main.Hook.MythicMobs;
 import net.danh.main.Hook.PlaceholderAPI;
-import net.danh.main.Manager.Data;
-import net.danh.main.Manager.PlayerData;
-import net.danh.main.Manager.Power;
-import net.danh.main.Manager.Price;
+import net.danh.main.Manager.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
@@ -40,9 +37,13 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
 
     @Override
+    public void onLoad() {
+        performNMSChecks();
+    }
+
+    @Override
     public void onEnable() {
         instance = this;
-        performNMSChecks();
         HookWithOthersPlugins();
         RegisterEvents();
         RegisterCommands();
@@ -54,6 +55,13 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                     if (PlayerData.getLevel(p) == 1) {
                         if (Power.getPower(p) > Power.getMaxPower(p)) {
                             Power.setPower(p, Power.getMaxPower(p));
+                        }
+                        if (Weight.getWeight(p) == Weight.getMaxWeight(p)) {
+                            p.setWalkSpeed(0F);
+                            p.setFlySpeed(0F);
+                        } else {
+                            p.setWalkSpeed(0.02F);
+                            p.setFlySpeed(0.02F);
                         }
                     }
                 }

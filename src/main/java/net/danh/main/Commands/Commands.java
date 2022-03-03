@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class Commands implements CommandExecutor {
 
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
         String RELOADED = Data.getlanguagefile().getString("RELOAD");
         String PREFIX = Data.getlanguagefile().getString("PREFIX");

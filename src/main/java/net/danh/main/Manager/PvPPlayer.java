@@ -1,19 +1,20 @@
 package net.danh.main.Manager;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class PvPPlayer {
 
-    public static boolean getPvPStatus(Player p) {
+    public static boolean getPvPStatus(@NotNull Player p) {
         return Data.getdatafile().getBoolean("players." + p.getName() + ".PvP");
     }
 
-    public static void PvPToggle(Player p) {
+    public static void PvPToggle(@NotNull Player p) {
         Data.getdatafile().set("players." + p.getName() + ".PvP", !getPvPStatus(p));
         Data.savedata();
     }
 
-    public static void setPvPStatus(Player p, Boolean Boolean) {
+    public static void setPvPStatus(@NotNull Player p, Boolean Boolean) {
         Data.getdatafile().set("players." + p.getName() + ".PvP", Boolean);
         Data.savedata();
     }
