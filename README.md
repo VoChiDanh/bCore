@@ -67,8 +67,10 @@ HELP_ADMIN:
 
 ## Permission
 
-> bCore.user - Permission for Player <br>
-> bCore.admin - Permission for Admin
+```
+bCore.user - Permission for Player
+bCore.admin - Permission for Admin
+```
 
 ## Soft Depends
 

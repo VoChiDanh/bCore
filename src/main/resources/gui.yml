@@ -16,7 +16,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     Coal:
       Slot: 1
       Material: COAL
@@ -31,7 +31,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     Iron:
       Slot: 2
       Material: IRON_INGOT
@@ -46,7 +46,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     Gold:
       Slot: 3
       Material: GOLD_INGOT
@@ -61,7 +61,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     PlayerInfo:
       Slot: 4
       Material: PLAYER_HEAD
@@ -91,7 +91,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     Emerald:
       Slot: 6
       Material: EMERALD
@@ -106,7 +106,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
     Log:
       Slot: 7
       Material: OAK_LOG
@@ -121,7 +121,7 @@ GUI:
         - "&e&oRight click to sell 5kg"
         - "&b&oMiddle click to sell %amount%kg"
         - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 5kg"
+        - "&6&oShift Right click to sell 50kg"
   EnchantGui:
     Title: "Enchant Gui"
     Size: 9
