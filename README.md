@@ -74,11 +74,11 @@ bCore.admin - Permission for Admin
 
 ## Soft Depends
 
-[![vault](https://img.shields.io/badge/Vault-1.7-blue?style=for-the-badge)](https://www.spigotmc.org/resources/34315/)
-[![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-blue?style=for-the-badge)](https://www.spigotmc.org/resources/6245/)
-[![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.0--SNAPSHOT-blue?style=for-the-badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/)
+[![vault](https://img.shields.io/badge/Vault-1.7-blue?style=badge)](https://www.spigotmc.org/resources/34315/)
+[![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-blue?style=badge)](https://www.spigotmc.org/resources/6245/)
+[![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.0--SNAPSHOT-blue?style=badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/)
 
 ## Project Status
 
-![GitHub Release](https://img.shields.io/github/release/VoChiDanh/bCore.svg?style=for-the-badge)
-![status](https://img.shields.io/badge/Project--Status-Active-green?style=for-the-badge) 
+![GitHub Release](https://img.shields.io/github/release/VoChiDanh/bCore.svg?style=badge)
+![status](https://img.shields.io/badge/Project--Status-Active-green?style=badge) 
