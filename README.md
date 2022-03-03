@@ -1,6 +1,8 @@
 # bCore  [1.13.x - 1.18.x]
 
-### Bank Features
+## Features
+
+### Bank 
 
 > You can deposit/withdraw money to Bank
 
@@ -42,7 +44,7 @@
 HELP_USER: 
 /bCore info [Player] - Check info player
 /Storage - Open sell gui
-/Bank - &eCheck money in bank
+/Bank - Check money in bank
 /Bank [deposit/withdraw] [number] - Deposit/Withdraw money to bank
 ```
 
@@ -78,5 +80,5 @@ HELP_ADMIN:
 
 ## Project Status
 
-![GitHub Release](https://img.shields.io/github/release/VoChiDanh/Storage.svg?style=for-the-badge)
+![GitHub Release](https://img.shields.io/github/release/VoChiDanh/bCore.svg?style=for-the-badge)
 ![status](https://img.shields.io/badge/Project--Status-Active-green?style=for-the-badge) 
