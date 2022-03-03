@@ -4,11 +4,12 @@ import net.danh.main.Manager.Power;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Eating implements Listener {
 
     @EventHandler
-    public void onEating(PlayerItemConsumeEvent e) {
+    public void onEating(@NotNull PlayerItemConsumeEvent e) {
         Power.addPower(e.getPlayer(), Power.getRestorePower(e.getPlayer()));
     }
 }

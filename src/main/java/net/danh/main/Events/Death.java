@@ -7,13 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class Death implements Listener {
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent e) {
+    public void onDeath(@NotNull PlayerDeathEvent e) {
         String DEAD = Data.getlanguagefile().getString("DEAD");
         Player p = e.getEntity().getPlayer();
         Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)

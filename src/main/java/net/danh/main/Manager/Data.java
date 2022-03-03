@@ -1,15 +1,22 @@
 package net.danh.main.Manager;
 
 import net.danh.main.bCore;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
+import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Data {
+
+    public final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
     private static File configFile, languageFile, dataFile, storageFile, priceFile, guiFile, bankFile;
     private static FileConfiguration config, language, data, storage, price, gui, bank;
 
@@ -148,7 +155,32 @@ public class Data {
         return r.nextInt(max - min) + min;
     }
 
-    public static String convert(String s) {
-        return s.replaceAll("&", "§");
+    // Colorizes messages with preset colorcodes (&) and if using 1.16+, applies hex values via "&#hexvalue"
+    public static String convert(String input) {
+
+        input = ChatColor.translateAlternateColorCodes('&', input);
+        NMSAssistant nms = new NMSAssistant();
+        if (nms.isVersionGreaterThan(15)) {
+            input = translateHexColorCodes("\\&#", "", input);
+        }
+
+        return input;
+    }
+
+    public static @NotNull String translateHexColorCodes(String startTag, String endTag, String message) {
+
+        final Pattern hexPattern = Pattern.compile(startTag + "([A-Fa-f0-9]{6})" + endTag);
+        Matcher matcher = hexPattern.matcher(message);
+        StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
+
+        while (matcher.find()) {
+
+            String group = matcher.group(1);
+            matcher.appendReplacement(buffer, COLOR_CHAR + "x" + COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1) + COLOR_CHAR
+                    + group.charAt(2) + COLOR_CHAR + group.charAt(3) + COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5));
+
+        }
+
+        return matcher.appendTail(buffer).toString();
     }
 }

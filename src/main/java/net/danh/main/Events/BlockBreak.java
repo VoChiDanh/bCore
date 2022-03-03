@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import preponderous.ponder.minecraft.bukkit.tools.MaterialChecker;
 
 import java.util.Objects;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class BlockBreak implements Listener {
         String blocks = e.getBlock().getType().toString();
         int max = 0;
         int min = 0;
+        MaterialChecker CheckMaterial = new MaterialChecker();
         PlayerData.addBlocks(p, 1);
         if (e.getPlayer().hasPermission("bCore.admin")) {
             e.setCancelled(false);

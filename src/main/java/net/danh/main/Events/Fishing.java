@@ -9,13 +9,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class Fishing implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onFishing(PlayerFishEvent e) {
+    public void onFishing(@NotNull PlayerFishEvent e) {
         String NEED_MORE_POWER = Data.getlanguagefile().getString("NEED_MORE_POWER");
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String LUCKY = Data.getlanguagefile().getString("LUCKY");

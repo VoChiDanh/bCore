@@ -6,23 +6,28 @@ import net.danh.main.CustomEnchantment.Money;
 import net.danh.main.Events.*;
 import net.danh.main.Hook.MythicMobs;
 import net.danh.main.Hook.PlaceholderAPI;
-import net.danh.main.Manager.*;
+import net.danh.main.Manager.Data;
+import net.danh.main.Manager.PlayerData;
+import net.danh.main.Manager.Power;
+import net.danh.main.Manager.Price;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
+import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
+import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
 
-public final class bCore extends JavaPlugin implements Listener {
+public final class bCore extends PonderBukkitPlugin implements Listener {
 
 
     public static Economy economy;
@@ -162,25 +167,16 @@ public final class bCore extends JavaPlugin implements Listener {
         getLogger().info("");
         getLogger().info(Data.convert("&3Register Event"));
         getLogger().info("");
-        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        registerEventHandlers();
         getLogger().info(Data.convert("&a✔ BlockBreak Event"));
-        getServer().getPluginManager().registerEvents(new Join(), this);
         getLogger().info(Data.convert("&a✔ Join Event"));
-        getServer().getPluginManager().registerEvents(new Fishing(), this);
         getLogger().info(Data.convert("&a✔ Fishing Event"));
-        getServer().getPluginManager().registerEvents(new Eating(), this);
         getLogger().info(Data.convert("&a✔ Eating Event"));
-        getServer().getPluginManager().registerEvents(new Death(), this);
         getLogger().info(Data.convert("&a✔ Death Event"));
-        getServer().getPluginManager().registerEvents(new Inventory(), this);
         getLogger().info(Data.convert("&a✔ Inventory Event"));
-        getServer().getPluginManager().registerEvents(new Money(), this);
         getLogger().info(Data.convert("&a✔ Money Event"));
-        getServer().getPluginManager().registerEvents(new Click(), this);
         getLogger().info(Data.convert("&a✔ Click Event"));
-        getServer().getPluginManager().registerEvents(new Kill(), this);
         getLogger().info(Data.convert("&a✔ Kill Event"));
-        getServer().getPluginManager().registerEvents(new PvP(), this);
         getLogger().info(Data.convert("&a✔ PvP Event"));
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
             getServer().getPluginManager().registerEvents(new MythicMobs(), this);
@@ -189,6 +185,31 @@ public final class bCore extends JavaPlugin implements Listener {
             getLogger().info(Data.convert("&7✘ MythicMobs Event"));
         }
         getLogger().info("");
+
+    }
+
+    private ArrayList<Listener> initializeListeners() {
+        return new ArrayList<>(Arrays.asList(
+                new BlockBreak(),
+                new Join(),
+                new Fishing(),
+                new Eating(),
+                new Death(),
+                new Inventory(),
+                new Money(),
+                new Click(),
+                new Kill(),
+                new PvP()
+        ));
+    }
+
+    /**
+     * Registers the event handlers of the plugin using Ponder.
+     */
+    private void registerEventHandlers() {
+        ArrayList<Listener> listeners = initializeListeners();
+        EventHandlerRegistry eventHandlerRegistry = new EventHandlerRegistry();
+        eventHandlerRegistry.registerEventHandlers(listeners, this);
     }
 
     private void RegisterCommands() {

@@ -12,13 +12,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class Kill implements Listener {
 
     @EventHandler
-    public void onNormalKill(EntityDeathEvent e) {
+    public void onNormalKill(@NotNull EntityDeathEvent e) {
         Player p = e.getEntity().getKiller();
         LivingEntity mob = e.getEntity();
         String vanillamobs = e.getEntityType().toString();

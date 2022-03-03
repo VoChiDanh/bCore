@@ -1,6 +1,5 @@
 package net.danh.main.CustomEnchantment;
 
-import net.danh.main.Manager.CheckMaterial;
 import net.danh.main.Manager.Data;
 import net.danh.main.Manager.Lucky;
 import net.danh.main.bCore;
@@ -15,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import preponderous.ponder.minecraft.bukkit.tools.MaterialChecker;
 
 public class Money extends Enchantment implements Listener {
 
@@ -27,6 +27,7 @@ public class Money extends Enchantment implements Listener {
         Material b = e.getBlock().getType();
         Player p = e.getPlayer();
         double money = p.getItemInHand().getEnchantmentLevel(this) * Data.getRandomInt(1, 100);
+        MaterialChecker CheckMaterial = new MaterialChecker();
         if (CheckMaterial.isCoal(b) || CheckMaterial.isIron(b) || CheckMaterial.isGold(b) || CheckMaterial.isDiamond(b) || CheckMaterial.isEmerald(b) || CheckMaterial.isLog(b)) {
             if (p.getItemInHand().getItemMeta() != null && p.getItemInHand().hasItemMeta()) {
                 if (p.getItemInHand().containsEnchantment(this)) {

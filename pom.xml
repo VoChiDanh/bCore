@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -81,6 +81,11 @@
             <artifactId>Mythic-Dist</artifactId>
             <version>5.0.0-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.VoChiDanh</groupId>
+            <artifactId>Ponder</artifactId>
+            <version>8000fc7309</version>
         </dependency>
     </dependencies>
 </project>
