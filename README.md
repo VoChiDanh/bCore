@@ -43,7 +43,7 @@ HELP_USER:
 /bCore info [Player] - Check info player
 /Storage - Open sell gui
 /Bank - &eCheck money in bank
-/Bank [deposit/withdraw] [number] - Deposit/Withdraw money to bank```
+/Bank [deposit/withdraw] [number] - Deposit/Withdraw money to bank
 ```
 
 ```
@@ -64,6 +64,11 @@ HELP_ADMIN:
 /bCore bankmaxmoney [add/set/remove] [Player] [Number] - Add/Set/Remove Bank Max Money
 /bCore reload - Reload config
 ```
+
+## Permission
+
+> bCore.user - Permission for Player <br>
+> bCore.admin - Permission for Admin
 
 ## Soft Depends
 
