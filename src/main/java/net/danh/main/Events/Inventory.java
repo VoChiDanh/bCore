@@ -7,7 +7,6 @@ import net.danh.main.Manager.Data;
 import net.danh.main.Manager.Items;
 import net.danh.main.Manager.PlayerData;
 import net.danh.main.Manager.Storage;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,121 +28,121 @@ public class Inventory implements Listener {
             if (e.getCurrentItem() == null) return;
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Stone.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Stone.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Coal.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Coal.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Iron.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Iron.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Gold.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Gold.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Diamond.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Emerald.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), 50);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material")))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), 1);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material")))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), 5);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material")))), Storage.getStorage(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material"))))));
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material")))), 10);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("Gui.SellGui.Log.Material")))), 50);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), 50);
                 }
             }
             p.closeInventory();

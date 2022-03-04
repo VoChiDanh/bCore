@@ -2,7 +2,6 @@ package net.danh.main.Manager;
 
 import net.danh.main.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +61,7 @@ public class Items {
         }
     }
 
-    public static String getName(Material material) {
+    public static String getName(String material) {
         return Data.getitemfile().getString("Name." + material);
     }
 

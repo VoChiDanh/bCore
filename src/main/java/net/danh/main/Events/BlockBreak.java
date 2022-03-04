@@ -65,6 +65,9 @@ public class BlockBreak implements Listener {
                 if (Data.getconfigfile().getBoolean("debug")) {
                     bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
                 }
+                if (min == 0 || max == 0) {
+                    return;
+                }
                 int kg = Data.getRandomInt(min, max);
                 if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
 
@@ -72,16 +75,19 @@ public class BlockBreak implements Listener {
                         bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
                     }
                     if (kg != 0) {
+                        if (Items.getName(b.toString()) == null) {
+                            return;
+                        }
                         if (Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS) &&
                                 e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
                             int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
                             int fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
                             int fortuneblocks = ((fortunechance + kg) * fortunelevel);
                             Weight.addWeight(e.getPlayer(), fortuneblocks);
-                            Storage.addStorage(e.getPlayer(), Items.getName(b), fortuneblocks);
+                            Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
                         } else {
                             Weight.addWeight(e.getPlayer(), kg);
-                            Storage.addStorage(e.getPlayer(), Items.getName(b), kg);
+                            Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), kg);
                         }
                     }
                 } else {

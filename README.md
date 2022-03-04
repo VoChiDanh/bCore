@@ -22,7 +22,6 @@
 
 > You will have a virtual storage to storage listed blocks in config, when you mine block was listed in config, you'll get block to virtual storage. You can sell it!
 
-
 ### PvP System
 
 > If you turn off PvP, you can't PvP with other Player..
