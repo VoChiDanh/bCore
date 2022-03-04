@@ -69,14 +69,14 @@ public class SellBlocks implements Listener {
             lore.add(Data.convert(loreconfig)
                     .replaceAll("%weight%", String.valueOf(Weight.getWeight(p)))
                     .replaceAll("%maxweight%", String.valueOf(Weight.getMaxWeight(p)))
-                    .replaceAll("%log%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")))))
-                            .replaceAll("%stone%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material")))))
-                                    .replaceAll("%coal%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material")))))
-                                            .replaceAll("%iron%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material")))))
-                                                    .replaceAll("%gold%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")))))
-                                                            .replaceAll("%diamond%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")))))
-                                                                    .replaceAll("%emerald%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")))))
-                                                                            .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p.getPlayer())))))))))));
+                    .replaceAll("%log%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))))))
+                    .replaceAll("%stone%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material"))))))
+                    .replaceAll("%coal%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material"))))))
+                    .replaceAll("%iron%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material"))))))
+                    .replaceAll("%gold%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))))))
+                    .replaceAll("%diamond%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))))))
+                    .replaceAll("%emerald%", String.valueOf(Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))))))
+                    .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p.getPlayer()))));
         }
         meta.setLore(lore);
         meta.setDisplayName(Data.convert(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Display")).replaceAll("%player%", p.getName())));
