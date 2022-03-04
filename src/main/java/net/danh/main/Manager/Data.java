@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
 public class Data {
 
     public final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
-    private static File configFile, languageFile, dataFile, storageFile, priceFile, guiFile, bankFile;
-    private static FileConfiguration config, language, data, storage, price, gui, bank;
+    private static File configFile, languageFile, dataFile, storageFile, itemFile, guiFile, bankFile;
+    private static FileConfiguration config, language, data, storage, item, gui, bank;
 
 
     public static void createconfig() {
@@ -26,7 +26,7 @@ public class Data {
         languageFile = new File(bCore.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(bCore.getInstance().getDataFolder(), "data.yml");
         storageFile = new File(bCore.getInstance().getDataFolder(), "storage.yml");
-        priceFile = new File(bCore.getInstance().getDataFolder(), "price.yml");
+        itemFile = new File(bCore.getInstance().getDataFolder(), "item.yml");
         guiFile = new File(bCore.getInstance().getDataFolder(), "gui.yml");
         bankFile = new File(bCore.getInstance().getDataFolder(), "bank.yml");
 
@@ -34,14 +34,14 @@ public class Data {
         if (!languageFile.exists()) bCore.getInstance().saveResource("language.yml", false);
         if (!dataFile.exists()) bCore.getInstance().saveResource("data.yml", false);
         if (!storageFile.exists()) bCore.getInstance().saveResource("storage.yml", false);
-        if (!priceFile.exists()) bCore.getInstance().saveResource("price.yml", false);
+        if (!itemFile.exists()) bCore.getInstance().saveResource("item.yml", false);
         if (!guiFile.exists()) bCore.getInstance().saveResource("gui.yml", false);
         if (!bankFile.exists()) bCore.getInstance().saveResource("bank.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         storage = new YamlConfiguration();
-        price = new YamlConfiguration();
+        item = new YamlConfiguration();
         gui = new YamlConfiguration();
         bank = new YamlConfiguration();
 
@@ -50,7 +50,7 @@ public class Data {
             language.load(languageFile);
             data.load(dataFile);
             storage.load(storageFile);
-            price.load(priceFile);
+            item.load(itemFile);
             gui.load(guiFile);
             bank.load(bankFile);
         } catch (IOException | InvalidConfigurationException e) {
@@ -75,8 +75,8 @@ public class Data {
         return storage;
     }
 
-    public static FileConfiguration getpricefile() {
-        return price;
+    public static FileConfiguration getitemfile() {
+        return item;
     }
 
     public static FileConfiguration getguifile() {
@@ -123,9 +123,9 @@ public class Data {
         }
     }
 
-    public static void saveprice() {
+    public static void saveitems() {
         try {
-            price.save(priceFile);
+            item.save(itemFile);
         } catch (IOException ignored) {
         }
     }

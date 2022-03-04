@@ -70,7 +70,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
         if (identifier.startsWith("price_")) {
             String name = identifier.substring(6).toUpperCase();
-            return String.valueOf(Price.getPrice(name));
+            return String.valueOf(Items.getPrice(name));
         }
         if (identifier.equalsIgnoreCase("bank_")) {
             String name = identifier.substring(5).toLowerCase();

@@ -72,6 +72,7 @@ GUI:
         - "&dMoney:&3 %money%$"
         - ""
         - "&9Log:&e %log% kg"
+        - "&8Stone:&e %stone% kg"
         - "&7Coal:&e %coal% kg"
         - "&fIron:&e %iron% kg"
         - "&6Gold:&e %gold% kg"

@@ -297,33 +297,15 @@ public class Commands implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("price")) {
                         if (args[1].equalsIgnoreCase("set")) {
-                            Price.setPrice(args[2], Integer.parseInt(args[3]));
+                            Items.setPrice(args[2], Integer.parseInt(args[3]));
                             sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("add")) {
-                            Price.addPrice(args[2], Integer.parseInt(args[3]));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            Price.removePrice(args[2], Integer.parseInt(args[3]));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                        }
-                    }
-                    if (args[0].equalsIgnoreCase("baseprice")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            Price.setBasePrice(args[2], Integer.parseInt(args[3]));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            Price.addBasePrice(args[2], Integer.parseInt(args[3]));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            Items.addPrice(args[2], Integer.parseInt(args[3]));
                             sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
-                            Price.removeBasePrice(args[2], Integer.parseInt(args[3]));
-                            sender.sendMessage(Data.convert(PREFIX + DONE));
+                            Items.removePrice(args[2], Integer.parseInt(args[3]));
                             sender.sendMessage(Data.convert(PREFIX + DONE));
                         }
                     }

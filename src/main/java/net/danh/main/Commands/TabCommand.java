@@ -43,7 +43,6 @@ public class TabCommand implements TabCompleter {
                 arg.add("storage");
                 arg.add("luckychance");
                 arg.add("price");
-                arg.add("baseprice");
                 arg.add("bankmoney");
                 arg.add("bankmaxmoney");
                 arg.add("blocks");
@@ -61,7 +60,6 @@ public class TabCommand implements TabCompleter {
                         || args[0].equalsIgnoreCase("weight")
                         || args[0].equalsIgnoreCase("maxweight")
                         || args[0].equalsIgnoreCase("price")
-                        || args[0].equalsIgnoreCase("baseprice")
                         || args[0].equalsIgnoreCase("bankmoney")
                         || args[0].equalsIgnoreCase("bankmaxmoney")
                         || args[0].equalsIgnoreCase("blocks")
@@ -105,7 +103,6 @@ public class TabCommand implements TabCompleter {
                     || args[0].equalsIgnoreCase("weight")
                     || args[0].equalsIgnoreCase("maxweight")
                     || args[0].equalsIgnoreCase("price")
-                    || args[0].equalsIgnoreCase("baseprice")
                     || args[0].equalsIgnoreCase("bankmoney")
                     || args[0].equalsIgnoreCase("bankmaxmoney")
                     || args[0].equalsIgnoreCase("blocks")

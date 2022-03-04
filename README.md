@@ -22,7 +22,6 @@
 
 > You will have a virtual storage to storage listed blocks in config, when you mine block was listed in config, you'll get block to virtual storage. You can sell it!
 
-> Price will auto update by 5 minutes
 
 ### PvP System
 

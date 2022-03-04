@@ -60,61 +60,13 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                             p.setWalkSpeed(0F);
                             p.setFlySpeed(0F);
                         } else {
-                            p.setWalkSpeed(0.02F);
-                            p.setFlySpeed(0.02F);
+                            p.setWalkSpeed(0.2F);
+                            p.setFlySpeed(0.2F);
                         }
                     }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
-        (new BukkitRunnable() {
-            public void run() { //TODO Need do something with this
-                if (getServer().getOnlinePlayers().size() > 0) {
-                    int stone = Data.getRandomInt(1, 1000);
-                    int coal = Data.getRandomInt(1, 1000);
-                    int iron = Data.getRandomInt(1, 1000);
-                    int gold = Data.getRandomInt(1, 1000);
-                    int diamond = Data.getRandomInt(1, 1000);
-                    int emerald = Data.getRandomInt(1, 1000);
-                    int log = Data.getRandomInt(1, 1000);
-                    if (stone < 500) {
-                        Price.removePrice("STONE".toUpperCase(), stone / 100);
-                    } else {
-                        Price.addPrice("STONE".toUpperCase(), stone / 100);
-                    }
-                    if (coal < 500) {
-                        Price.removePrice("COAL".toUpperCase(), coal / 100);
-                    } else {
-                        Price.addPrice("COAL".toUpperCase(), coal / 100);
-                    }
-                    if (iron < 500) {
-                        Price.removePrice("IRON".toUpperCase(), iron / 100);
-                    } else {
-                        Price.addPrice("IRON".toUpperCase(), iron / 100);
-                    }
-                    if (gold < 500) {
-                        Price.removePrice("GOLD".toUpperCase(), gold / 100);
-                    } else {
-                        Price.addPrice("GOLD".toUpperCase(), gold / 100);
-                    }
-                    if (diamond < 500) {
-                        Price.removePrice("DIAMOND".toUpperCase(), diamond / 100);
-                    } else {
-                        Price.addPrice("DIAMOND".toUpperCase(), diamond / 100);
-                    }
-                    if (emerald < 500) {
-                        Price.removePrice("EMERALD".toUpperCase(), emerald / 100);
-                    } else {
-                        Price.addPrice("EMERALD".toUpperCase(), emerald / 100);
-                    }
-                    if (log < 500) {
-                        Price.removePrice("LOG".toUpperCase(), log / 100);
-                    } else {
-                        Price.addPrice("LOG".toUpperCase(), log / 100);
-                    }
-                }
-            }
-        }).runTaskTimer(this, 300 * 20L, 300 * 20L);
     }
 
     @Override
@@ -123,7 +75,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Data.saveconfig();
         Data.savelanguage();
         Data.savegui();
-        Data.saveprice();
+        Data.saveitems();
         Data.savebank();
         getLogger().log(Level.INFO, "Saved data");
     }
