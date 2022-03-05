@@ -1,6 +1,6 @@
 package net.danh.main.Events;
 
-import net.danh.main.Gui.Enchant;
+import net.danh.main.Gui.SellBlocks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,9 +16,12 @@ public class Click implements Listener {
     public void onClick(@NotNull PlayerInteractEvent e) {
         Player p = e.getPlayer();
         MaterialChecker CheckMaterial = new MaterialChecker();
-        if (CheckMaterial.isAxe(p.getItemInHand().getType()) || CheckMaterial.isPickaxe(p.getItemInHand().getType())) {
-            if (!(e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
-                p.openInventory(Enchant.getEnchantGui(p));
+        if (CheckMaterial.isAxe(p.getItemInHand().getType())
+                || CheckMaterial.isPickaxe(p.getItemInHand().getType())
+                || CheckMaterial.isShovel(p.getItemInHand().getType())) {
+            if (!(e.getAction().equals(Action.LEFT_CLICK_BLOCK)
+                    || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
+                p.openInventory(SellBlocks.getSellGui(p));
             }
         }
     }

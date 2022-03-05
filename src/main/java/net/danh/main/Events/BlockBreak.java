@@ -81,8 +81,8 @@ public class BlockBreak implements Listener {
                         if (Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).hasEnchant(Enchantment.LOOT_BONUS_BLOCKS) &&
                                 e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) >= 1) {
                             int fortunelevel = Objects.requireNonNull(e.getPlayer().getItemInHand().getItemMeta()).getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS);
-                            int fortunechance = (e.getPlayer().getItemInHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) * Lucky.getLuckyChance(e.getPlayer()));
-                            int fortuneblocks = ((fortunechance + kg) * fortunelevel);
+                            int fortunechance = Data.getRandomInt((fortunelevel - Data.getRandomInt(1, fortunelevel)), fortunelevel);
+                            int fortuneblocks = fortunechance + kg;
                             Weight.addWeight(e.getPlayer(), fortuneblocks);
                             Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
                         } else {

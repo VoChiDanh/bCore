@@ -12,14 +12,14 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     Coal:
       Slot: 1
-      Material: COAL
+      Material: COAL_BLOCK
       Display: "&7Coal"
       Lore:
         - ""
@@ -27,14 +27,14 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     Iron:
       Slot: 2
-      Material: IRON_INGOT
+      Material: IRON_BLOCK
       Display: "&fIron"
       Lore:
         - ""
@@ -42,14 +42,14 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     Gold:
       Slot: 3
-      Material: GOLD_INGOT
+      Material: GOLD_BLOCK
       Display: "&6Gold"
       Lore:
         - ""
@@ -57,11 +57,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     PlayerInfo:
       Slot: 4
       Material: PLAYER_HEAD
@@ -80,7 +80,7 @@ GUI:
         - "&aEmerald:&e %emerald% kg"
     Diamond:
       Slot: 5
-      Material: DIAMOND
+      Material: DIAMOND_BLOCK
       Display: "&bDiamond"
       Lore:
         - ""
@@ -88,14 +88,14 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     Emerald:
       Slot: 6
-      Material: EMERALD
+      Material: EMERALD_BLOCK
       Display: "&aEmerald"
       Lore:
         - ""
@@ -103,11 +103,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"
     Log:
       Slot: 7
       Material: OAK_LOG
@@ -118,27 +118,8 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 1kg"
-        - "&e&oRight click to sell 5kg"
+        - "&e&oLeft click to sell 10kg"
+        - "&e&oRight click to sell 100kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to sell 10kg"
-        - "&6&oShift Right click to sell 50kg"
-  EnchantGui:
-    Title: "Enchant Gui"
-    Size: 9
-    Money:
-      Slot: 0
-      Material: ENCHANTED_BOOK
-      Exp: 1000
-      Display: "&bEnchant Money [Lv.%level%]"
-      Lore:
-        - ""
-        - "&aDesc: When you has this enchant"
-        - "&ayou will get chance to get money"
-        - "&awhen break blocks"
-        - ""
-        - "&6Req: &c%exp% XP / Level"
-        - "&6You have %xp% XP"
-        - ""
-        - "&3&oLeft click to enchant"
-        - "&3&oRight click to unenchant"
+        - "&6&oShift Left click to take 1 blocks"
+        - "&6&oShift Left click to take 10 blocks"

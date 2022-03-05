@@ -2,7 +2,9 @@ package net.danh.main.Manager;
 
 import net.danh.main.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -78,6 +80,21 @@ public class Items {
             }
         } else {
             p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
+        }
+    }
+
+    public static void Take(Player p, @NotNull String name, Integer number) {
+        if (getName(name) != null) {
+            if (Storage.getStorage(p, getName(name)) >= number * 10 && Weight.getWeight(p) >= number * 10) {
+                Storage.removeStorage(p, getName(name), number * 10);
+                Weight.removeWeight(p, number * 10);
+                ItemStack items = new ItemStack(Objects.requireNonNull(Material.getMaterial(name)), number);
+                p.getInventory().addItem(items);
+                Data.savestorage();
+                Data.savedata();
+            } else {
+                p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
+            }
         }
     }
 }

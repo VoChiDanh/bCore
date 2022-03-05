@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -23,23 +24,37 @@ public class SellBlocks implements Listener {
 
     public static @NotNull Inventory getSellGui(Player p) {
         Inventory sellgui = Bukkit.createInventory(p, Data.getguifile().getInt("GUI.SellGui.Size"), Objects.requireNonNull(Data.getguifile().getString(Data.convert("GUI.SellGui.Title"))));
-        ItemStack coal = coal(p);
-        ItemStack iron = iron(p);
-        ItemStack gold = gold(p);
-        ItemStack diamond = diamond(p);
-        ItemStack emerald = emerald(p);
-        ItemStack log = log(p);
-        ItemStack player = playerinfo(p);
-        ItemStack stone = stone(p);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Coal.Slot"), coal);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Stone.Slot"), stone);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Iron.Slot"), iron);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Gold.Slot"), gold);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.PlayerInfo.Slot"), player);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Diamond.Slot"), diamond);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Emerald.Slot"), emerald);
-        sellgui.setItem(Data.getguifile().getInt("GUI.SellGui.Log.Slot"), log);
+        updateInventory(p, sellgui);
         return sellgui;
+    }
+
+    private static void updateInventory(Player p, Inventory inv) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                String inventory =  p.getOpenInventory().getTitle();
+                if (inventory.equals(Objects.requireNonNull(Data.getguifile().getString(Data.convert("GUI.SellGui.Title"))))) {
+                    ItemStack coal = coal(p);
+                    ItemStack iron = iron(p);
+                    ItemStack gold = gold(p);
+                    ItemStack diamond = diamond(p);
+                    ItemStack emerald = emerald(p);
+                    ItemStack log = log(p);
+                    ItemStack player = playerinfo(p);
+                    ItemStack stone = stone(p);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Coal.Slot"), coal);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Stone.Slot"), stone);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Iron.Slot"), iron);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Gold.Slot"), gold);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.PlayerInfo.Slot"), player);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Diamond.Slot"), diamond);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Emerald.Slot"), emerald);
+                    inv.setItem(Data.getguifile().getInt("GUI.SellGui.Log.Slot"), log);
+                } else {
+                    cancel();
+                }
+            }
+        }.runTaskTimer(bCore.getInstance(), 20L, 20L);
     }
 
     public static @NotNull ItemStack stone(Player p) {
