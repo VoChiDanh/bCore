@@ -18,6 +18,7 @@ import java.util.Objects;
 
 public class Enchant implements Listener {
 
+    @Deprecated(since = "6/3/2022")
     public static @NotNull Inventory getEnchantGui(Player p) {
         Inventory EnchantGui = Bukkit.createInventory(p, Data.getguifile().getInt("GUI.EnchantGui.Size"), Objects.requireNonNull(Data.getguifile().getString(Data.convert("GUI.EnchantGui.Title"))));
         ItemStack MoneyEnchant = MoneyEnchant(p);
@@ -25,6 +26,7 @@ public class Enchant implements Listener {
         return EnchantGui;
     }
 
+    @Deprecated(since = "6/3/2022")
     public static @NotNull ItemStack MoneyEnchant(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.EnchantGui.Money.Material")))));
         ItemMeta meta = item.getItemMeta();

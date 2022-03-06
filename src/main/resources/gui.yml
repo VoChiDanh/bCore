@@ -2,6 +2,11 @@ GUI:
   SellGui:
     Title: "Sell Gui"
     Size: 9
+    Click:
+      Left: 10
+      Right: 100
+      Shift_Left: 1
+      Shift_Right: 10
     Stone:
       Slot: 0
       Material: STONE
@@ -12,11 +17,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     Coal:
       Slot: 1
       Material: COAL_BLOCK
@@ -27,11 +32,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     Iron:
       Slot: 2
       Material: IRON_BLOCK
@@ -42,11 +47,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     Gold:
       Slot: 3
       Material: GOLD_BLOCK
@@ -57,11 +62,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     PlayerInfo:
       Slot: 4
       Material: PLAYER_HEAD
@@ -88,11 +93,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     Emerald:
       Slot: 6
       Material: EMERALD_BLOCK
@@ -103,11 +108,11 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
     Log:
       Slot: 7
       Material: OAK_LOG
@@ -118,8 +123,8 @@ GUI:
         - ""
         - "&aStorage:&3 %amount% kg"
         - ""
-        - "&e&oLeft click to sell 10kg"
-        - "&e&oRight click to sell 100kg"
+        - "&e&oLeft click to sell %left%kg"
+        - "&e&oRight click to sell %right%kg"
         - "&b&oMiddle click to sell %amount%kg"
-        - "&6&oShift Left click to take 1 blocks"
-        - "&6&oShift Left click to take 10 blocks"
+        - "&6&oShift Left click to take %shift_left% blocks"
+        - "&6&oShift Right click to take %shift_right% blocks"
