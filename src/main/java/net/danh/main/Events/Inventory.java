@@ -84,27 +84,27 @@ public class Inventory implements Listener {
                     Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 1);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")), 1);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material"))), 10);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")), 10);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Diamond.Slot")) {
                 if (e.getClick().equals(ClickType.LEFT)) {
-                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 1);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 10);
                 }
                 if (e.getClick().equals(ClickType.RIGHT)) {
-                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 5);
+                    Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), 100);
                 }
                 if (e.getClick().equals(ClickType.MIDDLE)) {
                     Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")), 10);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")), 1);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")), 50);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")), 5);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Emerald.Slot")) {
@@ -118,10 +118,10 @@ public class Inventory implements Listener {
                     Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")), 1);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")), 1);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")), 10);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")), 10);
                 }
             }
             if (e.getSlot() == Data.getguifile().getInt("GUI.SellGui.Log.Slot")) {
@@ -135,10 +135,10 @@ public class Inventory implements Listener {
                     Items.Sell(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material"))), Storage.getStorage(p, Items.getName(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")))));
                 }
                 if (e.getClick().equals(ClickType.SHIFT_LEFT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")), 1);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")), 1);
                 }
                 if (e.getClick().equals(ClickType.SHIFT_RIGHT)) {
-                    Items.Sell(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")), 10);
+                    Items.Take(p, Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")), 10);
                 }
             }
         }
