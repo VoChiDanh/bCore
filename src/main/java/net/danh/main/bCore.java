@@ -79,7 +79,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Data.savedata();
         Data.saveconfig();
         Data.savelanguage();
-        Data.savegui();
         Data.saveitems();
         Data.savebank();
         getLogger().log(Level.INFO, "Saved data");
@@ -137,7 +136,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Fishing(),
                 new Moving(),
                 new Death(),
-                new Inventory(),
                 new Money(),
                 new Kill(),
                 new PvP()

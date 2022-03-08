@@ -21,7 +21,9 @@ public class Moving implements Listener {
         int Z = e.getFrom().getBlockZ();
         int Z1 = e.getTo().getBlockZ();
         if (X == X1 && Y == Y1 && Z == Z1) {
-            Power.addPower(p, Power.getRestorePower(p));
+            if (Power.getPower(p) < Power.getMaxPower(p)) {
+                Power.addPower(p, Power.getRestorePower(p));
+            }
         }
     }
 }

@@ -496,12 +496,12 @@ public class Commands implements CommandExecutor {
                 }
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("deposit")) {
-                        if (Integer.parseInt(args[1]) != 0) {
+                        if (Integer.parseInt(args[1]) > 0) {
                             Bank.depositBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
                         }
                     }
                     if (args[0].equalsIgnoreCase("withdraw")) {
-                        if (Integer.parseInt(args[1]) != 0) {
+                        if (Integer.parseInt(args[1]) > 0) {
                             Bank.withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
                         }
                     }
@@ -511,15 +511,15 @@ public class Commands implements CommandExecutor {
         }
         if (label.equalsIgnoreCase("pvp")) {
             if (sender instanceof Player) {
-                if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
+                if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "OAK_LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
                     PvPPlayer.PvPToggle(((Player) sender).getPlayer());
                     if (PvPPlayer.getPvPStatus(((Player) sender).getPlayer())) {
                         sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOn"))));
                     } else if (!PvPPlayer.getPvPStatus(((Player) sender).getPlayer())) {
                         sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOff"))));
                     }
-                    Storage.removeStorage(((Player) sender).getPlayer(), "LOG".toUpperCase(), 5);
-                    Weight.removeWeight(((Player) sender).getPlayer(), 5);
+                    Storage.removeStorage(((Player) sender).getPlayer(), Items.getName("OAK_LOG"), Data.getconfigfile().getInt("Req_Log_To_PvP"));
+                    Weight.removeWeight(((Player) sender).getPlayer(), Data.getconfigfile().getInt("Req_Log_To_PvP"));
                 } else {
                     sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
                 }
