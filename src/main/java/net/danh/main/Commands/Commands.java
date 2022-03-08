@@ -1,10 +1,8 @@
 package net.danh.main.Commands;
 
 import net.danh.main.CustomEnchantment.Money;
-import net.danh.main.Gui.SellBlocks;
 import net.danh.main.Manager.*;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,6 +37,16 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("reload")) {
                         Data.reloadfiles();
                         sender.sendMessage(Data.convert(PREFIX + RELOADED));
+                    }
+                }
+            }
+            if (args.length == 3) {
+                if (sender instanceof Player) {
+                    if (args[0].equalsIgnoreCase("sell")) {
+                        Items.Sell(((Player) sender).getPlayer(), Items.getName(args[1]), Integer.parseInt(args[2]));
+                    }
+                    if (args[0].equalsIgnoreCase("take")) {
+                        Items.Take(((Player) sender).getPlayer(), Items.getName(args[1]), Integer.parseInt(args[2]));
                     }
                 }
             }
@@ -451,42 +459,30 @@ public class Commands implements CommandExecutor {
             if (args.length == 5) {
                 if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("storage")) {
-                        if (Material.getMaterial(args[3]) != null) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
-                                    sender.sendMessage(Data.convert(PREFIX + DONE));
-                                } else {
-                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
-                                    sender.sendMessage(Data.convert(PREFIX + DONE));
-                                } else {
-                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (Bukkit.getPlayer(args[2]) != null) {
-                                    Storage.removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
-                                    sender.sendMessage(Data.convert(PREFIX + DONE));
-                                } else {
-                                    sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                                }
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Storage.setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
                             }
                         }
-                    }
-                }
-            }
-            return true;
-        }
-        if (label.equalsIgnoreCase("storage")) {
-            if (sender instanceof Player) {
-                if (args.length == 0) {
-                    if (sender.hasPermission("bCore.user")) {
-                        Objects.requireNonNull(((Player) sender).getPlayer()).openInventory(SellBlocks.getSellGui(((Player) sender).getPlayer()));
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Storage.addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Storage.removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
                     }
                 }
             }

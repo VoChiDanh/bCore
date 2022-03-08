@@ -22,12 +22,14 @@ import java.util.Objects;
 
 public class SellBlocks implements Listener {
 
+    @Deprecated
     public static @NotNull Inventory getSellGui(Player p) {
         Inventory sellgui = Bukkit.createInventory(p, Data.getguifile().getInt("GUI.SellGui.Size"), Objects.requireNonNull(Data.getguifile().getString(Data.convert("GUI.SellGui.Title"))));
         updateSellGui(p, sellgui);
         return sellgui;
     }
 
+    @Deprecated
     private static void updateSellGui(Player p, Inventory inv) {
         new BukkitRunnable() {
             @Override
@@ -57,6 +59,8 @@ public class SellBlocks implements Listener {
         }.runTaskTimer(bCore.getInstance(), 20L, 20L);
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack stone(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Stone.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -78,6 +82,8 @@ public class SellBlocks implements Listener {
     }
 
 
+
+    @Deprecated
     public static @NotNull ItemStack playerinfo(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Material")))));
         SkullMeta meta = (SkullMeta) item.getItemMeta();
@@ -103,6 +109,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack log(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Log.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -123,6 +131,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack coal(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Coal.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -143,6 +153,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack iron(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Iron.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -163,6 +175,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack gold(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Gold.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -183,6 +197,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack diamond(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Diamond.Material")))));
         ItemMeta meta = item.getItemMeta();
@@ -203,6 +219,8 @@ public class SellBlocks implements Listener {
         return item;
     }
 
+
+    @Deprecated
     public static @NotNull ItemStack emerald(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.Emerald.Material")))));
         ItemMeta meta = item.getItemMeta();

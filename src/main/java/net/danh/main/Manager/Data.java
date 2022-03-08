@@ -90,7 +90,7 @@ public class Data {
     public static void reloadfiles() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
-        gui = YamlConfiguration.loadConfiguration(guiFile);
+        item = YamlConfiguration.loadConfiguration(itemFile);
     }
 
     public static void saveconfig() {

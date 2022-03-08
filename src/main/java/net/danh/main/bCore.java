@@ -139,7 +139,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Death(),
                 new Inventory(),
                 new Money(),
-                new Click(),
                 new Kill(),
                 new PvP()
         ));
@@ -175,7 +174,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Objects.requireNonNull(getCommand("bCore")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
-        Objects.requireNonNull(getCommand("storage")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
     }
 

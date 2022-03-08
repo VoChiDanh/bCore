@@ -20,7 +20,7 @@ public class Storage {
         Data.getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) + number);
         p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("ADD_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))
-                .replaceAll("%block%", name.toLowerCase())
+                .replaceAll("%block%", name.replaceAll("_", " "))
                 .replaceAll("%weight%", String.valueOf(Weight.getWeight(p)))
                 .replaceAll("%maxweight%", String.valueOf(Weight.getMaxWeight(p)))));
         Data.savestorage();
@@ -30,7 +30,7 @@ public class Storage {
         Data.getstoragefile().set("players." + p.getName() + ".Blocks." + name, getStorage(p, name) - number);
         p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("REMOVE_STORAGE"))
                 .replaceAll("%amount%", String.valueOf(number))
-                .replaceAll("%block%", name.toLowerCase())
+                .replaceAll("%block%", name.replaceAll("_", " "))
                 .replaceAll("%weight%", String.valueOf(Weight.getWeight(p) - number))
                 .replaceAll("%maxweight%", String.valueOf(Weight.getMaxWeight(p)))));
         Data.savestorage();
