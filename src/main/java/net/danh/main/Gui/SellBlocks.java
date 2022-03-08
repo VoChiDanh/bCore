@@ -82,7 +82,6 @@ public class SellBlocks implements Listener {
     }
 
 
-
     @Deprecated
     public static @NotNull ItemStack playerinfo(Player p) {
         ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(Data.getguifile().getString("GUI.SellGui.PlayerInfo.Material")))));

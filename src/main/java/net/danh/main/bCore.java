@@ -200,7 +200,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             }
             try {
                 Enchantment.registerEnchantment(ench);
-                getLogger().log(Level.INFO, "Register Enchantments" + ench.getName());
+                getLogger().log(Level.INFO, "Register Enchantments " + ench.getName());
             } catch (IllegalArgumentException e) {
                 //if this is thrown it means the id is already taken.
             }
