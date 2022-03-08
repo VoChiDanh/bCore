@@ -135,7 +135,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new BlockBreak(),
                 new Join(),
                 new Fishing(),
-                new Eating(),
+                new Moving(),
                 new Death(),
                 new Inventory(),
                 new Money(),
@@ -200,6 +200,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             }
             try {
                 Enchantment.registerEnchantment(ench);
+                getLogger().log(Level.INFO, "Register Enchantments" + ench.getName());
             } catch (IllegalArgumentException e) {
                 //if this is thrown it means the id is already taken.
             }
