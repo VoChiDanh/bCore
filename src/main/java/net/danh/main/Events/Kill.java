@@ -5,6 +5,7 @@ import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import net.danh.main.Manager.Data;
 import net.danh.main.Manager.PlayerData;
 import net.danh.main.bCore;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -50,10 +51,12 @@ public class Kill implements Listener {
         if (mob instanceof Monster || mob instanceof Animals) {
             PlayerData.addKill(p, 1);
             int money = Data.getRandomInt(min, max);
-            bCore.economy.depositPlayer(p, money);
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                    .replaceAll("%money%", String.valueOf(money))
-                    .replaceAll("%mobs%", mob.getName())));
+            EconomyResponse r = bCore.economy.depositPlayer(p, money);
+            if (r.transactionSuccess()) {
+                p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
+                        .replaceAll("%money%", String.valueOf(money))
+                        .replaceAll("%mobs%", mob.getName())));
+            }
         }
     }
 

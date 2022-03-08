@@ -68,18 +68,20 @@ public class Items {
     }
 
     public static void Sell(Player p, @NotNull String name, Integer number) {
-        if (Storage.getStorage(p, name.toUpperCase()) >= number && Weight.getWeight(p) >= number) {
-            Storage.removeStorage(p, name, number);
-            Weight.removeWeight(p, number);
-            Data.savestorage();
-            Data.savedata();
-            int money = getPrice(name) * number;
-            EconomyResponse r = bCore.economy.depositPlayer(p.getPlayer(), money);
-            if (r.transactionSuccess()) {
-                p.sendMessage(Data.convert("&a+ " + money + "$"));
+        if (getName(name) != null) {
+            if (Storage.getStorage(p, getName(name)) >= number && Weight.getWeight(p) >= number) {
+                Storage.removeStorage(p, getName(name), number);
+                Weight.removeWeight(p, number);
+                Data.savestorage();
+                Data.savedata();
+                int money = getPrice(name) * number;
+                EconomyResponse r = bCore.economy.depositPlayer(p.getPlayer(), money);
+                if (r.transactionSuccess()) {
+                    p.sendMessage(Data.convert("&a+ " + money + "$"));
+                }
+            } else {
+                p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
             }
-        } else {
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MATERIAL"))));
         }
     }
 
