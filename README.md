@@ -49,8 +49,7 @@ HELP_ADMIN:
 /bCore plevel [add/set/remove] [Player] [Number] - Add/Set/Remove Player level
 /bCore xp [add/set/remove] [Player] [Number] - Add/Set/Remove Player XP
 /bCore power [add/set/remove] [Player] [Number] - Add/Set/Remove Player Power
-/bCore glevel [add/set/remove] [Player] [Number] - Add/Set/Remove Gang Level
-/bCore levelup [add/set/remove] [Player] [Number] - Add/Set/Remove Gang Points
+/bCore levelup [add/set/remove] [Player] [Number] - Add/Set/Remove Level Points
 /bCore maxpower [add/set/remove] [Player] [Number] - Add/Set/Remove Max Power
 /bCore restorepower [add/set/remove] [Player] [Number] - Add/Set/Remove Restore Power
 /bCore weight [add/set/remove] [Player] [Number] - Add/Set/Remove Weight

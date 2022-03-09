@@ -1,6 +1,6 @@
 xp: 1
 EnableAge: false
-AgeTime: 90000 #seconds
+AgeTime: 90000
 debug: false
 minimum_power: 30
 Lucky_Power: 5
@@ -12,63 +12,82 @@ Per_Restore_Power: 10
 Default_Lucky_Chance: 5
 Req_Log_To_PvP: 100
 Level_Bank: 10000
+Add_Type: ACTION_BAR #ACTION_BAR / CHAT
 Boolean:
-  true: "on"
-  false: "off"
+  'true': 'on'
+  'false': 'off'
 Blocks:
   STONE:
-    max: 5
+    max: 10
     min: 1
   COBBLESTONE:
-    max: 6
-    min: 2
+    max: 10
+    min: 1
   COAL_ORE:
-    max: 3
+    max: 10
     min: 1
   COAL_BLOCK:
-    max: 5
-    min: 2
+    max: 10
+    min: 1
   IRON_ORE:
-    max: 5
-    min: 3
+    max: 10
+    min: 1
   IRON_BLOCK:
-    max: 7
-    min: 4
+    max: 10
+    min: 1
   GOLD_ORE:
     max: 10
-    min: 5
+    min: 1
   GOLD_BLOCK:
-    max: 12
-    min: 6
+    max: 10
+    min: 1
   DIAMOND_ORE:
-    max: 15
-    min: 10
+    max: 10
+    min: 1
   DIAMOND_BLOCK:
-    max: 17
-    min: 11
+    max: 10
+    min: 1
   EMERALD_ORE:
-    max: 20
-    min: 15
+    max: 10
+    min: 1
   EMERALD_BLOCK:
-    max: 22
-    min: 16
+    max: 10
+    min: 1
   ACACIA_LOG:
-    max: 5
+    max: 10
     min: 1
   BIRCH_LOG:
-    max: 5
+    max: 10
     min: 1
   DARK_OAK_LOG:
-    max: 5
+    max: 10
     min: 1
   JUNGLE_LOG:
-    max: 5
+    max: 10
     min: 1
   OAK_LOG:
-    max: 5
+    max: 10
     min: 1
   SPRUCE_LOG:
-    max: 5
+    max: 10
+    min: 1
+  OBSIDIAN:
+    max: 10
+    min: 1
+  ANCIENT_DEBRIS:
+    max: 10
+    min: 1
+  CUT_SANDSTONE:
+    max: 10
+    min: 1
+  PRISMARINE:
+    max: 10
+    min: 1
+  SAND:
+    max: 10
+    min: 1
+  PRISMARINE_BRICKS:
+    max: 10
     min: 1
 Vanilla:
   Default:
