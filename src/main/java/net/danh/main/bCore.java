@@ -2,7 +2,6 @@ package net.danh.main;
 
 import net.danh.main.Commands.Commands;
 import net.danh.main.Commands.TabCommand;
-import net.danh.main.CustomEnchantment.Money;
 import net.danh.main.Events.*;
 import net.danh.main.Hook.MythicMobs;
 import net.danh.main.Hook.PlaceholderAPI;
@@ -12,7 +11,6 @@ import net.danh.main.Manager.Power;
 import net.danh.main.Manager.Weight;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -23,7 +21,6 @@ import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
 import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -33,7 +30,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
 
     public static Economy economy;
-    static Enchantment MONEY;
     private static bCore instance;
 
     public static bCore getInstance() {
@@ -52,7 +48,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         HookWithOthersPlugins();
         RegisterEvents();
         RegisterCommands();
-        RegisterEnchantments();
         Data.createconfig();
         (new BukkitRunnable() {
             public void run() {
@@ -136,7 +131,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Fishing(),
                 new Moving(),
                 new Death(),
-                new Money(),
                 new Kill(),
                 new PvP()
         ));
@@ -175,11 +169,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
     }
 
-    private void RegisterEnchantments() {
-        MONEY = new Money();
-        registerEnchants(MONEY);
-    }
-
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
         if (economyProvider != null)
@@ -187,23 +176,4 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         return (economy != null);
     }
 
-    private void registerEnchants(Enchantment ench) {
-        try {
-            try {
-                Field f = Enchantment.class.getDeclaredField("acceptingNew");
-                f.setAccessible(true);
-                f.set(null, true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                Enchantment.registerEnchantment(ench);
-                getLogger().log(Level.INFO, "Register Enchantments " + ench.getName());
-            } catch (IllegalArgumentException e) {
-                //if this is thrown it means the id is already taken.
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

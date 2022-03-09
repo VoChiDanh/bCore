@@ -1,6 +1,5 @@
 package net.danh.main.Commands;
 
-import net.danh.main.CustomEnchantment.Money;
 import net.danh.main.Manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -366,39 +365,6 @@ public class Commands implements CommandExecutor {
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                    }
-                    if (args[0].equalsIgnoreCase("enchant")) {
-                        if (sender instanceof Player) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                if (args[2].equals("Money")) {
-                                    Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), Integer.parseInt(args[3]));
-                                    sender.sendMessage(Data.convert(PREFIX + DONE));
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                if (args[2].equals("Money")) {
-                                    if (Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().getEnchantmentLevel(new Money()) == 0) {
-                                        Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), 1);
-                                    } else {
-                                        Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) + Integer.parseInt(args[3]));
-                                        sender.sendMessage(Data.convert(PREFIX + DONE));
-                                    }
-                                }
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                if (args[2].equals("Money")) {
-                                    if (Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().getEnchantmentLevel(new Money()) > 1) {
-                                        if (((Player) sender).getPlayer().getItemInHand().containsEnchantment(new Money())) {
-                                            Objects.requireNonNull(((Player) sender).getPlayer()).getItemInHand().addUnsafeEnchantment(new Money(), ((Player) sender).getPlayer().getItemInHand().getEnchantmentLevel(new Money()) - Integer.parseInt(args[3]));
-                                            sender.sendMessage(Data.convert(PREFIX + DONE));
-                                        }
-                                    } else {
-                                        ((Player) sender).getPlayer().getItemInHand().removeEnchantment(new Money());
-                                        sender.sendMessage(Data.convert(PREFIX + DONE));
-                                    }
-                                }
                             }
                         }
                     }

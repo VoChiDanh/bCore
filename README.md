@@ -30,10 +30,6 @@
 
 > When storage have any block, you weight will increase. When weight reach max. You can't mine anymore
 
-### Custom Enchants
-
-> Money - You'll get chance to get money when mining
-
 ## Commands
 
 ```
