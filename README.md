@@ -72,6 +72,4 @@ bCore.admin - Permission for Admin
 [![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.0--SNAPSHOT-blue?style=badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/)
 
 ## Project Status
-
-![GitHub Release](https://img.shields.io/github/release/VoChiDanh/bCore.svg?style=badge)
 ![status](https://img.shields.io/badge/Project--Status-Active-green?style=badge) 
