@@ -4,6 +4,8 @@ import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import net.danh.main.Manager.Data;
 import net.danh.main.Manager.PlayerData;
 import net.danh.main.bCore;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TranslatableComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,8 +41,9 @@ public class MythicMobs implements Listener {
         PlayerData.addKill(p, 1);
         int money = Data.getRandomInt(min, max);
         bCore.economy.depositPlayer(p, money);
-        p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
+        p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
+                new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
                 .replaceAll("%money%", String.valueOf(money))
-                .replaceAll("%mobs%", mob)));
+                .replaceAll("%mobs%", mob))));
     }
 }

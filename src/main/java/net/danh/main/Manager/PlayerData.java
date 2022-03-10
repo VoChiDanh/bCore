@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 public class PlayerData {
 
     public static int getLevel(@NotNull Player p) {
+        /** TODO 5 level = 1 key
+         **/
         return Data.getdatafile().getInt("players." + p.getName() + ".Level");
     }
 

@@ -1,3 +1,5 @@
+disable-worlds:
+  - Plot
 xp: 1
 EnableAge: false
 AgeTime: 90000

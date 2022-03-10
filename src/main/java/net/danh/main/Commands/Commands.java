@@ -487,7 +487,8 @@ public class Commands implements CommandExecutor {
                     Storage.removeStorage(((Player) sender).getPlayer(), Items.getName("OAK_LOG"), Data.getconfigfile().getInt("Req_Log_To_PvP"));
                     Weight.removeWeight(((Player) sender).getPlayer(), Data.getconfigfile().getInt("Req_Log_To_PvP"));
                 } else {
-                    sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))));
+                    sender.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))
+                            .replaceAll("%amount%", String.valueOf(Data.getconfigfile().getInt("Req_Log_To_PvP"))))));
                 }
             }
             return true;

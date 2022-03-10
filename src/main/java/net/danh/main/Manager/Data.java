@@ -20,7 +20,6 @@ public class Data {
     private static File configFile, languageFile, dataFile, storageFile, itemFile, bankFile;
     private static FileConfiguration config, language, data, storage, item, bank;
 
-
     public static void createconfig() {
         configFile = new File(bCore.getInstance().getDataFolder(), "config.yml");
         languageFile = new File(bCore.getInstance().getDataFolder(), "language.yml");
@@ -53,7 +52,6 @@ public class Data {
             e.printStackTrace();
         }
     }
-
 
     public static FileConfiguration getconfigfile() {
         return config;
@@ -92,14 +90,12 @@ public class Data {
         }
     }
 
-
     public static void savelanguage() {
         try {
             language.save(languageFile);
         } catch (IOException ignored) {
         }
     }
-
 
     public static void savedata() {
         try {
