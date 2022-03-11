@@ -1,7 +1,6 @@
 package net.danh.main.Events;
 
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import net.danh.main.Manager.Data;
 import net.danh.main.Manager.PlayerData;
 import net.danh.main.bCore;
@@ -30,7 +29,7 @@ public class Kill implements Listener {
             return;
         }
         if (bCore.getInstance().getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            BukkitAPIHelper mythicMobsAPI = MythicMobs.inst().getAPIHelper();
+            BukkitAPIHelper mythicMobsAPI = new BukkitAPIHelper();
             if (mythicMobsAPI.isMythicMob(mob)) {
                 return;
             }
@@ -57,8 +56,8 @@ public class Kill implements Listener {
             if (r.transactionSuccess()) {
                 p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
                         new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                        .replaceAll("%money%", String.valueOf(money))
-                        .replaceAll("%mobs%", mob.getName()))));
+                                .replaceAll("%money%", String.valueOf(money))
+                                .replaceAll("%mobs%", mob.getName()))));
             }
         }
     }

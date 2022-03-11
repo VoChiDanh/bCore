@@ -1,6 +1,6 @@
 package net.danh.main.Hook;
 
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
+import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import net.danh.main.Manager.Data;
 import net.danh.main.Manager.PlayerData;
 import net.danh.main.bCore;
@@ -43,7 +43,7 @@ public class MythicMobs implements Listener {
         bCore.economy.depositPlayer(p, money);
         p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
                 new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                .replaceAll("%money%", String.valueOf(money))
-                .replaceAll("%mobs%", mob))));
+                        .replaceAll("%money%", String.valueOf(money))
+                        .replaceAll("%mobs%", mob))));
     }
 }
