@@ -20,5 +20,5 @@ jobs:
           - echo $COMMIT | cut -b -7
       - uses: "actions/upload-artifact@v3"
         with:
-          name: "bCore-1.0-SNAPSHOT-${$COMMIT}"
+          name: "bCore-1.0-SNAPSHOT-${COMMIT}"
           path: ./target/bCore-1.0-SNAPSHOT.jar
