@@ -1,6 +1,6 @@
-package net.danh.main.Manager;
+package net.danh.Manager;
 
-import net.danh.main.bCore;
+import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

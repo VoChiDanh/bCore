@@ -1,6 +1,6 @@
-package net.danh.main.Manager;
+package net.danh.Manager;
 
-import net.danh.main.bCore;
+import net.danh.bCore;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -123,12 +123,6 @@ public class Data {
             bank.save(bankFile);
         } catch (IOException ignored) {
         }
-    }
-
-    @Deprecated
-    public static double getRandomDouble(double min, double max) {
-        Random r = new Random();
-        return r.nextDouble(max - min) + min;
     }
 
     public static int getRandomInt(int min, int max) {

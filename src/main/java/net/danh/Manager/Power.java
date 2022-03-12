@@ -1,4 +1,4 @@
-package net.danh.main.Manager;
+package net.danh.Manager;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

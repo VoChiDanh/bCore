@@ -1,8 +1,8 @@
-package net.danh.main.Events;
+package net.danh.Events;
 
-import net.danh.main.Manager.Data;
-import net.danh.main.Manager.PlayerData;
-import net.danh.main.bCore;
+import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
+import net.danh.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

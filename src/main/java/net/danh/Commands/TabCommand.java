@@ -1,4 +1,4 @@
-package net.danh.main.Commands;
+package net.danh.Commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

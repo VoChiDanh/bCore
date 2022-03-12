@@ -1,14 +1,14 @@
-package net.danh.main;
+package net.danh;
 
-import net.danh.main.Commands.Commands;
-import net.danh.main.Commands.TabCommand;
-import net.danh.main.Events.*;
-import net.danh.main.Hook.MythicMobs;
-import net.danh.main.Hook.PlaceholderAPI;
-import net.danh.main.Manager.Data;
-import net.danh.main.Manager.PlayerData;
-import net.danh.main.Manager.Power;
-import net.danh.main.Manager.Weight;
+import net.danh.Commands.Commands;
+import net.danh.Commands.TabCommand;
+import net.danh.Events.*;
+import net.danh.Hook.MythicMobs;
+import net.danh.Hook.PlaceholderAPI;
+import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
+import net.danh.Manager.Power;
+import net.danh.Manager.Weight;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,6 +23,7 @@ import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -46,7 +47,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     public void onEnable() {
         instance = this;
         HookWithOthersPlugins();
-        RegisterEvents();
+        RegisterEvent();
         RegisterCommands();
         Data.createconfig();
         (new BukkitRunnable() {
@@ -88,6 +89,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getLogger().warning("The server version is not suitable to load the plugin");
             getLogger().warning("Support version 1.13.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
+            return;
         }
     }
 
@@ -107,6 +109,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getLogger().log(Level.INFO, "Successfully hooked with Vault");
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
             getLogger().log(Level.INFO, "Successfully hooked with MythicMobs");
@@ -115,7 +119,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }
     }
 
-    private void RegisterEvents() {
+    private void RegisterEvent() {
         registerEventHandlers();
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
             registerMythic();
@@ -147,7 +151,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> MythicListeners() {
-        return new ArrayList<>(Arrays.asList(
+        return new ArrayList<>(List.of(
                 new MythicMobs()
         ));
     }

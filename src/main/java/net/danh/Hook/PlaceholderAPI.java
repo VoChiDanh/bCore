@@ -1,8 +1,8 @@
-package net.danh.main.Hook;
+package net.danh.Hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.danh.main.Manager.*;
-import net.danh.main.bCore;
+import net.danh.Manager.*;
+import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,6 +1,6 @@
-package net.danh.main.Events;
+package net.danh.Events;
 
-import net.danh.main.Manager.PvPPlayer;
+import net.danh.Manager.PvPPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;

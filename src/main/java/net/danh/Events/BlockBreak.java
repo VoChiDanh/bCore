@@ -1,7 +1,7 @@
-package net.danh.main.Events;
+package net.danh.Events;
 
-import net.danh.main.Manager.*;
-import net.danh.main.bCore;
+import net.danh.Manager.*;
+import net.danh.bCore;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

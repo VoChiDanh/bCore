@@ -1,4 +1,4 @@
-package net.danh.main.Manager;
+package net.danh.Manager;
 
 import java.util.HashMap;
 import java.util.Map;

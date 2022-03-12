@@ -1,7 +1,7 @@
-package net.danh.main.Commands;
+package net.danh.Commands;
 
-import net.danh.main.Manager.*;
-import net.danh.main.bCore;
+import net.danh.Manager.*;
+import net.danh.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

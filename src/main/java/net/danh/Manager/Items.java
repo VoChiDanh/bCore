@@ -1,6 +1,6 @@
-package net.danh.main.Manager;
+package net.danh.Manager;
 
-import net.danh.main.bCore;
+import net.danh.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

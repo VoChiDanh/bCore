@@ -1,9 +1,9 @@
-package net.danh.main.Events;
+package net.danh.Events;
 
-import net.danh.main.Manager.Data;
-import net.danh.main.Manager.Lucky;
-import net.danh.main.Manager.PlayerData;
-import net.danh.main.Manager.Power;
+import net.danh.Manager.Data;
+import net.danh.Manager.Lucky;
+import net.danh.Manager.PlayerData;
+import net.danh.Manager.Power;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
