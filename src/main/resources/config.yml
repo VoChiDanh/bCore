@@ -18,6 +18,7 @@ Add_Type: ACTION_BAR #ACTION_BAR / CHAT
 Boolean:
   'true': 'on'
   'false': 'off'
+Cooldown_PvP: 600
 Blocks:
   STONE:
     max: 10

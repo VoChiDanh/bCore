@@ -1,11 +1,13 @@
 package net.danh.main.Commands;
 
 import net.danh.main.Manager.*;
+import net.danh.main.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Commands implements CommandExecutor {
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String DONE = Data.getlanguagefile().getString("DONE");
         String UNKNOW_PLAYER = Data.getlanguagefile().getString("UNKNOW_PLAYER");
+        String COOLDOWN_PVP = Data.getlanguagefile().getString("COOLDOWN_PVP");
         if (label.equalsIgnoreCase("bCore")) {
             if (args.length == 0) {
                 if (sender.hasPermission("bCore.user")) {
@@ -478,6 +481,25 @@ public class Commands implements CommandExecutor {
         if (label.equalsIgnoreCase("pvp")) {
             if (sender instanceof Player) {
                 if (Storage.getStorage(Objects.requireNonNull(((Player) sender).getPlayer()), "OAK_LOG".toUpperCase()) >= Data.getconfigfile().getInt("Req_Log_To_PvP")) {
+                    int timeLeft = Cooldown.getCooldown(((Player) sender).getUniqueId());
+                    if (timeLeft == 0) {
+                        Cooldown.setCooldown(((Player) sender).getUniqueId(), Data.getconfigfile().getInt("Cooldown_PvP"));
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                int timeLeft = Cooldown.getCooldown(((Player) sender).getUniqueId());
+                                Cooldown.setCooldown(((Player) sender).getUniqueId(), --timeLeft);
+                                if (timeLeft == 0) {
+                                    this.cancel();
+                                }
+                            }
+                        }.runTaskTimer(bCore.getInstance(), 20, 20);
+
+                    } else {
+                        //Hasn't expired yet, shows how many seconds left until it does
+                        sender.sendMessage(Data.convert(PREFIX + Objects.requireNonNull(COOLDOWN_PVP).replaceAll("%time%", String.valueOf(timeLeft))));
+                        return true;
+                    }
                     PvPPlayer.PvPToggle(((Player) sender).getPlayer());
                     if (PvPPlayer.getPvPStatus(((Player) sender).getPlayer())) {
                         sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PvPOn"))));

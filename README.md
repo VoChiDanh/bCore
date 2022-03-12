@@ -69,7 +69,7 @@ bCore.admin - Permission for Admin
 
 [![vault](https://img.shields.io/badge/Vault-1.7-blue?style=badge)](https://www.spigotmc.org/resources/34315/)
 [![placeholderapi](https://img.shields.io/badge/PlaceholderAPI-2.11.11-blue?style=badge)](https://www.spigotmc.org/resources/6245/)
-[![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.0--SNAPSHOT-blue?style=badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/)
+[![mythicmobs](https://img.shields.io/badge/MythicMobs-5.0.1+-blue?style=badge)](https://mythiccraft.io/index.php?pages/official-mythicmobs-download/)
 
 ## Project Status
 ![status](https://img.shields.io/badge/Project--Status-Active-green?style=badge) 
