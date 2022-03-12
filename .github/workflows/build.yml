@@ -15,7 +15,10 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package
+      - name: Setup
+        run: |
+          - echo $COMMIT | cut -b -7
       - uses: "actions/upload-artifact@v3"
         with:
-          name: "bCore-1.0-SNAPSHOT-${GITHUB_SHA}"
+          name: "bCore-1.0-SNAPSHOT-${$COMMIT}"
           path: ./target/bCore-1.0-SNAPSHOT.jar
