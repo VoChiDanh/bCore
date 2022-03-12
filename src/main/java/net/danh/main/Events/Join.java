@@ -48,7 +48,7 @@ public class Join implements Listener {
             PlayerData.setKill(p, 0);
         }
         if (!PvPPlayer.getPvPStatus(p)) {
-            PvPPlayer.setPvPStatus(p, false);
+            PvPPlayer.setPvPStatus(p, true);
         }
     }
 }

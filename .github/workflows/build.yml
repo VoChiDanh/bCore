@@ -17,5 +17,5 @@ jobs:
         run: mvn -B package
       - uses: "actions/upload-artifact@v3"
         with:
-          name: "bCore-1.0-SNAPSHOT"
+          name: "bCore-1.0-SNAPSHOT-${SHORT_COMMIT_ID}"
           path: ./target/bCore-1.0-SNAPSHOT.jar

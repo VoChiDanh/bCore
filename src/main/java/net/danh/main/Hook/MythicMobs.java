@@ -6,6 +6,7 @@ import net.danh.main.Manager.PlayerData;
 import net.danh.main.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,10 +41,12 @@ public class MythicMobs implements Listener {
         }
         PlayerData.addKill(p, 1);
         int money = Data.getRandomInt(min, max);
-        bCore.economy.depositPlayer(p, money);
-        p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                        .replaceAll("%money%", String.valueOf(money))
-                        .replaceAll("%mobs%", mob))));
+        EconomyResponse r = bCore.economy.depositPlayer(p, money);
+        if (r.transactionSuccess()) {
+            p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
+                    new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
+                            .replaceAll("%money%", String.valueOf(money))
+                            .replaceAll("%mobs%", mob))));
+        }
     }
 }
