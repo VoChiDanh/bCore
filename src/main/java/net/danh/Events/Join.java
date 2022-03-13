@@ -1,5 +1,6 @@
 package net.danh.Events;
 
+import net.danh.Contest.Mining;
 import net.danh.Manager.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,6 @@ public class Join implements Listener {
         if (Lucky.getLuckyChance(p) == 0) {
             Lucky.setLuckyChance(p, Data.getconfigfile().getInt("Default_Lucky_Chance"));
         }
-
         if (Power.getPower(p) == 0) {
             Power.setPower(p, Power.getMaxPower(p));
         }
@@ -34,9 +34,6 @@ public class Join implements Listener {
         }
         if (Weight.getMaxWeight(p) == 0) {
             Weight.setMaxWeight(p, 5000);
-        }
-        if (Storage.getStorage(p, "LOG".toUpperCase()) == 0) {
-            Storage.setStorage(p, "LOG".toUpperCase(), 0);
         }
         if (Bank.getBankLevel(p) == 0) {
             Bank.setBankLevel(p, 1);
@@ -49,6 +46,12 @@ public class Join implements Listener {
         }
         if (!PvPPlayer.getPvPStatus(p)) {
             PvPPlayer.setPvPStatus(p, true);
+        }
+        if (PlayerData.getPlayerName(p) == null) {
+            PlayerData.setPlayerName(p);
+        }
+        if (PlayerData.getBlocks(p) > 0 && !Mining.getStart()) {
+            PlayerData.setBlocks(p, 0);
         }
     }
 }

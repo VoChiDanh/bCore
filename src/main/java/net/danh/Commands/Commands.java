@@ -1,5 +1,6 @@
 package net.danh.Commands;
 
+import net.danh.Contest.Mining;
 import net.danh.Manager.*;
 import net.danh.bCore;
 import org.bukkit.Bukkit;
@@ -40,6 +41,10 @@ public class Commands implements CommandExecutor {
                         Data.reloadfiles();
                         sender.sendMessage(Data.convert(PREFIX + RELOADED));
                     }
+                    if (args[0].equalsIgnoreCase("start")) {
+                        Mining.StartMining();
+                        sender.sendMessage(Data.convert(PREFIX + DONE));
+                    }
                 }
             }
             if (args.length == 3) {
@@ -48,7 +53,7 @@ public class Commands implements CommandExecutor {
                         Items.Sell(((Player) sender).getPlayer(), Items.getName(args[1]), Integer.parseInt(args[2]));
                     }
                     if (args[0].equalsIgnoreCase("take")) {
-                        Items.Take(((Player) sender).getPlayer(), Items.getName(args[1]), Integer.parseInt(args[2]));
+                        Items.Take(((Player) sender).getPlayer(), args[1], Integer.parseInt(args[2]));
                     }
                 }
             }

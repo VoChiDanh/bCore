@@ -50,7 +50,6 @@ public class Kill implements Listener {
             }
         }
         if (mob instanceof Monster || mob instanceof Animals) {
-            PlayerData.addKill(p, 1);
             int money = Data.getRandomInt(min, max);
             EconomyResponse r = bCore.economy.depositPlayer(p, money);
             if (r.transactionSuccess()) {

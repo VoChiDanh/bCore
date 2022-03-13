@@ -28,7 +28,7 @@ public class Moving implements Listener {
                     public void run() {
                         Power.addPower(p, Power.getRestorePower(p) / 5);
                     }
-                }).runTaskTimer(bCore.getInstance(), 20L, 20L);
+                }).runTaskTimer(bCore.getInstance(), 60 * 20L, 60 * 20L);
             }
         }
     }

@@ -39,7 +39,6 @@ public class MythicMobs implements Listener {
                 break;
             }
         }
-        PlayerData.addKill(p, 1);
         int money = Data.getRandomInt(min, max);
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
         if (r.transactionSuccess()) {

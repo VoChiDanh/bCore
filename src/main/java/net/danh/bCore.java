@@ -2,6 +2,7 @@ package net.danh;
 
 import net.danh.Commands.Commands;
 import net.danh.Commands.TabCommand;
+import net.danh.Contest.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
@@ -68,6 +69,12 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
+
+        (new BukkitRunnable() {
+            public void run() {
+                Mining.StartMining();
+            }
+        }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
     }
 
     @Override
@@ -83,13 +90,12 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(12)) {
+        if (nmsAssistant.isVersionGreaterThan(7)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.13.x - 1.18.x");
+            getLogger().warning("Support version 1.8.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
-            return;
         }
     }
 
@@ -112,19 +118,25 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        final NMSAssistant nmsAssistant = new NMSAssistant();
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs");
+            if (nmsAssistant.isVersionGreaterThan(15) && !(Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().contains("5.0.0"))) {
+                getLogger().log(Level.INFO, "Successfully hooked with MythicMobs");
+            }
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs");
         }
     }
 
+
     private void RegisterEvent() {
         registerEventHandlers();
+        final NMSAssistant nmsAssistant = new NMSAssistant();
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            registerMythic();
+            if (nmsAssistant.isVersionGreaterThan(15) && !(Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().contains("5.0.0"))) {
+                registerMythic();
+            }
         }
-
     }
 
     @Contract(" -> new")
