@@ -111,19 +111,19 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
             new PlaceholderAPI().register();
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
-            getLogger().log(Level.INFO, "Successfully hooked with Vault" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         }
     }
 
