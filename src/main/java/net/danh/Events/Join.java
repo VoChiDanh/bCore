@@ -38,11 +38,11 @@ public class Join implements Listener {
         if (Bank.getBankLevel(p) == 0) {
             Bank.setBankLevel(p, 1);
         }
-        if (PlayerData.getBlocks(p) == 0) {
-            PlayerData.setBlocks(p, 0);
+        if (PlayerData.getBlockEvent(p) == 0) {
+            PlayerData.setBlocksEvent(p, 0);
         }
-        if (PlayerData.getKill(p) == 0) {
-            PlayerData.setKill(p, 0);
+        if (PlayerData.getKillEvent(p) == 0) {
+            PlayerData.setKillEvent(p, 0);
         }
         if (!PvPPlayer.getPvPStatus(p)) {
             PvPPlayer.setPvPStatus(p, true);
@@ -50,7 +50,10 @@ public class Join implements Listener {
         if (PlayerData.getPlayerName(p) == null) {
             PlayerData.setPlayerName(p);
         }
-        if (PlayerData.getBlocks(p) > 0 && !Mining.getStart()) {
+        if (PlayerData.getBlockEvent(p) > 0 && !Mining.getStart()) {
+            PlayerData.setBlocksEvent(p, 0);
+        }
+        if (PlayerData.getBlocks(p) <= 0) {
             PlayerData.setBlocks(p, 0);
         }
     }

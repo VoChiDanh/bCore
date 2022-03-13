@@ -109,8 +109,9 @@ public class BlockBreak implements Listener {
                 PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
                 Power.removePower(p, 1);
                 if (Mining.getStart()) {
-                    PlayerData.addBlocks(p, 1);
+                    PlayerData.addBlocksEvent(p, 1);
                 }
+                PlayerData.addBlocks(p, 1);
                 if (Data.getconfigfile().getBoolean("debug")) {
                     bCore.getInstance().getLogger().log(Level.INFO, "Add xp");
                 }

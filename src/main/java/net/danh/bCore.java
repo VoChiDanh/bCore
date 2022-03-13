@@ -54,17 +54,21 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (PlayerData.getLevel(p) == 1) {
-                        if (Power.getPower(p) > Power.getMaxPower(p)) {
-                            Power.setPower(p, Power.getMaxPower(p));
-                        }
-                        if (Weight.getWeight(p) == Weight.getMaxWeight(p)) {
-                            p.setWalkSpeed(0F);
-                            p.setFlySpeed(0F);
-                        } else {
-                            p.setWalkSpeed(0.2F);
-                            p.setFlySpeed(0.2F);
-                        }
+                    if (Power.getPower(p) >= Power.getMaxPower(p)) {
+                        Power.setPower(p, Power.getMaxPower(p));
+                    }
+                    if (Weight.getWeight(p) == Weight.getMaxWeight(p)) {
+                        p.setWalkSpeed(0F);
+                        p.setFlySpeed(0F);
+                    } else {
+                        p.setWalkSpeed(0.2F);
+                        p.setFlySpeed(0.2F);
+                    }
+                    if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
+                        PlayerData.setBlocks(p, 0);
+                        getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
+                                .replaceAll("%player%", p.getName())));
+                        p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
                     }
                 }
             }
@@ -86,6 +90,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Data.savelanguage();
         Data.saveitems();
         Data.savebank();
+        Data.savecmd();
         getLogger().log(Level.INFO, "Saved data");
     }
 

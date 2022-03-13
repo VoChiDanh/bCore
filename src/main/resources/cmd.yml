@@ -1,0 +1,4 @@
+Commands:
+  Mine:
+    Amount: 1280
+    Command: "crate givekey %player% miner 1"

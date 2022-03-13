@@ -25,7 +25,7 @@ public class Mining {
         Started = true;
         Bukkit.broadcastMessage(Data.convert(Data.getlanguagefile().getString("MINING_START")));
         for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
-            PlayerData.setBlocks(p, 0);
+            PlayerData.setBlocksEvent(p, 0);
         }
         List<MiningManager> leaderboard = LeaderBoard.getLdMining();
         (new BukkitRunnable() {
@@ -47,7 +47,7 @@ public class Mining {
                         }
                     }
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
-                        PlayerData.setBlocks(p, 0);
+                        PlayerData.setBlocksEvent(p, 0);
                     }
                     cancel();
                     Started = false;

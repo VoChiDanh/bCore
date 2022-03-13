@@ -95,41 +95,41 @@ public class PlayerData {
     }
 
 
-    public static @NotNull Integer getBlocks(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
+    public static @NotNull Integer getBlockEvent(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Event.Blocks");
     }
 
-    public static void setBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", number);
+    public static void setBlocksEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", number);
         Data.savedata();
     }
 
-    public static void addBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) + number);
+    public static void addBlocksEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", getBlockEvent(p) + number);
         Data.savedata();
     }
 
-    public static void removeBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) - number);
+    public static void removeBlocksEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", getBlockEvent(p) - number);
         Data.savedata();
     }
 
-    public static @NotNull Integer getKill(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Kills");
+    public static @NotNull Integer getKillEvent(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Event.Kills");
     }
 
-    public static void setKill(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Kills", number);
+    public static void setKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Kills", number);
         Data.savedata();
     }
 
-    public static void addKill(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) + number);
+    public static void addKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Kills", getKillEvent(p) + number);
         Data.savedata();
     }
 
-    public static void removeKill(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Kills", getKill(p) - number);
+    public static void removeKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Event.Kills", getKillEvent(p) - number);
         Data.savedata();
     }
 
@@ -152,6 +152,26 @@ public class PlayerData {
 
     public static void setPlayerName(@NotNull Player p) {
         Data.getdatafile().set("players." + p.getName() + ".name", p.getName());
+    }
+
+
+    public static @NotNull Integer getBlocks(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
+    }
+
+    public static void setBlocks(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", number);
+        Data.savedata();
+    }
+
+    public static void addBlocks(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) + number);
+        Data.savedata();
+    }
+
+    public static void removeBlocks(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) - number);
+        Data.savedata();
     }
 
 }

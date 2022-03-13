@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
 public class Data {
 
     public final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
-    private static File configFile, languageFile, dataFile, storageFile, itemFile, bankFile;
-    private static FileConfiguration config, language, data, storage, item, bank;
+    private static File configFile, languageFile, dataFile, storageFile, itemFile, bankFile, cmdFile;
+    private static FileConfiguration config, language, data, storage, item, bank, cmd;
 
     public static void createconfig() {
         configFile = new File(bCore.getInstance().getDataFolder(), "config.yml");
@@ -27,6 +27,7 @@ public class Data {
         storageFile = new File(bCore.getInstance().getDataFolder(), "storage.yml");
         itemFile = new File(bCore.getInstance().getDataFolder(), "item.yml");
         bankFile = new File(bCore.getInstance().getDataFolder(), "bank.yml");
+        cmdFile = new File(bCore.getInstance().getDataFolder(), "cmd.yml");
 
         if (!configFile.exists()) bCore.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) bCore.getInstance().saveResource("language.yml", false);
@@ -34,12 +35,14 @@ public class Data {
         if (!storageFile.exists()) bCore.getInstance().saveResource("storage.yml", false);
         if (!itemFile.exists()) bCore.getInstance().saveResource("item.yml", false);
         if (!bankFile.exists()) bCore.getInstance().saveResource("bank.yml", false);
+        if (!cmdFile.exists()) bCore.getInstance().saveResource("cmd.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
         storage = new YamlConfiguration();
         item = new YamlConfiguration();
         bank = new YamlConfiguration();
+        cmd = new YamlConfiguration();
 
         try {
             config.load(configFile);
@@ -48,6 +51,7 @@ public class Data {
             storage.load(storageFile);
             item.load(itemFile);
             bank.load(bankFile);
+            cmd.load(cmdFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -77,10 +81,15 @@ public class Data {
         return bank;
     }
 
+    public static FileConfiguration getcmdfile() {
+        return cmd;
+    }
+
     public static void reloadfiles() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
         item = YamlConfiguration.loadConfiguration(itemFile);
+        cmd = YamlConfiguration.loadConfiguration(cmdFile);
     }
 
     public static void saveconfig() {
@@ -121,6 +130,14 @@ public class Data {
     public static void savebank() {
         try {
             bank.save(bankFile);
+        } catch (IOException ignored) {
+        }
+    }
+
+
+    public static void savecmd() {
+        try {
+            cmd.save(cmdFile);
         } catch (IOException ignored) {
         }
     }

@@ -377,6 +377,59 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("blocks-event")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.setBlocksEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.addBlocksEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.removeBlocksEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("kills-event")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.setKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.addKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                PlayerData.removeKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
+                            }
+                        }
+                    }
+
                     if (args[0].equalsIgnoreCase("blocks")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -397,32 +450,6 @@ public class Commands implements CommandExecutor {
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
                                 PlayerData.removeBlocks(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                    }
-                    if (args[0].equalsIgnoreCase("kills")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.setKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.addKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                PlayerData.removeKill(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
                                 sender.sendMessage(Data.convert(PREFIX + DONE));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));

@@ -82,11 +82,11 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             }
             return "";
         }
-        if (identifier.equalsIgnoreCase("blocks")) {
-            return String.valueOf(PlayerData.getBlocks(p));
+        if (identifier.equalsIgnoreCase("blocks_event")) {
+            return String.valueOf(PlayerData.getBlockEvent(p));
         }
-        if (identifier.equalsIgnoreCase("kills")) {
-            return String.valueOf(PlayerData.getKill(p));
+        if (identifier.equalsIgnoreCase("kills_event")) {
+            return String.valueOf(PlayerData.getKillEvent(p));
         }
         if (identifier.equalsIgnoreCase("pvp")) {
             if (PvPPlayer.getPvPStatus(p)) {
@@ -96,6 +96,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
                 return Data.getconfigfile().getString("Boolean.false");
             }
             return "";
+        }
+        if (identifier.equalsIgnoreCase("blocks")) {
+            return String.valueOf(PlayerData.getBlocks(p));
         }
         return null;
     }
