@@ -72,7 +72,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
         (new BukkitRunnable() {
             public void run() {
-                Mining.StartMining();
+                if (getServer().getOnlinePlayers().size() > 0) {
+                    Mining.StartMining();
+                }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
     }
@@ -90,7 +92,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(7)) {
+        if (nmsAssistant.isVersionGreaterThan(8)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
@@ -106,36 +108,30 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI");
+            getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
             new PlaceholderAPI().register();
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI");
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
-            getLogger().log(Level.INFO, "Successfully hooked with Vault");
+            getLogger().log(Level.INFO, "Successfully hooked with Vault" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault");
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        final NMSAssistant nmsAssistant = new NMSAssistant();
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            if (nmsAssistant.isVersionGreaterThan(15) && !(Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().contains("5.0.0"))) {
-                getLogger().log(Level.INFO, "Successfully hooked with MythicMobs");
-            }
+            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs");
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         }
     }
 
 
     private void RegisterEvent() {
         registerEventHandlers();
-        final NMSAssistant nmsAssistant = new NMSAssistant();
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            if (nmsAssistant.isVersionGreaterThan(15) && !(Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().contains("5.0.0"))) {
-                registerMythic();
-            }
+            registerMythic();
         }
     }
 

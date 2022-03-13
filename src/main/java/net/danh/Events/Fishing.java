@@ -29,7 +29,6 @@ public class Fishing implements Listener {
             e.setCancelled(true);
         } else {
             if (e.getCaught() instanceof Item) {
-                ((Item) e.getCaught()).getItemStack().getType();
                 double systemchance = Math.random() * 100.0D;
                 double playerchance = Lucky.getLuckyChance(e.getPlayer());
                 if (playerchance >= systemchance) {

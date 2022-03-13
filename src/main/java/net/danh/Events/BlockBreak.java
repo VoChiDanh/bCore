@@ -51,74 +51,71 @@ public class BlockBreak implements Listener {
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
-                    e.setDropItems(false);
                     e.getBlock().getDrops().clear();
                     e.setExpToDrop(0);
-                    if (!e.isDropItems()) {
-                        if (Data.getconfigfile().getBoolean("debug")) {
-                            bCore.getInstance().getLogger().log(Level.INFO, "No drop");
-                        }
-                        for (String getBlockType : Objects.requireNonNull(Data.getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
-                            if (blocks.equalsIgnoreCase(getBlockType)) {
-                                max = Data.getconfigfile().getInt("Blocks." + blocks + ".max");
-                                min = Data.getconfigfile().getInt("Blocks." + blocks + ".min");
-                                break;
-                            }
-                        }
-                        if (Data.getconfigfile().getBoolean("debug")) {
-                            bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
-                        }
-                        if (min == 0 || max == 0) {
-                            return;
-                        }
-                        int kg = Data.getRandomInt(min, max);
-                        if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
-
-                            if (Data.getconfigfile().getBoolean("debug")) {
-                                bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
-                            }
-                            if (kg != 0) {
-                                if (Items.getName(b.toString()) == null) {
-                                    return;
-                                }
-                                if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
-                                    int fortunelevel = e.getPlayer().getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
-                                    int fortuneblocks = (fortunelevel * Data.getRandomInt(1, 10)) + kg;
-                                    Weight.addWeight(e.getPlayer(), fortuneblocks);
-                                    Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
-                                } else {
-                                    Weight.addWeight(e.getPlayer(), kg);
-                                    Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), kg);
-                                }
-                            }
-                        } else {
-                            e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
-                            if (Data.getconfigfile().getBoolean("debug")) {
-                                bCore.getInstance().getLogger().log(Level.INFO, "Not Enough space");
-                            }
-                            e.setCancelled(true);
-                            return;
-                        }
+                    if (Data.getconfigfile().getBoolean("debug")) {
+                        bCore.getInstance().getLogger().log(Level.INFO, "No drop");
                     }
-                    if (playerchance >= systemchance) {
-                        PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
-                        Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
-                        e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
-                                .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                                .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
-                        return;
-                    }
-                    PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
-                    Power.removePower(p, 1);
-                    if (Mining.getStart()){
-                        PlayerData.addBlocks(p, 1);
+                    for (String getBlockType : Objects.requireNonNull(Data.getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
+                        if (blocks.equalsIgnoreCase(getBlockType)) {
+                            max = Data.getconfigfile().getInt("Blocks." + blocks + ".max");
+                            min = Data.getconfigfile().getInt("Blocks." + blocks + ".min");
+                            break;
+                        }
                     }
                     if (Data.getconfigfile().getBoolean("debug")) {
-                        bCore.getInstance().getLogger().log(Level.INFO, "Add xp");
+                        bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
+                    }
+                    if (min == 0 || max == 0) {
+                        return;
+                    }
+                    int kg = Data.getRandomInt(min, max);
+                    if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
+
+                        if (Data.getconfigfile().getBoolean("debug")) {
+                            bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
+                        }
+                        if (kg != 0) {
+                            if (Items.getName(b.toString()) == null) {
+                                return;
+                            }
+                            if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
+                                int fortunelevel = e.getPlayer().getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
+                                int fortuneblocks = (fortunelevel * Data.getRandomInt(1, 10)) + kg;
+                                Weight.addWeight(e.getPlayer(), fortuneblocks);
+                                Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
+                            } else {
+                                Weight.addWeight(e.getPlayer(), kg);
+                                Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), kg);
+                            }
+                        }
+                    } else {
+                        e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
+                        if (Data.getconfigfile().getBoolean("debug")) {
+                            bCore.getInstance().getLogger().log(Level.INFO, "Not Enough space");
+                        }
+                        e.setCancelled(true);
+                        return;
                     }
                 }
-
+                if (playerchance >= systemchance) {
+                    PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
+                    Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
+                            .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
+                            .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                    return;
+                }
+                PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
+                Power.removePower(p, 1);
+                if (Mining.getStart()) {
+                    PlayerData.addBlocks(p, 1);
+                }
+                if (Data.getconfigfile().getBoolean("debug")) {
+                    bCore.getInstance().getLogger().log(Level.INFO, "Add xp");
+                }
             }
+
         }
     }
 }

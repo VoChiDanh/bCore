@@ -47,6 +47,7 @@ public class TabCommand implements TabCompleter {
                 arg.add("bankmaxmoney");
                 arg.add("blocks");
                 arg.add("kills");
+                arg.add("start");
             }
             if (sender.hasPermission("bCore.admin")) {
                 if (args[0].equalsIgnoreCase("plevel")

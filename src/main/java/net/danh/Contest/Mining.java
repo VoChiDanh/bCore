@@ -27,7 +27,7 @@ public class Mining {
         for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
             PlayerData.setBlocks(p, 0);
         }
-        List<TMining> leaderboard = LDMining.getLeaderboard();
+        List<MiningManager> leaderboard = LeaderBoard.getLdMining();
         (new BukkitRunnable() {
             int counter = Data.getconfigfile().getInt("EVENT_TIME");
 
@@ -36,7 +36,7 @@ public class Mining {
                 if (counter == 0) {
                     Bukkit.broadcastMessage(Data.convert(Data.getlanguagefile().getString("MINING_END")));
                     for (int i = 0; i < Math.min(leaderboard.size(), 10); i++) {
-                        TMining top = leaderboard.get(i);
+                        MiningManager top = leaderboard.get(i);
                         Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("TOP"))
                                 .replaceAll("%top%", String.valueOf(i + 1))
                                 .replaceAll("%player%", top.getPlayer().getName())

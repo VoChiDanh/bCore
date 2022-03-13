@@ -1,4 +1,4 @@
-# bCore  [1.13.x - 1.18.x]
+# bCore  [1.9.x - 1.18.x]
 
 ## Features
 
@@ -35,7 +35,6 @@
 ```
 HELP_USER: 
 /bCore info [Player] - Check info player
-/Storage - Open sell gui
 /Bank - Check money in bank
 /Bank [deposit/withdraw] [number] - Deposit/Withdraw money to bank
 ```

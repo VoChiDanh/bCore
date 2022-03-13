@@ -42,8 +42,9 @@ public class Commands implements CommandExecutor {
                         sender.sendMessage(Data.convert(PREFIX + RELOADED));
                     }
                     if (args[0].equalsIgnoreCase("start")) {
-                        Mining.StartMining();
-                        sender.sendMessage(Data.convert(PREFIX + DONE));
+                        if (bCore.getInstance().getServer().getOnlinePlayers().size() > 0) {
+                            Mining.StartMining();
+                        }
                     }
                 }
             }

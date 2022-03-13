@@ -2,12 +2,12 @@ package net.danh.Contest;
 
 import org.bukkit.entity.Player;
 
-public class TMining {
+public class MiningManager {
 
     protected int mining;
     protected Player player;
 
-    public TMining(Player player, int mining) {
+    public MiningManager(Player player, int mining) {
         this.player = player;
         this.mining = mining;
     }

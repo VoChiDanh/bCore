@@ -1,9 +1,8 @@
 package net.danh.Hook;
 
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
-import net.danh.bCore;
 import net.danh.Manager.Data;
-import net.danh.Manager.PlayerData;
+import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
 import net.milkbowl.vault.economy.EconomyResponse;
