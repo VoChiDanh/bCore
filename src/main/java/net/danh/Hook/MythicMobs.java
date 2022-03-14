@@ -2,6 +2,7 @@ package net.danh.Hook;
 
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import net.danh.Manager.Data;
+import net.danh.Manager.Power;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
@@ -40,6 +41,7 @@ public class MythicMobs implements Listener {
         }
         int money = Data.getRandomInt(min, max);
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
+        Power.addPower(p, 2);
         if (r.transactionSuccess()) {
             p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
                     new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))

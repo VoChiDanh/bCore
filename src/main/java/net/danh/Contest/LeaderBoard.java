@@ -13,7 +13,7 @@ public class LeaderBoard {
         Set<String> playername = Objects.requireNonNull(Data.getdatafile().getConfigurationSection("players.")).getKeys(false);
         for (String name : playername) {
             String pname = Data.getdatafile().getString("players." + name + ".name");
-            int kill = Data.getdatafile().getInt("players." + name + ".Blocks");
+            int kill = Data.getdatafile().getInt("players." + name + ".Event.Blocks");
             tMinings.add(new MiningManager(Bukkit.getPlayer(Objects.requireNonNull(pname)), kill));
         }
         //Sort the list using a custom comparator

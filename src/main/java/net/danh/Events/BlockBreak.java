@@ -36,6 +36,9 @@ public class BlockBreak implements Listener {
         MaterialChecker materialChecker = new MaterialChecker();
         int max = 0;
         int min = 0;
+        e.getBlock().getDrops().clear();
+        e.setDropItems(false);
+        e.setExpToDrop(0);
         List<String> w = Data.getconfigfile().getStringList("disable-worlds");
         if (!w.contains(p.getWorld().getName())) {
             if (materialChecker.isShovel(p.getItemInHand().getType())
@@ -51,8 +54,6 @@ public class BlockBreak implements Listener {
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "Check power");
                     }
-                    e.getBlock().getDrops().clear();
-                    e.setExpToDrop(0);
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "No drop");
                     }

@@ -146,7 +146,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new BlockBreak(),
                 new Join(),
                 new Fishing(),
-                new Moving(),
                 new Death(),
                 new Kill(),
                 new PvP()
