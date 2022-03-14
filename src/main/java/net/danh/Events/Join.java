@@ -45,7 +45,7 @@ public class Join implements Listener {
             PlayerData.setKillEvent(p, 0);
         }
         if (!PvPPlayer.getFirstJoin(p) && !PvPPlayer.getPvPStatus(p)) {
-            PvPPlayer.setPvPStatus(p, false);
+            PvPPlayer.setPvPStatus(p, true);
         }
         if (PlayerData.getPlayerName(p) == null) {
             PlayerData.setPlayerName(p);

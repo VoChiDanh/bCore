@@ -1,14 +1,12 @@
 disable-worlds:
   - Plot
 xp: 1
-EnableAge: false
-AgeTime: 90000
 debug: false
 minimum_power: 30
 Lucky_Power: 5
 Lucky_XP: 2
-Max_Power: 100
-Per_Max_Power: 100
+Max_Power: 1000
+Per_Max_Power: 1000
 Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
@@ -18,8 +16,8 @@ Add_Type: ACTION_BAR #ACTION_BAR / CHAT
 EVENT_TIME: 600
 Protect-time: 1800
 Boolean:
-  'true': 'on'
-  'false': 'off'
+  'true': 'Bật'
+  'false': 'Tắt'
 Cooldown_PvP: 600
 Blocks:
   STONE:

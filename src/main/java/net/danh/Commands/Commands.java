@@ -58,23 +58,6 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            if (args.length == 2) {
-                if (sender.hasPermission("bCore.user")) {
-                    if (args[0].equalsIgnoreCase("info")) {
-                        if (Bukkit.getPlayer(args[1]) != null) {
-                            for (String check_info : Data.getlanguagefile().getStringList("INFO_CHECK")) {
-                                sender.sendMessage(Data.convert(check_info
-                                        .replaceAll("%player%", Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName())
-                                        .replaceAll("%plevel%", String.valueOf(PlayerData.getLevel(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%xp", String.valueOf(PlayerData.getXP(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))
-                                        .replaceAll("%power%", String.valueOf(Power.getPower(Objects.requireNonNull(Bukkit.getPlayer(args[1])))))));
-                            }
-                        } else {
-                            sender.sendMessage(Data.convert(PREFIX + UNKNOW_PLAYER));
-                        }
-                    }
-                }
-            }
             if (args.length == 4) {
                 if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("plevel")) {

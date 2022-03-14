@@ -62,12 +62,6 @@ public class PlayerData {
             setXP(p, 0);
             addLevel(p, 1);
             addLeveluptimes(p, 1);
-            for (String age_up : Data.getlanguagefile().getStringList("LEVEL_UP")) {
-                p.sendMessage(Data.convert(age_up
-                        .replaceAll("%mpower%", String.valueOf(Power.getMaxPower(p)))
-                        .replaceAll("%level%", String.valueOf(getLevel(p)))
-                        .replaceAll("%rpower%", String.valueOf(Power.getRestorePower(p)))));
-            }
         }
     }
 
