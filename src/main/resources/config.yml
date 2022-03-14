@@ -16,6 +16,7 @@ Req_Log_To_PvP: 100
 Level_Bank: 10000
 Add_Type: ACTION_BAR #ACTION_BAR / CHAT
 EVENT_TIME: 600
+Protect-time: 1800
 Boolean:
   'true': 'on'
   'false': 'off'

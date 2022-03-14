@@ -32,7 +32,8 @@ public class PvP implements Listener {
                     Player damager = (Player) arrow.getShooter();
                     boolean damagerState = PvPPlayer.getPvPStatus(damager);
                     boolean attackedState = PvPPlayer.getPvPStatus(attacked);
-                    if (damagerState || attackedState) {
+                    if (damagerState || attackedState
+                            || PvPPlayer.getProtectTime(damager) > 0 || PvPPlayer.getProtectTime(attacked) > 0) {
                         e.setCancelled(true);
                     }
                 }
@@ -46,7 +47,8 @@ public class PvP implements Listener {
             if (arrow.getShooter() instanceof Player damager && e.getEntity() instanceof Player attacked) {
                 boolean damagerState = PvPPlayer.getPvPStatus(damager);
                 boolean attackedState = PvPPlayer.getPvPStatus(attacked);
-                if (damagerState || attackedState) {
+                if (damagerState || attackedState
+                        || PvPPlayer.getProtectTime(damager) > 0 || PvPPlayer.getProtectTime(attacked) > 0) {
                     e.setCancelled(true);
                 }
             }
@@ -60,7 +62,8 @@ public class PvP implements Listener {
             boolean damagerState = PvPPlayer.getPvPStatus(damager);
             boolean attackedState = PvPPlayer.getPvPStatus(attacked);
             if (damager.getInventory().getItemInMainHand().getType() == Material.FISHING_ROD || damager.getInventory().getItemInOffHand().getType() == Material.FISHING_ROD) {
-                if (damagerState || attackedState) {
+                if (damagerState || attackedState
+                        || PvPPlayer.getProtectTime(damager) > 0 || PvPPlayer.getProtectTime(attacked) > 0) {
                     e.setCancelled(true);
                 }
             }

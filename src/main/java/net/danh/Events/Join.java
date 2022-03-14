@@ -56,5 +56,9 @@ public class Join implements Listener {
         if (PlayerData.getBlocks(p) <= 0) {
             PlayerData.setBlocks(p, 0);
         }
+        if (!PvPPlayer.getFirstJoin(p) && PvPPlayer.getProtectTime(p) == 0) {
+            PvPPlayer.setFirstJoinStatus(p, true);
+            PvPPlayer.setProtectTime(p, Data.getconfigfile().getInt("Protect-time"));
+        }
     }
 }

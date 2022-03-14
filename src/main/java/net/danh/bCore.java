@@ -6,10 +6,9 @@ import net.danh.Contest.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
-import net.danh.Manager.Data;
-import net.danh.Manager.PlayerData;
-import net.danh.Manager.Power;
-import net.danh.Manager.Weight;
+import net.danh.Manager.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TranslatableComponent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -69,6 +68,28 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                         getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
                                 .replaceAll("%player%", p.getName())));
                         p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
+                    }
+                    int timeLeft = PvPPlayer.getProtectTime(p);
+                    Cooldown.setCooldown(p.getUniqueId(), --timeLeft);
+                    if (timeLeft == 0) {
+                        PvPPlayer.setProtectTime(p, 0);
+                        this.cancel();
+                    }
+                }
+            }
+        }).runTaskTimer(this, 20L, 20L);
+        (new BukkitRunnable() {
+            public void run() {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    int timeLeft = PvPPlayer.getProtectTime(p);
+                    timeLeft--;
+                    PvPPlayer.setProtectTime(p, timeLeft);
+                    p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
+                            new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PROTECT_PVP"))
+                                    .replaceAll("%time%", String.valueOf(PvPPlayer.getProtectTime(p))))));
+                    if (timeLeft == 0) {
+                        PvPPlayer.setProtectTime(p, 0);
+                        this.cancel();
                     }
                 }
             }

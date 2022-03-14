@@ -100,6 +100,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("blocks")) {
             return String.valueOf(PlayerData.getBlocks(p));
         }
+        if (identifier.equalsIgnoreCase("protect_time")) {
+            return String.valueOf(PvPPlayer.getProtectTime(p));
+        }
         return null;
     }
 }

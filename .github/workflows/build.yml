@@ -17,5 +17,5 @@ jobs:
         run: mvn -B package
       - uses: "actions/upload-artifact@v3"
         with:
-          name: "bCore"
+          name: "[DevBuild] bCore"
           path: ./target/bCore.jar
