@@ -5,6 +5,8 @@ softdepend:
   - Vault
   - PlaceholderAPI
   - MythicMobs
+depend:
+  - WorldGuard
 authors: [ VoChiDanh ]
 api-version: 1.13
 commands:

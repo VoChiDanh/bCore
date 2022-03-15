@@ -81,15 +81,17 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    int timeLeft = PvPPlayer.getProtectTime(p);
-                    timeLeft--;
-                    PvPPlayer.setProtectTime(p, timeLeft);
-                    p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                            new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PROTECT_PVP"))
-                                    .replaceAll("%time%", String.valueOf(PvPPlayer.getProtectTime(p))))));
-                    if (timeLeft == 0) {
-                        PvPPlayer.setProtectTime(p, 0);
-                        this.cancel();
+                    if (PvPPlayer.getProtectTime(p) > 0) {
+                        int timeLeft = PvPPlayer.getProtectTime(p);
+                        timeLeft--;
+                        PvPPlayer.setProtectTime(p, timeLeft);
+                        p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
+                                new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PROTECT_PVP"))
+                                        .replaceAll("%time%", String.valueOf(PvPPlayer.getProtectTime(p))))));
+                        if (timeLeft <= 0) {
+                            PvPPlayer.setProtectTime(p, 0);
+                            cancel();
+                        }
                     }
                 }
             }
@@ -133,12 +135,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
-            new PlaceholderAPI().register();
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
-        }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
             getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
         } else {
@@ -146,10 +142,29 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+            if (Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion().startsWith("7")) {
+                getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
+            } else {
+                getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
+        } else {
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
             getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+        }
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
+            new PlaceholderAPI().register();
+        } else {
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
         }
     }
 

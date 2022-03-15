@@ -1,10 +1,24 @@
 package net.danh.Events;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.util.Location;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.domains.Association;
+import com.sk89q.worldguard.protection.association.Associables;
+import com.sk89q.worldguard.protection.association.DelayedRegionOverlapAssociation;
+import com.sk89q.worldguard.protection.association.RegionAssociable;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.danh.Contest.Mining;
 import net.danh.Manager.*;
 import net.danh.bCore;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,11 +53,17 @@ public class BlockBreak implements Listener {
         e.getBlock().getDrops().clear();
         e.setDropItems(false);
         e.setExpToDrop(0);
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(p);
+        Location loc = new com.sk89q.worldedit.util.Location(localPlayer.getWorld(), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ());
+        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionQuery query = container.createQuery();
+        if (!query.testState(loc, localPlayer, Flags.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
+            e.setCancelled(true);
+            return;
+        }
         List<String> w = Data.getconfigfile().getStringList("disable-worlds");
         if (!w.contains(p.getWorld().getName())) {
-            if (materialChecker.isShovel(p.getItemInHand().getType())
-                    || materialChecker.isAxe(p.getItemInHand().getType())
-                    || materialChecker.isPickaxe(p.getItemInHand().getType())) {
+            if (materialChecker.isShovel(p.getItemInHand().getType()) || materialChecker.isAxe(p.getItemInHand().getType()) || materialChecker.isPickaxe(p.getItemInHand().getType())) {
                 if (Data.getconfigfile().getBoolean("debug")) {
                     bCore.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
                 }
@@ -102,9 +122,7 @@ public class BlockBreak implements Listener {
                 if (playerchance >= systemchance) {
                     PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
                     Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
-                    e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY)
-                            .replaceAll("%power%", String.valueOf(POWER + LEVELUP))
-                            .replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY).replaceAll("%power%", String.valueOf(POWER + LEVELUP)).replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
                     return;
                 }
                 PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
