@@ -21,7 +21,7 @@ jobs:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: "Dev Build"
           content: "This is a new beta version of bCore plugin! You can download and use it!"
-          filename: /target/bCore.jar
+          filename: target/bCore.jar
       - uses: "actions/upload-artifact@v3"
         with:
           name: "[DevBuild] bCore"
