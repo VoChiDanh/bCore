@@ -34,4 +34,4 @@ jobs:
           embed-color: "65280"
           embed-description: |
             ${{ github.event.head_commit.message }}
-#          filename: ./target/bCore.jar
+          filename: ./target/bCore.jar
