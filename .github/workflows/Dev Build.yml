@@ -1,4 +1,4 @@
-name: Build
+name: Dev Build
 on:
   push:
     branches: [ master ]
@@ -15,6 +15,13 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v4.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: "Dev Build"
+          content: "This is a new beta version of bCore plugin! You can download and use it!"
+          filename: ./target/bCore.jar
       - uses: "actions/upload-artifact@v3"
         with:
           name: "[DevBuild] bCore"

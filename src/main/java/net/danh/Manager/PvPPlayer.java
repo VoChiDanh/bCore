@@ -20,7 +20,7 @@ public class PvPPlayer {
     }
 
     public static boolean getFirstJoin(@NotNull Player p) {
-        return Data.getdatafile().getBoolean("players." + p.getName() + ".First-Join.PvP.Status");
+        return !Data.getdatafile().getBoolean("players." + p.getName() + ".First-Join.PvP.Status");
     }
 
     public static void setFirstJoinStatus(@NotNull Player p, Boolean status) {

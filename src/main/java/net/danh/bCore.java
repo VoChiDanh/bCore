@@ -120,11 +120,11 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(8)) {
+        if (nmsAssistant.isVersionGreaterThan(15)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.8.x - 1.18.x");
+            getLogger().warning("Support version 1.16.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
     }
@@ -156,7 +156,11 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            if (!Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().startsWith("4")) {
+                getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            } else {
+                getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            }
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         }

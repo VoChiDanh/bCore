@@ -69,7 +69,7 @@ public class PvP implements Listener {
                 RegionQuery query = container.createQuery();
                 if (damagerState || attackedState
                         || PvPPlayer.getProtectTime(damager) > 0 || PvPPlayer.getProtectTime(attacked) > 0
-                || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
+                        || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                     e.setCancelled(true);
                 }
             }

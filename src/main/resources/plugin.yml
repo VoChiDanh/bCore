@@ -2,13 +2,13 @@ name: '${project.name}'
 version: '${project.version}'
 main: net.danh.bCore
 softdepend:
-  - Vault
   - PlaceholderAPI
   - MythicMobs
 depend:
+  - Vault
   - WorldGuard
 authors: [ VoChiDanh ]
-api-version: 1.13
+api-version: 1.16
 commands:
   bCore:
     description: Main commands

@@ -38,25 +38,25 @@ public class Join implements Listener {
         if (Bank.getBankLevel(p) == 0) {
             Bank.setBankLevel(p, 1);
         }
-        if (PlayerData.getBlockEvent(p) == 0) {
-            PlayerData.setBlocksEvent(p, 0);
+        if (Event.getBlockEvent(p) == 0) {
+            Event.setBlocksEvent(p, 0);
         }
-        if (PlayerData.getKillEvent(p) == 0) {
-            PlayerData.setKillEvent(p, 0);
+        if (Event.getKillEvent(p) == 0) {
+            Event.setKillEvent(p, 0);
         }
-        if (!PvPPlayer.getFirstJoin(p) && !PvPPlayer.getPvPStatus(p)) {
+        if (PvPPlayer.getFirstJoin(p) && !PvPPlayer.getPvPStatus(p)) {
             PvPPlayer.setPvPStatus(p, true);
         }
         if (PlayerData.getPlayerName(p) == null) {
             PlayerData.setPlayerName(p);
         }
-        if (PlayerData.getBlockEvent(p) > 0 && !Mining.getStart()) {
-            PlayerData.setBlocksEvent(p, 0);
+        if (Event.getBlockEvent(p) > 0 && !Mining.getStart()) {
+            Event.setBlocksEvent(p, 0);
         }
         if (PlayerData.getBlocks(p) <= 0) {
             PlayerData.setBlocks(p, 0);
         }
-        if (!PvPPlayer.getFirstJoin(p) && PvPPlayer.getProtectTime(p) == 0) {
+        if (PvPPlayer.getFirstJoin(p) && PvPPlayer.getProtectTime(p) == 0) {
             PvPPlayer.setFirstJoinStatus(p, true);
             PvPPlayer.setProtectTime(p, Data.getconfigfile().getInt("Protect-time"));
         }

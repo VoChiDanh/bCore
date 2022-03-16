@@ -83,10 +83,10 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return "";
         }
         if (identifier.equalsIgnoreCase("blocks_event")) {
-            return String.valueOf(PlayerData.getBlockEvent(p));
+            return String.valueOf(Event.getBlockEvent(p));
         }
         if (identifier.equalsIgnoreCase("kills_event")) {
-            return String.valueOf(PlayerData.getKillEvent(p));
+            return String.valueOf(Event.getKillEvent(p));
         }
         if (identifier.equalsIgnoreCase("pvp")) {
             if (PvPPlayer.getPvPStatus(p)) {
