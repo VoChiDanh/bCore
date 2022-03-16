@@ -21,9 +21,9 @@ jobs:
           msg: ${{github.repository}}
           separator: "/"
       - name: Discord Webhook Action
-        uses: tsickert/discord-webhook@v4.0.0
+        uses: tsickert/discord-webhook@v3.0.1
         with:
-          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           username: "${{ steps.split.outputs._1 }}"
           avatar-url: "https://github.com/${{ steps.split.outputs._0 }}.png"
           content: "${{ github.event.head_commit.message }}"
