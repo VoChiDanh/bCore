@@ -19,12 +19,6 @@ jobs:
         with:
           name: "[DevBuild] bCore"
           path: ./target/bCore.jar
-      - name: Discord DevBuild
-        uses: sinshutu/upload-to-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: ./target/bCore.jar
       - uses: jungwinter/split@v2
         id: split
         with:
