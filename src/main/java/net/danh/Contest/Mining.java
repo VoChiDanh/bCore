@@ -2,6 +2,7 @@ package net.danh.Contest;
 
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
+import net.danh.Manager.PlayerData;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
@@ -35,11 +36,11 @@ public class Mining {
                 counter--;
                 if (counter == 0) {
                     Bukkit.broadcastMessage(Data.convert(Data.getlanguagefile().getString("MINING_END")));
-                    for (int i = 0; i < Math.min(leaderboard.size(), 10); i++) {
+                    for (int i = 0; i < Math.min(leaderboard.size(), 5); i++) {
                         MiningManager top = leaderboard.get(i);
                         Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("TOP"))
                                 .replaceAll("%top%", String.valueOf(i + 1))
-                                .replaceAll("%player%", top.getPlayer().getName())
+                                .replaceAll("%player%", PlayerData.getPlayerName(top.getPlayer()))
                                 .replaceAll("%block%", String.valueOf(Event.getBlockEvent(top.getPlayer())))));
                         EconomyResponse r = bCore.economy.depositPlayer(top.getPlayer(), Event.getBlockEvent(top.getPlayer()));
                         bCore.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Contest"))
