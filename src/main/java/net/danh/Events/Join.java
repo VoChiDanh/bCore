@@ -41,9 +41,6 @@ public class Join implements Listener {
         if (Event.getBlockEvent(p) == 0) {
             Event.setBlocksEvent(p, 0);
         }
-        if (Event.getKillEvent(p) == 0) {
-            Event.setKillEvent(p, 0);
-        }
         if (PvPPlayer.getFirstJoin(p) && !PvPPlayer.getPvPStatus(p)) {
             PvPPlayer.setPvPStatus(p, true);
         }

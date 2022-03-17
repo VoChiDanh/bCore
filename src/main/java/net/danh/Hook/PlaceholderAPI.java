@@ -85,9 +85,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("blocks_event")) {
             return String.valueOf(Event.getBlockEvent(p));
         }
-        if (identifier.equalsIgnoreCase("kills_event")) {
-            return String.valueOf(Event.getKillEvent(p));
-        }
         if (identifier.equalsIgnoreCase("pvp")) {
             if (PvPPlayer.getPvPStatus(p)) {
                 return Data.getconfigfile().getString("Boolean.true");
