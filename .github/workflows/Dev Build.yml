@@ -24,6 +24,12 @@ jobs:
         with:
           msg: ${{github.repository}}
           separator: "/"
+      - name: Get current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDD-HH
+          utcOffset: "+07:00"
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v4.0.0
         with:
@@ -32,12 +38,8 @@ jobs:
           embed-title: "Dev Build"
           avatar-url: "https://github.com/${{ steps.split.outputs._0 }}.png"
           embed-color: "65280"
-          embed-author-name: "VoChiDanh"
-          embed-author-icon-url: "https://github.com/VoChiDanh.png"
-          embed-author-url: "https://github.com/VoChiDanh"
-          embed-thumbnail-url: "https://github.com/${{ steps.split.outputs._0 }}/${{ steps.split.outputs._1 }}"
-          embed-footer-icon-url:  "https://i.imgur.com/YprbQRMb.jpg"
-          embed-footer-text: "v2.0"
+          embed-footer-icon-url:  "https://i.imgur.com/3kJEdFk.png"
+          embed-footer-text: "v2.0 • ${{ steps.current-time.outputs.formattedTime }}"
           embed-description: |
             ${{ github.event.head_commit.message }}
 #          filename: ./target/bCore.jar
