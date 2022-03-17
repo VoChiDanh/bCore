@@ -39,7 +39,7 @@ jobs:
           avatar-url: "https://github.com/${{ steps.split.outputs._0 }}.png"
           embed-color: "65280"
           embed-footer-icon-url:  "https://i.imgur.com/3kJEdFk.png"
-          embed-footer-text: "v2.0 • ${{ steps.current-time.outputs.formattedTime }}"
+          embed-footer-text: "v2.0 • ${{ steps.current-time.outputs.hour }}:${{ steps.current-time.outputs.minute }} - ${{ steps.current-time.outputs.day }}/${{ steps.current-time.outputs.mouth }}/${{ steps.current-time.outputs.year }}"
           embed-description: |
             ${{ github.event.head_commit.message }}
 #          filename: ./target/bCore.jar
