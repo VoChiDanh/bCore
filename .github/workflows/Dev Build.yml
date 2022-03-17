@@ -33,13 +33,12 @@ jobs:
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v4.0.0
         with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: "${{ steps.split.outputs._1 }}"
-          embed-title: "Dev Build"
+          embed-title: "Development Builds"
           avatar-url: "https://github.com/${{ steps.split.outputs._0 }}.png"
           embed-color: "65280"
-          embed-footer-icon-url:  "https://i.imgur.com/3kJEdFk.png"
-          embed-footer-text: "v2.0 • ${{ steps.current-time.outputs.hour }}:${{ steps.current-time.outputs.minute }} - ${{ steps.current-time.outputs.day }}/${{ steps.current-time.outputs.mouth }}/${{ steps.current-time.outputs.year }}"
+          embed-footer-text: "${{ steps.split.outputs._1 }} Build #${{ steps.current-time.outputs.day }}${{ steps.current-time.outputs.month }}${{ steps.current-time.outputs.year }}${{ steps.current-time.outputs.hour }}${{ steps.current-time.outputs.minute }}"
           embed-description: |
             ${{ github.event.head_commit.message }}
 #          filename: ./target/bCore.jar
