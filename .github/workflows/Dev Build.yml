@@ -38,7 +38,7 @@ jobs:
           embed-thumbnail-url: "https://github.com/${{ steps.split.outputs._0 }}/${{ steps.split.outputs._1 }}"
           embed-footer-icon-url:  "https://i.imgur.com/YprbQRMb.jpg"
           embed-footer-text: "v2.0"
-          embed-timestamp: true
+          embed-timestamp: " %H:%M:%S - %m/%d/%Y"
           embed-description: |
             ${{ github.event.head_commit.message }}
 #          filename: ./target/bCore.jar
