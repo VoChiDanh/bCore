@@ -24,7 +24,9 @@ jobs:
         with:
           msg: ${{github.repository}}
           separator: "/"
-        run: echo "::set-output name=date::$(date +'%H:%M %d/%m/%Y')"
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%H:%M %m/%d/%Y')"
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v4.0.0
         with:
