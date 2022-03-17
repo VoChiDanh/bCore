@@ -24,6 +24,7 @@ jobs:
         with:
           msg: ${{github.repository}}
           separator: "/"
+        run: echo "::set-output name=date::$(date +'%H:%M %d/%m/%Y')"
       - name: Discord Webhook Action
         uses: tsickert/discord-webhook@v4.0.0
         with:
@@ -38,7 +39,7 @@ jobs:
           embed-thumbnail-url: "https://github.com/${{ steps.split.outputs._0 }}/${{ steps.split.outputs._1 }}"
           embed-footer-icon-url:  "https://i.imgur.com/YprbQRMb.jpg"
           embed-footer-text: "v2.0"
-          embed-timestamp: %m/%d/%Y %H:%M:%S
+          embed-timestamp: "${{ steps.date.outputs.date }}"
           embed-description: |
             ${{ github.event.head_commit.message }}
 #          filename: ./target/bCore.jar
