@@ -56,13 +56,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                     if (Power.getPower(p) >= Power.getMaxPower(p)) {
                         Power.setPower(p, Power.getMaxPower(p));
                     }
-                    if (Weight.getWeight(p) == Weight.getMaxWeight(p)) {
-                        p.setWalkSpeed(0F);
-                        p.setFlySpeed(0F);
-                    } else {
-                        p.setWalkSpeed(0.2F);
-                        p.setFlySpeed(0.2F);
-                    }
                     if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
                         PlayerData.setBlocks(p, 0);
                         getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
@@ -73,7 +66,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                     Cooldown.setCooldown(p.getUniqueId(), --timeLeft);
                     if (timeLeft == 0) {
                         PvPPlayer.setProtectTime(p, 0);
-                        this.cancel();
+                        cancel();
                     }
                 }
             }
