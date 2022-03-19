@@ -113,11 +113,11 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(15)) {
+        if (nmsAssistant.isVersionGreaterThan(12)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.16.x - 1.18.x");
+            getLogger().warning("Support version 1.13.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
     }
