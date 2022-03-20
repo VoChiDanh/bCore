@@ -23,7 +23,6 @@ import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -113,11 +112,11 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(12)) {
+        if (nmsAssistant.isVersionGreaterThan(7)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.13.x - 1.18.x");
+            getLogger().warning("Support version 1.8.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
     }
@@ -136,24 +135,14 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-            if (Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion().startsWith("7")) {
-                getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
-            } else {
-                getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
-                getServer().getPluginManager().disablePlugin(this);
-                return;
-            }
+            getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
-            if (!Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion().startsWith("4")) {
-                getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
-            } else {
-                getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
-            }
+            getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         } else {
             getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         }
@@ -196,7 +185,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> MythicListeners() {
-        return new ArrayList<>(List.of(
+        return new ArrayList<>(Arrays.asList(
                 new MythicMobs()
         ));
     }

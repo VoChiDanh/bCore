@@ -1,6 +1,6 @@
 package net.danh.Hook;
 
-import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
+import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import net.danh.Manager.Data;
 import net.danh.Manager.Power;
 import net.danh.bCore;
@@ -20,7 +20,7 @@ public class MythicMobs implements Listener {
     public void onMythicMobsKill(@NotNull MythicMobDeathEvent mme) {
         Player p = (Player) mme.getKiller();
         String mobname = mme.getMobType().getInternalName();
-        String mob = mme.getMob().getName();
+        String mob = mme.getMob().getType().getDisplayName();
 
         if (p == null) {
             return;

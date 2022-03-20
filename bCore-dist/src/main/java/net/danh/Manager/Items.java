@@ -15,7 +15,7 @@ public class Items {
         return Data.getitemfile().getInt("Price." + name);
     }
 
-    @Deprecated(since = "4/3/2022")
+    @Deprecated
     public static @NotNull Integer getBasePrice(String name) {
         return Data.getitemfile().getInt("BasePrice." + name);
     }
@@ -25,7 +25,7 @@ public class Items {
         Data.saveitems();
     }
 
-    @Deprecated(since = "4/3/2022")
+    @Deprecated
     public static void setBasePrice(String name, Integer price) {
         Data.getitemfile().set("BasePrice." + name, price);
         Data.saveitems();
@@ -37,7 +37,7 @@ public class Items {
     }
 
 
-    @Deprecated(since = "4/3/2022")
+    @Deprecated
     public static void addBasePrice(String name, Integer price) {
         Data.getitemfile().set("BasePrice." + name, getBasePrice(name) + price);
         Data.saveitems();
@@ -54,7 +54,7 @@ public class Items {
 
     }
 
-    @Deprecated(since = "4/3/2022")
+    @Deprecated
     public static void removeBasePrice(String name, Integer price) {
         Data.getitemfile().set("BasePrice." + name, getBasePrice(name) - price);
         if (getBasePrice(name) == 0) {

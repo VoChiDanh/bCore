@@ -6,13 +6,19 @@
 
     <groupId>net.danh</groupId>
     <artifactId>bCore</artifactId>
-    <version>2.2</version>
-    <packaging>jar</packaging>
+    <version>2.3</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>bCore-dist</module>
+        <module>bCore_v1_12_R1</module>
+        <module>bCore_v1_16_R3</module>
+        <module>bCore_v1_18_R2</module>
+    </modules>
 
     <name>bCore</name>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -29,7 +35,6 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -46,6 +51,20 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
         <resources>
             <resource>
@@ -80,12 +99,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
@@ -98,21 +111,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.lumine</groupId>
-            <artifactId>Mythic-Dist</artifactId>
-            <version>5.0.3-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.github.Preponderous-Software</groupId>
             <artifactId>Ponder</artifactId>
             <version>07e0c073e9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q.worldguard</groupId>
-            <artifactId>worldguard-bukkit</artifactId>
-            <version>7.0.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

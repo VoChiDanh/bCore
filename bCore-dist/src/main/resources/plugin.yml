@@ -8,7 +8,7 @@ depend:
   - Vault
   - WorldGuard
 authors: [ VoChiDanh ]
-api-version: 1.16
+api-version: 1.13
 commands:
   bCore:
     description: Main commands

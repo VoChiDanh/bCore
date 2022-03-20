@@ -1,0 +1,12 @@
+bCore_v1_12_R1:
+  - MythicMobs 4.1.0 -> 4.7.2
+  - WorldGuard 6
+  - Java 8
+bCore_v1_16_R3:
+  - MythicMobs 4.8.0 -> 4.14.1
+  - WorldGuard 7
+  - Java 11
+bCore_v1_18_R2:
+  - MythicMobs 5.0.1 -> latest
+  - WorldGuard 7 -> latest
+  - Java 16

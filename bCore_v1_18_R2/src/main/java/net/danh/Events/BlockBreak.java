@@ -1,0 +1,134 @@
+package net.danh.Events;
+
+import com.sk89q.worldedit.util.Location;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
+import net.danh.Contest.Mining;
+import net.danh.Manager.*;
+import net.danh.bCore;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
+import preponderous.ponder.minecraft.bukkit.tools.MaterialChecker;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+
+public class BlockBreak implements Listener {
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onBlockBreak(@NotNull BlockBreakEvent e) {
+        Material b = e.getBlock().getType();
+        Player p = e.getPlayer();
+        double systemchance = Math.random() * 100.0D;
+        double playerchance = Lucky.getLuckyChance(e.getPlayer());
+        String NEED_MORE_POWER = Data.getlanguagefile().getString("NEED_MORE_POWER");
+        String PREFIX = Data.getlanguagefile().getString("PREFIX");
+        String LUCKY = Data.getlanguagefile().getString("LUCKY");
+        Integer POWER = Data.getconfigfile().getInt("Lucky_Power");
+        Integer XP = Data.getconfigfile().getInt("Lucky_XP");
+        Integer LEVELUP = PlayerData.getleveluptimes(e.getPlayer());
+        String FULL_STORAGE = Data.getlanguagefile().getString("FULL_STORAGE");
+        String blocks = e.getBlock().getType().toString();
+        MaterialChecker materialChecker = new MaterialChecker();
+        int max = 0;
+        int min = 0;
+        e.getBlock().getDrops().clear();
+        e.setDropItems(false);
+        e.setExpToDrop(0);
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(p);
+        Location loc = new com.sk89q.worldedit.util.Location(localPlayer.getWorld(), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ());
+        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionQuery query = container.createQuery();
+        if (!query.testState(loc, localPlayer, Flags.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
+            e.setCancelled(true);
+            return;
+        }
+        List<String> w = Data.getconfigfile().getStringList("disable-worlds");
+        if (!w.contains(p.getWorld().getName())) {
+            if (materialChecker.isShovel(p.getItemInHand().getType()) || materialChecker.isAxe(p.getItemInHand().getType()) || materialChecker.isPickaxe(p.getItemInHand().getType())) {
+                if (Data.getconfigfile().getBoolean("debug")) {
+                    bCore.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
+                }
+                if (Power.getPower(e.getPlayer()) <= Data.getconfigfile().getInt("minimum_power")) {
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + NEED_MORE_POWER));
+                    e.setCancelled(true);
+                } else {
+                    if (Data.getconfigfile().getBoolean("debug")) {
+                        bCore.getInstance().getLogger().log(Level.INFO, "Check power");
+                    }
+                    if (Data.getconfigfile().getBoolean("debug")) {
+                        bCore.getInstance().getLogger().log(Level.INFO, "No drop");
+                    }
+                    for (String getBlockType : Objects.requireNonNull(Data.getconfigfile().getConfigurationSection("Blocks.")).getKeys(false)) {
+                        if (blocks.equalsIgnoreCase(getBlockType)) {
+                            max = Data.getconfigfile().getInt("Blocks." + blocks + ".max");
+                            min = Data.getconfigfile().getInt("Blocks." + blocks + ".min");
+                            break;
+                        }
+                    }
+                    if (Data.getconfigfile().getBoolean("debug")) {
+                        bCore.getInstance().getLogger().log(Level.INFO, "Correct block");
+                    }
+                    if (min == 0 || max == 0) {
+                        return;
+                    }
+                    int kg = Data.getRandomInt(min, max);
+                    if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
+
+                        if (Data.getconfigfile().getBoolean("debug")) {
+                            bCore.getInstance().getLogger().log(Level.INFO, "Enough space");
+                        }
+                        if (kg != 0) {
+                            if (Items.getName(b.toString()) == null) {
+                                return;
+                            }
+                            if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
+                                int fortunelevel = e.getPlayer().getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
+                                int fortuneblocks = (fortunelevel * Data.getRandomInt(1, 10)) + kg;
+                                Weight.addWeight(e.getPlayer(), fortuneblocks);
+                                Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
+                            } else {
+                                Weight.addWeight(e.getPlayer(), kg);
+                                Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), kg);
+                            }
+                        }
+                    } else {
+                        e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
+                        if (Data.getconfigfile().getBoolean("debug")) {
+                            bCore.getInstance().getLogger().log(Level.INFO, "Not Enough space");
+                        }
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+                if (playerchance >= systemchance) {
+                    PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
+                    Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY).replaceAll("%power%", String.valueOf(POWER + LEVELUP)).replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
+                    return;
+                }
+                PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
+                Power.removePower(p, 1);
+                if (Mining.getStart()) {
+                    Event.addBlocksEvent(p, 1);
+                }
+                PlayerData.addBlocks(p, 1);
+                if (Data.getconfigfile().getBoolean("debug")) {
+                    bCore.getInstance().getLogger().log(Level.INFO, "Add xp");
+                }
+            }
+
+        }
+    }
+}
