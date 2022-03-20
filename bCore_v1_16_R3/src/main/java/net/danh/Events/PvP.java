@@ -25,7 +25,7 @@ public class PvP implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamagedByEntity(@NotNull EntityDamageByEntityEvent e) {
         //check if attack was a player
-        if (e.getDamager() instanceof Player  && e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             //player who hit
             Player damager = (Player) e.getDamager();
             Player attacked = (Player) e.getEntity();
