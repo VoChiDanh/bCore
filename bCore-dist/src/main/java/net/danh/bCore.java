@@ -1,5 +1,7 @@
 package net.danh;
 
+import me.clip.placeholderapi.metrics.bukkit.Metrics;
+import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
 import net.danh.Commands.TabCommand;
 import net.danh.Contest.Mining;
@@ -45,6 +47,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
+        Metrics metrics = new Metrics(this, 14684);
+        metrics.addCustomChart(new SimplePie("plugin_name", () -> getDescription().getName()));
         HookWithOthersPlugins();
         RegisterEvent();
         RegisterCommands();

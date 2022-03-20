@@ -9,4 +9,4 @@ bCore_v1_16_R3:
 bCore_v1_18_R2:
   - MythicMobs 5.0.1 -> latest
   - WorldGuard 7 -> latest
-  - Java 16
+  - Java 17

@@ -31,10 +31,31 @@ public class Data {
 
         if (!configFile.exists()) bCore.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) bCore.getInstance().saveResource("language.yml", false);
-        if (!dataFile.exists()) bCore.getInstance().saveResource("data.yml", false);
-        if (!storageFile.exists()) bCore.getInstance().saveResource("storage.yml", false);
+        if (!dataFile.exists()) {
+            dataFile.getParentFile().mkdirs();
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!storageFile.exists()) {
+            storageFile.getParentFile().mkdirs();
+            try {
+                storageFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (!itemFile.exists()) bCore.getInstance().saveResource("item.yml", false);
-        if (!bankFile.exists()) bCore.getInstance().saveResource("bank.yml", false);
+        if (!bankFile.exists()) {
+            bankFile.getParentFile().mkdirs();
+            try {
+                bankFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (!cmdFile.exists()) bCore.getInstance().saveResource("cmd.yml", false);
         config = new YamlConfiguration();
         language = new YamlConfiguration();
