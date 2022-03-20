@@ -22,7 +22,7 @@ jobs:
             ./bCore_v1_12_R1/target/bCore.jar
             ./bCore_v1_16_R3/target/bCore.jar
             ./bCore_v1_18_R2/target/bCore.jar
-            NOTE.yml
+            ./NOTE.yml
       - uses: jungwinter/split@v2
         id: split
         with:
