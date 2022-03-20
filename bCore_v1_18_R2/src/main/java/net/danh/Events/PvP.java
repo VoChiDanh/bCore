@@ -32,7 +32,15 @@ public class PvP implements Listener {
             boolean damagerState = PvPPlayer.getPvPStatus(damager);
             //player who was hit
             boolean attackedState = PvPPlayer.getPvPStatus(attacked);
-            if (damagerState || attackedState) {
+            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(damager);
+            LocalPlayer localPlayer1 = WorldGuardPlugin.inst().wrapPlayer(attacked);
+            Location loc = new Location(localPlayer.getWorld(), localPlayer.getLocation().getBlockX(), localPlayer.getLocation().getBlockY(), localPlayer.getLocation().getBlockZ());
+            Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = container.createQuery();
+            if (damagerState || attackedState
+                    || PvPPlayer.getProtectTime(damager) > 0 || PvPPlayer.getProtectTime(attacked) > 0
+                    || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                 e.setCancelled(true);
             }
         } else if (e.getDamager() instanceof Projectile) {
