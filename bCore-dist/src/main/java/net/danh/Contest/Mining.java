@@ -34,7 +34,13 @@ public class Mining {
 
             public void run() {
                 counter--;
-                if (counter == 0) {
+                for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
+                    p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
+                            new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("COUNTDOWN"))
+                                    .replaceAll("%time%", String.valueOf(counter)))));
+                }
+                if (counter <= 0) {
+                    cancel();
                     Bukkit.broadcastMessage(Data.convert(Data.getlanguagefile().getString("MINING_END")));
                     for (int i = 0; i < Math.min(leaderboard.size(), 5); i++) {
                         MiningManager top = leaderboard.get(i);
@@ -53,14 +59,7 @@ public class Mining {
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
                         Event.setBlocksEvent(p, 0);
                     }
-                    cancel();
                     Started = false;
-                } else {
-                    for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
-                        p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                                new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("COUNTDOWN"))
-                                        .replaceAll("%time%", String.valueOf(counter)))));
-                    }
                 }
             }
         }).runTaskTimer(bCore.getInstance(), 20L, 20L);

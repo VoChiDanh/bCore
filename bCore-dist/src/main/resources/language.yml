@@ -22,7 +22,7 @@ HELP_ADMIN:
 DONE: "&aXong"
 NEED_MORE_POWER: "&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc"
 NOT_FISH: "&#eb6152Đây không phải cá nên bạn không thể câu nó"
-LUCKY: "&#52d6ebThật may mắn! Bạn nhận đuọc %power% năng lượng và %xp% xp"
+LUCKY: "&#52d6ebThật may mắn! Bạn nhận được %power% năng lượng và %xp% xp"
 DEAD: "&#eb8252Bạn chết và mất %xp% XP và %money%$"
 UNKNOWN_PLAYER: "&#eb8252Không tìm thấy người chơi"
 FULL_STORAGE: "&#eb8252Kho của bạn đã đầy!"
