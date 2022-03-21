@@ -41,9 +41,6 @@ public class Join implements Listener {
         if (Event.getBlockEvent(p) == 0) {
             Event.setBlocksEvent(p, 0);
         }
-        if (PvPPlayer.getFirstJoin(p) && !PvPPlayer.getPvPStatus(p)) {
-            PvPPlayer.setPvPStatus(p, true);
-        }
         if (PlayerData.getPlayerName(p) == null) {
             PlayerData.setPlayerName(p);
         }
@@ -52,10 +49,6 @@ public class Join implements Listener {
         }
         if (PlayerData.getBlocks(p) <= 0) {
             PlayerData.setBlocks(p, 0);
-        }
-        if (PvPPlayer.getFirstJoin(p) && PvPPlayer.getProtectTime(p) == 0) {
-            PvPPlayer.setFirstJoinStatus(p, true);
-            PvPPlayer.setProtectTime(p, Data.getconfigfile().getInt("Protect-time"));
         }
     }
 }

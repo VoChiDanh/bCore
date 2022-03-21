@@ -3,14 +3,13 @@ package net.danh;
 import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
-import net.danh.Commands.TabCommand;
 import net.danh.Contest.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
-import net.danh.Manager.*;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TranslatableComponent;
+import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
+import net.danh.Manager.Power;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -65,34 +64,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                                 .replaceAll("%player%", p.getName())));
                         p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
                     }
-                    int timeLeft = PvPPlayer.getProtectTime(p);
-                    Cooldown.setCooldown(p.getUniqueId(), --timeLeft);
-                    if (timeLeft == 0) {
-                        PvPPlayer.setProtectTime(p, 0);
-                        cancel();
-                    }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
-        (new BukkitRunnable() {
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (PvPPlayer.getProtectTime(p) > 0) {
-                        int timeLeft = PvPPlayer.getProtectTime(p);
-                        timeLeft--;
-                        PvPPlayer.setProtectTime(p, timeLeft);
-                        p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                                new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PROTECT_PVP"))
-                                        .replaceAll("%time%", String.valueOf(PvPPlayer.getProtectTime(p))))));
-                        if (timeLeft <= 0) {
-                            PvPPlayer.setProtectTime(p, 0);
-                            cancel();
-                        }
-                    }
-                }
-            }
-        }).runTaskTimer(this, 20L, 20L);
-
         (new BukkitRunnable() {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
@@ -127,34 +101,24 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void HookWithOthersPlugins() {
         if (!setupEconomy()) {
-            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getLogger().severe(String.format("Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
             getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
-            getServer().getPluginManager().disablePlugin(this);
-            return;
         }
-        if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-            getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
-            getServer().getPluginManager().disablePlugin(this);
-            return;
+        if (getServer().getPluginManager().getPlugin("PvP") != null && Objects.requireNonNull(getServer().getPluginManager().getPlugin("PvP")).getDescription().getAuthors().contains("VoChiDanh")) {
+            getLogger().log(Level.INFO, "Successfully hooked with PvP v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PvP")).getDescription().getVersion());
         }
-        if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
+        if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
         } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
+            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs");
         }
-        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
             new PlaceholderAPI().register();
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
         }
     }
 
@@ -173,8 +137,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Join(),
                 new Fishing(),
                 new Death(),
-                new Kill(),
-                new PvP()
+                new Kill()
         ));
     }
 
@@ -205,17 +168,19 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void RegisterCommands() {
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("bCore")).setTabCompleter(new TabCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("bank")).setTabCompleter(new TabCommand());
-        Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
     }
 
     private boolean setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
-        if (economyProvider != null)
-            economy = economyProvider.getProvider();
-        return (economy != null);
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        economy = rsp.getProvider();
+        return true;
     }
 
 }

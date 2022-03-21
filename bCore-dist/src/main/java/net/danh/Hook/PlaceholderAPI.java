@@ -85,20 +85,8 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("blocks_event")) {
             return String.valueOf(Event.getBlockEvent(p));
         }
-        if (identifier.equalsIgnoreCase("pvp")) {
-            if (PvPPlayer.getPvPStatus(p)) {
-                return Data.getconfigfile().getString("Boolean.true");
-            }
-            if (!PvPPlayer.getPvPStatus(p)) {
-                return Data.getconfigfile().getString("Boolean.false");
-            }
-            return "";
-        }
         if (identifier.equalsIgnoreCase("blocks")) {
             return String.valueOf(PlayerData.getBlocks(p));
-        }
-        if (identifier.equalsIgnoreCase("protect_time")) {
-            return String.valueOf(PvPPlayer.getProtectTime(p));
         }
         return null;
     }
