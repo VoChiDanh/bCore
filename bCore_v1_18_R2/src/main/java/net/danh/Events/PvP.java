@@ -25,10 +25,8 @@ public class PvP implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamagedByEntity(@NotNull EntityDamageByEntityEvent e) {
         //check if attack was a player
-        if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {
             //player who hit
-            Player damager = (Player) e.getDamager();
-            Player attacked = (Player) e.getEntity();
             boolean damagerState = PvPPlayer.getPvPStatus(damager);
             //player who was hit
             boolean attackedState = PvPPlayer.getPvPStatus(attacked);
@@ -43,11 +41,9 @@ public class PvP implements Listener {
                     || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                 e.setCancelled(true);
             }
-        } else if (e.getDamager() instanceof Projectile) {
-            Projectile arrow = (Projectile) e.getDamager();
+        } else if (e.getDamager() instanceof Projectile arrow) {
             if (arrow.getShooter() instanceof Player) {
-                if (e.getEntity() instanceof Player) {
-                    Player attacked = (Player) e.getEntity();
+                if (e.getEntity() instanceof Player attacked) {
                     Player damager = (Player) arrow.getShooter();
                     boolean damagerState = PvPPlayer.getPvPStatus(damager);
                     boolean attackedState = PvPPlayer.getPvPStatus(attacked);
@@ -69,11 +65,8 @@ public class PvP implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamagedByEntity(@NotNull EntityCombustByEntityEvent e) {
-        if (e.getCombuster() instanceof Arrow) {
-            Arrow arrow = (Arrow) e.getCombuster();
-            if (arrow.getShooter() instanceof Player && e.getEntity() instanceof Player) {
-                Player damager = (Player) arrow.getShooter();
-                Player attacked = (Player) e.getEntity();
+        if (e.getCombuster() instanceof Arrow arrow) {
+            if (arrow.getShooter() instanceof Player damager && e.getEntity() instanceof Player attacked) {
                 boolean damagerState = PvPPlayer.getPvPStatus(damager);
                 boolean attackedState = PvPPlayer.getPvPStatus(attacked);
                 LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(damager);
@@ -93,8 +86,7 @@ public class PvP implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onFishingPlayer(@NotNull PlayerFishEvent e) {
-        if (e.getCaught() instanceof Player) {
-            Player attacked = (Player) e.getCaught();
+        if (e.getCaught() instanceof Player attacked) {
             Player damager = e.getPlayer();
             boolean damagerState = PvPPlayer.getPvPStatus(damager);
             boolean attackedState = PvPPlayer.getPvPStatus(attacked);

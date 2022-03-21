@@ -24,7 +24,7 @@ NEED_MORE_POWER: "&#eb6152Bạn cần nhiều năng lượng hơn để có th�
 NOT_FISH: "&#eb6152Đây không phải cá nên bạn không thể câu nó"
 LUCKY: "&#52d6ebThật may mắn! Bạn nhận đuọc %power% năng lượng và %xp% xp"
 DEAD: "&#eb8252Bạn chết và mất %xp% XP và %money%$"
-UNKNOW_PLAYER: "&#eb8252Không tìm thấy người chơi"
+UNKNOWN_PLAYER: "&#eb8252Không tìm thấy người chơi"
 FULL_STORAGE: "&#eb8252Kho của bạn đã đầy!"
 NOT_ENOUGH_MATERIAL: "&#eb8252Bạn không đủ nguyên liệu"
 ADD_STORAGE: "&a+ %amount%kg %block% &7(%weight%/%maxweight% kg)"
