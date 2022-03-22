@@ -3,7 +3,6 @@ package net.danh;
 import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
-import net.danh.Contest.Killing.Killing;
 import net.danh.Contest.Mining.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
@@ -70,8 +69,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
-                Mining.StartMining();
-                Killing.StartKilling();
+                if (getServer().getOnlinePlayers().size() > 0) {
+                    Mining.StartMining();
+                }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
     }

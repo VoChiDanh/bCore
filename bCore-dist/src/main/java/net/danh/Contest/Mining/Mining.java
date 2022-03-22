@@ -1,5 +1,6 @@
 package net.danh.Contest.Mining;
 
+import net.danh.Contest.Killing.Killing;
 import net.danh.Contest.LeaderBoard;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
@@ -62,6 +63,7 @@ public class Mining {
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
                         Event.setBlocksEvent(p, 0);
                     }
+                    Killing.StartKilling();
                     Started = false;
                 }
             }
