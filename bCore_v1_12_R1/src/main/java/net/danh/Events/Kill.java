@@ -1,7 +1,9 @@
 package net.danh.Events;
 
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import net.danh.Contest.Killing.Killing;
 import net.danh.Manager.Data;
+import net.danh.Manager.Event;
 import net.danh.Manager.Power;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
@@ -53,6 +55,9 @@ public class Kill implements Listener {
             int money = Data.getRandomInt(min, max);
             EconomyResponse r = bCore.economy.depositPlayer(p, money);
             Power.addPower(p, 2);
+            if (Killing.getStart()) {
+                Event.addKillEvent(p, 1);
+            }
             if (r.transactionSuccess()) {
                 p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
                         new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))

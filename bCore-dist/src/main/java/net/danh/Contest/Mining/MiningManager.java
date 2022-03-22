@@ -1,4 +1,4 @@
-package net.danh.Contest;
+package net.danh.Contest.Mining;
 
 import org.bukkit.entity.Player;
 

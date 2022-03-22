@@ -7,7 +7,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import net.danh.Contest.Mining;
+import net.danh.Contest.Mining.Mining;
 import net.danh.Manager.*;
 import net.danh.bCore;
 import org.bukkit.Material;

@@ -7,10 +7,9 @@
     <parent>
         <artifactId>bCore</artifactId>
         <groupId>net.danh</groupId>
-        <version>2.5</version>
+        <version>2.6</version>
     </parent>
     <artifactId>bCore_v1_16_R3</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>bCore</name>
@@ -21,7 +20,7 @@
     </properties>
 
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>${project.parent.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -59,7 +58,7 @@
         <dependency>
             <groupId>net.danh</groupId>
             <artifactId>bCore-dist</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

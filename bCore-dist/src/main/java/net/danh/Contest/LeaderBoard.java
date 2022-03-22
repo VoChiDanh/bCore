@@ -1,5 +1,9 @@
 package net.danh.Contest;
 
+import net.danh.Contest.Killing.KillingComparator;
+import net.danh.Contest.Killing.KillingManager;
+import net.danh.Contest.Mining.MiningComparator;
+import net.danh.Contest.Mining.MiningManager;
 import net.danh.Manager.Data;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
@@ -20,5 +24,19 @@ public class LeaderBoard {
         tMinings.sort(new MiningComparator());
         Collections.reverse(tMinings);
         return tMinings;
+    }
+
+    public static @NotNull List<KillingManager> getLdKilling() {
+        List<KillingManager> tKilling = new ArrayList<>();
+        Set<String> playername = Objects.requireNonNull(Data.getdatafile().getConfigurationSection("players.")).getKeys(false);
+        for (String name : playername) {
+            String pname = Data.getdatafile().getString("players." + name + ".name");
+            int block = Data.getdatafile().getInt("players." + name + ".Event.Kills");
+            tKilling.add(new KillingManager(Bukkit.getPlayer(Objects.requireNonNull(pname)), block));
+        }
+        //Sort the list using a custom comparator
+        tKilling.sort(new KillingComparator());
+        Collections.reverse(tKilling);
+        return tKilling;
     }
 }

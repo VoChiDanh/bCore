@@ -24,4 +24,22 @@ public class Event {
         Data.savedata();
     }
 
+    public static @NotNull Integer getKillEvent(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Event.Kills");
+    }
+
+    public static void setKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + "Event.Kills", number);
+        Data.savedata();
+    }
+
+    public static void addKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + "Event.Kills", getKillEvent(p) + number);
+        Data.savedata();
+    }
+
+    public static void removeKillEvent(@NotNull Player p, Integer number) {
+        Data.getdatafile().set("players." + p.getName() + "Event.Kills", getKillEvent(p) - number);
+        Data.savedata();
+    }
 }
