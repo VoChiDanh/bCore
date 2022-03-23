@@ -45,12 +45,12 @@ public class Mining {
                 if (counter <= 0) {
                     cancel();
                     Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_END"))
-                            .replaceAll("%amount%", "Đào Khối")));
+                            .replaceAll("%name%", "Đào Khối")));
                     for (int i = 0; i < Math.min(leaderboard.size(), 5); i++) {
                         MiningManager top = leaderboard.get(i);
                         Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("TOP"))
                                 .replaceAll("%top%", String.valueOf(i + 1))
-                                .replaceAll("%player%", PlayerData.getPlayerName(top.getPlayer()))
+                                .replaceAll("%player%", top.getPlayer().getDisplayName())
                                 .replaceAll("%amount%", Event.getBlockEvent(top.getPlayer()) + " Blocks")));
                         EconomyResponse r = bCore.economy.depositPlayer(top.getPlayer(), Event.getBlockEvent(top.getPlayer()));
                         bCore.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Contest"))

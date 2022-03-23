@@ -49,7 +49,7 @@ public class Killing {
                         KillingManager top = leaderboard.get(i);
                         Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("TOP"))
                                 .replaceAll("%top%", String.valueOf(i + 1))
-                                .replaceAll("%player%", PlayerData.getPlayerName(top.getPlayer()))
+                                .replaceAll("%player%", top.getPlayer().getDisplayName())
                                 .replaceAll("%amount%", Event.getKillEvent(top.getPlayer()) + " Kills")));
                         EconomyResponse r = bCore.economy.depositPlayer(top.getPlayer(), Event.getKillEvent(top.getPlayer()));
                         bCore.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Contest"))

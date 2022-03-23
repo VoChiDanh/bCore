@@ -10,7 +10,8 @@ Per_Max_Power: 1000
 Restore_Power: 10
 Per_Restore_Power: 10
 Default_Lucky_Chance: 5
-Req_Log_To_PvP: 100
+Req_Log_To_PvP: 320
+Item_Toggle_PvP: OAK_LOG
 Level_Bank: 10000
 Add_Type: ACTION_BAR #ACTION_BAR / CHAT
 EVENT_TIME: 600
