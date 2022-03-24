@@ -65,6 +65,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                                 .replaceAll("%player%", p.getName())));
                         p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
                     }
+                    p.setLevel(PlayerData.getLevel(p));
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
@@ -72,6 +73,21 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
                     Mining.StartMining();
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        long time = p.getPlayerTime() / 20;
+                        int secs = Math.toIntExact(time % 60);
+                        time /= 60;
+                        int mins = Math.toIntExact(time % 60);
+                        time /= 60;
+                        int hours = Math.toIntExact(time % 24);
+                        time /= 24;
+                        int days = Math.toIntExact(time);
+                        if (hours == 1 || hours == 2 || hours == 3 || hours == 4 || hours == 5 || hours == 6 || hours == 7 || hours == 8 || hours == 9 || hours == 10 || hours == 11 || hours == 12 || hours == 13 || hours == 14 || hours == 15 || hours == 16 || hours == 17 || hours == 18 || hours == 19 || hours == 20 || hours == 21 || hours == 22 || hours == 23 || hours == 24) {
+                            getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
+                                    .replaceAll("%player%", p.getName())));
+                            p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
+                        }
+                    }
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
