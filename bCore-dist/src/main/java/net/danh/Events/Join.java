@@ -1,6 +1,5 @@
 package net.danh.Events;
 
-import net.danh.Contest.Killing.Killing;
 import net.danh.Contest.Mining.Mining;
 import net.danh.Manager.*;
 import org.bukkit.entity.Player;
@@ -50,15 +49,8 @@ public class Join implements Listener {
         if (Event.getBlockEvent(p) > 0 && !Mining.getStart()) {
             Event.setBlocksEvent(p, 0);
         }
-        if (Event.getKillEvent(p) > 0 && !Killing.getStart()) {
-            Event.setKillEvent(p, 0);
-        }
         if (PlayerData.getBlocks(p) <= 0) {
             PlayerData.setBlocks(p, 0);
-        }
-        if (Killing.getStart()) {
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_START"))
-                    .replaceAll("%name%", "Tàn Sát")));
         }
         if (Mining.getStart()) {
             p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_START"))

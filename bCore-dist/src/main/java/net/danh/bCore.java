@@ -24,6 +24,7 @@ import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -101,7 +102,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void HookWithOthersPlugins() {
         if (!setupEconomy()) {
-            getLogger().severe(String.format("Disabled due to no Vault dependency found!", getDescription().getName()));
+            getLogger().log(Level.SEVERE, "Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -159,7 +160,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> MythicListeners() {
-        return new ArrayList<>(Arrays.asList(
+        return new ArrayList<>(Collections.singletonList(
                 new MythicMobs()
         ));
     }

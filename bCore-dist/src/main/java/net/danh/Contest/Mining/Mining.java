@@ -1,10 +1,8 @@
 package net.danh.Contest.Mining;
 
-import net.danh.Contest.Killing.Killing;
 import net.danh.Contest.LeaderBoard;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
-import net.danh.Manager.PlayerData;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
@@ -63,7 +61,6 @@ public class Mining {
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
                         Event.setBlocksEvent(p, 0);
                     }
-                    Killing.StartKilling();
                     Started = false;
                 }
             }

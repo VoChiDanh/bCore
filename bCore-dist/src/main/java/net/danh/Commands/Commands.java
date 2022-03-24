@@ -385,32 +385,6 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("kills-event")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Event.setKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Event.addKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Event.removeKillEvent(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                    }
                     if (args[0].equalsIgnoreCase("blocks")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {

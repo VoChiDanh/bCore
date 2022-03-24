@@ -1,5 +1,5 @@
 disable-worlds:
-  - Plot
+  - plots2
 xp: 1
 debug: false
 minimum_power: 30
@@ -13,12 +13,12 @@ Default_Lucky_Chance: 5
 Req_Log_To_PvP: 320
 Item_Toggle_PvP: OAK_LOG
 Level_Bank: 10000
-Add_Type: ACTION_BAR #ACTION_BAR / CHAT
+Add_Type: ACTION_BAR
 EVENT_TIME: 600
 Protect-time: 1800
 Boolean:
-  'true': 'Bật'
-  'false': 'Tắt'
+  'true': Bật
+  'false': Tắt
 Cooldown_PvP: 600
 Blocks:
   STONE:
@@ -106,5 +106,17 @@ MythicMobs:
     min: 1
     max: 2
   THO:
-    min: 5
-    max: 10
+    min: 10
+    max: 100
+  THOMO:
+    min: 100
+    max: 500
+  BAOHO:
+    min: 500
+    max: 1000
+  THANCAT:
+    min: 1000
+    max: 2000
+  NHENBIEN:
+    min: 2000
+    max: 3000
