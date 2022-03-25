@@ -45,7 +45,7 @@ public class Mining {
                         EconomyResponse r = bCore.economy.depositPlayer(p, Event.getBlockEvent(p));
                         bCore.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Contest"))
                                 .replaceAll("%player%", p.getName())
-                                .replaceAll("%amount%", String.valueOf(Event.getBlockEvent(p)))));
+                                .replaceAll("%amount%", String.valueOf(Event.getBlockEvent(p) / 100))));
                         if (r.transactionSuccess()) {
                             p.sendMessage(Data.convert(Data.getlanguagefile().getString("REWARD")));
                         }
