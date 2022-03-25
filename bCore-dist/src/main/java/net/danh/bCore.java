@@ -4,9 +4,13 @@ import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
 import net.danh.Contest.Mining.Mining;
-import net.danh.Events.*;
+import net.danh.Events.BlockBreak;
+import net.danh.Events.Death;
+import net.danh.Events.Fishing;
+import net.danh.Events.Kill;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
+import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.danh.Manager.Power;
@@ -66,6 +70,10 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                         p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
                     }
                     p.setLevel(PlayerData.getLevel(p));
+                    if (Credit.getCredit(p) == 0 && !Credit.getType(p)) {
+                        Credit.setCredit(p, 100D);
+                        Credit.setType(p, false);
+                    }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
@@ -158,7 +166,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     private @NotNull ArrayList<Listener> initializeListeners() {
         return new ArrayList<>(Arrays.asList(
                 new BlockBreak(),
-                new Join(),
                 new Fishing(),
                 new Death(),
                 new Kill()

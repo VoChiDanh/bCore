@@ -1,6 +1,5 @@
 package net.danh.Contest.Mining;
 
-import net.danh.Contest.LeaderBoard;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
 import net.danh.bCore;
@@ -11,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Mining {
@@ -29,7 +27,6 @@ public class Mining {
         for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
             Event.setBlocksEvent(p, 0);
         }
-        List<MiningManager> leaderboard = LeaderBoard.getLdMining();
         (new BukkitRunnable() {
             int counter = Data.getconfigfile().getInt("EVENT_TIME");
 
@@ -44,18 +41,13 @@ public class Mining {
                     cancel();
                     Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_END"))
                             .replaceAll("%name%", "Đào Khối")));
-                    for (int i = 0; i < Math.min(leaderboard.size(), 5); i++) {
-                        MiningManager top = leaderboard.get(i);
-                        Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("TOP"))
-                                .replaceAll("%top%", String.valueOf(i + 1))
-                                .replaceAll("%player%", top.getPlayer().getDisplayName())
-                                .replaceAll("%amount%", Event.getBlockEvent(top.getPlayer()) + " Blocks")));
-                        EconomyResponse r = bCore.economy.depositPlayer(top.getPlayer(), Event.getBlockEvent(top.getPlayer()));
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        EconomyResponse r = bCore.economy.depositPlayer(p, Event.getBlockEvent(p));
                         bCore.getInstance().getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Contest"))
-                                .replaceAll("%player%", top.getPlayer().getName())
-                                .replaceAll("%amount%", String.valueOf(Event.getBlockEvent(top.getPlayer())))));
+                                .replaceAll("%player%", p.getName())
+                                .replaceAll("%amount%", String.valueOf(Event.getBlockEvent(p)))));
                         if (r.transactionSuccess()) {
-                            top.getPlayer().sendMessage(Data.convert(Data.getlanguagefile().getString("REWARD")));
+                            p.sendMessage(Data.convert(Data.getlanguagefile().getString("REWARD")));
                         }
                     }
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {

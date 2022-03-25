@@ -59,9 +59,15 @@ public class BlockBreak implements Listener {
                 if (Data.getconfigfile().getBoolean("debug")) {
                     bCore.getInstance().getLogger().log(Level.INFO, "Check pickaxe");
                 }
+                if (Credit.getCredit(p) < 100) {
+                    p.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                    e.setCancelled(true);
+                    return;
+                }
                 if (Power.getPower(e.getPlayer()) <= Data.getconfigfile().getInt("minimum_power")) {
                     e.getPlayer().sendMessage(Data.convert(PREFIX + NEED_MORE_POWER));
                     e.setCancelled(true);
+                    return;
                 } else {
                     if (Data.getconfigfile().getBoolean("debug")) {
                         bCore.getInstance().getLogger().log(Level.INFO, "Check power");

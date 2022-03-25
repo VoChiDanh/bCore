@@ -92,16 +92,16 @@ public class Bank {
         Data.savebank();
     }
 
-    public static int getBankLevel(Player p) {
+    public static int getBankLevel(@NotNull Player p) {
         return Data.getbankfile().getInt("banks." + p.getName() + ".level");
     }
 
-    public static void setBankLevel(Player p, Integer level) {
+    public static void setBankLevel(@NotNull Player p, Integer level) {
         Data.getbankfile().set("banks." + p.getName() + ".level", level);
         Data.savebank();
     }
 
-    public static void addBankLevel(Player p, Integer level) {
+    public static void addBankLevel(@NotNull Player p, Integer level) {
         Data.getbankfile().set("banks." + p.getName() + ".level", getBankLevel(p) + level);
         Data.savebank();
     }

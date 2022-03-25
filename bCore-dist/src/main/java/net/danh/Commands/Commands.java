@@ -20,7 +20,6 @@ public class Commands implements CommandExecutor {
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String DONE = Data.getlanguagefile().getString("DONE");
         String UNKNOWN_PLAYER = Data.getlanguagefile().getString("UNKNOWN_PLAYER");
-        String COOLDOWN_PVP = Data.getlanguagefile().getString("COOLDOWN_PVP");
         if (label.equalsIgnoreCase("bCore")) {
             if (args.length == 0) {
                 if (sender.hasPermission("bCore.user")) {
@@ -111,6 +110,32 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("credit")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Credit.setCredit(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.parseDouble(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Credit.addCredit(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.parseDouble(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                Credit.removeCredit(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Double.parseDouble(args[3]));
+                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                    }
                     if (args[0].equalsIgnoreCase("power")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -121,11 +146,17 @@ public class Commands implements CommandExecutor {
                             }
                         }
                         if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Power.addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                                sender.sendMessage(Data.convert(PREFIX + DONE));
+                            if (Integer.parseInt(args[3]) > 0) {
+                                if (Bukkit.getPlayer(args[2]) != null) {
+                                    Power.addPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                    sender.sendMessage(Data.convert(PREFIX + DONE));
+                                } else {
+                                    sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                                }
                             } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                                if (Integer.parseInt(args[3]) == 0) {
+                                    Power.setPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Power.getMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2]))));
+                                }
                             }
                         }
                         if (args[1].equalsIgnoreCase("remove")) {

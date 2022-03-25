@@ -88,6 +88,18 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("blocks")) {
             return String.valueOf(PlayerData.getBlocks(p));
         }
+        if (identifier.equalsIgnoreCase("icredit")) {
+            return String.valueOf(Credit.getIntCredit(p));
+        }
+        if (identifier.equalsIgnoreCase("credit")) {
+            if (Credit.getType(p)) {
+                return "&a" + Credit.getRealCredit(p);
+            }
+            if (!Credit.getType(p)) {
+                return "&c" + Credit.getRealCredit(p);
+            }
+            return "&e" + Credit.getRealCredit(p);
+        }
         return null;
     }
 }
