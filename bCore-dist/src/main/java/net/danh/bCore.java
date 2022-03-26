@@ -10,10 +10,7 @@ import net.danh.Events.Fishing;
 import net.danh.Events.Kill;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
-import net.danh.Manager.Credit;
-import net.danh.Manager.Data;
-import net.danh.Manager.PlayerData;
-import net.danh.Manager.Power;
+import net.danh.Manager.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,6 +23,9 @@ import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
 import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +37,10 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     public static Economy economy;
     private static bCore instance;
+
+    public static DecimalFormat format = new DecimalFormat("##.##");
+    public static Object serverInstance;
+    public static Field tpsField;
 
     public static bCore getInstance() {
         return instance;
@@ -57,6 +61,13 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
+        try {
+            serverInstance = TPS.getNMSClass("MinecraftServer").getMethod("getServer").invoke(null);
+            tpsField = serverInstance.getClass().getField("recentTps");
+        } catch (NoSuchFieldException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -73,6 +84,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                     if (Credit.getCredit(p) == 0 && !Credit.getType(p)) {
                         Credit.setCredit(p, 100D);
                         Credit.setType(p, false);
+                    }
+                    if (Weight.getMaxWeight(p) == 0) {
+                        Weight.setMaxWeight(p, 5000);
                     }
                 }
             }

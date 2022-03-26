@@ -49,6 +49,10 @@ public class BlockBreak implements Listener {
             e.setCancelled(true);
             return;
         }
+        if (Double.parseDouble(TPS.getTPS(0)) < 17D) {
+            e.setCancelled(true);
+            return;
+        }
         List<String> w = Data.getconfigfile().getStringList("disable-worlds");
         if (!w.contains(p.getWorld().getName())) {
             if (Credit.getCredit(p) < 100) {
@@ -79,7 +83,7 @@ public class BlockBreak implements Listener {
                     }
                     if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
                         int fortunelevel = e.getPlayer().getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
-                        int fortuneblocks = (fortunelevel * Data.getRandomInt(1, 10)) + kg;
+                        int fortuneblocks = (fortunelevel * Data.getRandomInt(10, 20)) + kg;
                         Weight.addWeight(e.getPlayer(), fortuneblocks);
                         Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
                     } else {

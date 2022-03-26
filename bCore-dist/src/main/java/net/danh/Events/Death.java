@@ -1,5 +1,6 @@
 package net.danh.Events;
 
+import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.danh.bCore;
@@ -17,9 +18,14 @@ public class Death implements Listener {
     @EventHandler
     public void onDeath(@NotNull PlayerDeathEvent e) {
         String DEAD = Data.getlanguagefile().getString("DEAD");
-        Player p = e.getEntity().getPlayer();
+        Player p = e.getEntity();
+        Player k = p.getKiller();
         if (Objects.requireNonNull(p).hasPermission("displayname.default")) {
             PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
+            if (k != null) {
+                Credit.removeCredit(p, 0.5D);
+                Credit.removeCredit(k, 1D);
+            }
             EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
             if (r.transactionSuccess()) {
                 Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)

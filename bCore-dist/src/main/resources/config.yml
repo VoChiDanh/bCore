@@ -22,77 +22,77 @@ Boolean:
 Cooldown_PvP: 600
 Blocks:
   STONE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   COBBLESTONE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   COAL_ORE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   COAL_BLOCK:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   IRON_ORE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   IRON_BLOCK:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   GOLD_ORE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   GOLD_BLOCK:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   DIAMOND_ORE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   DIAMOND_BLOCK:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   EMERALD_ORE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   EMERALD_BLOCK:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   ACACIA_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   BIRCH_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   DARK_OAK_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   JUNGLE_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   OAK_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   SPRUCE_LOG:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   OBSIDIAN:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   ANCIENT_DEBRIS:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   CUT_SANDSTONE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   PRISMARINE:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   SAND:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
   PRISMARINE_BRICKS:
-    max: 10
-    min: 1
+    max: 20
+    min: 10
 Vanilla:
   Default:
     min: 1
