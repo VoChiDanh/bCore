@@ -23,7 +23,7 @@ HELP_ADMIN:
   Max Money'
   - '&9/bCore reload - &aReload config'
 DONE: '&aXong'
-NEED_MORE_POWER: '&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc'
+NEED_MORE_POWER: '&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc! Hãy đi tiêu diệt quái để có thể có thêm năng lượng!'
 NOT_FISH: '&#eb6152Đây không phải cá nên bạn không thể câu nó'
 LUCKY: '&#52d6ebThật may mắn! Bạn nhận được %power% năng lượng và %xp% xp'
 DEAD: '&#eb8252Bạn chết và mất %xp% XP và %money%$'
