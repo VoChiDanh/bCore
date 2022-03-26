@@ -2,6 +2,7 @@ package net.danh.Events;
 
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
 import net.danh.Manager.Power;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
@@ -52,6 +53,7 @@ public class Kill implements Listener {
         if (mob instanceof Monster || mob instanceof Animals) {
             int money = Data.getRandomInt(min, max);
             EconomyResponse r = bCore.economy.depositPlayer(p, money);
+            PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
             Power.addPower(p, Data.getconfigfile().getInt("Restore_Power"));
             if (r.transactionSuccess()) {
                 p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),

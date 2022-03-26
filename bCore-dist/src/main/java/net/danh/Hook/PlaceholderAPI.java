@@ -92,10 +92,10 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Credit.getIntCredit(p));
         }
         if (identifier.equalsIgnoreCase("credit")) {
-            if (Credit.getType(p)) {
+            if (Credit.getCredit(p) <= 200D && Credit.getCredit(p) >= 100D) {
                 return "&a" + Credit.getRealCredit(p);
             }
-            if (!Credit.getType(p)) {
+            if (Credit.getCredit(p) < 100D && Credit.getCredit(p) >= 0D) {
                 return "&c" + Credit.getRealCredit(p);
             }
             return "&e" + Credit.getRealCredit(p);

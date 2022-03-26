@@ -1,50 +1,54 @@
-PREFIX: "&f[&#28fac2bCore&f] "
-RELOAD: "&#96ff69Đã tải lại"
-NOT_ENOUGH_PERMISSION: "&#de402fBạn không đủ quyền"
+PREFIX: '&f[&#28fac2bCore&f] '
+RELOAD: '&#96ff69Đã tải lại'
+NOT_ENOUGH_PERMISSION: '&#de402fBạn không đủ quyền'
 HELP_USER:
-  - "&9/Bank - &eKiểm tra số tiền có trong ngân hàng"
-  - "&9/Bank [deposit/withdraw] [số] - &aĐóng/Rút tiền của ngân hàng"
-  - "&9/PvP - &aBật tắt PvP"
+  - '&9/Bank - &eKiểm tra số tiền có trong ngân hàng'
+  - '&9/Bank [deposit/withdraw] [số] - &aĐóng/Rút tiền của ngân hàng'
+  - '&9/PvP - &aBật tắt PvP'
 HELP_ADMIN:
-  - "&9/bCore plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level"
-  - "&9/bCore xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP"
-  - "&9/bCore power [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Power"
-  - "&9/bCore levelup [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Level Points"
-  - "&9/bCore maxpower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Power"
-  - "&9/bCore restorepower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Restore Power"
-  - "&9/bCore weight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Weight"
-  - "&9/bCore maxweight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Weight"
-  - "&9/bCore storage [add/set/remove] [Player] [Block Type] [Number] - &cAdd/Set/Remove Storage"
-  - "&9/bCore price [add/set/remove] [Block Type] [Number] - &cAdd/Set/Remove Item Price"
-  - "&9/bCore bankmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Money"
-  - "&9/bCore bankmaxmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Max Money"
-  - "&9/bCore reload - &aReload config"
-DONE: "&aXong"
-NEED_MORE_POWER: "&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc"
-NOT_FISH: "&#eb6152Đây không phải cá nên bạn không thể câu nó"
-LUCKY: "&#52d6ebThật may mắn! Bạn nhận được %power% năng lượng và %xp% xp"
-DEAD: "&#eb8252Bạn chết và mất %xp% XP và %money%$"
-UNKNOWN_PLAYER: "&#eb8252Không tìm thấy người chơi"
-FULL_STORAGE: "&#eb8252Kho của bạn đã đầy!"
-NOT_ENOUGH_MATERIAL: "&#eb8252Bạn không đủ nguyên liệu"
-ADD_STORAGE: "&a+ %amount%kg %block% &7(%weight%/%maxweight% kg)"
-REMOVE_STORAGE: "&c- %amount%kg %block% &7(%weight%/%maxweight% kg)"
-NOT_ENOUGH_MONEY: "&#eb8252Bạn không đủ tiền"
-DEPOSIT_BANK: "&#a8f2a2Bạn đã đóng %money%$ vào ngân hàng"
-WITHDRAW_BANK: "&#a8f2a2Bạn đã rút %money%$ khỏi ngân hàng"
-FULL_BANK: "&#f2c9a2Bạn cần nâng cấp ngân hàng để có thể chứa nhiều tiền hơn!"
-BANK: "&#9d84f0Bạn có %money%$ trong ngân hàng!"
-KILL_MOBS: "&a+ %money% | &6%mobs%"
-DO_NOT_ENOUGH_LOG: "&#e85d76Bạn cần %amount% gỗ sồi để bật/tắt PvP"
-PvPOff: "&#5de8b0Bạn đã &ctắt&#5de8b0 bảo vệ PvP"
-PvPOn: "&#5de8b0Bạn đã &6bật&#5de8b0 bảo vệ PvP"
-COOLDOWN_PVP: "&#e85d8bBạn cần chờ dến %time% giây nữa để có thể bật/tắt PvP"
-CONTEST_START: "&#a2e85dCuộc thi %name% bắt đầu!"
-CONTEST_END: "&#5d74e8Cuộc thi %name% kết thúc!"
-COUNTDOWN: "&#a2e85dCòn %time% giây nữa kết thúc"
-TOP: "&a#%top% |&3 %player% - %amount%"
-REWARD: "&aNhận thưởng thành công!"
-MINER_REWARD: "&a+%amount% Key Miner"
-PROTECT_PVP: "&#5de8aeBảo vệ PvP trong %time% giây"
-LOW_CREDIT: "&9Uy tín của bạn quá thấp để có thể hạ được nữa...."
-LOW_CREDIT_WORKING: "&aĐiểm uy tín của bạn quá thấp để có thể làm việc này! Mua điểm uy tín tại /cuahang"
+  - '&9/bCore plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level'
+  - '&9/bCore xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP'
+  - '&9/bCore power [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Power'
+  - '&9/bCore levelup [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Level Points'
+  - '&9/bCore maxpower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Power'
+  - '&9/bCore restorepower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Restore
+  Power'
+  - '&9/bCore weight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Weight'
+  - '&9/bCore maxweight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Weight'
+  - '&9/bCore storage [add/set/remove] [Player] [Block Type] [Number] - &cAdd/Set/Remove
+  Storage'
+  - '&9/bCore price [add/set/remove] [Block Type] [Number] - &cAdd/Set/Remove Item Price'
+  - '&9/bCore bankmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Money'
+  - '&9/bCore bankmaxmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank
+  Max Money'
+  - '&9/bCore reload - &aReload config'
+DONE: '&aXong'
+NEED_MORE_POWER: '&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc'
+NOT_FISH: '&#eb6152Đây không phải cá nên bạn không thể câu nó'
+LUCKY: '&#52d6ebThật may mắn! Bạn nhận được %power% năng lượng và %xp% xp'
+DEAD: '&#eb8252Bạn chết và mất %xp% XP và %money%$'
+UNKNOWN_PLAYER: '&#eb8252Không tìm thấy người chơi'
+FULL_STORAGE: '&#eb8252Kho của bạn đã đầy!'
+NOT_ENOUGH_MATERIAL: '&#eb8252Bạn không đủ nguyên liệu'
+ADD_STORAGE: '&a+ %amount%kg %block% &7(%weight%/%maxweight% kg)'
+REMOVE_STORAGE: '&c- %amount%kg %block% &7(%weight%/%maxweight% kg)'
+NOT_ENOUGH_MONEY: '&#eb8252Bạn không đủ tiền'
+DEPOSIT_BANK: '&#a8f2a2Bạn đã đóng %money%$ vào ngân hàng'
+WITHDRAW_BANK: '&#a8f2a2Bạn đã rút %money%$ khỏi ngân hàng'
+FULL_BANK: '&#f2c9a2Bạn cần nâng cấp ngân hàng để có thể chứa nhiều tiền hơn!'
+BANK: '&#9d84f0Bạn có %money%$ trong ngân hàng!'
+KILL_MOBS: '&a+ %money% | &6%mobs%'
+DO_NOT_ENOUGH_LOG: '&#e85d76Bạn cần %amount% gỗ sồi để bật/tắt PvP'
+PvPOff: '&#5de8b0Bạn đã &ctắt&#5de8b0 bảo vệ PvP'
+PvPOn: '&#5de8b0Bạn đã &6bật&#5de8b0 bảo vệ PvP'
+COOLDOWN_PVP: '&#e85d8bBạn cần chờ dến %time% giây nữa để có thể bật/tắt PvP'
+CONTEST_START: '&#a2e85dCuộc thi %name% bắt đầu!'
+CONTEST_END: '&#5d74e8Cuộc thi %name% kết thúc!'
+COUNTDOWN: '&#a2e85dCòn %time% giây nữa kết thúc'
+TOP: '&a#%top% |&3 %player% - %amount%'
+REWARD: '&aNhận thưởng thành công!'
+MINER_REWARD: '&a+1 Key Miner'
+PROTECT_PVP: '&#5de8aeBảo vệ PvP trong %time% giây'
+LOW_CREDIT: '&9Uy tín của bạn quá thấp để có thể hạ được nữa....'
+LOW_CREDIT_WORKING: '&aĐiểm uy tín của bạn quá thấp để có thể làm việc này! Mua điểm
+  uy tín tại /cuahang'
