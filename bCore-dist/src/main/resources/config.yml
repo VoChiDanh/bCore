@@ -12,7 +12,7 @@ Per_Restore_Power: 10
 Default_Lucky_Chance: 5
 Req_Log_To_PvP: 320
 Item_Toggle_PvP: OAK_LOG
-Level_Bank: 10000
+Level_Bank: 1000000
 Add_Type: ACTION_BAR
 EVENT_TIME: 600
 Protect-time: 1800

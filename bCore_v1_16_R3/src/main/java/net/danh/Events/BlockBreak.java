@@ -9,6 +9,8 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.danh.Contest.Mining.Mining;
 import net.danh.Manager.*;
+import net.danh.bCore;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -27,14 +29,8 @@ public class BlockBreak implements Listener {
     public void onBlockBreak(@NotNull BlockBreakEvent e) {
         Material b = e.getBlock().getType();
         Player p = e.getPlayer();
-        double systemchance = Math.random() * 100.0D;
-        double playerchance = Lucky.getLuckyChance(e.getPlayer());
         String NEED_MORE_POWER = Data.getlanguagefile().getString("NEED_MORE_POWER");
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
-        String LUCKY = Data.getlanguagefile().getString("LUCKY");
-        Integer POWER = Data.getconfigfile().getInt("Lucky_Power");
-        Integer XP = Data.getconfigfile().getInt("Lucky_XP");
-        Integer LEVELUP = PlayerData.getleveluptimes(e.getPlayer());
         String FULL_STORAGE = Data.getlanguagefile().getString("FULL_STORAGE");
         String blocks = e.getBlock().getType().toString();
         int max = 0;
@@ -47,10 +43,6 @@ public class BlockBreak implements Listener {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
         if (!query.testState(loc, localPlayer, Flags.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
-            e.setCancelled(true);
-            return;
-        }
-        if (Double.parseDouble(TPS.getTPS(0)) < 17D) {
             e.setCancelled(true);
             return;
         }
@@ -77,39 +69,29 @@ public class BlockBreak implements Listener {
                 return;
             }
             int kg = Data.getRandomInt(min, max);
-            if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
-                if (kg != 0) {
-                    if (Items.getName(b.toString()) == null) {
-                        return;
-                    }
+            Bukkit.getScheduler().scheduleSyncDelayedTask(bCore.getInstance(), () -> {
+                if (Weight.getWeight(e.getPlayer()) + kg <= Weight.getMaxWeight(e.getPlayer())) {
                     if (e.getPlayer().getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
                         int fortunelevel = e.getPlayer().getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
-                        int fortuneblocks = (fortunelevel * Data.getRandomInt(10, 20)) + kg;
+                        int fortuneblocks = (fortunelevel * Data.getRandomInt(1, 10)) + kg;
                         Weight.addWeight(e.getPlayer(), fortuneblocks);
                         Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), fortuneblocks);
                     } else {
                         Weight.addWeight(e.getPlayer(), kg);
                         Storage.addStorage(e.getPlayer(), Items.getName(b.toString()), kg);
                     }
+                } else {
+                    e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
+                    e.setCancelled(true);
+                    return;
                 }
-            } else {
-                e.getPlayer().sendMessage(Data.convert(PREFIX + FULL_STORAGE));
-                e.setCancelled(true);
-                return;
-            }
-            if (playerchance >= systemchance) {
-                PlayerData.addXP(e.getPlayer(), 2 + PlayerData.getleveluptimes(e.getPlayer()));
-                Power.addPower(e.getPlayer(), 5 + PlayerData.getleveluptimes(e.getPlayer()));
-                e.getPlayer().sendMessage(Data.convert(PREFIX + Objects.requireNonNull(LUCKY).replaceAll("%power%", String.valueOf(POWER + LEVELUP)).replaceAll("%xp%", String.valueOf(XP + LEVELUP))));
-                return;
-            }
-            PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
-            Power.removePower(p, 1);
-            if (Mining.getStart()) {
-                Event.addBlocksEvent(p, 1);
-            }
-            PlayerData.addBlocks(p, 1);
+                PlayerData.addXP(e.getPlayer(), Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(e.getPlayer()));
+                Power.removePower(p, 1);
+                if (Mining.getStart()) {
+                    Event.addBlocksEvent(p, 1);
+                }
+                PlayerData.addBlocks(p, 1);
+            });
         }
-
     }
 }
