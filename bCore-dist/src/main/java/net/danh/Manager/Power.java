@@ -17,7 +17,11 @@ public class Power {
     }
 
     public static void addPower(@NotNull Player p, int number) {
-        Data.getdatafile().set("players." + p.getName() + ".Power", getPower(p) + number);
+        if (getPower(p) + number <= getMaxPower(p)) {
+            Data.getdatafile().set("players." + p.getName() + ".Power", getPower(p) + number);
+        } else {
+            Power.setPower(p, Power.getMaxPower(p));
+        }
         Data.savedata();
     }
 

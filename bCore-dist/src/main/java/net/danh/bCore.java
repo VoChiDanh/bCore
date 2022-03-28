@@ -4,13 +4,13 @@ import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
 import net.danh.Contest.Mining.Mining;
-import net.danh.Events.BlockBreak;
 import net.danh.Events.Death;
 import net.danh.Events.Fishing;
 import net.danh.Events.Kill;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
-import net.danh.Manager.*;
+import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,7 +24,6 @@ import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,19 +60,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
-        try {
-            serverInstance = TPS.getNMSClass("MinecraftServer").getMethod("getServer").invoke(null);
-            tpsField = serverInstance.getClass().getField("recentTps");
-        } catch (NoSuchFieldException | SecurityException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (Power.getPower(p) >= Power.getMaxPower(p)) {
-                        Power.setPower(p, Power.getMaxPower(p));
-                    }
                     if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
                         PlayerData.setBlocks(p, 0);
                         getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
@@ -81,38 +70,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                         p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
                     }
                     p.setLevel(PlayerData.getLevel(p));
-                    if (Credit.getCredit(p) == 0 && !Credit.getType(p)) {
-                        Credit.setCredit(p, 100D);
-                        Credit.setType(p, false);
-                    }
-                    if (Weight.getMaxWeight(p) == 0) {
-                        Weight.setMaxWeight(p, 5000);
-                    }
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
-        (new BukkitRunnable() {
-            public void run() {
-                if (getServer().getOnlinePlayers().size() > 0) {
-                    Mining.StartMining();
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        long time = p.getPlayerTime() / 20;
-                        int secs = Math.toIntExact(time % 60);
-                        time /= 60;
-                        int mins = Math.toIntExact(time % 60);
-                        time /= 60;
-                        int hours = Math.toIntExact(time % 24);
-                        time /= 24;
-                        int days = Math.toIntExact(time);
-                        if (hours == 1 || hours == 2 || hours == 3 || hours == 4 || hours == 5 || hours == 6 || hours == 7 || hours == 8 || hours == 9 || hours == 10 || hours == 11 || hours == 12 || hours == 13 || hours == 14 || hours == 15 || hours == 16 || hours == 17 || hours == 18 || hours == 19 || hours == 20 || hours == 21 || hours == 22 || hours == 23 || hours == 24) {
-                            getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
-                                    .replaceAll("%player%", p.getName())));
-                            p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
-                        }
-                    }
-                }
-            }
-        }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
     }
 
     @Override
@@ -123,6 +83,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Data.saveitems();
         Data.savebank();
         Data.savecmd();
+        Data.savestorage();
         getLogger().log(Level.INFO, "Saved data");
     }
 
@@ -179,7 +140,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> initializeListeners() {
         return new ArrayList<>(Arrays.asList(
-                new BlockBreak(),
                 new Fishing(),
                 new Death(),
                 new Kill()
