@@ -23,17 +23,18 @@ public class Power {
             Power.setPower(p, Power.getMaxPower(p));
         }
         Data.savedata();
+        p.sendMessage(Data.convert("&a+ " + number + " Power"));
     }
 
 
     public static void removePower(Player p, int number) {
         if (getPower(p) > number) {
             Data.getdatafile().set("players." + p.getName() + ".Power", getPower(p) - number);
-            Data.savedata();
         } else {
             Data.getdatafile().set("players." + p.getName() + ".Power", 0);
-            Data.savedata();
         }
+        p.sendMessage(Data.convert("&c- " + number + " Power"));
+        Data.savedata();
     }
 
     public static int getMaxPower(@NotNull Player p) {

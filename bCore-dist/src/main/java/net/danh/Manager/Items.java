@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@Deprecated
 public class Items {
 
     public static @NotNull Integer getPrice(String name) {

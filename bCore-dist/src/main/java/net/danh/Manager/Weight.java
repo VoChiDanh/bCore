@@ -3,6 +3,7 @@ package net.danh.Manager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public class Weight {
 
     public static @NotNull Integer getWeight(@NotNull Player p) {

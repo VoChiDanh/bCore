@@ -25,25 +25,26 @@ public class PlayerData {
 
     public static void addLevel(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) + number);
-        Data.savedata();
         Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
         Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
+        Data.savedata();
+        p.sendMessage(Data.convert("&aChúc mừng bạn đã lên cấp " + getLevel(p)));
     }
 
     public static void addXP(@NotNull Player p, int number) {
         Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
         checkLevelUp(p);
         Data.savedata();
+        p.sendMessage(Data.convert("&a+ " + number + " XP"));
     }
 
     public static void removeLevel(Player p, int number) {
         if (getLevel(p) > number) {
             Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) - number);
-            Data.savedata();
         } else {
             Data.getdatafile().set("players." + p.getName() + ".Level", 1);
-            Data.savedata();
         }
+        Data.savedata();
     }
 
     public static void removeXP(Player p, int number) {
@@ -62,6 +63,7 @@ public class PlayerData {
             setXP(p, 0);
             addLevel(p, 1);
             addLeveluptimes(p, 1);
+            p.sendMessage(Data.convert("&aChúc mừng bạn đã lên cấp độ " + getLevel(p)));
         }
     }
 
@@ -100,15 +102,6 @@ public class PlayerData {
         }
         return limit;
     }
-
-    public static String getPlayerName(@NotNull Player p) {
-        return Data.getdatafile().getString("players." + p.getName() + ".name");
-    }
-
-    public static void setPlayerName(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".name", p.getName());
-    }
-
 
     public static @NotNull Integer getBlocks(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");

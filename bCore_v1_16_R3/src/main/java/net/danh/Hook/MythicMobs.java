@@ -42,7 +42,7 @@ public class MythicMobs implements Listener {
         }
         int money = Data.getRandomInt(min, max);
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
-        Power.addPower(p, Data.getconfigfile().getInt("Restore_Power"));
+        Power.addPower(p, Power.getRestorePower(p));
         PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
         if (r.transactionSuccess()) {
             p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),

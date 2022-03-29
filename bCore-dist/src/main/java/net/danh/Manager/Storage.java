@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@Deprecated
 public class Storage {
 
     public static @NotNull Integer getStorage(@NotNull Player p, String name) {

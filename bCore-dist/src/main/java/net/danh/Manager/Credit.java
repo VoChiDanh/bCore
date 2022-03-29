@@ -46,6 +46,7 @@ public class Credit {
             Data.getdatafile().set("players." + p.getName() + ".Credit", getCredit(p) + amount);
         }
         Data.savedata();
+        p.sendMessage(Data.convert("&a+ " + amount + " Uy tín"));
     }
 
     public static void removeCredit(@NotNull Player p, Double amount) {
@@ -62,5 +63,6 @@ public class Credit {
             Objects.requireNonNull(Bukkit.getPlayer(p.getName())).sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT")));
         }
         Data.savedata();
+        p.sendMessage(Data.convert("&c- " + amount + " Uy tín"));
     }
 }
