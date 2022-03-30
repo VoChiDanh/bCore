@@ -3,57 +3,79 @@ package net.danh.Manager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+
 public class PlayerData {
 
-    public static int getLevel(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Level");
+    public static HashMap<Player, Integer> block = new HashMap<>();
+    public static HashMap<Player, Integer> xp = new HashMap<>();
+    public static HashMap<Player, Integer> level = new HashMap<>();
+    public static HashMap<Player, Integer> levelup = new HashMap<>();
+
+
+    public static void SaveXP(@NotNull Player p) {
+        Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p));
+        Data.savedata();
     }
 
-    public static int getXP(@NotNull Player p) {
+    public static void SaveLevel(@NotNull Player p) {
+        Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p));
+        Data.savedata();
+    }
+
+    public static int getXPData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".XP");
     }
 
+    public static int getLevelData(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".Level");
+    }
+
+    public static int getLevel(@NotNull Player p) {
+        return level.get(p);
+    }
+
+    public static int getXP(@NotNull Player p) {
+        return xp.get(p);
+    }
+    /*
+    Data.getdatafile().getInt("players." + p.getName() + ".XP");
+     */
+
     public static void setLevel(@NotNull Player p, int number) {
-        Data.getdatafile().set("players." + p.getName() + ".Level", number);
-        Data.savedata();
+        level.put(p, number);
     }
 
     public static void setXP(@NotNull Player p, int number) {
-        Data.getdatafile().set("players." + p.getName() + ".XP", number);
-        Data.savedata();
+        xp.put(p, number);
     }
 
     public static void addLevel(@NotNull Player p, int number) {
-        Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) + number);
+        level.replace(p, getLevel(p) + number);
         Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
         Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
-        Data.savedata();
         p.sendMessage(Data.convert("&aChúc mừng bạn đã lên cấp " + getLevel(p)));
     }
 
     public static void addXP(@NotNull Player p, int number) {
-        Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) + number);
+        xp.replace(p, getXP(p) + number);
         checkLevelUp(p);
-        Data.savedata();
         p.sendMessage(Data.convert("&a+ " + number + " XP"));
     }
 
     public static void removeLevel(Player p, int number) {
         if (getLevel(p) > number) {
-            Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p) - number);
+            level.replace(p, getLevel(p) - number);
         } else {
-            Data.getdatafile().set("players." + p.getName() + ".Level", 1);
+            level.put(p, 1);
         }
-        Data.savedata();
     }
 
     public static void removeXP(Player p, int number) {
         if (getXP(p) > number) {
-            Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p) - number);
-            Data.savedata();
+            xp.replace(p, getXP(p) - number);
         } else {
-            Data.getdatafile().set("players." + p.getName() + ".XP", 0);
-            Data.savedata();
+            xp.put(p, 1);
         }
     }
 
@@ -68,58 +90,57 @@ public class PlayerData {
     }
 
     public static int getleveluptimes(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes");
+        return levelup.get(p);
+    }
+
+    public static int getLUData(@NotNull Player p) {
+        return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes", getLevelData(p));
+    }
+
+    public static void SaveLevelup(@NotNull Player p) {
+        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p));
+        Data.savedata();
     }
 
     public static void addLeveluptimes(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p) + number);
-        Data.savedata();
+        levelup.replace(p, getleveluptimes(p) + number);
     }
 
     public static void removeLeveluptimes(Player p, Integer number) {
         if (getleveluptimes(p) > 1) {
-            Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p) - number);
+            levelup.replace(p, getleveluptimes(p) - number);
         } else {
-            Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", 0);
+            levelup.put(p, 0);
         }
-        Data.savedata();
     }
 
     public static void setLeveluptimes(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", number);
-        Data.savedata();
-    }
-
-    @Deprecated
-    public static Integer getPlayerLimit(Player p, String perm) {
-        int limit = 0;
-        for (int i = 0; i <= 1000000000; i++) {
-            if (p.hasPermission(perm + "." + i)) {
-                if (limit < i) {
-                    limit = i;
-                }
-            }
-        }
-        return limit;
+        levelup.put(p, number);
     }
 
     public static @NotNull Integer getBlocks(@NotNull Player p) {
+        return block.get(p);
+    }
+
+    public static int getBlockData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
     }
 
-    public static void setBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", number);
+    public static void SaveBlock(@NotNull Player p) {
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p));
         Data.savedata();
+    }
+
+    public static void setBlocks(@NotNull Player p, Integer number) {
+        block.put(p, number);
     }
 
     public static void addBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) + number);
-        Data.savedata();
+        block.replace(p, getBlocks(p) + number);
     }
 
     public static void removeBlocks(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p) - number);
-        Data.savedata();
+        block.replace(p, getBlocks(p) - number);
     }
 
 }

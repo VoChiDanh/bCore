@@ -4,10 +4,7 @@ import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
 import net.danh.Contest.Mining.Mining;
-import net.danh.Events.BlockBreak;
-import net.danh.Events.Death;
-import net.danh.Events.Fishing;
-import net.danh.Events.Kill;
+import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
@@ -136,11 +133,13 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> initializeListeners() {
-        return new ArrayList<>(Arrays.asList(
+        return new ArrayList<Listener>(Arrays.asList(
                 new Fishing(),
                 new Death(),
                 new Kill(),
-                new BlockBreak()
+                new BlockBreak(),
+                new Join(),
+                new Quit()
         ));
     }
 
