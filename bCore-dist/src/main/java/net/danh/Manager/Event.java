@@ -32,11 +32,6 @@ public class Event {
         }
     }
 
-    public static void SaveEvent(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", getBlockEvent(p));
-        Data.savedata();
-    }
-
     public static int getBEData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Event.Blocks");
     }

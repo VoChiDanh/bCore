@@ -17,10 +17,6 @@ public class Lucky {
         return lucky.get(p);
     }
 
-    public static void SaveLuckyChance(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Lucky", getLuckyChance(p));
-        Data.savedata();
-    }
 
     public static void setLuckyChance(@NotNull Player p, int number) {
         lucky.put(p, number);

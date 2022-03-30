@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 
@@ -166,6 +167,23 @@ public class Data {
     public static int getRandomInt(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min) + min;
+    }
+
+    public static void saveall(@NotNull Player p) {
+        Data.getbankfile().set("banks." + p.getName() + ".money", Bank.getBankMoney(p));
+        Data.getbankfile().set("banks." + p.getName() + ".level",  Bank.getBankLevel(p));
+        Data.getdatafile().set("players." + p.getName() + ".Credit", Credit.getCredit(p));
+        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", Event.getBlockEvent(p));
+        Data.getdatafile().set("players." + p.getName() + ".Lucky", Lucky.getLuckyChance(p));
+        Data.getdatafile().set("players." + p.getName() + ".XP", PlayerData.getXP(p));
+        Data.getdatafile().set("players." + p.getName() + ".Level", PlayerData.getLevel(p));
+        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", PlayerData.getleveluptimes(p));
+        Data.getdatafile().set("players." + p.getName() + ".Blocks", PlayerData.getBlocks(p));
+        Data.getdatafile().set("players." + p.getName() + ".Power", Power.getPower(p));
+        Data.getdatafile().set("players." + p.getName() + ".MaxPower", Power.getMaxPower(p));
+        Data.getdatafile().set("players." + p.getName() + ".RestorePower", Power.getRestorePower(p));
+        Data.savedata();
+        Data.savebank();
     }
 
     // Colorizes messages with preset colorcodes (&) and if using 1.16+, applies hex values via "&#hexvalue"

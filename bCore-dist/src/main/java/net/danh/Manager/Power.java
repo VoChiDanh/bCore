@@ -19,12 +19,6 @@ public class Power {
         return power.get(p);
     }
 
-
-    public static void SavePower(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Power", getPower(p));
-        Data.savedata();
-    }
-
     public static void setPower(@NotNull Player p, int number) {
         power.put(p, number);
     }
@@ -52,11 +46,6 @@ public class Power {
         return Data.getdatafile().getInt("players." + p.getName() + ".MaxPower");
     }
 
-    public static void SaveMaxPower(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".MaxPower", getMaxPower(p));
-        Data.savedata();
-    }
-
     public static int getMaxPower(@NotNull Player p) {
         return maxpower.get(p);
     }
@@ -79,11 +68,6 @@ public class Power {
 
     public static int getRestorePowerData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".RestorePower");
-    }
-
-    public static void SaveRestorePower(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".RestorePower", getRestorePower(p));
-        Data.savedata();
     }
 
     public static int getRestorePower(@NotNull Player p) {

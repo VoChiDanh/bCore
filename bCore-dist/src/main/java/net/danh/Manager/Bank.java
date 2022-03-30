@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Bank {
 
     public static HashMap<Player, Integer> bank = new HashMap<>();
+    public static HashMap<Player, Integer> banklevel = new HashMap<>();
 
     /*
      Data.getbankfile().getInt("banks." + p.getName() + ".money");
@@ -22,33 +23,21 @@ public class Bank {
         return Data.getbankfile().getInt("banks." + p.getName() + ".money");
     }
 
-    public static void SaveBankMoney(@NotNull Player p) {
-        Data.getbankfile().set("banks." + p.getName() + ".money", getBankMoney(p));
-        Data.savebank();
-    }
 
     public static void setBankMoney(@NotNull Player p, Integer number) {
         bank.put(p, number);
     }
 
     public static void addBankMoney(Player p, Integer number) {
-        if (getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < (getBankMoney(p) + number) || getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < getBankMoney(p)) {
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("FULL_BANK"))));
-        } else {
-            bank.replace(p, getBankMoney(p) + number);
-        }
+        bank.replace(p, getBankMoney(p) + number);
     }
 
     public static void removeBankMoney(Player p, Integer number) {
-        if (getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") >= number) {
-            bank.replace(p, getBankMoney(p) - number);
-        } else {
-            bank.put(p, 0);
-        }
+        bank.replace(p, getBankMoney(p) - number);
     }
 
     public static void depositBank(Player p, Integer number) {
-        if (getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < (getBankMoney(p) + number) || getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < getBankMoney(p)) {
+        if (getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < (getBankMoney(p) + number)) {
             p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("FULL_BANK"))));
         } else {
             if (bCore.economy.getBalance(p) >= number) {
@@ -77,29 +66,24 @@ public class Bank {
         return Data.getbankfile().getInt("banks." + p.getName() + ".level");
     }
 
-    public static void SaveBankLevel(@NotNull Player p) {
-        Data.getbankfile().set("banks." + p.getName() + ".level", getBankLevel(p));
-        Data.savebank();
-    }
-
     public static int getBankLevel(@NotNull Player p) {
-        return bank.get(p);
+        return banklevel.get(p);
     }
 
 
     public static void setBankLevel(@NotNull Player p, Integer level) {
-        bank.put(p, level);
+        banklevel.put(p, level);
     }
 
     public static void addBankLevel(@NotNull Player p, Integer level) {
-        bank.replace(p, getBankLevel(p) + level);
+        banklevel.replace(p, getBankLevel(p) + level);
     }
 
     public static void removeBankLevel(Player p, Integer level) {
         if (getBankLevel(p) > level) {
-            bank.replace(p, getBankLevel(p) - level);
+            banklevel.replace(p, getBankLevel(p) - level);
         } else {
-            bank.replace(p, 1);
+            banklevel.replace(p, 1);
         }
     }
 }

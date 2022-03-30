@@ -12,17 +12,6 @@ public class PlayerData {
     public static HashMap<Player, Integer> level = new HashMap<>();
     public static HashMap<Player, Integer> levelup = new HashMap<>();
 
-
-    public static void SaveXP(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".XP", getXP(p));
-        Data.savedata();
-    }
-
-    public static void SaveLevel(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Level", getLevel(p));
-        Data.savedata();
-    }
-
     public static int getXPData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".XP");
     }
@@ -96,12 +85,6 @@ public class PlayerData {
     public static int getLUData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes", getLevelData(p));
     }
-
-    public static void SaveLevelup(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", getleveluptimes(p));
-        Data.savedata();
-    }
-
     public static void addLeveluptimes(@NotNull Player p, Integer number) {
         levelup.replace(p, getleveluptimes(p) + number);
     }
@@ -124,11 +107,6 @@ public class PlayerData {
 
     public static int getBlockData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
-    }
-
-    public static void SaveBlock(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", getBlocks(p));
-        Data.savedata();
     }
 
     public static void setBlocks(@NotNull Player p, Integer number) {

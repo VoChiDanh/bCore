@@ -21,10 +21,6 @@ public class Credit {
     public static double getCreditData(@NotNull Player p) {
         return Data.getdatafile().getDouble("players." + p.getName() + ".Credit");
     }
-    public static void SaveCredit(@NotNull Player p) {
-        Data.getdatafile().set("players." + p.getName() + ".Credit", getCredit(p));
-        Data.savedata();
-    }
 
     public static double getCredit(@NotNull Player p) {
         return credit.get(p);
