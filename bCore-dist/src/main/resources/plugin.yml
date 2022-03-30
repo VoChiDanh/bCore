@@ -8,6 +8,7 @@ softdepend:
 depend:
   - Vault
   - WorldGuard
+website: https://github.com/D-x-Z/bCore
 authors: [ VoChiDanh ]
 api-version: 1.13
 commands:
