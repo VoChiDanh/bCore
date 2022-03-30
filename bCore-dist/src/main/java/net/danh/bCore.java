@@ -4,6 +4,7 @@ import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
 import net.danh.Commands.Commands;
 import net.danh.Contest.Mining.Mining;
+import net.danh.Events.BlockBreak;
 import net.danh.Events.Death;
 import net.danh.Events.Fishing;
 import net.danh.Events.Kill;
@@ -23,8 +24,6 @@ import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
 import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
-import java.lang.reflect.Field;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,9 +36,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     public static Economy economy;
     private static bCore instance;
 
-    public static DecimalFormat format = new DecimalFormat("##.##");
-    public static Object serverInstance;
-    public static Field tpsField;
 
     public static bCore getInstance() {
         return instance;
@@ -63,16 +59,17 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
-                        PlayerData.setBlocks(p, 0);
-                        getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))
-                                .replaceAll("%player%", p.getName())));
-                        p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
-                    }
                     p.setLevel(PlayerData.getLevel(p));
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
+        (new BukkitRunnable() {
+            public void run() {
+                if (getServer().getOnlinePlayers().size() > 0) {
+                    Mining.StartMining();
+                }
+            }
+        }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
     }
 
     @Override
@@ -132,7 +129,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     private void RegisterEvent() {
         registerEventHandlers();
-        if (getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
+        if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
             registerMythic();
         }
     }
@@ -142,7 +139,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         return new ArrayList<>(Arrays.asList(
                 new Fishing(),
                 new Death(),
-                new Kill()
+                new Kill(),
+                new BlockBreak()
         ));
     }
 
