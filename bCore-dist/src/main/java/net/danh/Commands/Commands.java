@@ -196,9 +196,9 @@ public class Commands implements CommandExecutor {
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
                                 Power.removeMaxPower(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
                             }
-                        } else {
-                            sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
                         }
                     }
                     if (args[0].equalsIgnoreCase("restorepower")) {

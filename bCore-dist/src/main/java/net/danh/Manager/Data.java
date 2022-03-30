@@ -171,7 +171,7 @@ public class Data {
 
     public static void saveall(@NotNull Player p) {
         Data.getbankfile().set("banks." + p.getName() + ".money", Bank.getBankMoney(p));
-        Data.getbankfile().set("banks." + p.getName() + ".level",  Bank.getBankLevel(p));
+        Data.getbankfile().set("banks." + p.getName() + ".level", Bank.getBankLevel(p));
         Data.getdatafile().set("players." + p.getName() + ".Credit", Credit.getCredit(p));
         Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", Event.getBlockEvent(p));
         Data.getdatafile().set("players." + p.getName() + ".Lucky", Lucky.getLuckyChance(p));

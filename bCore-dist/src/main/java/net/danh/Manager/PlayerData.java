@@ -85,6 +85,7 @@ public class PlayerData {
     public static int getLUData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes", getLevelData(p));
     }
+
     public static void addLeveluptimes(@NotNull Player p, Integer number) {
         levelup.replace(p, getleveluptimes(p) + number);
     }

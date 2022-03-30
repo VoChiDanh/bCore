@@ -1,6 +1,6 @@
 package net.danh.Events;
 
-import net.danh.Manager.*;
+import net.danh.Manager.Data;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

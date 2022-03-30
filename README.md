@@ -1,6 +1,6 @@
 # bCore | 1.9.x - 1.18.x
 
-## Information 
+## Information
 
 [![Issues](https://img.shields.io/github/issues-raw/D-x-Z/bCore.svg?maxAge=25000)](https://github.com/D-x-Z/bCore/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/D-x-Z/bCore.svg?style=flat)](https://github.com/D-x-Z/bCore)
