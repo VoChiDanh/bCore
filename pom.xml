@@ -50,10 +50,6 @@
                             <pattern>org.bstats</pattern>
                             <shadedPattern>net.danh</shadedPattern>
                         </relocation>
-                        <relocation>
-                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>net.danh.nbtapi</shadedPattern>
-                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -110,11 +106,6 @@
         <repository>
             <id>sk89q-repo</id>
             <url>https://maven.enginehub.org/repo/</url>
-        </repository>
-        <repository>
-            <id>codemc-repo</id>
-            <url>https://repo.codemc.org/repository/maven-public/</url>
-            <layout>default</layout>
         </repository>
     </repositories>
 
