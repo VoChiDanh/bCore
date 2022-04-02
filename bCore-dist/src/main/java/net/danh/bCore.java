@@ -62,6 +62,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Data.saveall(p);
+                }
                 if (getServer().getOnlinePlayers().size() > 0) {
                     Mining.StartMining();
                 }

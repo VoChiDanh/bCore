@@ -3,53 +3,57 @@ package net.danh.Manager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-@Deprecated
-public class Weight {
+import java.util.HashMap;
 
-    public static @NotNull Integer getWeight(@NotNull Player p) {
+public class Weight {
+    public static HashMap<Player, Integer> weight = new HashMap<>();
+    public static HashMap<Player, Integer> maxweight = new HashMap<>();
+
+    public static @NotNull Integer getWeightData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".Weight");
     }
 
+    public static @NotNull Integer getWeight(@NotNull Player p) {
+        return weight.get(p);
+    }
+
     public static void setWeight(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Weight", number);
-        Data.savedata();
+        weight.put(p, number);
     }
 
     public static void addWeight(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".Weight", getWeight(p) + number);
-        Data.savedata();
+        weight.replace(p, getWeight(p) + number);
     }
 
     public static void removeWeight(Player p, Integer number) {
-        if (getWeight(p) > 1) {
-            Data.getdatafile().set("players." + p.getName() + ".Weight", getWeight(p) - number);
+        if (getWeight(p) > number) {
+            weight.replace(p, getWeight(p) - number);
         } else {
-            Data.getdatafile().set("players." + p.getName() + ".Weight", 0);
+            weight.replace(p, 0);
         }
-        Data.savedata();
     }
 
-    public static int getMaxWeight(@NotNull Player p) {
+    public static int getMaxWeightData(@NotNull Player p) {
         return Data.getdatafile().getInt("players." + p.getName() + ".MaxWeight");
     }
 
 
+    public static int getMaxWeight(@NotNull Player p) {
+        return maxweight.get(p);
+    }
+
+
     public static void setMaxWeight(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".MaxWeight", number);
-        Data.savedata();
+        maxweight.put(p, number);
     }
 
     public static void addMaxWeight(@NotNull Player p, Integer number) {
-        Data.getdatafile().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) + number);
-        Data.savedata();
+        maxweight.replace(p, getMaxWeight(p) + number);
     }
 
     public static void removeMaxWeight(Player p, Integer number) {
-        if (getMaxWeight(p) > 10) {
-            Data.getdatafile().set("players." + p.getName() + ".MaxWeight", getMaxWeight(p) - number);
-        } else {
-            Data.getdatafile().set("players." + p.getName() + ".MaxWeight", 10);
+        if (getMaxWeight(p) > number && (getMaxWeight(p) - number) > getWeight(p)) {
+            maxweight.replace(p, getMaxWeight(p) - number);
         }
-        Data.savedata();
     }
 }

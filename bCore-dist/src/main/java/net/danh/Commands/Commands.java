@@ -45,16 +45,6 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            if (args.length == 3) {
-                if (sender instanceof Player) {
-                    if (args[0].equalsIgnoreCase("sell")) {
-                        Items.Sell(((Player) sender).getPlayer(), Items.getName(args[1]), Integer.parseInt(args[2]));
-                    }
-                    if (args[0].equalsIgnoreCase("take")) {
-                        Items.Take(((Player) sender).getPlayer(), args[1], Integer.parseInt(args[2]));
-                    }
-                }
-            }
             if (args.length == 4) {
                 if (sender.hasPermission("bCore.admin")) {
                     if (args[0].equalsIgnoreCase("plevel")) {
@@ -293,17 +283,6 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("price")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            Items.setPrice(args[2], Integer.parseInt(args[3]));
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            Items.addPrice(args[2], Integer.parseInt(args[3]));
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            Items.removePrice(args[2], Integer.parseInt(args[3]));
-                        }
-                    }
                     if (args[0].equalsIgnoreCase("bankmoney")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -391,33 +370,6 @@ public class Commands implements CommandExecutor {
                         if (args[1].equalsIgnoreCase("remove")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
                                 PlayerData.removeBlocks(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                    }
-                }
-            }
-            if (args.length == 5) {
-                if (sender.hasPermission("bCore.admin")) {
-                    if (args[0].equalsIgnoreCase("storage")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Storage.setStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Storage.addStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Storage.removeStorage(Objects.requireNonNull(Bukkit.getPlayer(args[2])), args[3], Integer.parseInt(args[4]));
                             } else {
                                 sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
                             }

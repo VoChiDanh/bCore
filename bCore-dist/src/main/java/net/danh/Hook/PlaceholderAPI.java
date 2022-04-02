@@ -64,14 +64,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("luckychance")) {
             return String.valueOf(Lucky.getLuckyChance(p));
         }
-        if (identifier.startsWith("storage_")) {
-            String name = identifier.substring(8).toUpperCase();
-            return String.valueOf(Storage.getStorage(p, name));
-        }
-        if (identifier.startsWith("price_")) {
-            String name = identifier.substring(6).toUpperCase();
-            return String.valueOf(Items.getPrice(name));
-        }
         if (identifier.equalsIgnoreCase("bank")) {
             String name = identifier.substring(4).toLowerCase();
             if (name.equalsIgnoreCase("_money")) {

@@ -6,6 +6,7 @@ import com.sk89q.worldguard.bukkit.RegionQuery;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import net.danh.Contest.Mining.Mining;
+import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
 import net.danh.Manager.PlayerData;
@@ -31,6 +32,9 @@ public class BlockBreak implements Listener {
         if (!query.testState(loc, localPlayer, DefaultFlag.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
             e.setCancelled(true);
             return;
+        }
+        if (Credit.getCredit(p) < 95) {
+            p.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
         }
         if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
             PlayerData.setBlocks(p, 0);

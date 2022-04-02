@@ -24,5 +24,7 @@ public class Join implements Listener {
         Power.setPower(p, Power.getPowerData(p));
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));
+        Weight.setWeight(p, Weight.getWeightData(p));
+        Weight.setMaxWeight(p, Weight.getMaxWeightData(p));
     }
 }
