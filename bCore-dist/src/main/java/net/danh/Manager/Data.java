@@ -18,15 +18,13 @@ import java.util.regex.Pattern;
 public class Data {
 
     public final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
-    private static File configFile, languageFile, dataFile, storageFile, itemFile, bankFile, cmdFile;
-    private static FileConfiguration config, language, data, storage, item, bank, cmd;
+    private static File configFile, languageFile, dataFile, bankFile, cmdFile;
+    private static FileConfiguration config, language, data, bank, cmd;
 
     public static void createconfig() {
         configFile = new File(bCore.getInstance().getDataFolder(), "config.yml");
         languageFile = new File(bCore.getInstance().getDataFolder(), "language.yml");
         dataFile = new File(bCore.getInstance().getDataFolder(), "data.yml");
-        storageFile = new File(bCore.getInstance().getDataFolder(), "storage.yml");
-        itemFile = new File(bCore.getInstance().getDataFolder(), "item.yml");
         bankFile = new File(bCore.getInstance().getDataFolder(), "bank.yml");
         cmdFile = new File(bCore.getInstance().getDataFolder(), "cmd.yml");
 
@@ -40,15 +38,6 @@ public class Data {
                 e.printStackTrace();
             }
         }
-        if (!storageFile.exists()) {
-            storageFile.getParentFile().mkdirs();
-            try {
-                storageFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (!itemFile.exists()) bCore.getInstance().saveResource("item.yml", false);
         if (!bankFile.exists()) {
             bankFile.getParentFile().mkdirs();
             try {
@@ -61,8 +50,6 @@ public class Data {
         config = new YamlConfiguration();
         language = new YamlConfiguration();
         data = new YamlConfiguration();
-        storage = new YamlConfiguration();
-        item = new YamlConfiguration();
         bank = new YamlConfiguration();
         cmd = new YamlConfiguration();
 
@@ -70,8 +57,6 @@ public class Data {
             config.load(configFile);
             language.load(languageFile);
             data.load(dataFile);
-            storage.load(storageFile);
-            item.load(itemFile);
             bank.load(bankFile);
             cmd.load(cmdFile);
         } catch (IOException | InvalidConfigurationException e) {
@@ -91,14 +76,6 @@ public class Data {
         return data;
     }
 
-    public static FileConfiguration getstoragefile() {
-        return storage;
-    }
-
-    public static FileConfiguration getitemfile() {
-        return item;
-    }
-
     public static FileConfiguration getbankfile() {
         return bank;
     }
@@ -110,7 +87,6 @@ public class Data {
     public static void reloadfiles() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
-        item = YamlConfiguration.loadConfiguration(itemFile);
         cmd = YamlConfiguration.loadConfiguration(cmdFile);
     }
 
@@ -131,20 +107,6 @@ public class Data {
     public static void savedata() {
         try {
             data.save(dataFile);
-        } catch (IOException ignored) {
-        }
-    }
-
-    public static void savestorage() {
-        try {
-            storage.save(storageFile);
-        } catch (IOException ignored) {
-        }
-    }
-
-    public static void saveitems() {
-        try {
-            item.save(itemFile);
         } catch (IOException ignored) {
         }
     }
@@ -184,6 +146,8 @@ public class Data {
         Data.getdatafile().set("players." + p.getName() + ".RestorePower", Power.getRestorePower(p));
         Data.getdatafile().set("players." + p.getName() + ".Weight", Weight.getWeight(p));
         Data.getdatafile().set("players." + p.getName() + ".MaxWeight", Weight.getMaxWeight(p));
+        Data.getdatafile().set("players." + p.getName() + ".Points", Points.getPvPPoints(p));
+        Data.getdatafile().set("players." + p.getName() + ".Status", Status.getPvPStatus(p));
         Data.savedata();
         Data.savebank();
     }

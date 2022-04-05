@@ -1,11 +1,20 @@
 PREFIX: '&f[&#28fac2bCore&f] '
 RELOAD: '&#96ff69Đã tải lại'
 NOT_ENOUGH_PERMISSION: '&#de402fBạn không đủ quyền'
+PVP:
+  COOLDOWN_TIMES: '&3Bạn sẽ được dùng lệnh /PvP sau %time% giây'
+  NOT_ENOUGH_POINTS: '&cBạn không đủ điểm PvP! Bạn cần ít nhất %amount% điểm'
+  TOGGLE_MESSAGE: '&bTrạng thái PvP: %status%'
+  USER_HELP:
+    - '&a/PvP on/off -&e Bật/Tắt PvP'
+  PROTECT_PVP_TIMES: '&aBảo vệ PvP Trong %time% giây'
 HELP_USER:
   - '&9/Bank - &eKiểm tra số tiền có trong ngân hàng'
   - '&9/Bank [deposit/withdraw] [số] - &aĐóng/Rút tiền của ngân hàng'
   - '&9/PvP - &aBật tắt PvP'
 HELP_ADMIN:
+  - '&a/bCore pvpp <set/add/remove> <player> <amount> - &3Add/set/remove PvP Points'
+  - '&a/bCore status <player> <true/false> - &3Set PvP Status'
   - '&9/bCore plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level'
   - '&9/bCore xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP'
   - '&9/bCore power [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Power'

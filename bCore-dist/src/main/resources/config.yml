@@ -20,87 +20,14 @@ Boolean:
   'true': Bật
   'false': Tắt
 Cooldown_PvP: 600
-Blocks:
-  STONE:
-    max: 10
-    min: 1
-  COBBLESTONE:
-    max: 10
-    min: 1
-  COAL_ORE:
-    max: 10
-    min: 1
-  COAL_BLOCK:
-    max: 10
-    min: 1
-  IRON_ORE:
-    max: 10
-    min: 1
-  IRON_BLOCK:
-    max: 10
-    min: 1
-  GOLD_ORE:
-    max: 10
-    min: 1
-  GOLD_BLOCK:
-    max: 10
-    min: 1
-  DIAMOND_ORE:
-    max: 10
-    min: 1
-  DIAMOND_BLOCK:
-    max: 10
-    min: 1
-  EMERALD_ORE:
-    max: 10
-    min: 1
-  EMERALD_BLOCK:
-    max: 10
-    min: 1
-  ACACIA_LOG:
-    max: 10
-    min: 1
-  BIRCH_LOG:
-    max: 10
-    min: 1
-  DARK_OAK_LOG:
-    max: 10
-    min: 1
-  JUNGLE_LOG:
-    max: 10
-    min: 1
-  OAK_LOG:
-    max: 10
-    min: 1
-  SPRUCE_LOG:
-    max: 10
-    min: 1
-  OBSIDIAN:
-    max: 10
-    min: 1
-  ANCIENT_DEBRIS:
-    max: 10
-    min: 1
-  CUT_SANDSTONE:
-    max: 10
-    min: 1
-  PRISMARINE:
-    max: 10
-    min: 1
-  SAND:
-    max: 10
-    min: 1
-  PRISMARINE_BRICKS:
-    max: 10
-    min: 1
-Vanilla:
-  Default:
-    min: 1
-    max: 2
-    chance: 30
-  ZOMBIE:
-    min: 1
-    max: 2
+PVP:
+  DEFAULT_POINTS: 10 #Points will give on first join
+  COOLDOWN_TIMES: 300 #Times to do command /PvP again
+  POINTS_DEAD: 1 #Amount PvP Points will lose when dead to protect PvP Status off
+  POINTS_TOGGLE: 1 #Amount PvP will lose when do command /PvP
+  STATUS_ON: 'Bật'
+  STATUS_OFF: 'Tắt'
+  FIRST_TIME_PROTECT: 300
 MythicMobs:
   Default:
     min: 1
@@ -120,3 +47,6 @@ MythicMobs:
   NHENBIEN:
     min: 2000
     max: 3000
+  THOGOM:
+    min: 3000
+    max: 4000

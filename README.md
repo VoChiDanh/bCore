@@ -15,17 +15,16 @@
 - [MythicMobs Support](https://www.spigotmc.org/resources/5702/)
 - [WorldGuard Support](https://dev.bukkit.org/projects/worldguard)
 - [PlaceholderAPI](https://www.spigotmc.org/resources/6245/)
-- [PvP System](https://github.com/D-x-Z/PvP)
+- PvP System
 - Storage
 - Weight
 - Power
 - LuckyChance
 - Event
 
-## Soft Depend / Depend / Addon
+## Soft Depend / Depend
 
 - [Vault](https://www.spigotmc.org/resources/34315/) - Depend
 - [WorldGuard](https://dev.bukkit.org/projects/worldguard) - Depend
 - [MythicMobs](https://www.spigotmc.org/resources/5702/) - Soft Depend
 - [PlaceholderAPI](https://www.spigotmc.org/resources/6245/) - Soft Depend
-- [PvP](https://github.com/D-x-Z/PvP) - Addon

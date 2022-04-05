@@ -12,6 +12,8 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        Points.setPvPPoints(p, Data.getconfigfile().getInt("PVP.DEFAULT_POINTS"));
+        Status.TogglePvP(p, false);
         Event.setBlocksEvent(p, Event.getBEData(p));
         PlayerData.setLeveluptimes(p, PlayerData.getLUData(p));
         PlayerData.setLevel(p, PlayerData.getLevelData(p));
@@ -26,5 +28,19 @@ public class Join implements Listener {
         Power.setRestorePower(p, Power.getRestorePowerData(p));
         Weight.setWeight(p, Weight.getWeightData(p));
         Weight.setMaxWeight(p, Weight.getMaxWeightData(p));
+        Points.setPvPPoints(p, Points.getPvPPointsData(p));
+        Status.TogglePvP(p, Status.getPvPStatusData(p));
+        if (Power.getRestorePower(p) == 0) {
+            Power.setRestorePower(p, Data.getconfigfile().getInt("Restore_Power"));
+        }
+        if (Power.getMaxPower(p) == 0) {
+            Power.setMaxPower(p, Data.getconfigfile().getInt("Max_Power"));
+        }
+        if (Bank.getBankLevel(p) == 0) {
+            Bank.setBankLevel(p, 1);
+        }
+        if (Credit.getCredit(p) == 0) {
+            Credit.setCredit(p, 100D);
+        }
     }
 }

@@ -77,21 +77,19 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Data.savedata();
         Data.saveconfig();
         Data.savelanguage();
-        Data.saveitems();
         Data.savebank();
         Data.savecmd();
-        Data.savestorage();
         getLogger().log(Level.INFO, "Saved data");
     }
 
 
     private void performNMSChecks() {
         final NMSAssistant nmsAssistant = new NMSAssistant();
-        if (nmsAssistant.isVersionGreaterThan(7)) {
+        if (nmsAssistant.isVersionGreaterThan(8)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.8.x - 1.18.x");
+            getLogger().warning("Support version 1.9.x - 1.18.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
     }
@@ -111,9 +109,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
             getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
-        }
-        if (getServer().getPluginManager().getPlugin("PvP") != null && Objects.requireNonNull(getServer().getPluginManager().getPlugin("PvP")).getDescription().getAuthors().contains("VoChiDanh")) {
-            getLogger().log(Level.INFO, "Successfully hooked with PvP v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PvP")).getDescription().getVersion());
         }
         if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
@@ -137,12 +132,14 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     @Contract(" -> new")
     private @NotNull ArrayList<Listener> initializeListeners() {
         return new ArrayList<Listener>(Arrays.asList(
-                new Fishing(),
                 new Death(),
                 new Kill(),
                 new BlockBreak(),
                 new Join(),
-                new Quit()
+                new Quit(),
+                new DamagedByEntity(),
+                new DamagedByArrow(),
+                new DamagedByEntity()
         ));
     }
 
@@ -174,6 +171,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
     private void RegisterCommands() {
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
     }
 
     private boolean setupEconomy() {

@@ -1,5 +1,6 @@
 package net.danh.Commands;
 
+import com.cryptomorin.xseries.XMaterial;
 import net.danh.Contest.Mining.Mining;
 import net.danh.Manager.*;
 import net.danh.bCore;
@@ -8,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -19,6 +21,33 @@ public class Commands implements CommandExecutor {
         String RELOADED = Data.getlanguagefile().getString("RELOAD");
         String PREFIX = Data.getlanguagefile().getString("PREFIX");
         String UNKNOWN_PLAYER = Data.getlanguagefile().getString("UNKNOWN_PLAYER");
+        if (label.equalsIgnoreCase("pvp")) {
+            if (sender instanceof Player) {
+                if (args.length == 1) {
+                    if (args[0].equalsIgnoreCase("off")) {
+                        ItemStack item = new ItemStack(Objects.requireNonNull(XMaterial.OAK_LOG.parseMaterial()));
+                        if (Objects.requireNonNull(((Player) sender).getPlayer()).getInventory().containsAtLeast(item, Data.getconfigfile().getInt("Req_Log_To_PvP"))) {
+                            ItemStack items = new ItemStack(XMaterial.OAK_LOG.parseMaterial(), Data.getconfigfile().getInt("Req_Log_To_PvP"));
+                            ((Player) sender).getPlayer().getInventory().removeItem(items);
+                            Status.TogglePvP(Objects.requireNonNull(((Player) sender).getPlayer()), false);
+                            sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PVP.TOGGLE_MESSAGE"))
+                                    .replaceAll("%status%", Objects.requireNonNull(Data.getconfigfile().getString("PVP.STATUS_OFF")))));
+                        } else {
+                            sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("DO_NOT_ENOUGH_LOG"))
+                                    .replaceAll("%amount%", String.valueOf(Data.getconfigfile().getInt("Req_Log_To_PvP")))));
+                        }
+                    } else {
+                        if (args[0].equalsIgnoreCase("on")) {
+                            Status.TogglePvP(Objects.requireNonNull(((Player) sender).getPlayer()), true);
+                            sender.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PVP.TOGGLE_MESSAGE"))
+                                    .replaceAll("%status%", Objects.requireNonNull(Data.getconfigfile().getString("PVP.STATUS_ON")))));
+                            return true;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         if (label.equalsIgnoreCase("bCore")) {
             if (args.length == 0) {
                 if (sender.hasPermission("bCore.user")) {
@@ -352,6 +381,25 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("pvpp")) {
+                        if (Bukkit.getPlayer(args[2]) != null) {
+                            if (args[1].equalsIgnoreCase("set")) {
+                                Points.setPvPPoints(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Objects.requireNonNull(Bukkit.getPlayer(args[2])).sendMessage("&a+ " + args[3] + " Điểm PvP");
+
+                            }
+                            if (args[1].equalsIgnoreCase("add")) {
+                                Points.addPvPPoints(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Objects.requireNonNull(Bukkit.getPlayer(args[2])).sendMessage("&a+ " + args[3] + " Điểm PvP");
+
+                            }
+                            if (args[1].equalsIgnoreCase("remove")) {
+                                Points.removePvPPoints(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Objects.requireNonNull(Bukkit.getPlayer(args[2])).sendMessage("&c- " + args[3] + " Điểm PvP");
+
+                            }
+                        }
+                    }
                     if (args[0].equalsIgnoreCase("blocks")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -376,6 +424,23 @@ public class Commands implements CommandExecutor {
                         }
                     }
                 }
+            }
+            if (sender.hasPermission("bCore.admin")) {
+                if (args[0].equalsIgnoreCase("status")) {
+                    if (args.length == 3) {
+                        if (Bukkit.getPlayer(args[1]) != null) {
+                            Status.TogglePvP(Objects.requireNonNull(Bukkit.getPlayer(args[1])), Boolean.getBoolean(args[2]));
+                            if (Status.getPvPStatus(Objects.requireNonNull(Bukkit.getPlayer(args[1])))) {
+                                Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PVP.TOGGLE_MESSAGE" + " &7(" + Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName() + ")"))
+                                        .replaceAll("%status%", Objects.requireNonNull(Data.getconfigfile().getString("PVP.STATUS_ON")))));
+                            } else {
+                                Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("PVP.TOGGLE_MESSAGE" + " &7(" + Objects.requireNonNull(Bukkit.getPlayer(args[1])).getName() + ")"))
+                                        .replaceAll("%status%", Objects.requireNonNull(Data.getconfigfile().getString("PVP.STATUS_OFF")))));
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             return true;
         }

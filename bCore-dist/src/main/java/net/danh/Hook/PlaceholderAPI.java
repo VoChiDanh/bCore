@@ -64,6 +64,12 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("luckychance")) {
             return String.valueOf(Lucky.getLuckyChance(p));
         }
+        if (identifier.equalsIgnoreCase("status")) {
+            return String.valueOf(Status.getPvPStatus(p));
+        }
+        if (identifier.equalsIgnoreCase("pvp_points")) {
+            return String.valueOf(Points.getPvPPoints(p));
+        }
         if (identifier.equalsIgnoreCase("bank")) {
             String name = identifier.substring(4).toLowerCase();
             if (name.equalsIgnoreCase("_money")) {

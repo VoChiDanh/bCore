@@ -20,18 +20,16 @@ public class Death implements Listener {
         String DEAD = Data.getlanguagefile().getString("DEAD");
         Player p = e.getEntity();
         Player k = p.getKiller();
-        if (Objects.requireNonNull(p).hasPermission("displayname.default")) {
-            PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
-            if (k != null) {
-                Credit.removeCredit(p, 0.5D);
-                Credit.removeCredit(k, 1D);
-            }
-            EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
-            if (r.transactionSuccess()) {
-                Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)
-                        .replaceAll("%xp%", String.valueOf(PlayerData.getXP(Objects.requireNonNull(p)) / 2))
-                        .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p) / 4))));
-            }
+        PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
+        Credit.removeCredit(p, 0.5D);
+        if (k != null) {
+            Credit.removeCredit(k, 1D);
+        }
+        EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
+        if (r.transactionSuccess()) {
+            Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)
+                    .replaceAll("%xp%", String.valueOf(PlayerData.getXP(Objects.requireNonNull(p)) / 2))
+                    .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p) / 4))));
         }
     }
 }

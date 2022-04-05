@@ -4,7 +4,6 @@ main: net.danh.bCore
 softdepend:
   - PlaceholderAPI
   - MythicMobs
-  - PvP
 depend:
   - Vault
   - WorldGuard
@@ -16,4 +15,6 @@ commands:
     description: Main commands
   bank:
     description: Bank commands
+  pvp:
+    description: PvP Commands
 
