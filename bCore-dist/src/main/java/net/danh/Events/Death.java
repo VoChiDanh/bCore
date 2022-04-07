@@ -22,10 +22,9 @@ public class Death implements Listener {
         Player p = e.getEntity();
         Player k = p.getKiller();
         PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
-        Credit.removeCredit(p, 0.5D);
         if (k != null) {
             Credit.removeCredit(k, 1D);
-            Points.addPvPPoints(p, 1);
+            Points.addPvPPoints(k, 1);
         }
         EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
         if (r.transactionSuccess()) {
