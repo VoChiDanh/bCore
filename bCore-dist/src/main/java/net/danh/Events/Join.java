@@ -14,7 +14,6 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        Points.setPvPPoints(p, Points.getPvPPointsData(p));
         List<String> w = Data.getconfigfile().getStringList("disable-worlds");
         Status.TogglePvP(p, !w.contains(p.getWorld().getName()));
         Event.setBlocksEvent(p, Event.getBEData(p));

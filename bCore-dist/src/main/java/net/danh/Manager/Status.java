@@ -18,6 +18,5 @@ public class Status {
 
     public static void TogglePvP(@NotNull Player p, boolean status) {
         pvpstatus.put(p, status);
-        Points.removePvPPoints(p, Data.getconfigfile().getInt("PVP.POINTS_TOGGLE"));
     }
 }
