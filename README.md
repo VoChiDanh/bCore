@@ -28,3 +28,23 @@
 - [WorldGuard](https://dev.bukkit.org/projects/worldguard) - Depend
 - [MythicMobs](https://www.spigotmc.org/resources/5702/) - Soft Depend
 - [PlaceholderAPI](https://www.spigotmc.org/resources/6245/) - Soft Depend
+
+## Note
+
+### bCore_v1_12_R1:<br>
+
+- MythicMobs 4.1.0 -> 4.7.2<br>
+- WorldGuard 6<br>
+- Java 8<br>
+
+### bCore_v1_16_R3:<br>
+
+- MythicMobs 4.8.0 -> 4.14.1<br>
+- WorldGuard 7<br>
+- Java 11<br>
+
+### bCore_v1_18_R2:<br>
+
+- MythicMobs 5.0.1 -> latest<br>
+- WorldGuard 7 -> latest<br>
+- Java 17<br>

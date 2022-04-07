@@ -112,8 +112,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }
         if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with MythicMobs v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("MythicMobs")).getDescription().getVersion());
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with MythicMobs");
         }
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with PlaceholderAPI v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("PlaceholderAPI")).getDescription().getVersion());
@@ -139,7 +137,9 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Quit(),
                 new DamagedByEntity(),
                 new DamagedByArrow(),
-                new DamagedByEntity()
+                new DamagedByEntity(),
+                new Teleport(),
+                new Enchant()
         ));
     }
 

@@ -21,10 +21,12 @@ public class Points {
     }
 
     public static void addPvPPoints(@NotNull Player p, int amount) {
+        p.sendMessage(Data.convert("&a+" + amount + " Điểm PvP"));
         points.replace(p, getPvPPoints(p) + amount);
     }
 
     public static void removePvPPoints(@NotNull Player p, int amount) {
+        p.sendMessage(Data.convert("&c-" + amount + " Điểm PvP"));
         points.replace(p, getPvPPoints(p) - amount);
     }
 

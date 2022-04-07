@@ -7,13 +7,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class Join implements Listener {
 
     @EventHandler
     public void onJoin(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        Points.setPvPPoints(p, Data.getconfigfile().getInt("PVP.DEFAULT_POINTS"));
-        Status.TogglePvP(p, false);
+        Points.setPvPPoints(p, Points.getPvPPointsData(p));
+        List<String> w = Data.getconfigfile().getStringList("disable-worlds");
+        Status.TogglePvP(p, !w.contains(p.getWorld().getName()));
         Event.setBlocksEvent(p, Event.getBEData(p));
         PlayerData.setLeveluptimes(p, PlayerData.getLUData(p));
         PlayerData.setLevel(p, PlayerData.getLevelData(p));
@@ -26,8 +29,6 @@ public class Join implements Listener {
         Power.setPower(p, Power.getPowerData(p));
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));
-        Weight.setWeight(p, Weight.getWeightData(p));
-        Weight.setMaxWeight(p, Weight.getMaxWeightData(p));
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
         Status.TogglePvP(p, Status.getPvPStatusData(p));
         if (Power.getRestorePower(p) == 0) {

@@ -8,13 +8,11 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.danh.Contest.Mining.Mining;
-import net.danh.Manager.Credit;
-import net.danh.Manager.Data;
-import net.danh.Manager.Event;
-import net.danh.Manager.PlayerData;
+import net.danh.Manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +21,7 @@ import java.util.Objects;
 
 public class BlockBreak implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBreaking(@NotNull BlockBreakEvent e) {
         Player p = e.getPlayer();
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(p);
@@ -36,6 +34,13 @@ public class BlockBreak implements Listener {
         }
         if (Credit.getCredit(p) < 95) {
             p.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+            e.setCancelled(true);
+            return;
+        }
+        if (Lucky.getLuckyChance(p) > Math.random() * 100.0D) {
+            PlayerData.addXP(p, Data.getconfigfile().getInt("Lucky_XP") + PlayerData.getleveluptimes(e.getPlayer()));
+            Power.addPower(p, Data.getconfigfile().getInt("Lucky_Power") + PlayerData.getleveluptimes(e.getPlayer()));
+            p.sendMessage(Data.convert(Data.getlanguagefile().getString("PREFIX") + Objects.requireNonNull(Data.getlanguagefile().getString("LUCKY")).replaceAll("%power%", String.valueOf(Data.getconfigfile().getInt("Lucky_Power") + PlayerData.getleveluptimes(p))).replaceAll("%xp%", String.valueOf(Data.getconfigfile().getInt("Lucky_XP") + PlayerData.getleveluptimes(p)))));
         }
         if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
             PlayerData.setBlocks(p, 0);

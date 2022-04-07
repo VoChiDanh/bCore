@@ -55,12 +55,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("maxpower")) {
             return String.valueOf(Power.getMaxPower(p));
         }
-        if (identifier.equalsIgnoreCase("weight")) {
-            return String.valueOf(Weight.getWeight(p));
-        }
-        if (identifier.equalsIgnoreCase("maxweight")) {
-            return String.valueOf(Weight.getMaxWeight(p));
-        }
         if (identifier.equalsIgnoreCase("luckychance")) {
             return String.valueOf(Lucky.getLuckyChance(p));
         }

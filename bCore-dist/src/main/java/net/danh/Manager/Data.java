@@ -144,8 +144,6 @@ public class Data {
         Data.getdatafile().set("players." + p.getName() + ".Power", Power.getPower(p));
         Data.getdatafile().set("players." + p.getName() + ".MaxPower", Power.getMaxPower(p));
         Data.getdatafile().set("players." + p.getName() + ".RestorePower", Power.getRestorePower(p));
-        Data.getdatafile().set("players." + p.getName() + ".Weight", Weight.getWeight(p));
-        Data.getdatafile().set("players." + p.getName() + ".MaxWeight", Weight.getMaxWeight(p));
         Data.getdatafile().set("players." + p.getName() + ".Points", Points.getPvPPoints(p));
         Data.getdatafile().set("players." + p.getName() + ".Status", Status.getPvPStatus(p));
         Data.savedata();

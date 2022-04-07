@@ -3,6 +3,7 @@ package net.danh.Events;
 import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
+import net.danh.Manager.Points;
 import net.danh.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
@@ -24,6 +25,7 @@ public class Death implements Listener {
         Credit.removeCredit(p, 0.5D);
         if (k != null) {
             Credit.removeCredit(k, 1D);
+            Points.addPvPPoints(p, 1);
         }
         EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
         if (r.transactionSuccess()) {
