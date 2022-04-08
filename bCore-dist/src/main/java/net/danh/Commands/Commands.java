@@ -416,6 +416,112 @@ public class Commands implements CommandExecutor {
             }
             return true;
         }
+        if (label.equalsIgnoreCase("latxu")) {
+            if (sender instanceof Player) {
+                if (args.length == 3) {
+                    if (args[0].equalsIgnoreCase("tien") || args[0].equalsIgnoreCase("uytin") || args[0].equalsIgnoreCase("nangluong")) {
+                        if (args[1].equalsIgnoreCase("tren") || args[1].equalsIgnoreCase("duoi")) {
+                            if (args[0].equalsIgnoreCase("tien")) {
+                                if (Integer.parseInt(args[2]) > bCore.economy.getBalance(((Player) sender).getPlayer())) {
+                                    sender.sendMessage(Data.convert("&cBạn không đủ yêu cầu để chơi lật xu!"));
+                                    return true;
+                                }
+                            }
+                            if (args[0].equalsIgnoreCase("uytin")) {
+                                if (Integer.parseInt(args[2]) > Credit.getRealCredit(Objects.requireNonNull(((Player) sender).getPlayer()))) {
+                                    sender.sendMessage(Data.convert("&cBạn không đủ yêu cầu để chơi lật xu!"));
+                                    return true;
+                                }
+                            }
+                            if (args[0].equalsIgnoreCase("nangluong")) {
+                                if (Integer.parseInt(args[2]) > Power.getPower(Objects.requireNonNull(((Player) sender).getPlayer()))) {
+                                    sender.sendMessage(Data.convert("&cBạn không đủ yêu cầu để chơi lật xu!"));
+                                    return true;
+                                }
+                            }
+                            if (Math.random() * 100.0D > 50) {
+                                if (args[1].equalsIgnoreCase("tren")) {
+                                    if (args[0].equalsIgnoreCase("tien")) {
+                                        bCore.economy.depositPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + "$"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("uytin")) {
+                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + " Uy Tín"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("nangluong")) {
+                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + " Năng Lượng"));
+                                        return true;
+                                    }
+                                }
+                                if (args[1].equalsIgnoreCase("duoi")) {
+                                    if (args[0].equalsIgnoreCase("tien")) {
+                                        bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + "$"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("uytin")) {
+                                        Credit.removeCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + " Uy Tín"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("nangluong")) {
+                                        Power.removePower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + " Năng Lượng"));
+                                        return true;
+                                    }
+                                }
+                            } else {
+                                if (args[1].equalsIgnoreCase("tren")) {
+                                    if (args[0].equalsIgnoreCase("tien")) {
+                                        bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + "$"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("uytin")) {
+                                        Credit.removeCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + " Uy Tín"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("nangluong")) {
+                                        Power.removePower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " + args[2] + " Năng Lượng"));
+                                        return true;
+                                    }
+                                }
+                                if (args[1].equalsIgnoreCase("duoi")) {
+                                    if (args[0].equalsIgnoreCase("tien")) {
+                                        bCore.economy.depositPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + "$"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("uytin")) {
+                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + " Uy Tín"));
+                                        return true;
+                                    }
+                                    if (args[0].equalsIgnoreCase("nangluong")) {
+                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + args[2] + " Năng Lượng"));
+                                        return true;
+                                    }
+                                }
+                            }
+                        } else {
+                            sender.sendMessage(Data.convert("&cHãy chọn mặt đồng xu khi rơi xuống: tren, duoi"));
+                            return true;
+                        }
+                    } else {
+                        sender.sendMessage(Data.convert("&cThể loại đặt cược không hợp lệ! Các loại đặt cược: tien, uytin, nangluong"));
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
         return true;
     }
 }

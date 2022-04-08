@@ -7,6 +7,8 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import net.danh.Manager.Credit;
+import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -33,6 +35,11 @@ public class DamagedByArrow implements Listener {
                 Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
                 RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
                 RegionQuery query = container.createQuery();
+                if (Credit.getCredit(damager) <= 50) {
+                    damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                    e.setCancelled(true);
+                    return;
+                }
                 if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                     e.setCancelled(true);
                 }

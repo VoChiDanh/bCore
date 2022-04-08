@@ -1,17 +1,14 @@
 disable-worlds:
   - plots2
   - world
+  - Spawn
 xp: 1
 debug: false
-minimum_power: 30
-Lucky_Power: 5
-Lucky_XP: 2
 Max_Power: 1000
 Per_Max_Power: 1000
 Restore_Power: 10
 Per_Restore_Power: 10
-Default_Lucky_Chance: 5
-Req_Log_To_PvP: 5
+Req_Log_To_PvP: 0
 Level_Bank: 2000000
 Add_Type: ACTION_BAR
 EVENT_TIME: 600
@@ -21,12 +18,12 @@ Boolean:
   'false': Tắt
 Cooldown_PvP: 600
 PVP:
-  DEFAULT_POINTS: 10 #Points will give on first join
-  COOLDOWN_TIMES: 300 #Times to do command /PvP again
-  POINTS_DEAD: 1 #Amount PvP Points will lose when dead to protect PvP Status off
-  POINTS_TOGGLE: 1 #Amount PvP will lose when do command /PvP
-  STATUS_ON: 'Bật'
-  STATUS_OFF: 'Tắt'
+  DEFAULT_POINTS: 10
+  COOLDOWN_TIMES: 300
+  POINTS_DEAD: 1
+  POINTS_TOGGLE: 1
+  STATUS_ON: Bật
+  STATUS_OFF: Tắt
   FIRST_TIME_PROTECT: 300
 MythicMobs:
   Default:

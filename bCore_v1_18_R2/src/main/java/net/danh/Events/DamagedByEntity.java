@@ -7,6 +7,8 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import net.danh.Manager.Credit;
+import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -21,10 +23,8 @@ public class DamagedByEntity implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamagedByEntity(@NotNull EntityDamageByEntityEvent e) {
         //check if attack was a player
-        if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {
             //player who hit
-            Player damager = (Player) e.getDamager();
-            Player attacked = (Player) e.getEntity();
             boolean damagerState = Status.getPvPStatus(damager);
             //player who was hit
             boolean attackedState = Status.getPvPStatus(attacked);
@@ -34,14 +34,17 @@ public class DamagedByEntity implements Listener {
             Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
             RegionQuery query = container.createQuery();
+            if (Credit.getCredit(damager) <= 50) {
+                damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                e.setCancelled(true);
+                return;
+            }
             if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                 e.setCancelled(true);
             }
-        } else if (e.getDamager() instanceof Projectile) {
-            Projectile arrow = (Projectile) e.getDamager();
+        } else if (e.getDamager() instanceof Projectile arrow) {
             if (arrow.getShooter() instanceof Player) {
-                if (e.getEntity() instanceof Player) {
-                    Player attacked = (Player) e.getEntity();
+                if (e.getEntity() instanceof Player attacked) {
                     Player damager = (Player) arrow.getShooter();
                     boolean damagerState = Status.getPvPStatus(damager);
                     boolean attackedState = Status.getPvPStatus(attacked);
@@ -51,6 +54,11 @@ public class DamagedByEntity implements Listener {
                     Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
                     RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
                     RegionQuery query = container.createQuery();
+                    if (Credit.getCredit(damager) <= 50) {
+                        damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                        e.setCancelled(true);
+                        return;
+                    }
                     if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                         e.setCancelled(true);
                     }

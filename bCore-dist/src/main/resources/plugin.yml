@@ -1,12 +1,11 @@
 name: ${project.name}
 version: ${project.version}
 main: net.danh.bCore
-softdepend:
-  - PlaceholderAPI
-  - MythicMobs
 depend:
   - Vault
   - WorldGuard
+  - MythicMobs
+  - PlaceholderAPI
 website: https://github.com/D-x-Z/bCore
 authors: [ VoChiDanh ]
 api-version: 1.13
@@ -17,4 +16,6 @@ commands:
     description: Bank commands
   pvp:
     description: PvP Commands
+  latxu:
+    description: Games Commands
 

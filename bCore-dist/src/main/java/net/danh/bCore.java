@@ -102,10 +102,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }
         if (getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
-        } else {
-            getLogger().log(Level.INFO, "Unsuccessfully hooked with WorldGuard");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
         }
         if (getServer().getPluginManager().isPluginEnabled("Vault")) {
             getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
@@ -139,8 +135,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new DamagedByArrow(),
                 new DamagedByEntity(),
                 new Teleport(),
-                new Enchant(),
-                new AnvilUpgrade()
+                new Enchant()
         ));
     }
 
@@ -173,6 +168,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("latxu")).setExecutor(new Commands());
     }
 
     private boolean setupEconomy() {

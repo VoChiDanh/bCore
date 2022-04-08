@@ -158,17 +158,5 @@
             <artifactId>XSeries</artifactId>
             <version>8.7.1</version>
         </dependency>
-        <dependency>
-            <groupId>io.lumine</groupId>
-            <artifactId>MythicLib-dist</artifactId>
-            <version>1.3.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.Indyuce</groupId>
-            <artifactId>MMOItems</artifactId>
-            <version>6.7.3</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,9 @@
 package net.danh.Events;
 
-import net.danh.Manager.*;
+import net.danh.Manager.Credit;
+import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
+import net.danh.Manager.Points;
 import net.danh.bCore;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
@@ -19,8 +22,10 @@ public class Death implements Listener {
         Player p = e.getEntity();
         Player k = p.getKiller();
         if (k != null) {
-            Credit.removeCredit(k, 1D);
-            Points.addPvPPoints(k, 1);
+            if (!Objects.equals(Objects.requireNonNull(p.getAddress()).getAddress().getHostAddress(), Objects.requireNonNull(Objects.requireNonNull(k).getAddress()).getAddress().getHostAddress())) {
+                Credit.removeCredit(k, 1D);
+                Points.addPvPPoints(k, 1);
+            }
         }
         PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
         EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);

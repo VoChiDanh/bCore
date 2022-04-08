@@ -5,6 +5,8 @@ import com.sk89q.worldguard.bukkit.RegionContainer;
 import com.sk89q.worldguard.bukkit.RegionQuery;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import net.danh.Manager.Credit;
+import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -33,6 +35,11 @@ public class DamagedByEntity implements Listener {
             Location loc1 = new Location(attacked.getWorld(), attacked.getLocation().getBlockX(), attacked.getLocation().getBlockY(), attacked.getLocation().getBlockZ());
             RegionContainer container = WorldGuardPlugin.inst().getRegionContainer();
             RegionQuery query = container.createQuery();
+            if (Credit.getCredit(damager) <= 50) {
+                damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                e.setCancelled(true);
+                return;
+            }
             if (!damagerState || !attackedState || !query.testState(loc, localPlayer, DefaultFlag.PVP) || !query.testState(loc1, localPlayer1, DefaultFlag.PVP)) {
                 e.setCancelled(true);
             }
@@ -50,6 +57,11 @@ public class DamagedByEntity implements Listener {
                     Location loc1 = new Location(attacked.getWorld(), attacked.getLocation().getBlockX(), attacked.getLocation().getBlockY(), attacked.getLocation().getBlockZ());
                     RegionContainer container = WorldGuardPlugin.inst().getRegionContainer();
                     RegionQuery query = container.createQuery();
+                    if (Credit.getCredit(damager) <= 50) {
+                        damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                        e.setCancelled(true);
+                        return;
+                    }
                     if (!damagerState || !attackedState || !query.testState(loc, localPlayer, DefaultFlag.PVP) || !query.testState(loc1, localPlayer1, DefaultFlag.PVP)) {
                         e.setCancelled(true);
                     }

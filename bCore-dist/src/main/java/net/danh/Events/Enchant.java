@@ -1,5 +1,6 @@
 package net.danh.Events;
 
+import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ public class Enchant implements Listener {
         if (e.getExpLevelCost() <= PlayerData.getXP(p)) {
             PlayerData.removeXP(p, e.getExpLevelCost());
         } else {
+            p.sendMessage(Data.convert("&cBạn không đủ kinh nghiệm để phù phép"));
             e.setCancelled(true);
         }
     }

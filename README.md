@@ -26,7 +26,7 @@
 
 - [Vault](https://www.spigotmc.org/resources/34315/) - Depend
 - [WorldGuard](https://dev.bukkit.org/projects/worldguard) - Depend
-- [MythicMobs](https://www.spigotmc.org/resources/5702/) - Soft Depend
+- [MythicMobs](https://www.spigotmc.org/resources/5702/) - Depend
 - [PlaceholderAPI](https://www.spigotmc.org/resources/6245/) - Soft Depend
 
 ## Note
