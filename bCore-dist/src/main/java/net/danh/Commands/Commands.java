@@ -376,8 +376,8 @@ public class Commands implements CommandExecutor {
                 }
             }
             if (sender.hasPermission("bCore.admin")) {
-                if (args[0].equalsIgnoreCase("status")) {
-                    if (args.length == 3) {
+                if (args.length == 3) {
+                    if (args[0].equalsIgnoreCase("status")) {
                         if (Bukkit.getPlayer(args[1]) != null) {
                             Status.TogglePvP(Objects.requireNonNull(Bukkit.getPlayer(args[1])), Boolean.getBoolean(args[2]));
                             if (Status.getPvPStatus(Objects.requireNonNull(Bukkit.getPlayer(args[1])))) {
@@ -418,6 +418,11 @@ public class Commands implements CommandExecutor {
         }
         if (label.equalsIgnoreCase("latxu")) {
             if (sender instanceof Player) {
+                if (args.length == 0) {
+                    sender.sendMessage(Data.convert("&aLệnh: /latxu <tien/uytin/nangluong> <tren/duoi> <số>"));
+                    sender.sendMessage(Data.convert("&aVí dụ: /latxu tien tren 1000"));
+                    return true;
+                }
                 if (args.length == 3) {
                     if (args[0].equalsIgnoreCase("tien") || args[0].equalsIgnoreCase("uytin") || args[0].equalsIgnoreCase("nangluong")) {
                         if (args[1].equalsIgnoreCase("tren") || args[1].equalsIgnoreCase("duoi")) {
