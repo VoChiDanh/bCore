@@ -7,15 +7,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class Join implements Listener {
 
     @EventHandler
     public void onJoin(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        List<String> w = Data.getconfigfile().getStringList("disable-worlds");
-        Status.TogglePvP(p, !w.contains(p.getWorld().getName()));
         Event.setBlocksEvent(p, Event.getBEData(p));
         PlayerData.setLeveluptimes(p, PlayerData.getLUData(p));
         PlayerData.setLevel(p, PlayerData.getLevelData(p));

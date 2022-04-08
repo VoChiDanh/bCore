@@ -59,20 +59,23 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Lucky.getLuckyChance(p));
         }
         if (identifier.equalsIgnoreCase("status")) {
-            return String.valueOf(Status.getPvPStatus(p));
+            if (Status.getPvPStatus(p)) {
+                return Data.getconfigfile().getString("Boolean.true");
+            } else {
+                return Data.getconfigfile().getString("Boolean.false");
+            }
         }
         if (identifier.equalsIgnoreCase("pvp_points")) {
             return String.valueOf(Points.getPvPPoints(p));
         }
-        if (identifier.equalsIgnoreCase("bank")) {
-            String name = identifier.substring(4).toLowerCase();
-            if (name.equalsIgnoreCase("_money")) {
-                return String.valueOf(Bank.getBankMoney(p));
-            }
-            if (name.equalsIgnoreCase("_max_money")) {
-                return String.valueOf(Bank.getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank"));
-            }
-            return "";
+        if (identifier.equalsIgnoreCase("bank_money")) {
+            return String.valueOf(Bank.getBankMoney(p));
+        }
+        if (identifier.equalsIgnoreCase("bank_level")) {
+            return String.valueOf(Bank.getBankLevel(p));
+        }
+        if (identifier.equalsIgnoreCase("bank_max_money")) {
+            return String.valueOf(Bank.getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank"));
         }
         if (identifier.equalsIgnoreCase("blocks_event")) {
             return String.valueOf(Event.getBlockEvent(p));

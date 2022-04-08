@@ -50,3 +50,6 @@ MythicMobs:
   THOGOM:
     min: 3000
     max: 4000
+  CONGNHAN:
+    min: 4000
+    max: 5000

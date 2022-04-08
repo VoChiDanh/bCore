@@ -156,7 +156,7 @@ public class Data {
         input = ChatColor.translateAlternateColorCodes('&', input);
         NMSAssistant nms = new NMSAssistant();
         if (nms.isVersionGreaterThan(15)) {
-            input = translateHexColorCodes("\\&#", "", input);
+            input = translateHexColorCodes("&#", "", input);
         }
 
         return input;

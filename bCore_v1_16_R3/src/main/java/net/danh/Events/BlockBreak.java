@@ -37,11 +37,6 @@ public class BlockBreak implements Listener {
             e.setCancelled(true);
             return;
         }
-        if (Lucky.getLuckyChance(p) > Math.random() * 100.0D) {
-            PlayerData.addXP(p, Data.getconfigfile().getInt("Lucky_XP") + PlayerData.getleveluptimes(e.getPlayer()));
-            Power.addPower(p, Data.getconfigfile().getInt("Lucky_Power") + PlayerData.getleveluptimes(e.getPlayer()));
-            p.sendMessage(Data.convert(Data.getlanguagefile().getString("PREFIX") + Objects.requireNonNull(Data.getlanguagefile().getString("LUCKY")).replaceAll("%power%", String.valueOf(Data.getconfigfile().getInt("Lucky_Power") + PlayerData.getleveluptimes(p))).replaceAll("%xp%", String.valueOf(Data.getconfigfile().getInt("Lucky_XP") + PlayerData.getleveluptimes(p)))));
-        }
         if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
             PlayerData.setBlocks(p, 0);
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command"))

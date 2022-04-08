@@ -17,7 +17,7 @@ public class Points {
     }
 
     public static void setPvPPoints(@NotNull Player p, int amount) {
-        points.put(p, amount);
+        points.put(p, Math.max(amount, 0));
     }
 
     public static void addPvPPoints(@NotNull Player p, int amount) {

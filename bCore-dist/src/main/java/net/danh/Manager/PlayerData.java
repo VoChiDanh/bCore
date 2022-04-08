@@ -32,11 +32,11 @@ public class PlayerData {
      */
 
     public static void setLevel(@NotNull Player p, int number) {
-        level.put(p, number);
+        level.put(p, Math.max(number, 1));
     }
 
     public static void setXP(@NotNull Player p, int number) {
-        xp.put(p, number);
+        xp.put(p, Math.max(number, 0));
     }
 
     public static void addLevel(@NotNull Player p, int number) {
@@ -64,7 +64,7 @@ public class PlayerData {
         if (getXP(p) > number) {
             xp.replace(p, getXP(p) - number);
         } else {
-            xp.put(p, 1);
+            xp.put(p, 0);
         }
     }
 
