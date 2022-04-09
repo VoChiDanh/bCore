@@ -521,7 +521,7 @@ public class Commands implements CommandExecutor {
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("xp")) {
-                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) * 2);
+                                        PlayerData.removeXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) * 2);
                                         sender.sendMessage(Data.convert("&c&lThất Bại!&6 Bạn bị mất " +  Integer.parseInt(args[2]) * 2 + " XP"));
                                         return true;
                                     }
@@ -543,7 +543,7 @@ public class Commands implements CommandExecutor {
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("xp")) {
-                                        PlayerData.removeXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
+                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
                                         sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " XP"));
                                         return true;
                                     }
