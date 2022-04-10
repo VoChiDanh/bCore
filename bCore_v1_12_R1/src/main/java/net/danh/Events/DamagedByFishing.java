@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class DamagedByFishing implements Listener {
 
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler
     public void onDamagedByFishing(@NotNull PlayerFishEvent e) {
         if (e.getCaught() instanceof Player) {
             Player attacked = (Player) e.getCaught();

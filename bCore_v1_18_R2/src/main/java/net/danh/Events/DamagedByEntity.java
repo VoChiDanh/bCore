@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamagedByEntity implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler
     public void onDamagedByEntity(@NotNull EntityDamageByEntityEvent e) {
         //check if attack was a player
         if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {

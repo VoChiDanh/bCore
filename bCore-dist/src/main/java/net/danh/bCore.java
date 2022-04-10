@@ -135,7 +135,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new DamagedByArrow(),
                 new DamagedByEntity(),
                 new Teleport(),
-                new Enchant()
+                new Enchant(),
+                new Interact()
         ));
     }
 

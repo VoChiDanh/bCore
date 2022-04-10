@@ -14,10 +14,10 @@ public class Enchant implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onEnchant(@NotNull EnchantItemEvent e) {
         Player p = e.getEnchanter();
-        if (e.getExpLevelCost() <= PlayerData.getXP(p)) {
-            PlayerData.removeXP(p, e.getExpLevelCost());
+        if (e.getExpLevelCost() * 1000 < PlayerData.getXP(p)) {
+            PlayerData.removeXP(p, e.getExpLevelCost() * 1000);
         } else {
-            p.sendMessage(Data.convert("&cBạn không đủ kinh nghiệm để phù phép"));
+            p.sendMessage(Data.convert("&cBạn không đủ " + e.getExpLevelCost() * 1000 + " kinh nghiệm để phù phép"));
             e.setCancelled(true);
         }
     }

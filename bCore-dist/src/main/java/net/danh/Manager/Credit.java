@@ -27,7 +27,11 @@ public class Credit {
     }
 
     public static void setCredit(@NotNull Player p, Double amount) {
-        credit.put(p, amount);
+        if (amount < 200D) {
+            credit.put(p, amount);
+        } else {
+            credit.put(p, 200D);
+        }
     }
 
     public static void addCredit(@NotNull Player p, Double amount) {

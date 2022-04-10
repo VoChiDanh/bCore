@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamagedByArrow implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler
     public void onDamagedByArrow(@NotNull EntityCombustByEntityEvent e) {
         if (e.getCombuster() instanceof Arrow) {
             Arrow arrow = (Arrow) e.getCombuster();
