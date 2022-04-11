@@ -23,10 +23,6 @@ public class DamagedByEntity implements Listener {
         //check if attack was a player
         if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {
             //player who hit
-            if (damager == null || attacked == null){
-                e.setCancelled(true);
-                return;
-            }
             boolean damagerState = Status.getPvPStatus(damager);
             //player who was hit
             boolean attackedState = Status.getPvPStatus(attacked);

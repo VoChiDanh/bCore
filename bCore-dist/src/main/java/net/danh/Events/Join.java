@@ -25,7 +25,7 @@ public class Join implements Listener {
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
-        Status.TogglePvP(p,false);
+        Status.TogglePvP(p, false);
         Bitcoin.setBitCoin(p, Bitcoin.getBitCoinData(p));
         Bitcoin.setBitCoinMax(p, Bitcoin.getBitCoinMaxData(p));
         if (Power.getRestorePower(p) == 0) {

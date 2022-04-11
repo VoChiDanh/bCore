@@ -419,15 +419,15 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("bitcoinprice")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             Bitcoin.setBitCoinBuyPrice(Integer.parseInt(args[2]));
-                            Bitcoin.setBitCoinSellPrice(Integer.parseInt(args[2]) / 2);
+                            Bitcoin.setBitCoinSellPrice(Integer.parseInt(args[2]));
                         }
                         if (args[1].equalsIgnoreCase("add")) {
                             Bitcoin.addBitCoinBuyPrice(Integer.parseInt(args[2]));
-                            Bitcoin.addBitCoinSellPrice(Integer.parseInt(args[2]) / 2);
+                            Bitcoin.addBitCoinSellPrice(Integer.parseInt(args[2]));
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             Bitcoin.removeBitCoinBuyPrice(Integer.parseInt(args[2]));
-                            Bitcoin.removeBitCoinSellPrice(Integer.parseInt(args[2]) / 2);
+                            Bitcoin.removeBitCoinSellPrice(Integer.parseInt(args[2]));
                         }
                     }
                 }
