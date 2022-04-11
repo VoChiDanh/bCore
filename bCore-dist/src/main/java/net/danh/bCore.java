@@ -71,10 +71,10 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 int a = Data.getRandomInt(1000, 1000000);
                 if (a > 10000) {
                     Bitcoin.removeBitCoinBuyPrice(a);
-                    Bitcoin.removeBitCoinSellPrice(a * 2);
+                    Bitcoin.removeBitCoinSellPrice(a / 2);
                 } else {
                     Bitcoin.addBitCoinBuyPrice(a);
-                    Bitcoin.removeBitCoinSellPrice(a / 2);
+                    Bitcoin.addBitCoinSellPrice(a / 2);
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);

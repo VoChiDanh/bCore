@@ -427,7 +427,7 @@ public class Commands implements CommandExecutor {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             Bitcoin.removeBitCoinBuyPrice(Integer.parseInt(args[2]));
-                            Bitcoin.removeBitCoinSellPrice(Integer.parseInt(args[2]) * 2);
+                            Bitcoin.removeBitCoinSellPrice(Integer.parseInt(args[2]) / 2);
                         }
                     }
                 }
