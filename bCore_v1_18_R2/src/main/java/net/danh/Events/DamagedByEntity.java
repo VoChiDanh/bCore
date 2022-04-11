@@ -11,9 +11,7 @@ import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +23,10 @@ public class DamagedByEntity implements Listener {
         //check if attack was a player
         if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {
             //player who hit
+            if (damager == null || attacked == null){
+                e.setCancelled(true);
+                return;
+            }
             boolean damagerState = Status.getPvPStatus(damager);
             //player who was hit
             boolean attackedState = Status.getPvPStatus(attacked);
@@ -42,7 +44,7 @@ public class DamagedByEntity implements Listener {
             if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
                 e.setCancelled(true);
             }
-        } else if (e.getDamager() instanceof Projectile arrow) {
+        }/* else if (e.getDamager() instanceof Projectile arrow) {
             if (arrow.getShooter() instanceof Player) {
                 if (e.getEntity() instanceof Player attacked) {
                     Player damager = (Player) arrow.getShooter();
@@ -64,6 +66,6 @@ public class DamagedByEntity implements Listener {
                     }
                 }
             }
-        }
+        }*/
     }
 }

@@ -68,6 +68,18 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("pvp_points")) {
             return String.valueOf(Points.getPvPPoints(p));
         }
+        if (identifier.equalsIgnoreCase("bitcoin")) {
+            return String.valueOf(Bitcoin.getBitCoin(p));
+        }
+        if (identifier.equalsIgnoreCase("bitcoin_max")) {
+            return String.valueOf(Bitcoin.getBitCoinMax(p));
+        }
+        if (identifier.equalsIgnoreCase("bitcoin_buy")) {
+            return String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$";
+        }
+        if (identifier.equalsIgnoreCase("bitcoin_sell")) {
+            return String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$";
+        }
         if (identifier.equalsIgnoreCase("bank_money")) {
             return String.valueOf(Bank.getBankMoney(p));
         }

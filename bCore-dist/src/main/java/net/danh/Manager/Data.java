@@ -146,6 +146,8 @@ public class Data {
         Data.getdatafile().set("players." + p.getName() + ".RestorePower", Power.getRestorePower(p));
         Data.getdatafile().set("players." + p.getName() + ".Points", Points.getPvPPoints(p));
         Data.getdatafile().set("players." + p.getName() + ".Status", Status.getPvPStatus(p));
+        Data.getdatafile().set("players." + p.getName() + ".BitCoins", Bitcoin.getBitCoin(p));
+        Data.getdatafile().set("players." + p.getName() + ".BitCoinsMax", Bitcoin.getBitCoinMax(p));
         Data.savedata();
         Data.savebank();
     }

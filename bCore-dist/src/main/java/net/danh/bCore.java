@@ -7,6 +7,7 @@ import net.danh.Contest.Mining.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
+import net.danh.Manager.Bitcoin;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.milkbowl.vault.economy.Economy;
@@ -53,6 +54,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
+        Bitcoin.setBitCoinBuyPrice(Bitcoin.getBitCoinBuyPriceData());
+        Bitcoin.setBitCoinSellPrice(Bitcoin.getBitCoinBuyPrice() / 2);
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -62,11 +65,16 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    Data.saveall(p);
-                }
                 if (getServer().getOnlinePlayers().size() > 0) {
                     Mining.StartMining();
+                }
+                int a = Data.getRandomInt(1000, 1000000);
+                if (a > 10000) {
+                    Bitcoin.removeBitCoinBuyPrice(a);
+                    Bitcoin.removeBitCoinSellPrice(a * 2);
+                } else {
+                    Bitcoin.addBitCoinBuyPrice(a);
+                    Bitcoin.removeBitCoinSellPrice(a / 2);
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
@@ -74,6 +82,11 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Override
     public void onDisable() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Data.saveall(p);
+        }
+        Data.getdatafile().set("BitCoinsBuyPrice", Bitcoin.getBitCoinBuyPrice());
+        getLogger().log(Level.INFO, "Saved player data");
         Data.savedata();
         Data.saveconfig();
         Data.savelanguage();
@@ -170,6 +183,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("latxu")).setExecutor(new Commands());
+        Objects.requireNonNull(getCommand("bitcoin")).setExecutor(new Commands());
     }
 
     private boolean setupEconomy() {

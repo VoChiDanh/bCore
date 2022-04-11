@@ -13,6 +13,8 @@ Level_Bank: 2000000
 Add_Type: ACTION_BAR
 EVENT_TIME: 600
 Protect-time: 1800
+bitcoin: 1000000
+bitcoin_max: 500
 Boolean:
   'true': Bật
   'false': Tắt

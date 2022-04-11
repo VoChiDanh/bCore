@@ -7,7 +7,7 @@
     <parent>
         <artifactId>bCore</artifactId>
         <groupId>net.danh</groupId>
-        <version>3.8</version>
+        <version>3.9</version>
     </parent>
     <artifactId>bCore_v1_18_R2</artifactId>
     <packaging>jar</packaging>

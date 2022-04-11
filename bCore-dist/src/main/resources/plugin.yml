@@ -18,4 +18,6 @@ commands:
     description: PvP Commands
   latxu:
     description: Games Commands
+  bitcoin:
+    description: BitCoin Commands
 
