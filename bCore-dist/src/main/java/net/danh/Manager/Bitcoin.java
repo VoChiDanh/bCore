@@ -1,10 +1,14 @@
 package net.danh.Manager;
 
+import net.danh.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Bitcoin {
 
@@ -81,12 +85,12 @@ public class Bitcoin {
         bitcoin_buyprice.put("BC", Math.max(number, Data.getconfigfile().getInt("bitcoin")));
     }
 
-    public static void addBitCoinBuyPrice(int number) {
+    private static void addBitCoinBuyPrice(int number) {
         bitcoin_buyprice.replace("BC", getBitCoinBuyPrice() + number);
         Bukkit.getServer().broadcastMessage(Data.convert("&6Giá Mua của BitCoin đã tăng lên&a " + String.format("%,d", getBitCoinBuyPrice()) + "$/1 BitCoin"));
     }
 
-    public static void removeBitCoinBuyPrice(int number) {
+    private static void removeBitCoinBuyPrice(int number) {
         if (getBitCoinBuyPrice() - number > Data.getconfigfile().getInt("bitcoin")) {
             bitcoin_buyprice.replace("BC", getBitCoinBuyPrice() - number);
         } else {
@@ -103,7 +107,7 @@ public class Bitcoin {
         bitcoin_sellprice.put("BC", Math.min(number, getBitCoinBuyPrice() / 2));
     }
 
-    public static void addBitCoinSellPrice(int number) {
+    private static void addBitCoinSellPrice(int number) {
         if (getBitCoinSellPrice() + number <= getBitCoinBuyPrice() / 2) {
             bitcoin_sellprice.replace("BC", getBitCoinSellPrice() + number);
         } else {
@@ -112,12 +116,82 @@ public class Bitcoin {
         Bukkit.getServer().broadcastMessage(Data.convert("&6Giá Bán của BitCoin đã tăng lên&a " + String.format("%,d", getBitCoinSellPrice()) + "$/1 BitCoin"));
     }
 
-    public static void removeBitCoinSellPrice(int number) {
+    private static void removeBitCoinSellPrice(int number) {
         if (getBitCoinSellPrice() - number > 0) {
             bitcoin_sellprice.replace("BC", getBitCoinSellPrice() - number);
         } else {
             bitcoin_sellprice.put("BC", 0);
         }
         Bukkit.getServer().broadcastMessage(Data.convert("&6Giá Bán của BitCoin đã giảm xuống&c " + String.format("%,d", getBitCoinSellPrice()) + "$/1 BitCoin"));
+    }
+
+    public static void IncreasePrice(int number) {
+        addBitCoinBuyPrice(number);
+        addBitCoinSellPrice(number);
+        DiscordWebhook webhook = new DiscordWebhook(Data.getdiscordfile().getString("discord-bitcoin-webhook-url"));
+        DiscordWebhook.EmbedObject eb = new DiscordWebhook.EmbedObject();
+        for (int i = 1; i < 26; i++) {
+
+            if (Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".title") == null) continue;
+
+            eb.addField(Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".title"),
+                    Objects.requireNonNull(Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".content"))
+                            .replace("{giaban}", String.format("%,d", getBitCoinBuyPrice()))
+                            .replace("{giamua}", String.format("%,d", getBitCoinSellPrice()))
+                            .replace("{type}", "+")
+                            .replace("{amount}", String.format("%,d", number)),
+                    Data.getdiscordfile().getBoolean("bitcoin-discord-fields." + i + ".inline"));
+        }
+        // Setting features of the embed
+        eb.setColor(Color.decode(Objects.requireNonNull(Data.getdiscordfile().getString("discord-embed-bitcoin-discord-colour-increase"))));
+        eb.setFooter(Data.getdiscordfile().getString("bitcoin-discord-embed-footer"), Data.getdiscordfile().getString("bitcoin-discord-embed-icon"));
+        // Adding the embed to the webhook before sending off
+        webhook.addEmbed(eb);
+
+        AtomicBoolean error = new AtomicBoolean(false);
+
+        Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
+            try {
+                webhook.execute();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                error.set(true);
+            }
+        });
+    }
+
+    public static void DecreasePrice(int number) {
+        removeBitCoinBuyPrice(number);
+        removeBitCoinSellPrice(number);
+        DiscordWebhook webhook = new DiscordWebhook(Data.getdiscordfile().getString("discord-bitcoin-webhook-url"));
+        DiscordWebhook.EmbedObject eb = new DiscordWebhook.EmbedObject();
+        for (int i = 1; i < 26; i++) {
+
+            if (Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".title") == null) continue;
+
+            eb.addField(Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".title"),
+                    Objects.requireNonNull(Data.getdiscordfile().getString("bitcoin-discord-fields." + i + ".content"))
+                            .replace("{giaban}", String.format("%,d", getBitCoinBuyPrice()))
+                            .replace("{giamua}", String.format("%,d", getBitCoinSellPrice()))
+                            .replace("{type}", "-")
+                            .replace("{amount}", String.format("%,d", number)),
+                    Data.getdiscordfile().getBoolean("bitcoin-discord-fields." + i + ".inline"));
+        }
+        // Setting features of the embed
+        eb.setColor(Color.decode(Objects.requireNonNull(Data.getdiscordfile().getString("discord-embed-bitcoin-discord-colour-decrease"))));
+        eb.setFooter(Data.getdiscordfile().getString("bitcoin-discord-embed-footer"), Data.getdiscordfile().getString("bitcoin-discord-embed-icon"));
+        // Adding the embed to the webhook before sending off
+        webhook.addEmbed(eb);
+
+        AtomicBoolean error = new AtomicBoolean(false);
+
+        Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
+            try {
+                webhook.execute();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                error.set(true);
+            }
+        });
     }
 }
