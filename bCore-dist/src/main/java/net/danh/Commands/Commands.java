@@ -623,15 +623,19 @@ public class Commands implements CommandExecutor {
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("mua")) {
                         if (Integer.parseInt(args[1]) > 0) {
-                            if (bCore.economy.getBalance(((Player) sender).getPlayer()) >= Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1])) {
-                                if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + Integer.parseInt(args[1]) <= Bitcoin.getBitCoinMax(((Player) sender).getPlayer())) {
-                                    Bitcoin.addBitCoin(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[1]));
-                                    bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1]));
+                            if (Bitcoin.getBitCoinSellPrice() > 250000) {
+                                if (bCore.economy.getBalance(((Player) sender).getPlayer()) >= Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1])) {
+                                    if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + Integer.parseInt(args[1]) <= Bitcoin.getBitCoinMax(((Player) sender).getPlayer())) {
+                                        Bitcoin.addBitCoin(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[1]));
+                                        bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1]));
+                                    } else {
+                                        sender.sendMessage(Data.convert("&cBạn đã đạt đến giới hạn mua BitCoins"));
+                                    }
                                 } else {
-                                    sender.sendMessage(Data.convert("&cBạn đã đạt đến giới hạn mua BitCoins"));
+                                    sender.sendMessage(Data.convert("&cBạn không đủ tiền mua " + Integer.parseInt(args[1]) + " BitCoins"));
                                 }
                             } else {
-                                sender.sendMessage(Data.convert("&cBạn không đủ tiền mua " + Integer.parseInt(args[1]) + " BitCoins"));
+                                sender.sendMessage(Data.convert("&cBạn không thể mua bitcoin lúc này!"));
                             }
                         }
                     }

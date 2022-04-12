@@ -105,7 +105,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 if (a >= 50000) {
                     Bitcoin.IncreasePrice(a);
                 } else {
-                    Bitcoin.DecreasePrice(a);
+                    Bitcoin.DecreasePrice(a * 2);
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
