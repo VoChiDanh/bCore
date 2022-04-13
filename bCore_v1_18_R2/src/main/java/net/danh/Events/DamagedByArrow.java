@@ -13,13 +13,14 @@ import net.danh.Manager.Status;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class DamagedByArrow implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onDamagedByArrow(@NotNull EntityCombustByEntityEvent e) {
         if (e.getCombuster() instanceof Arrow arrow) {
             if (arrow.getShooter() instanceof Player damager && e.getEntity() instanceof Player attacked) {

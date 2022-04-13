@@ -367,7 +367,7 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("bitcoinmax")) {
                         if (Bukkit.getPlayer(args[2]) != null) {
                             if (args[1].equalsIgnoreCase("set")) {
-                                Bitcoin.setBitCoinMax(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                                Bitcoin.setBitCoinMax(Integer.parseInt(args[3]));
                             }
                             if (args[1].equalsIgnoreCase("add")) {
                                 Bitcoin.addBitCoinMax(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
@@ -496,23 +496,23 @@ public class Commands implements CommandExecutor {
                             if (Math.random() * 100.0D > 50) {
                                 if (args[1].equalsIgnoreCase("tren")) {
                                     if (args[0].equalsIgnoreCase("tien")) {
-                                        bCore.economy.depositPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]) >> 1);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + "$"));
+                                        bCore.economy.depositPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + "$"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("uytin")) {
-                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " Uy Tín"));
+                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " Uy Tín"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("nangluong")) {
-                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " Năng Lượng"));
+                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " Năng Lượng"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("xp")) {
-                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " XP"));
+                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " XP"));
                                         return true;
                                     }
                                 }
@@ -572,22 +572,22 @@ public class Commands implements CommandExecutor {
                                 if (args[1].equalsIgnoreCase("duoi")) {
                                     if (args[0].equalsIgnoreCase("tien")) {
                                         bCore.economy.depositPlayer(((Player) sender).getPlayer(), Integer.parseInt(args[2]) >> 1);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + "$"));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + "$"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("uytin")) {
-                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " Uy Tín"));
+                                        Credit.addCredit(Objects.requireNonNull(((Player) sender).getPlayer()), Double.parseDouble(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " Uy Tín"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("nangluong")) {
-                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " Năng Lượng"));
+                                        Power.addPower(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " Năng Lượng"));
                                         return true;
                                     }
                                     if (args[0].equalsIgnoreCase("xp")) {
-                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]) / 2);
-                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) / 2 + " XP"));
+                                        PlayerData.addXP(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[2]));
+                                        sender.sendMessage(Data.convert("&a&lThành Công!&6 Chúc mừng bạn nhận được " + Integer.parseInt(args[2]) + " XP"));
                                         return true;
                                     }
                                 }
@@ -613,7 +613,7 @@ public class Commands implements CommandExecutor {
             }
             if (sender instanceof Player) {
                 if (args.length == 0) {
-                    sender.sendMessage(Data.convert("&aBạn có " + Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + "/" + Bitcoin.getBitCoinMax(((Player) sender).getPlayer()) + " BitCoins"));
+                    sender.sendMessage(Data.convert("&aBạn có " + Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + "/" + Bitcoin.getBitCoinMax() + " BitCoins"));
                     sender.sendMessage(Data.convert("&6Giá của mua 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$"));
                     sender.sendMessage(Data.convert("&6Giá của bán 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$"));
                     sender.sendMessage(Data.convert("&3Cứ mỗi 1h giá BitCoin sẽ biến động"));
@@ -623,19 +623,23 @@ public class Commands implements CommandExecutor {
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("mua")) {
                         if (Integer.parseInt(args[1]) > 0) {
-                            if (Bitcoin.getBitCoinSellPrice() > 250000) {
-                                if (bCore.economy.getBalance(((Player) sender).getPlayer()) >= Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1])) {
-                                    if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + Integer.parseInt(args[1]) <= Bitcoin.getBitCoinMax(((Player) sender).getPlayer())) {
-                                        Bitcoin.addBitCoin(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[1]));
-                                        bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1]));
+                            if (Integer.parseInt(args[1]) + Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) <= Bitcoin.getBitCoinMax()) {
+                                if (Bitcoin.getBitCoinSellPrice() > 250000) {
+                                    if (bCore.economy.getBalance(((Player) sender).getPlayer()) >= Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1])) {
+                                        if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + Integer.parseInt(args[1]) <= Bitcoin.getBitCoinMax()) {
+                                            Bitcoin.addBitCoin(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[1]));
+                                            bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1]));
+                                        } else {
+                                            sender.sendMessage(Data.convert("&cBạn đã đạt đến giới hạn mua BitCoins"));
+                                        }
                                     } else {
-                                        sender.sendMessage(Data.convert("&cBạn đã đạt đến giới hạn mua BitCoins"));
+                                        sender.sendMessage(Data.convert("&cBạn không đủ tiền mua " + Integer.parseInt(args[1]) + " BitCoins"));
                                     }
                                 } else {
-                                    sender.sendMessage(Data.convert("&cBạn không đủ tiền mua " + Integer.parseInt(args[1]) + " BitCoins"));
+                                    sender.sendMessage(Data.convert("&cBạn không thể mua bitcoin lúc này!"));
                                 }
                             } else {
-                                sender.sendMessage(Data.convert("&cBạn không thể mua bitcoin lúc này!"));
+                                sender.sendMessage(Data.convert("&cBạn không thể mua thêm bitcoin"));
                             }
                         }
                     }

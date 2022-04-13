@@ -72,7 +72,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(Bitcoin.getBitCoin(p));
         }
         if (identifier.equalsIgnoreCase("bitcoin_max")) {
-            return String.valueOf(Bitcoin.getBitCoinMax(p));
+            return String.valueOf(Bitcoin.getBitCoinMax());
         }
         if (identifier.equalsIgnoreCase("bitcoin_buy")) {
             return String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$";

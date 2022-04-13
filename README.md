@@ -16,11 +16,9 @@
 - [WorldGuard Support](https://dev.bukkit.org/projects/worldguard)
 - [PlaceholderAPI](https://www.spigotmc.org/resources/6245/)
 - PvP System
-- Storage
-- Weight
 - Power
-- LuckyChance
 - Event
+- Bitcoin
 
 ## Soft Depend / Depend
 

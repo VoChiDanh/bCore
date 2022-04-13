@@ -10,6 +10,7 @@ import net.md_5.bungee.api.chat.TranslatableComponent;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 public class MythicMobs implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onMythicMobsKill(@NotNull MythicMobDeathEvent mme) {
         Player p = (Player) mme.getKiller();
         String mobname = mme.getMobType().getInternalName();

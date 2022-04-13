@@ -79,7 +79,8 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         // Adding the embed to the webhook before sending off
         webhook.addEmbed(eb);
 
-        AtomicBoolean error = new AtomicBoolean(false);
+        AtomicBoolean error;
+        error = new AtomicBoolean(false);
 
         Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
             try {
@@ -109,6 +110,16 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
+        (new BukkitRunnable() {
+            public void run() {
+                int a = Data.getRandomInt(1000, 100000);
+                if (a >= 50000) {
+                    Bitcoin.IncreasePrice(a);
+                } else {
+                    Bitcoin.DecreasePrice(a * 2);
+                }
+            }
+        }).runTaskTimer(this, 1800 * 20L, 1800 * 20L);
     }
 
     @Override
@@ -116,7 +127,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         for (Player p : Bukkit.getOnlinePlayers()) {
             Data.saveall(p);
         }
-        Data.getdatafile().set("BitCoinsBuyPrice", Bitcoin.getBitCoinBuyPrice());
+        Data.getdatafile().set("BitCoinsBuyPrice.BC", Bitcoin.getBitCoinBuyPrice());
         getLogger().log(Level.INFO, "Saved player data");
         Data.savedata();
         Data.saveconfig();

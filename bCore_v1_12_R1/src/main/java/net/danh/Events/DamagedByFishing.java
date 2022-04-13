@@ -12,14 +12,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class DamagedByFishing implements Listener {
 
-
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onDamagedByFishing(@NotNull PlayerFishEvent e) {
         if (e.getCaught() instanceof Player) {
             Player attacked = (Player) e.getCaught();
