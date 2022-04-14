@@ -33,7 +33,6 @@ public class Bitcoin {
     public static void addBitCoin(@NotNull Player p, int number) {
         if (getBitCoin(p) + number <= getBitCoinMax()) {
             bitcoin.replace(p, getBitCoin(p) + number);
-            addBitCoinMax(p, number);
             p.sendMessage(Data.convert("&a+ " + number + " BitCoins"));
         }
     }
@@ -41,7 +40,6 @@ public class Bitcoin {
     public static void removeBitCoin(Player p, int number) {
         if (getBitCoin(p) - number >= 0) {
             bitcoin.replace(p, getBitCoin(p) - number);
-            removeBitCoinMax(p, number);
             p.sendMessage(Data.convert("&c- " + number + " BitCoins"));
         }
     }

@@ -6,7 +6,7 @@
 
     <groupId>net.danh</groupId>
     <artifactId>bCore</artifactId>
-    <version>4.0-B2</version>
+    <version>4.0-B3</version>
     <packaging>pom</packaging>
     <modules>
         <module>bCore-dist</module>

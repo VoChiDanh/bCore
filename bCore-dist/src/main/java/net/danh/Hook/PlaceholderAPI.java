@@ -107,6 +107,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             }
             return "&e" + Credit.getRealCredit(p);
         }
+        if (identifier.equalsIgnoreCase("version")) {
+            return getVersion();
+        }
         return null;
     }
 }
