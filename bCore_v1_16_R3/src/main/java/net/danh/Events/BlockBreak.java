@@ -12,6 +12,7 @@ import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
 import net.danh.Manager.PlayerData;
+import net.danh.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,13 +28,15 @@ public class BlockBreak implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBreaking(@NotNull BlockBreakEvent e) {
         Player p = e.getPlayer();
-        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(p);
-        Location loc = new com.sk89q.worldedit.util.Location(localPlayer.getWorld(), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ());
-        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-        RegionQuery query = container.createQuery();
-        if (!query.testState(loc, localPlayer, Flags.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
-            e.setCancelled(true);
-            return;
+        if (bCore.getInstance().getServer().getPluginManager().getPlugin("WorldGuard") != null) {
+            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(p);
+            Location loc = new com.sk89q.worldedit.util.Location(localPlayer.getWorld(), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ());
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = container.createQuery();
+            if (!query.testState(loc, localPlayer, Flags.BLOCK_BREAK) && !p.hasPermission("bCore.admin")) {
+                e.setCancelled(true);
+                return;
+            }
         }
         if (Credit.getCredit(p) < 95) {
             p.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));

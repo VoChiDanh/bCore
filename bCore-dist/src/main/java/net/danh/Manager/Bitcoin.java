@@ -147,8 +147,7 @@ public class Bitcoin {
         // Adding the embed to the webhook before sending off
         webhook.addEmbed(eb);
 
-        AtomicBoolean error;
-        error = new AtomicBoolean(false);
+        AtomicBoolean error = new AtomicBoolean(false);
 
         Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
             try {
@@ -183,8 +182,7 @@ public class Bitcoin {
         // Adding the embed to the webhook before sending off
         webhook.addEmbed(eb);
 
-        AtomicBoolean error;
-        error = new AtomicBoolean(false);
+        AtomicBoolean error = new AtomicBoolean(false);
 
         Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
             try {

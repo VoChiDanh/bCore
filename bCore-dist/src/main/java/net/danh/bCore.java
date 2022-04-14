@@ -79,8 +79,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         // Adding the embed to the webhook before sending off
         webhook.addEmbed(eb);
 
-        AtomicBoolean error;
-        error = new AtomicBoolean(false);
+        AtomicBoolean error = new AtomicBoolean(false);
 
         Bukkit.getScheduler().runTaskAsynchronously(bCore.getInstance(), () -> {
             try {
@@ -101,12 +100,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
                     Mining.StartMining();
-                }
-                int a = Data.getRandomInt(1000, 100000);
-                if (a >= 50000) {
-                    Bitcoin.IncreasePrice(a);
-                } else {
-                    Bitcoin.DecreasePrice(a * 2);
                 }
             }
         }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
@@ -159,7 +152,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         if (getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with WorldGuard v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("WorldGuard")).getDescription().getVersion());
         }
-        if (getServer().getPluginManager().isPluginEnabled("Vault")) {
+        if (getServer().getPluginManager().getPlugin("Vault") != null) {
             getLogger().log(Level.INFO, "Successfully hooked with Vault v" + Objects.requireNonNull(getServer().getPluginManager().getPlugin("Vault")).getDescription().getVersion());
         }
         if (getServer().getPluginManager().getPlugin("MythicMobs") != null) {
@@ -188,8 +181,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
                 new Join(),
                 new Quit(),
                 new DamagedByEntity(),
-                new DamagedByArrow(),
-                new DamagedByEntity(),
+                new DamagedByFishing(),
                 new Teleport(),
                 new Enchant(),
                 new Interact()

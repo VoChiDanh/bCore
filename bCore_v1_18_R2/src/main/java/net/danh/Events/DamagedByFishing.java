@@ -10,6 +10,7 @@ import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Status;
+import net.danh.bCore;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,19 +27,26 @@ public class DamagedByFishing implements Listener {
             Player damager = e.getPlayer();
             boolean damagerState = Status.getPvPStatus(damager);
             boolean attackedState = Status.getPvPStatus(attacked);
-            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(damager);
-            LocalPlayer localPlayer1 = WorldGuardPlugin.inst().wrapPlayer(attacked);
-            Location loc = new Location(localPlayer.getWorld(), localPlayer.getLocation().getBlockX(), localPlayer.getLocation().getBlockY(), localPlayer.getLocation().getBlockZ());
-            Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
-            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-            RegionQuery query = container.createQuery();
+            if (bCore.getInstance().getServer().getPluginManager().getPlugin("WorldGuard") != null) {
+                LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(damager);
+                LocalPlayer localPlayer1 = WorldGuardPlugin.inst().wrapPlayer(attacked);
+                Location loc = new Location(localPlayer.getWorld(), localPlayer.getLocation().getBlockX(), localPlayer.getLocation().getBlockY(), localPlayer.getLocation().getBlockZ());
+                Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
+                RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                RegionQuery query = container.createQuery();
+                if (damager.getInventory().getItemInMainHand().getType() == Material.FISHING_ROD || damager.getInventory().getItemInOffHand().getType() == Material.FISHING_ROD) {
+                    if (!query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
+                        e.setCancelled(true);
+                    }
+                }
+            }
             if (Credit.getCredit(damager) <= 50) {
                 damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
                 e.setCancelled(true);
                 return;
             }
             if (damager.getInventory().getItemInMainHand().getType() == Material.FISHING_ROD || damager.getInventory().getItemInOffHand().getType() == Material.FISHING_ROD) {
-                if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
+                if (!damagerState || !attackedState) {
                     e.setCancelled(true);
                 }
             }
