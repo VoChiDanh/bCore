@@ -27,7 +27,6 @@ public class Bitcoin {
 
     public static void setBitCoin(@NotNull Player p, int number) {
         bitcoin.put(p, Math.max(number, 0));
-        setBitCoinMax(number);
     }
 
     public static void addBitCoin(@NotNull Player p, int number) {

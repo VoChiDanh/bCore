@@ -400,6 +400,29 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
+                    if (args[0].equalsIgnoreCase("qp")) {
+                        if (args[1].equalsIgnoreCase("set")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                QPoints.setQP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("add")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                QPoints.addQP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getPlayer(args[2]) != null) {
+                                QPoints.removeQP(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
+                            } else {
+                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
+                            }
+                        }
+                    }
                 }
             }
             if (sender.hasPermission("bCore.admin")) {
