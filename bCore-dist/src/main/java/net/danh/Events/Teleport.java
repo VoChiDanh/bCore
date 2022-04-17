@@ -1,10 +1,10 @@
 package net.danh.Events;
 
+import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import net.danh.bCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,16 +21,13 @@ public class Teleport implements Listener {
         (new BukkitRunnable() {
             int time = 10;
             public void run() {
-                if (time == 0) {
+                if (time <= 0) {
                     Status.TogglePvP(p, true);
-                    return;
+                    cancel();
+                } else {
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new TranslatableComponent(Data.convert("&aBật PvP trong " + time-- + " giây")));
                 }
-                for (final Player player : Bukkit.getOnlinePlayers()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new TranslatableComponent("&aBật PvP trong " + time + " giây"));
-                }
-
-                time--;
             }
         }).runTaskTimer(bCore.getInstance(), 20L, 20L);
     }
