@@ -1,5 +1,8 @@
 package net.danh.Manager;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
 import java.io.IOException;
@@ -347,7 +350,7 @@ public class DiscordWebhook {
         }
 
         @Override
-        public String toString() {
+        public @NotNull String toString() {
             StringBuilder builder = new StringBuilder();
             Set<Map.Entry<String, Object>> entrySet = map.entrySet();
             builder.append("{");
@@ -380,7 +383,8 @@ public class DiscordWebhook {
             return builder.toString();
         }
 
-        private String quote(String string) {
+        @Contract(pure = true)
+        private @NotNull String quote(String string) {
             return "\"" + string + "\"";
         }
     }
