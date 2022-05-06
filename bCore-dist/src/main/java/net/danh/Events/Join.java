@@ -1,10 +1,14 @@
 package net.danh.Events;
 
 import net.danh.Manager.*;
+import net.danh.bCore;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TranslatableComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 public class Join implements Listener {
@@ -25,7 +29,7 @@ public class Join implements Listener {
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
-        Status.TogglePvP(p, false);
+        Status.TogglePvP(p, Status.getPvPStatusData(p));
         Bitcoin.setBitCoin(p, Bitcoin.getBitCoinData(p));
         Bitcoin.setBitCoinMax(Bitcoin.getBitCoinMaxData());
         QPoints.setQP(p, QPoints.getQPData(p));
@@ -43,5 +47,19 @@ public class Join implements Listener {
         }
         p.sendMessage(Data.convert("&6Giá của mua 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$"));
         p.sendMessage(Data.convert("&6Giá của bán 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$"));
+
+        (new BukkitRunnable() {
+            int time = 10;
+
+            public void run() {
+                if (time <= 0) {
+                    Status.TogglePvP(p, true);
+                    cancel();
+                } else {
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new TranslatableComponent(Data.convert("&aBật PvP trong " + time-- + " giây")));
+                }
+            }
+        }).runTaskTimer(bCore.getInstance(), 20L, 20L);
     }
 }
