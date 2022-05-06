@@ -24,7 +24,6 @@ public class Join implements Listener {
         Bank.setBankMoney(p, Bank.getBMData(p));
         Bank.setBankLevel(p, Bank.getBLData(p));
         Credit.setCredit(p, Credit.getCreditData(p));
-        Lucky.setLuckyChance(p, Lucky.getLuckyChanceData(p));
         Power.setPower(p, Power.getPowerData(p));
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));

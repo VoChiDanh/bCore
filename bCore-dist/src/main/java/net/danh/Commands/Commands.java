@@ -240,29 +240,6 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("luckychance")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.setLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.addLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getPlayer(args[2]) != null) {
-                                Lucky.removeLuckyChance(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            } else {
-                                sender.sendMessage(Data.convert(PREFIX + UNKNOWN_PLAYER));
-                            }
-                        }
-                    }
                     if (args[0].equalsIgnoreCase("bankmoney")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {

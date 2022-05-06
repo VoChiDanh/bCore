@@ -152,7 +152,6 @@ public class Data {
         Data.getbankfile().set("banks." + p.getName() + ".level", Bank.getBankLevel(p));
         Data.getdatafile().set("players." + p.getName() + ".Credit", Credit.getCredit(p));
         Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", Event.getBlockEvent(p));
-        Data.getdatafile().set("players." + p.getName() + ".Lucky", Lucky.getLuckyChance(p));
         Data.getdatafile().set("players." + p.getName() + ".XP", PlayerData.getXP(p));
         Data.getdatafile().set("players." + p.getName() + ".Level", PlayerData.getLevel(p));
         Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", PlayerData.getleveluptimes(p));

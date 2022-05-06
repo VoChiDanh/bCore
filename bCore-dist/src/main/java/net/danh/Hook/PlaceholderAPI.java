@@ -58,9 +58,6 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("maxpower")) {
             return String.valueOf(Power.getMaxPower(p));
         }
-        if (identifier.equalsIgnoreCase("luckychance")) {
-            return String.valueOf(Lucky.getLuckyChance(p));
-        }
         if (identifier.equalsIgnoreCase("status")) {
             if (Status.getPvPStatus(p)) {
                 return Data.getconfigfile().getString("Boolean.true");
