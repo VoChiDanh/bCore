@@ -16,8 +16,6 @@ commands:
     description: Bank commands
   pvp:
     description: PvP Commands
-  latxu:
-    description: Games Commands
   bitcoin:
     description: BitCoin Commands
 

@@ -40,6 +40,7 @@ jobs:
           embed-author-url: "https://github.com/${{ github.actor }}"
           embed-author-icon-url: "https://github.com/${{ github.actor }}.png"
           embed-footer-text: "Build Pending..."
+          embed-footer-icon-url: "https://i.imgur.com/7rp33Yk.gif"
           embed-description: |            
             ${{ github.event.head_commit.message }}
 

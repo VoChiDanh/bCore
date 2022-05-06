@@ -217,7 +217,6 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("latxu")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bitcoin")).setExecutor(new Commands());
     }
 
