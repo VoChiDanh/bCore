@@ -45,12 +45,12 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
     @Override
     public void onLoad() {
+        instance = this;
         performNMSChecks();
     }
 
     @Override
     public void onEnable() {
-        instance = this;
         Metrics metrics = new Metrics(this, 14684);
         metrics.addCustomChart(new SimplePie("plugin_name", () -> getDescription().getName()));
         HookWithOthersPlugins();
