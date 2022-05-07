@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -328,32 +327,6 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("bitcoin")) {
-                        if (Bukkit.getPlayer(args[2]) != null) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                Bitcoin.setBitCoin(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                Bitcoin.addBitCoin(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                Bitcoin.removeBitCoin(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            }
-                        }
-                    }
-                    if (args[0].equalsIgnoreCase("bitcoinmax")) {
-                        if (Bukkit.getPlayer(args[2]) != null) {
-                            if (args[1].equalsIgnoreCase("set")) {
-                                Bitcoin.setBitCoinMax(Integer.parseInt(args[3]));
-                            }
-                            if (args[1].equalsIgnoreCase("add")) {
-                                Bitcoin.addBitCoinMax(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            }
-                            if (args[1].equalsIgnoreCase("remove")) {
-                                Bitcoin.removeBitCoinMax(Objects.requireNonNull(Bukkit.getPlayer(args[2])), Integer.parseInt(args[3]));
-                            }
-                        }
-                    }
                     if (args[0].equalsIgnoreCase("blocks")) {
                         if (args[1].equalsIgnoreCase("set")) {
                             if (Bukkit.getPlayer(args[2]) != null) {
@@ -416,22 +389,8 @@ public class Commands implements CommandExecutor {
                             }
                         }
                     }
-                    if (args[0].equalsIgnoreCase("bitcoinprice")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            Bitcoin.setBitCoinBuyPrice(Integer.parseInt(args[2]));
-                            Bitcoin.setBitCoinSellPrice(Integer.parseInt(args[2]));
-                        }
-                        if (args[1].equalsIgnoreCase("add")) {
-                            Bitcoin.IncreasePrice(Integer.parseInt(args[2]));
-                        }
-                        if (args[1].equalsIgnoreCase("remove")) {
-                            Bitcoin.DecreasePrice(Integer.parseInt(args[2]));
-                        }
-                    }
                 }
-                return true;
             }
-            return true;
         }
         if (label.equalsIgnoreCase("bank")) {
             if (sender instanceof Player) {
@@ -449,57 +408,6 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("withdraw")) {
                         if (Integer.parseInt(args[1]) > 0) {
                             Bank.withdrawBank(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        if (label.equalsIgnoreCase("bitcoin")) {
-            if (sender instanceof ConsoleCommandSender) {
-                if (args.length == 0) {
-                    sender.sendMessage(Data.convert("&6Giá của mua 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$"));
-                    sender.sendMessage(Data.convert("&6Giá của bán 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$"));
-                }
-            }
-            if (sender instanceof Player) {
-                if (args.length == 0) {
-                    sender.sendMessage(Data.convert("&aBạn có " + Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + "/" + Bitcoin.getBitCoinMax() + " BitCoins"));
-                    sender.sendMessage(Data.convert("&6Giá của mua 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$"));
-                    sender.sendMessage(Data.convert("&6Giá của bán 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$"));
-                    sender.sendMessage(Data.convert("&3Cứ mỗi 1h giá BitCoin sẽ biến động"));
-                    sender.sendMessage(Data.convert("&bDùng lệnh: /bitcoin mua <số bitcoin muốn mua> Để mua bitcoin"));
-                    sender.sendMessage(Data.convert("&bDùng lệnh: /bitcoin ban <số bitcoin muốn bán> Để bán bitcoin"));
-                }
-                if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase("mua")) {
-                        if (Integer.parseInt(args[1]) > 0) {
-                            if (Integer.parseInt(args[1]) + Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) <= Bitcoin.getBitCoinMax()) {
-                                if (Bitcoin.getBitCoinSellPrice() > 250000) {
-                                    if (bCore.economy.getBalance(((Player) sender).getPlayer()) >= Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1])) {
-                                        if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) + Integer.parseInt(args[1]) <= Bitcoin.getBitCoinMax()) {
-                                            Bitcoin.addBitCoin(Objects.requireNonNull(((Player) sender).getPlayer()), Integer.parseInt(args[1]));
-                                            bCore.economy.withdrawPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinBuyPrice() * Integer.parseInt(args[1]));
-                                        } else {
-                                            sender.sendMessage(Data.convert("&cBạn đã đạt đến giới hạn mua BitCoins"));
-                                        }
-                                    } else {
-                                        sender.sendMessage(Data.convert("&cBạn không đủ tiền mua " + Integer.parseInt(args[1]) + " BitCoins"));
-                                    }
-                                } else {
-                                    sender.sendMessage(Data.convert("&cBạn không thể mua bitcoin lúc này!"));
-                                }
-                            } else {
-                                sender.sendMessage(Data.convert("&cBạn không thể mua thêm bitcoin"));
-                            }
-                        }
-                    }
-                    if (args[0].equalsIgnoreCase("ban")) {
-                        if (Integer.parseInt(args[1]) > 0) {
-                            if (Bitcoin.getBitCoin(Objects.requireNonNull(((Player) sender).getPlayer())) - Integer.parseInt(args[1]) >= 0) {
-                                Bitcoin.removeBitCoin(((Player) sender).getPlayer(), Integer.parseInt(args[1]));
-                                bCore.economy.depositPlayer(((Player) sender).getPlayer(), Bitcoin.getBitCoinSellPrice() * Integer.parseInt(args[1]));
-                            }
                         }
                     }
                 }

@@ -29,8 +29,6 @@ public class Join implements Listener {
         Power.setRestorePower(p, Power.getRestorePowerData(p));
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
         Status.TogglePvP(p, Status.getPvPStatusData(p));
-        Bitcoin.setBitCoin(p, Bitcoin.getBitCoinData(p));
-        Bitcoin.setBitCoinMax(Bitcoin.getBitCoinMaxData());
         QPoints.setQP(p, QPoints.getQPData(p));
         if (Power.getRestorePower(p) == 0) {
             Power.setRestorePower(p, Data.getconfigfile().getInt("Restore_Power"));
@@ -44,9 +42,6 @@ public class Join implements Listener {
         if (Credit.getCredit(p) == 0) {
             Credit.setCredit(p, 100D);
         }
-        p.sendMessage(Data.convert("&6Giá của mua 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinBuyPrice()) + "$"));
-        p.sendMessage(Data.convert("&6Giá của bán 1 BitCoin hiện tại là " + String.format("%,d", Bitcoin.getBitCoinSellPrice()) + "$"));
-
         (new BukkitRunnable() {
             int time = 10;
 

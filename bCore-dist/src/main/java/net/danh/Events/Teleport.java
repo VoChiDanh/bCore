@@ -20,6 +20,7 @@ public class Teleport implements Listener {
         Status.TogglePvP(p, false);
         (new BukkitRunnable() {
             int time = 10;
+
             public void run() {
                 if (time <= 0) {
                     Status.TogglePvP(p, true);
