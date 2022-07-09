@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,8 +9,12 @@ import java.util.HashMap;
 public class QPoints {
     private static final HashMap<Player, Integer> qp = new HashMap<>();
 
+    public static int getOldQPData(@NotNull String name) {
+        return Data.getdatafile().getInt("players" + name + ".QPoints");
+    }
+
     public static int getQPData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players" + p.getName() + ".QPoints");
+        return new PData(p.getName()).getConfig().getInt("qpoints");
     }
 
     public static int getQP(Player p) {

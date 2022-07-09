@@ -4,8 +4,6 @@ import net.danh.bCore;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +11,8 @@ import java.util.Random;
 
 public class Data {
 
-    private static File configFile, languageFile, dataFile, bankFile, cmdFile, discordFile;
-    private static FileConfiguration config, language, data, bank, cmd, discord;
+    private static File configFile, languageFile, dataFile, bankFile, cmdFile;
+    private static FileConfiguration config, language, data, bank, cmd;
 
     public static void createconfig() {
         configFile = new File(bCore.getInstance().getDataFolder(), "config.yml");
@@ -22,11 +20,9 @@ public class Data {
         dataFile = new File(bCore.getInstance().getDataFolder(), "data.yml");
         bankFile = new File(bCore.getInstance().getDataFolder(), "bank.yml");
         cmdFile = new File(bCore.getInstance().getDataFolder(), "cmd.yml");
-        discordFile = new File(bCore.getInstance().getDataFolder(), "discord.yml");
 
         if (!configFile.exists()) bCore.getInstance().saveResource("config.yml", false);
         if (!languageFile.exists()) bCore.getInstance().saveResource("language.yml", false);
-        if (!discordFile.exists()) bCore.getInstance().saveResource("discord.yml", false);
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();
             try {
@@ -49,7 +45,6 @@ public class Data {
         data = new YamlConfiguration();
         bank = new YamlConfiguration();
         cmd = new YamlConfiguration();
-        discord = new YamlConfiguration();
 
         try {
             config.load(configFile);
@@ -57,7 +52,6 @@ public class Data {
             data.load(dataFile);
             bank.load(bankFile);
             cmd.load(cmdFile);
-            discord.load(discordFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -83,15 +77,10 @@ public class Data {
         return cmd;
     }
 
-    public static FileConfiguration getdiscordfile() {
-        return discord;
-    }
-
     public static void reloadfiles() {
         config = YamlConfiguration.loadConfiguration(configFile);
         language = YamlConfiguration.loadConfiguration(languageFile);
         cmd = YamlConfiguration.loadConfiguration(cmdFile);
-        discord = YamlConfiguration.loadConfiguration(discordFile);
     }
 
     public static void saveconfig() {
@@ -130,13 +119,6 @@ public class Data {
         }
     }
 
-    public static void savediscord() {
-        try {
-            discord.save(discordFile);
-        } catch (IOException ignored) {
-        }
-    }
-
     public static int getRandomInt(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min) + min;
@@ -148,24 +130,5 @@ public class Data {
         } catch (NumberFormatException | NullPointerException e) {
             return 0;
         }
-    }
-
-    public static void saveall(@NotNull Player p) {
-        Data.getbankfile().set("banks." + p.getName() + ".money", Bank.getBankMoney(p));
-        Data.getbankfile().set("banks." + p.getName() + ".level", Bank.getBankLevel(p));
-        Data.getdatafile().set("players." + p.getName() + ".Credit", Credit.getCredit(p));
-        Data.getdatafile().set("players." + p.getName() + ".Event.Blocks", Event.getBlockEvent(p));
-        Data.getdatafile().set("players." + p.getName() + ".XP", PlayerData.getXP(p));
-        Data.getdatafile().set("players." + p.getName() + ".Level", PlayerData.getLevel(p));
-        Data.getdatafile().set("players." + p.getName() + ".LevelUpTimes", PlayerData.getleveluptimes(p));
-        Data.getdatafile().set("players." + p.getName() + ".Blocks", PlayerData.getBlocks(p));
-        Data.getdatafile().set("players." + p.getName() + ".Power", Power.getPower(p));
-        Data.getdatafile().set("players." + p.getName() + ".MaxPower", Power.getMaxPower(p));
-        Data.getdatafile().set("players." + p.getName() + ".RestorePower", Power.getRestorePower(p));
-        Data.getdatafile().set("players." + p.getName() + ".Points", Points.getPvPPoints(p));
-        Data.getdatafile().set("players." + p.getName() + ".Status", Status.getPvPStatus(p));
-        Data.getdatafile().set("players" + p.getName() + ".QPoints", QPoints.getQP(p));
-        Data.savedata();
-        Data.savebank();
     }
 }

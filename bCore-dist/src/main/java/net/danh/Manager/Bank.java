@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -21,13 +22,18 @@ public class Bank {
         return bank.get(p);
     }
 
+    public static int getOldBMData(@NotNull String name) {
+        return Data.getbankfile().getInt("banks." + name + ".money");
+    }
+
+
     public static int getBMData(@NotNull Player p) {
-        return Data.getbankfile().getInt("banks." + p.getName() + ".money");
+        return new PData(p.getName()).getConfig().getInt("banks.money");
     }
 
 
     public static void setBankMoney(@NotNull Player p, Integer number) {
-        bank.put(p, number);
+        bank.put(p, Math.max(0, number));
     }
 
     public static void addBankMoney(Player p, Integer number) {
@@ -63,8 +69,12 @@ public class Bank {
         }
     }
 
+    public static int getOldBLData(@NotNull String name) {
+        return Data.getbankfile().getInt("banks." + name + ".level");
+    }
+
     public static int getBLData(@NotNull Player p) {
-        return Data.getbankfile().getInt("banks." + p.getName() + ".level");
+        return new PData(p.getName()).getConfig().getInt("banks." + p.getName() + ".level");
     }
 
     public static int getBankLevel(@NotNull Player p) {
@@ -73,7 +83,7 @@ public class Bank {
 
 
     public static void setBankLevel(@NotNull Player p, Integer level) {
-        banklevel.put(p, level);
+        banklevel.put(p, Math.max(1, level));
     }
 
     public static void addBankLevel(@NotNull Player p, Integer level) {

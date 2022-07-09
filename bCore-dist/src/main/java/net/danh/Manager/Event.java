@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +33,11 @@ public class Event {
         }
     }
 
+    public static int getOldBEData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".Event.Blocks");
+    }
+
     public static int getBEData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Event.Blocks");
+        return new PData(p.getName()).getConfig().getInt("event.blocks");
     }
 }

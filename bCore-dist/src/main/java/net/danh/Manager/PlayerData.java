@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,12 +15,20 @@ public class PlayerData {
     public static HashMap<Player, Integer> level = new HashMap<>();
     public static HashMap<Player, Integer> levelup = new HashMap<>();
 
+    public static int getOldXPData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".XP");
+    }
+
     public static int getXPData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".XP");
+        return new PData(p.getName()).getConfig().getInt("xp");
+    }
+
+    public static int getOldLevelData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".Level");
     }
 
     public static int getLevelData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Level");
+        return new PData(p.getName()).getConfig().getInt("level");
     }
 
     public static int getLevel(@NotNull Player p) {
@@ -29,9 +38,6 @@ public class PlayerData {
     public static int getXP(@NotNull Player p) {
         return xp.get(p);
     }
-    /*
-    Data.getdatafile().getInt("players." + p.getName() + ".XP");
-     */
 
     public static void setLevel(@NotNull Player p, int number) {
         level.put(p, Math.max(number, 1));
@@ -84,8 +90,12 @@ public class PlayerData {
         return levelup.get(p);
     }
 
+    public static int getOldLUData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".LevelUpTimes");
+    }
+
     public static int getLUData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".LevelUpTimes", getLevelData(p));
+        return new PData(p.getName()).getConfig().getInt("level_up_times");
     }
 
     public static void addLeveluptimes(@NotNull Player p, Integer number) {
@@ -108,8 +118,12 @@ public class PlayerData {
         return block.get(p);
     }
 
+    public static int getOldBlockData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".Blocks");
+    }
+
     public static int getBlockData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Blocks");
+        return new PData(p.getName()).getConfig().getInt("blocks");
     }
 
     public static void setBlocks(@NotNull Player p, Integer number) {

@@ -22,6 +22,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import static net.danh.PlayerData.PlayerData.savePlayerData;
+
 public class bCore extends JavaPlugin {
 
 
@@ -48,6 +50,7 @@ public class bCore extends JavaPlugin {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
+        net.danh.PlayerData.PlayerData.convertData();
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -67,7 +70,7 @@ public class bCore extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            Data.saveall(p);
+            savePlayerData(p);
         }
         getLogger().log(Level.INFO, "Saved player data");
         Data.savedata();
@@ -75,7 +78,6 @@ public class bCore extends JavaPlugin {
         Data.savelanguage();
         Data.savebank();
         Data.savecmd();
-        Data.savediscord();
         getLogger().log(Level.INFO, "Saved data");
     }
 

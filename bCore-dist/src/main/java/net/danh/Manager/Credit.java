@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,8 +19,12 @@ public class Credit {
         return (int) getRealCredit(p);
     }
 
+    public static double getOldCreditData(@NotNull String name) {
+        return Data.getdatafile().getDouble("players." + name + ".Credit");
+    }
+
     public static double getCreditData(@NotNull Player p) {
-        return Data.getdatafile().getDouble("players." + p.getName() + ".Credit");
+        return new PData(p.getName()).getConfig().getDouble("players." + p.getName() + ".Credit");
     }
 
     public static double getCredit(@NotNull Player p) {
@@ -28,7 +33,7 @@ public class Credit {
 
     public static void setCredit(@NotNull Player p, Double amount) {
         if (amount < 200D) {
-            credit.put(p, amount);
+            credit.put(p, Math.max(100D, amount));
         } else {
             credit.put(p, 200D);
         }

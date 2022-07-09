@@ -1,5 +1,6 @@
 package net.danh.Manager;
 
+import net.danh.PlayerData.PData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,8 +11,12 @@ import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 public class Points {
     public static HashMap<Player, Integer> points = new HashMap<>();
 
+    public static int getOldPvPPointsData(@NotNull String name) {
+        return Data.getdatafile().getInt("players." + name + ".Points");
+    }
+
     public static int getPvPPointsData(@NotNull Player p) {
-        return Data.getdatafile().getInt("players." + p.getName() + ".Points");
+        return new PData(p.getName()).getConfig().getInt("points");
     }
 
     public static int getPvPPoints(@NotNull Player p) {
