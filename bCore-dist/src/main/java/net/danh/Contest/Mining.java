@@ -1,16 +1,18 @@
-package net.danh.Contest.Mining;
+package net.danh.Contest;
 
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
 import net.danh.bCore;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TranslatableComponent;
+import net.danh.dcore.Utils.Chat;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
+
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+import static net.danh.dcore.Utils.Player.sendPlayerMessageType;
 
 public class Mining {
 
@@ -22,7 +24,7 @@ public class Mining {
 
     public static void StartMining() {
         Started = true;
-        Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_START"))
+        Bukkit.broadcastMessage(Chat.colorize(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_START"))
                 .replaceAll("%name%", "Đào Khối")));
         for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
             Event.setBlocksEvent(p, 0);
@@ -33,13 +35,12 @@ public class Mining {
             public void run() {
                 counter--;
                 for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {
-                    p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                            new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("COUNTDOWN"))
-                                    .replaceAll("%time%", String.valueOf(counter)))));
+                    sendPlayerMessageType(p, Data.getconfigfile().getString("Add_Type"), Objects.requireNonNull(Data.getlanguagefile().getString("COUNTDOWN"))
+                            .replaceAll("%time%", String.valueOf(counter)));
                 }
                 if (counter <= 0) {
                     cancel();
-                    Bukkit.broadcastMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_END"))
+                    Bukkit.broadcastMessage(Chat.colorize(Objects.requireNonNull(Data.getlanguagefile().getString("CONTEST_END"))
                             .replaceAll("%name%", "Đào Khối")));
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         EconomyResponse r = bCore.economy.depositPlayer(p, Event.getBlockEvent(p));
@@ -47,7 +48,7 @@ public class Mining {
                                 .replaceAll("%player%", p.getName())
                                 .replaceAll("%amount%", String.valueOf(Event.getBlockEvent(p) / 100))));
                         if (r.transactionSuccess()) {
-                            p.sendMessage(Data.convert(Data.getlanguagefile().getString("REWARD")));
+                            sendPlayerMessage(p, Data.getlanguagefile().getString("REWARD"));
                         }
                     }
                     for (Player p : bCore.getInstance().getServer().getOnlinePlayers()) {

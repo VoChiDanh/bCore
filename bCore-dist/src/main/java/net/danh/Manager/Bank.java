@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class Bank {
 
     public static HashMap<Player, Integer> bank = new HashMap<>();
@@ -38,15 +40,14 @@ public class Bank {
 
     public static void depositBank(Player p, Integer number) {
         if (getBankLevel(p) * Data.getconfigfile().getInt("Level_Bank") < (getBankMoney(p) + number)) {
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("FULL_BANK"))));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("FULL_BANK"));
         } else {
             if (bCore.economy.getBalance(p) >= number) {
                 addBankMoney(p, number);
                 bCore.economy.withdrawPlayer(p, number);
-                p.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("DEPOSIT_BANK"))
-                        .replaceAll("%money%", String.valueOf(number)))));
+                sendPlayerMessage(p, Objects.requireNonNull(Data.getlanguagefile().getString("DEPOSIT_BANK")).replaceAll("%money%", String.valueOf(number)));
             } else {
-                p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MONEY"))));
+                sendPlayerMessage(p, Data.getlanguagefile().getString("NOT_ENOUGH_MONEY"));
             }
         }
     }
@@ -55,10 +56,10 @@ public class Bank {
         if (getBankMoney(p) >= number) {
             removeBankMoney(p, number);
             bCore.economy.depositPlayer(p, number);
-            p.sendMessage(Data.convert(Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("WITHDRAW_BANK"))
-                    .replaceAll("%money%", String.valueOf(number)))));
+            sendPlayerMessage(p, Objects.requireNonNull(Data.getlanguagefile().getString("WITHDRAW_BANK"))
+                    .replaceAll("%money%", String.valueOf(number)));
         } else {
-            p.sendMessage(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("NOT_ENOUGH_MONEY"))));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("NOT_ENOUGH_MONEY"));
         }
     }
 

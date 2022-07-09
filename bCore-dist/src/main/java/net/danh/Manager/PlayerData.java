@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class PlayerData {
 
     public static HashMap<Player, Integer> block = new HashMap<>();
@@ -43,13 +45,13 @@ public class PlayerData {
         level.replace(p, getLevel(p) + number);
         Power.addMaxPower(p, Data.getconfigfile().getInt("Per_Max_Power"));
         Power.addRestorePower(p, Data.getconfigfile().getInt("Per_Restore_Power"));
-        p.sendMessage(Data.convert("&aChúc mừng bạn đã lên cấp " + getLevel(p)));
+        sendPlayerMessage(p, "&aChúc mừng bạn đã lên cấp " + getLevel(p));
     }
 
     public static void addXP(@NotNull Player p, int number) {
         xp.replace(p, getXP(p) + number);
         checkLevelUp(p);
-        p.sendMessage(Data.convert("&a+ " + number + " XP"));
+        sendPlayerMessage(p, "&a+ " + number + " XP");
     }
 
     public static void removeLevel(Player p, int number) {
@@ -74,7 +76,7 @@ public class PlayerData {
             setXP(p, 0);
             addLevel(p, 1);
             addLeveluptimes(p, 1);
-            p.sendMessage(Data.convert("&aChúc mừng bạn đã lên cấp độ " + getLevel(p)));
+            sendPlayerMessage(p, "&aChúc mừng bạn đã lên cấp độ " + getLevel(p));
         }
     }
 

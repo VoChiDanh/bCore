@@ -1,11 +1,11 @@
 package net.danh.Manager;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Objects;
+
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 
 public class Credit {
     public static HashMap<Player, Double> credit = new HashMap<>();
@@ -37,16 +37,16 @@ public class Credit {
     public static void addCredit(@NotNull Player p, Double amount) {
         if ((getCredit(p) + amount) <= 200D) {
             credit.replace(p, getCredit(p) + amount);
-            p.sendMessage(Data.convert("&a+ " + amount + " Uy tín"));
+            sendPlayerMessage(p, "&a+ " + amount + " Uy tín");
         }
     }
 
     public static void removeCredit(@NotNull Player p, Double amount) {
         if ((getCredit(p) - amount) >= 0) {
             credit.replace(p, getCredit(p) - amount);
-            p.sendMessage(Data.convert("&c- " + amount + " Uy tín"));
+            sendPlayerMessage(p, "&c- " + amount + " Uy tín");
         } else {
-            Objects.requireNonNull(Bukkit.getPlayer(p.getName())).sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT")));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("LOW_CREDIT"));
         }
     }
 }

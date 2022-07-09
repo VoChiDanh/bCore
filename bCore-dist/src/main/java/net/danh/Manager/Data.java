@@ -1,23 +1,18 @@
 package net.danh.Manager;
 
 import net.danh.bCore;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Data {
 
-    public final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
     private static File configFile, languageFile, dataFile, bankFile, cmdFile, discordFile;
     private static FileConfiguration config, language, data, bank, cmd, discord;
 
@@ -147,6 +142,14 @@ public class Data {
         return r.nextInt(max - min) + min;
     }
 
+    public static int getInt(java.lang.String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException | NullPointerException e) {
+            return 0;
+        }
+    }
+
     public static void saveall(@NotNull Player p) {
         Data.getbankfile().set("banks." + p.getName() + ".money", Bank.getBankMoney(p));
         Data.getbankfile().set("banks." + p.getName() + ".level", Bank.getBankLevel(p));
@@ -164,34 +167,5 @@ public class Data {
         Data.getdatafile().set("players" + p.getName() + ".QPoints", QPoints.getQP(p));
         Data.savedata();
         Data.savebank();
-    }
-
-    // Colorizes messages with preset colorcodes (&) and if using 1.16+, applies hex values via "&#hexvalue"
-    public static String convert(String input) {
-
-        input = ChatColor.translateAlternateColorCodes('&', input);
-        NMSAssistant nms = new NMSAssistant();
-        if (nms.isVersionGreaterThan(15)) {
-            input = translateHexColorCodes("&#", "", input);
-        }
-
-        return input;
-    }
-
-    public static @NotNull String translateHexColorCodes(String startTag, String endTag, String message) {
-
-        final Pattern hexPattern = Pattern.compile(startTag + "([A-Fa-f0-9]{6})" + endTag);
-        Matcher matcher = hexPattern.matcher(message);
-        StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
-
-        while (matcher.find()) {
-
-            String group = matcher.group(1);
-            matcher.appendReplacement(buffer, COLOR_CHAR + "x" + COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1) + COLOR_CHAR
-                    + group.charAt(2) + COLOR_CHAR + group.charAt(3) + COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5));
-
-        }
-
-        return matcher.appendTail(buffer).toString();
     }
 }

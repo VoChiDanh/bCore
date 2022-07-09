@@ -14,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class Death implements Listener {
 
     @EventHandler
@@ -30,9 +32,9 @@ public class Death implements Listener {
         PlayerData.removeXP(p, PlayerData.getXP(Objects.requireNonNull(p)) / 2);
         EconomyResponse r = bCore.economy.withdrawPlayer(p, bCore.economy.getBalance(p) / 4);
         if (r.transactionSuccess()) {
-            Objects.requireNonNull(p).sendMessage(Data.convert(Objects.requireNonNull(DEAD)
+            sendPlayerMessage(p, Objects.requireNonNull(DEAD)
                     .replaceAll("%xp%", String.valueOf(PlayerData.getXP(Objects.requireNonNull(p)) / 2))
-                    .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p) / 4))));
+                    .replaceAll("%money%", String.valueOf(bCore.economy.getBalance(p) / 4)));
         }
     }
 }

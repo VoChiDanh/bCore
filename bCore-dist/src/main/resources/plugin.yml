@@ -1,5 +1,5 @@
-name: ${project.name}
-version: ${project.version}
+name: bCore
+version: ${bcore.version}
 main: net.danh.bCore
 softdepend:
   - Vault
@@ -16,6 +16,3 @@ commands:
     description: Bank commands
   pvp:
     description: PvP Commands
-  bitcoin:
-    description: BitCoin Commands
-

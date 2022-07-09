@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class Points {
     public static HashMap<Player, Integer> points = new HashMap<>();
 
@@ -21,12 +23,12 @@ public class Points {
     }
 
     public static void addPvPPoints(@NotNull Player p, int amount) {
-        p.sendMessage(Data.convert("&a+" + amount + " Điểm PvP"));
+        sendPlayerMessage(p, "&a+" + amount + " Điểm PvP");
         points.replace(p, getPvPPoints(p) + amount);
     }
 
     public static void removePvPPoints(@NotNull Player p, int amount) {
-        p.sendMessage(Data.convert("&c-" + amount + " Điểm PvP"));
+        sendPlayerMessage(p, "&c-" + amount + " Điểm PvP");
         points.replace(p, Math.max(getPvPPoints(p) - amount, 0));
     }
 

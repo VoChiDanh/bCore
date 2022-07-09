@@ -7,12 +7,12 @@
     <parent>
         <artifactId>bCore</artifactId>
         <groupId>net.danh</groupId>
-        <version>5.0</version>
+        <version>1.0</version>
     </parent>
     <artifactId>bCore_v1_18_R2</artifactId>
     <packaging>jar</packaging>
 
-    <name>bCore</name>
+    <name>bCore_v1_18_R2</name>
 
     <properties>
         <java.version>17</java.version>

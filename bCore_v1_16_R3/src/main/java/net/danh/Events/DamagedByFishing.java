@@ -19,6 +19,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.jetbrains.annotations.NotNull;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class DamagedByFishing implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
@@ -42,7 +44,7 @@ public class DamagedByFishing implements Listener {
                 }
             }
             if (Credit.getCredit(damager) <= 50) {
-                damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+                sendPlayerMessage(damager, Data.getlanguagefile().getString("LOW_CREDIT_WORKING"));
                 e.setCancelled(true);
                 return;
             }

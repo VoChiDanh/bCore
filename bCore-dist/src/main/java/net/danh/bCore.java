@@ -2,32 +2,27 @@ package net.danh;
 
 import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
-import net.danh.Commands.Commands;
-import net.danh.Contest.Mining.Mining;
+import net.danh.Commands.Bank;
+import net.danh.Commands.PvP;
+import net.danh.Commands.bCoreCMD;
+import net.danh.Contest.Mining;
 import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
+import net.danh.dcore.NMS.NMSAssistant;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
-import preponderous.ponder.minecraft.bukkit.nms.NMSAssistant;
-import preponderous.ponder.minecraft.bukkit.tools.EventHandlerRegistry;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.logging.Level;
 
-public final class bCore extends PonderBukkitPlugin implements Listener {
+public class bCore extends JavaPlugin {
 
 
     public static Economy economy;
@@ -86,7 +81,7 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
 
 
     private void performNMSChecks() {
-        final NMSAssistant nmsAssistant = new NMSAssistant();
+        NMSAssistant nmsAssistant = new NMSAssistant();
         if (nmsAssistant.isVersionGreaterThan(8)) {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
@@ -125,52 +120,27 @@ public final class bCore extends PonderBukkitPlugin implements Listener {
         }
     }
 
-    @Contract(" -> new")
-    private @NotNull ArrayList<Listener> initializeListeners() {
-        return new ArrayList<Listener>(Arrays.asList(
-                new Death(),
-                new Kill(),
-                new BlockBreak(),
-                new Join(),
-                new Quit(),
-                new DamagedByEntity(),
-                new DamagedByFishing(),
-                new Teleport(),
-                new Enchant(),
-                new Interact()
-        ));
-    }
-
-    /**
-     * Registers the event handlers of the plugin using Ponder.
-     */
     private void registerEventHandlers() {
-        ArrayList<Listener> listeners = initializeListeners();
-        EventHandlerRegistry eventHandlerRegistry = new EventHandlerRegistry();
-        eventHandlerRegistry.registerEventHandlers(listeners, this);
+        getServer().getPluginManager().registerEvents(new Death(), this);
+        getServer().getPluginManager().registerEvents(new Kill(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new Join(), this);
+        getServer().getPluginManager().registerEvents(new Quit(), this);
+        getServer().getPluginManager().registerEvents(new DamagedByEntity(), this);
+        getServer().getPluginManager().registerEvents(new DamagedByFishing(), this);
+        getServer().getPluginManager().registerEvents(new Teleport(), this);
+        getServer().getPluginManager().registerEvents(new Enchant(), this);
+        getServer().getPluginManager().registerEvents(new Interact(), this);
     }
 
-    @Contract(" -> new")
-    private @NotNull ArrayList<Listener> MythicListeners() {
-        return new ArrayList<>(Collections.singletonList(
-                new MythicMobs()
-        ));
-    }
-
-    /**
-     * Registers the event handlers of the plugin using Ponder.
-     */
     private void registerMythic() {
-        ArrayList<Listener> mythic = MythicListeners();
-        EventHandlerRegistry eventHandlerRegistry = new EventHandlerRegistry();
-        eventHandlerRegistry.registerEventHandlers(mythic, this);
+        getServer().getPluginManager().registerEvents(new MythicMobs(), this);
     }
 
     private void RegisterCommands() {
-        Objects.requireNonNull(getCommand("bCore")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("bank")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("pvp")).setExecutor(new Commands());
-        Objects.requireNonNull(getCommand("bitcoin")).setExecutor(new Commands());
+        new bCoreCMD(this);
+        new PvP(this);
+        new Bank(this);
     }
 
     private boolean setupEconomy() {

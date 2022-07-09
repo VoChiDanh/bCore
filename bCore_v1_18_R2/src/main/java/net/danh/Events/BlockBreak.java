@@ -7,7 +7,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import net.danh.Contest.Mining.Mining;
+import net.danh.Contest.Mining;
 import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Event;
@@ -22,6 +22,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 
 public class BlockBreak implements Listener {
 
@@ -39,14 +41,14 @@ public class BlockBreak implements Listener {
             }
         }
         if (Credit.getCredit(p) < 95) {
-            p.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("LOW_CREDIT_WORKING"));
             e.setCancelled(true);
             return;
         }
         if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
             PlayerData.setBlocks(p, 0);
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command")).replaceAll("%player%", p.getName())));
-            p.sendMessage(Data.convert(Data.getlanguagefile().getString("MINER_REWARD")));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("LOW_CREDIT_WORKING"));
         }
         if (Mining.getStart()) {
             Event.addBlocksEvent(p, 1);

@@ -13,23 +13,8 @@ HELP_USER:
   - '&9/Bank [deposit/withdraw] [số] - &aĐóng/Rút tiền của ngân hàng'
   - '&9/PvP - &aBật tắt PvP'
 HELP_ADMIN:
-  - '&a/bCore pvpp <set/add/remove> <player> <amount> - &3Add/set/remove PvP Points'
+  - '&a/bCore [level/xp/credit/power/levelup/maxpower/restorepower/bankmoney/banklevel/banklevel/pvpp/blocks/qp] <set/add/remove> <player> <amount> - &3Add/set/remove'
   - '&a/bCore status <player> <true/false> - &3Set PvP Status'
-  - '&9/bCore plevel [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player level'
-  - '&9/bCore xp [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player XP'
-  - '&9/bCore power [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Player Power'
-  - '&9/bCore levelup [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Level Points'
-  - '&9/bCore maxpower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Power'
-  - '&9/bCore restorepower [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Restore
-  Power'
-  - '&9/bCore weight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Weight'
-  - '&9/bCore maxweight [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Max Weight'
-  - '&9/bCore storage [add/set/remove] [Player] [Block Type] [Number] - &cAdd/Set/Remove
-  Storage'
-  - '&9/bCore price [add/set/remove] [Block Type] [Number] - &cAdd/Set/Remove Item Price'
-  - '&9/bCore bankmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank Money'
-  - '&9/bCore bankmaxmoney [add/set/remove] [Player] [Number] - &cAdd/Set/Remove Bank
-  Max Money'
   - '&9/bCore reload - &aReload config'
 DONE: '&aXong'
 NEED_MORE_POWER: '&#eb6152Bạn cần nhiều năng lượng hơn để có thể làm việc! Hãy đi tiêu diệt quái để có thể có thêm năng lượng!'

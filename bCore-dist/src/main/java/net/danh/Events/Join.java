@@ -2,14 +2,14 @@ package net.danh.Events;
 
 import net.danh.Manager.*;
 import net.danh.bCore;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TranslatableComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+
+import static net.danh.dcore.Utils.Player.sendPlayerMessageType;
 
 public class Join implements Listener {
 
@@ -50,8 +50,7 @@ public class Join implements Listener {
                     Status.TogglePvP(p, true);
                     cancel();
                 } else {
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new TranslatableComponent(Data.convert("&aBật PvP trong " + time-- + " giây")));
+                    sendPlayerMessageType(p, null, "&aBật PvP trong " + time-- + " giây");
                 }
             }
         }).runTaskTimer(bCore.getInstance(), 20L, 20L);

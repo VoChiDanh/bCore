@@ -5,6 +5,7 @@ import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.danh.Manager.Power;
 import net.danh.bCore;
+import net.danh.dcore.Utils.Chat;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TranslatableComponent;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -58,7 +59,7 @@ public class Kill implements Listener {
             PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
             if (r.transactionSuccess()) {
                 p.spigot().sendMessage(ChatMessageType.valueOf(Data.getconfigfile().getString("Add_Type")),
-                        new TranslatableComponent(Data.convert(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
+                        new TranslatableComponent(Chat.colorize(Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
                                 .replaceAll("%money%", String.valueOf(money))
                                 .replaceAll("%mobs%", mob.getName()))));
             }

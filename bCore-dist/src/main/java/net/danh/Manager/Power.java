@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+import static net.danh.dcore.Utils.Player.sendPlayerMessage;
+
 public class Power {
 
     public static HashMap<Player, Integer> power = new HashMap<>();
@@ -29,7 +31,7 @@ public class Power {
         } else {
             power.put(p, getMaxPower(p));
         }
-        p.sendMessage(Data.convert("&a+ " + number + " Power"));
+        sendPlayerMessage(p, "&a+ " + number + " Power");
     }
 
 
@@ -39,7 +41,7 @@ public class Power {
         } else {
             power.put(p, 0);
         }
-        p.sendMessage(Data.convert("&c- " + number + " Power"));
+        sendPlayerMessage(p, "&c- " + number + " Power");
     }
 
     public static int getMaxPowerData(@NotNull Player p) {
