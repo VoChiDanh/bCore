@@ -24,7 +24,7 @@ public class Credit {
     }
 
     public static double getCreditData(@NotNull Player p) {
-        return new PData(p.getName()).getConfig().getDouble("players." + p.getName() + ".Credit");
+        return new PData(p.getName()).getConfig().getDouble("credit");
     }
 
     public static double getCredit(@NotNull Player p) {

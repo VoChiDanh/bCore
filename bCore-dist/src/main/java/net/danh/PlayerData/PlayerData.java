@@ -15,23 +15,21 @@ public class PlayerData {
         for (String name : Objects.requireNonNull(Data.getdatafile().getConfigurationSection("players")).getKeys(false)) {
             PData new_data = new PData(name);
             new_data.load();
-            if (new_data.getConfig().getKeys(true).size() == 0) {
-                new_data.getConfig().set("banks.money", Bank.getOldBMData(name));
-                new_data.getConfig().set("banks.level", Bank.getOldBLData(name));
-                new_data.getConfig().set("credit", Credit.getOldCreditData(name));
-                new_data.getConfig().set("event.blocks", Event.getOldBEData(name));
-                new_data.getConfig().set("xp", net.danh.Manager.PlayerData.getOldXPData(name));
-                new_data.getConfig().set("level", net.danh.Manager.PlayerData.getOldLevelData(name));
-                new_data.getConfig().set("level_up_times", net.danh.Manager.PlayerData.getOldLUData(name));
-                new_data.getConfig().set("blocks", net.danh.Manager.PlayerData.getOldBlockData(name));
-                new_data.getConfig().set("power.default", Power.getOldPowerData(name));
-                new_data.getConfig().set("power.max", Power.getOldMaxPowerData(name));
-                new_data.getConfig().set("power.restore", Power.getOldRestorePowerData(name));
-                new_data.getConfig().set("points", Points.getOldPvPPointsData(name));
-                new_data.getConfig().set("status", Status.getOldPvPStatusData(name));
-                new_data.getConfig().set("qpoints", QPoints.getOldQPData(name));
-                new_data.save();
-            }
+            new_data.getConfig().set("banks.money", Bank.getOldBMData(name));
+            new_data.getConfig().set("banks.level", Bank.getOldBLData(name));
+            new_data.getConfig().set("credit", Credit.getOldCreditData(name));
+            new_data.getConfig().set("event.blocks", Event.getOldBEData(name));
+            new_data.getConfig().set("xp", net.danh.Manager.PlayerData.getOldXPData(name));
+            new_data.getConfig().set("level", net.danh.Manager.PlayerData.getOldLevelData(name));
+            new_data.getConfig().set("level_up_times", net.danh.Manager.PlayerData.getOldLUData(name));
+            new_data.getConfig().set("blocks", net.danh.Manager.PlayerData.getOldBlockData(name));
+            new_data.getConfig().set("power.default", Power.getOldPowerData(name));
+            new_data.getConfig().set("power.max", Power.getOldMaxPowerData(name));
+            new_data.getConfig().set("power.restore", Power.getOldRestorePowerData(name));
+            new_data.getConfig().set("points", Points.getOldPvPPointsData(name));
+            new_data.getConfig().set("status", Status.getOldPvPStatusData(name));
+            new_data.getConfig().set("qpoints", QPoints.getOldQPData(name));
+            new_data.save();
         }
     }
 
