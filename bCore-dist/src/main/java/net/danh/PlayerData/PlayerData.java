@@ -14,6 +14,7 @@ public class PlayerData {
     public static void convertData() {
         for (String name : Objects.requireNonNull(Data.getdatafile().getConfigurationSection("players")).getKeys(false)) {
             PData new_data = new PData(name);
+            new_data.load();
             if (new_data.getConfig().getKeys(true).size() == 0) {
                 new_data.getConfig().set("banks.money", Bank.getOldBMData(name));
                 new_data.getConfig().set("banks.level", Bank.getOldBLData(name));
@@ -69,6 +70,7 @@ public class PlayerData {
 
     public static void savePlayerData(Player p) {
         PData data = new PData(p.getName());
+        data.load();
         data.getConfig().set("banks.money", Bank.getBankMoney(p));
         data.getConfig().set("banks.level", Bank.getBankLevel(p));
         data.getConfig().set("credit", Credit.getCredit(p));
