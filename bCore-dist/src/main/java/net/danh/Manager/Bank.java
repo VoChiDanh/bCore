@@ -74,7 +74,7 @@ public class Bank {
     }
 
     public static int getBLData(@NotNull Player p) {
-        return new PData(p.getName()).getConfig().getInt("banks." + p.getName() + ".level");
+        return new PData(p.getName()).getConfig().getInt("banks.level");
     }
 
     public static int getBankLevel(@NotNull Player p) {
