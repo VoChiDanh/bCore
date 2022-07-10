@@ -51,6 +51,8 @@ public class PlayerData {
     }
 
     public static void loadPlayerData(Player p) {
+        PData data = new PData(p.getName());
+        data.load();
         Event.setBlocksEvent(p, Event.getBEData(p));
         net.danh.Manager.PlayerData.setLeveluptimes(p, net.danh.Manager.PlayerData.getLUData(p));
         net.danh.Manager.PlayerData.setLevel(p, net.danh.Manager.PlayerData.getLevelData(p));

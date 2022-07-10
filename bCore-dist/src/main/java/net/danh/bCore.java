@@ -50,7 +50,6 @@ public class bCore extends JavaPlugin {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
-        net.danh.PlayerData.PlayerData.convertData();
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
