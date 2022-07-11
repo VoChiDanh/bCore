@@ -66,7 +66,7 @@ public class bCore extends JavaPlugin {
                     Mining.StartMining();
                 }
             }
-        }).runTaskTimer(this, 3600 * 20L, 3600 * 20L);
+        }).runTaskTimer(this, 1800 * 20L, 1800 * 20L);
     }
 
     @Override
