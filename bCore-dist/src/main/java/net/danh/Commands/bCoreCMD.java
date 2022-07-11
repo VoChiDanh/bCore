@@ -107,7 +107,12 @@ public class bCoreCMD extends CMDBase {
                         setPower(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addPower(t, amount);
+                        if (amount > 0) {
+                            addPower(t, amount);
+                        }
+                        if (amount <= 0) {
+                            addPower(t, getMaxPower(t));
+                        }
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
                         removePower(t, amount);
@@ -303,7 +308,12 @@ public class bCoreCMD extends CMDBase {
                         setPower(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addPower(t, amount);
+                        if (amount > 0) {
+                            addPower(t, amount);
+                        }
+                        if (amount <= 0) {
+                            addPower(t, getMaxPower(t));
+                        }
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
                         removePower(t, amount);
@@ -469,6 +479,14 @@ public class bCoreCMD extends CMDBase {
                     commands.add("set");
                     commands.add("remove");
                     StringUtil.copyPartialMatches(args[1], commands, completions);
+                }
+            }
+            if (args.length == 3) {
+                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove") || args[1].equalsIgnoreCase("set")) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        commands.add(p.getName());
+                        StringUtil.copyPartialMatches(args[2], commands, completions);
+                    }
                 }
             }
         }

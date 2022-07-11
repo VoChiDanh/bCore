@@ -2,6 +2,7 @@ package net.danh.Commands;
 
 import net.danh.Manager.Data;
 import net.danh.dcore.Commands.CMDBase;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -43,8 +44,17 @@ public class Bank extends CMDBase {
     }
 
     @Override
-    public void consoleexecute(ConsoleCommandSender p, String[] args) {
-        sendConsoleMessage(p, "&cConsole lam gi co bank?");
+    public void consoleexecute(ConsoleCommandSender c, String[] args) {
+        if (args.length == 1) {
+            Player p = Bukkit.getPlayer(args[0]);
+            if (p == null) {
+                sendConsoleMessage(c, Data.getlanguagefile().getString("UNKNOWN_PLAYER"));
+                return;
+            }
+            sendConsoleMessage(c, Objects.requireNonNull(Objects.requireNonNull(Data.getlanguagefile().getString("BANK"))
+                    .replaceAll("%money%", String.valueOf(net.danh.Manager.Bank.getBankMoney(Objects.requireNonNull(p))))
+                    .replaceAll("%level%", String.valueOf(net.danh.Manager.Bank.getBankLevel(p)))));
+        }
     }
 
     @Override
@@ -55,6 +65,14 @@ public class Bank extends CMDBase {
             commands.add("deposit");
             commands.add("withdraw");
             StringUtil.copyPartialMatches(args[0], commands, completions);
+        }
+        if (sender instanceof ConsoleCommandSender) {
+            if (args.length == 1) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    commands.add(p.getName());
+                    StringUtil.copyPartialMatches(args[0], commands, completions);
+                }
+            }
         }
         Collections.sort(completions);
         return completions;
