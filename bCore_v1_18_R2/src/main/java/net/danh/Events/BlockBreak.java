@@ -48,7 +48,7 @@ public class BlockBreak implements Listener {
         if (PlayerData.getBlocks(p) >= Data.getcmdfile().getInt("Commands.Mine.Amount")) {
             PlayerData.setBlocks(p, 0);
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(Objects.requireNonNull(Data.getcmdfile().getString("Commands.Mine.Command")).replaceAll("%player%", p.getName())));
-            sendPlayerMessage(p, Data.getlanguagefile().getString("LOW_CREDIT_WORKING"));
+            sendPlayerMessage(p, Data.getlanguagefile().getString("MINER_REWARD"));
         }
         if (Mining.getStart()) {
             Event.addBlocksEvent(p, 1);

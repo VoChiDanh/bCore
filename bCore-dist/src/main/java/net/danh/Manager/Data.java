@@ -131,4 +131,12 @@ public class Data {
             return 0;
         }
     }
+
+    public static double getDouble(java.lang.String s) {
+        try {
+            return Double.parseDouble(s);
+        } catch (NumberFormatException | NullPointerException e) {
+            return 0;
+        }
+    }
 }

@@ -20,7 +20,7 @@ import java.util.Objects;
 
 import static net.danh.Manager.Bank.*;
 import static net.danh.Manager.Credit.*;
-import static net.danh.Manager.Data.getInt;
+import static net.danh.Manager.Data.getDouble;
 import static net.danh.Manager.Data.getlanguagefile;
 import static net.danh.Manager.Event.*;
 import static net.danh.Manager.PlayerData.*;
@@ -63,7 +63,7 @@ public class bCoreCMD extends CMDBase {
         if (args.length == 4) {
             Player t = Bukkit.getPlayer(args[2]);
             String msg = ChatColor.stripColor(args[3]);
-            int amount = getInt(msg);
+            double amount = getDouble(msg);
             if (t == null) {
                 sendPlayerMessage(p, PREFIX + UNKNOWN_PLAYER);
                 return;
@@ -71,150 +71,150 @@ public class bCoreCMD extends CMDBase {
             if (p.hasPermission("bCore.admin")) {
                 if (args[0].equalsIgnoreCase("level")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setLevel(t, amount);
+                        setLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addLevel(t, amount);
+                        addLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeLevel(t, amount);
+                        removeLevel(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("xp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setXP(t, amount);
+                        setXP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addXP(t, amount);
+                        addXP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeXP(t, amount);
+                        removeXP(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("credit")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setCredit(t, (double) amount);
+                        setCredit(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addCredit(t, (double) amount);
+                        addCredit(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeCredit(t, (double) amount);
+                        removeCredit(t, amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("power")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setPower(t, amount);
+                        setPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
                         if (amount > 0) {
-                            addPower(t, amount);
+                            addPower(t, (int) amount);
                         }
                         if (amount <= 0) {
                             addPower(t, getMaxPower(t));
                         }
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removePower(t, amount);
+                        removePower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("levelup")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setLeveluptimes(t, amount);
+                        setLeveluptimes(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addLeveluptimes(t, amount);
+                        addLeveluptimes(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeLeveluptimes(t, amount);
+                        removeLeveluptimes(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("maxpower")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setMaxPower(t, amount);
+                        setMaxPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addMaxPower(t, amount);
+                        addMaxPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeMaxPower(t, amount);
+                        removeMaxPower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("restorepower")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setRestorePower(t, amount);
+                        setRestorePower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addRestorePower(t, amount);
+                        addRestorePower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeRestorePower(t, amount);
+                        removeRestorePower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("bankmoney")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBankMoney(t, amount);
+                        setBankMoney(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBankMoney(t, amount);
+                        addBankMoney(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBankMoney(t, amount);
+                        removeBankMoney(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("banklevel")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBankLevel(t, amount);
+                        setBankLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBankLevel(t, amount);
+                        addBankLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBankLevel(t, amount);
+                        removeBankLevel(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("blocksevent")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBlocksEvent(t, amount);
+                        setBlocksEvent(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBlocksEvent(t, amount);
+                        addBlocksEvent(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBlocksEvent(t, amount);
+                        removeBlocksEvent(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("pvpp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setPvPPoints(t, amount);
+                        setPvPPoints(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addPvPPoints(t, amount);
+                        addPvPPoints(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removePvPPoints(t, amount);
+                        removePvPPoints(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("blocks")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBlocks(t, amount);
+                        setBlocks(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBlocks(t, amount);
+                        addBlocks(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBlocks(t, amount);
+                        removeBlocks(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("qp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setQP(t, amount);
+                        setQP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addQP(t, amount);
+                        addQP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeQP(t, amount);
+                        removeQP(t, (int) amount);
                     }
                 }
             }
@@ -264,7 +264,7 @@ public class bCoreCMD extends CMDBase {
         if (args.length == 4) {
             Player t = Bukkit.getPlayer(args[2]);
             String msg = ChatColor.stripColor(args[3]);
-            int amount = getInt(msg);
+            double amount = getDouble(msg);
             if (t == null) {
                 sendConsoleMessage(p, PREFIX + UNKNOWN_PLAYER);
                 return;
@@ -272,150 +272,150 @@ public class bCoreCMD extends CMDBase {
             if (p.hasPermission("bCore.admin")) {
                 if (args[0].equalsIgnoreCase("level")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setLevel(t, amount);
+                        setLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addLevel(t, amount);
+                        addLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeLevel(t, amount);
+                        removeLevel(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("xp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setXP(t, amount);
+                        setXP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addXP(t, amount);
+                        addXP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeXP(t, amount);
+                        removeXP(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("credit")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setCredit(t, (double) amount);
+                        setCredit(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addCredit(t, (double) amount);
+                        addCredit(t, amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeCredit(t, (double) amount);
+                        removeCredit(t, amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("power")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setPower(t, amount);
+                        setPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
                         if (amount > 0) {
-                            addPower(t, amount);
+                            addPower(t, (int) amount);
                         }
                         if (amount <= 0) {
                             addPower(t, getMaxPower(t));
                         }
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removePower(t, amount);
+                        removePower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("levelup")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setLeveluptimes(t, amount);
+                        setLeveluptimes(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addLeveluptimes(t, amount);
+                        addLeveluptimes(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeLeveluptimes(t, amount);
+                        removeLeveluptimes(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("maxpower")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setMaxPower(t, amount);
+                        setMaxPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addMaxPower(t, amount);
+                        addMaxPower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeMaxPower(t, amount);
+                        removeMaxPower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("restorepower")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setRestorePower(t, amount);
+                        setRestorePower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addRestorePower(t, amount);
+                        addRestorePower(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeRestorePower(t, amount);
+                        removeRestorePower(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("bankmoney")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBankMoney(t, amount);
+                        setBankMoney(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBankMoney(t, amount);
+                        addBankMoney(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBankMoney(t, amount);
+                        removeBankMoney(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("banklevel")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBankLevel(t, amount);
+                        setBankLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBankLevel(t, amount);
+                        addBankLevel(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBankLevel(t, amount);
+                        removeBankLevel(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("blocksevent")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBlocksEvent(t, amount);
+                        setBlocksEvent(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBlocksEvent(t, amount);
+                        addBlocksEvent(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBlocksEvent(t, amount);
+                        removeBlocksEvent(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("pvpp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setPvPPoints(t, amount);
+                        setPvPPoints(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addPvPPoints(t, amount);
+                        addPvPPoints(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removePvPPoints(t, amount);
+                        removePvPPoints(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("blocks")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setBlocks(t, amount);
+                        setBlocks(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addBlocks(t, amount);
+                        addBlocks(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeBlocks(t, amount);
+                        removeBlocks(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("qp")) {
                     if (args[1].equalsIgnoreCase("set")) {
-                        setQP(t, amount);
+                        setQP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        addQP(t, amount);
+                        addQP(t, (int) amount);
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        removeQP(t, amount);
+                        removeQP(t, (int) amount);
                     }
                 }
             }

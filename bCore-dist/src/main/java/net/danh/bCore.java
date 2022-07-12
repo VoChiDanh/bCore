@@ -22,7 +22,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import static net.danh.PlayerData.PlayerData.*;
+import static net.danh.PlayerData.PlayerData.loadPlayerData;
+import static net.danh.PlayerData.PlayerData.savePlayerData;
 
 public class bCore extends JavaPlugin {
 
@@ -50,7 +51,7 @@ public class bCore extends JavaPlugin {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
-        for (Player p : Bukkit.getOnlinePlayers()){
+        for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
         (new BukkitRunnable() {
