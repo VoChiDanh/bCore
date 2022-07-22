@@ -14,12 +14,15 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvn -B package
       - uses: "actions/upload-artifact@v3"
         with:
           name: "[DevBuild]-bCore"
           path: |
-            ./target/bCore.jar
+            ./bCore_v1_12_R1/target/bCore.jar
+            ./bCore_v1_16_R3/target/bCore.jar
+            ./bCore_v1_18_R2/target/bCore.jar
+            ./NOTE.yml
       - uses: jungwinter/split@v2
         id: split
         with:
