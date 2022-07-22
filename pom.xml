@@ -7,14 +7,7 @@
     <groupId>net.danh</groupId>
     <artifactId>bCore</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>bCore-dist</module>
-        <module>bCore_v1_12_R1</module>
-        <module>bCore_v1_16_R3</module>
-        <module>bCore_v1_18_R2</module>
-    </modules>
-
+    <packaging>jar</packaging>
     <name>bCore</name>
 
     <properties>
@@ -126,6 +119,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.7.1</version>
@@ -147,6 +146,18 @@
             <artifactId>bstats-bukkit</artifactId>
             <version>3.0.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <version>5.1.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.7-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
