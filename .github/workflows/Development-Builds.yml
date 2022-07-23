@@ -6,9 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 17
       - uses: actions/checkout@v2
       - name: Set up JDK 17
         uses: actions/setup-java@v2
@@ -22,10 +19,7 @@ jobs:
         with:
           name: "[DevBuild]-bCore"
           path: |
-            ./bCore_v1_12_R1/target/bCore.jar
-            ./bCore_v1_16_R3/target/bCore.jar
-            ./bCore_v1_18_R2/target/bCore.jar
-            ./NOTE.yml
+            ./target/bCore.jar
       - uses: jungwinter/split@v2
         id: split
         with:
