@@ -1,5 +1,5 @@
 name: bCore
-version: ${bcore.version}
+version: ${project.version}
 main: net.danh.bCore
 softdepend:
   - Vault

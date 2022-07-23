@@ -16,7 +16,6 @@ import net.danh.bCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 
 public class BlockBreak implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler
     public void onBreaking(@NotNull BlockBreakEvent e) {
         Player p = e.getPlayer();
         if (bCore.getInstance().getServer().getPluginManager().getPlugin("WorldGuard") != null) {
