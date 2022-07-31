@@ -32,12 +32,13 @@ public class Credit {
     }
 
     public static void setCredit(@NotNull Player p, Double amount) {
-        if (amount < 200D) {
-            credit.put(p, Math.max(100D, amount));
+        if (p.hasPlayedBefore()) {
+            credit.put(p, amount);
         } else {
-            credit.put(p, 200D);
+            credit.put(p, 100D);
         }
     }
+
 
     public static void addCredit(@NotNull Player p, Double amount) {
         if ((getCredit(p) + amount) <= 200D) {
