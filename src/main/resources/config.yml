@@ -3,6 +3,8 @@ disable-worlds:
   - world
   - Spawn
 xp: 1
+damage: 500
+bt_damage: 100
 debug: false
 Max_Power: 1000
 Per_Max_Power: 1000

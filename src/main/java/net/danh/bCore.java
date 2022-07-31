@@ -11,6 +11,7 @@ import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
+import net.danh.dcore.DCore;
 import net.danh.dcore.NMS.NMSAssistant;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -51,6 +52,7 @@ public class bCore extends JavaPlugin {
         RegisterEvent();
         RegisterCommands();
         Data.createconfig();
+        DCore.RegisterDCore(bCore.getInstance());
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }

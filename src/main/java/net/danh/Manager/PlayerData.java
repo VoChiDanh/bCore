@@ -1,6 +1,7 @@
 package net.danh.Manager;
 
 import net.danh.PlayerData.PData;
+import net.danh.dcore.Indicator.Hologram;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,34 +58,39 @@ public class PlayerData {
     public static void addXP(@NotNull Player p, int number) {
         xp.replace(p, getXP(p) + number);
         checkLevelUp(p);
-        sendPlayerMessage(p, "&a+ " + number + " XP");
+        Hologram.create(p, "&a+ " + number + " XP");
     }
 
     public static void removeLevel(Player p, int number) {
         if (getLevel(p) > number) {
             level.replace(p, getLevel(p) - number);
+            Hologram.create(p, "&c-" + number + " Level");
         } else {
             level.put(p, 1);
+            Hologram.create(p, "&c-" + getLevel(p) + " Level");
         }
     }
 
     public static void removeXP(Player p, int number) {
         if (getXP(p) > number) {
             xp.replace(p, getXP(p) - number);
+            Hologram.create(p, "&c-" + number + " XP");
         } else {
             xp.put(p, 0);
+            Hologram.create(p, "&c-" + getXP(p) + " XP");
         }
     }
 
 
     public static void checkLevelUp(Player p) {
-        if (getXP(p) >= getLevel(p) * 10000) {
-            removeXP(p, getLevel(p) * 10000);
+        if (getXP(p) >= getleveluptimes(p) * 10000) {
+            removeXP(p, getleveluptimes(p) * 10000);
             addLevel(p, 1);
             addLeveluptimes(p, 1);
             sendPlayerMessage(p, "&aChúc mừng bạn đã lên cấp độ " + getLevel(p));
         }
     }
+
 
     public static int getleveluptimes(@NotNull Player p) {
         return levelup.get(p);

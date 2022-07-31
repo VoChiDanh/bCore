@@ -6,7 +6,7 @@
 
     <groupId>net.danh</groupId>
     <artifactId>bCore</artifactId>
-    <version>5.2.1-SNAPSHOT</version>
+    <version>5.2.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>bCore</name>
 
@@ -139,7 +139,21 @@
         <dependency>
             <groupId>com.github.D-x-Z</groupId>
             <artifactId>DCore</artifactId>
-            <version>42a5cdc78c</version>
+            <version>c066c01bf0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.Indyuce</groupId>
+            <artifactId>MMOItems</artifactId>
+            <version>6.7.4</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/MMOItems-6.7.4.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.Indyuce</groupId>
+            <artifactId>Mythiclib</artifactId>
+            <version>1.3.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/MythicLib-1.3.3.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bstats</groupId>

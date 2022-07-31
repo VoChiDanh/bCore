@@ -7,15 +7,18 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import io.lumine.mythic.lib.api.item.NBTItem;
 import net.danh.Manager.Credit;
 import net.danh.Manager.Data;
 import net.danh.Manager.Status;
 import net.danh.bCore;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import static net.danh.dcore.Utils.Player.sendPlayerMessage;
@@ -48,6 +51,26 @@ public class DamagedByEntity implements Listener {
             }
             if (!damagerState || !attackedState) {
                 e.setCancelled(true);
+            }
+            ItemStack d_i = damager.getInventory().getItemInMainHand();
+            ItemStack a_i = attacked.getInventory().getItemInMainHand();
+            if (d_i.getType() != Material.AIR) {
+                NBTItem item = NBTItem.get(d_i);
+                double stat = item.getDouble("MMOITEMS_ATTACK_DAMAGE"); // format is MMOITEMS_STAT_ID
+                if (a_i.getType() == Material.AIR) {
+                    if (stat >= Data.getconfigfile().getInt("damage")) {
+                        e.setCancelled(true);
+                    }
+                } else {
+                    NBTItem item2 = NBTItem.get(a_i);
+                    double stat2 = item2.getDouble("MMOITEMS_ATTACK_DAMAGE"); // format is MMOITEMS_STAT_ID
+                    double damage = stat - stat2;
+                    if (damage > 0) {
+                        if (damage >= Data.getconfigfile().getInt("bt_damage")) {
+                            e.setCancelled(true);
+                        }
+                    }
+                }
             }
         }/* else if (e.getDamager() instanceof Projectile) {
             Projectile arrow = (Projectile) e.getDamager();
