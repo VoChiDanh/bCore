@@ -45,10 +45,5 @@ public class MythicMobs implements Listener {
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
         PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
         Power.addPower(p, new Random().nextInt(Power.getRestorePower(p) * 2));
-        if (r.transactionSuccess()) {
-            Hologram.create(mme.getEntity(), Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                    .replaceAll("%money%", String.valueOf(money))
-                    .replaceAll("%mobs%", mob));
-        }
     }
 }

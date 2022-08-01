@@ -1,7 +1,6 @@
 package net.danh.Manager;
 
 import net.danh.PlayerData.PData;
-import net.danh.dcore.Indicator.Hologram;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,10 +31,8 @@ public class Power {
     public static void addPower(@NotNull Player p, int number) {
         if (getPower(p) + number <= getMaxPower(p)) {
             power.replace(p, getPower(p) + number);
-            Hologram.create(p, "&a+" + number + " Power");
         } else {
             power.put(p, getMaxPower(p));
-            Hologram.create(p, "&a+" + getMaxPower(p) + " Power");
         }
     }
 
@@ -43,10 +40,8 @@ public class Power {
     public static void removePower(Player p, int number) {
         if (getPower(p) > number) {
             power.replace(p, getPower(p) - number);
-            Hologram.create(p, "&c-" + number + " Power");
         } else {
             power.put(p, 0);
-            Hologram.create(p, "&c-" + getPower(p) + " Power");
         }
     }
 

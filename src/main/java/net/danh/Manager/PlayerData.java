@@ -1,7 +1,6 @@
 package net.danh.Manager;
 
 import net.danh.PlayerData.PData;
-import net.danh.dcore.Indicator.Hologram;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,26 +57,21 @@ public class PlayerData {
     public static void addXP(@NotNull Player p, int number) {
         xp.replace(p, getXP(p) + number);
         checkLevelUp(p);
-        Hologram.create(p, "&a+ " + number + " XP");
     }
 
     public static void removeLevel(Player p, int number) {
         if (getLevel(p) > number) {
             level.replace(p, getLevel(p) - number);
-            Hologram.create(p, "&c-" + number + " Level");
         } else {
             level.put(p, 1);
-            Hologram.create(p, "&c-" + getLevel(p) + " Level");
         }
     }
 
     public static void removeXP(Player p, int number) {
         if (getXP(p) > number) {
             xp.replace(p, getXP(p) - number);
-            Hologram.create(p, "&c-" + number + " XP");
         } else {
             xp.put(p, 0);
-            Hologram.create(p, "&c-" + getXP(p) + " XP");
         }
     }
 

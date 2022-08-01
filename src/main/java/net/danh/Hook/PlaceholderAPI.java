@@ -46,6 +46,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("xp")) {
             return String.valueOf(PlayerData.getXP(p));
         }
+        if (identifier.equalsIgnoreCase("xp_req")) {
+            return String.valueOf(PlayerData.getleveluptimes(p) * 10000);
+        }
         if (identifier.equalsIgnoreCase("qp")) {
             return String.valueOf(QPoints.getQP(p));
         }
