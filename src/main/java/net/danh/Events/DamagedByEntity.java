@@ -65,8 +65,8 @@ public class DamagedByEntity implements Listener {
                     NBTItem item2 = NBTItem.get(a_i);
                     double stat2 = item2.getDouble("MMOITEMS_ATTACK_DAMAGE"); // format is MMOITEMS_STAT_ID
                     double damage = stat - stat2;
-                    if (damage > 0) {
-                        if (damage >= Data.getconfigfile().getInt("bt_damage")) {
+                    if (Math.abs(damage) > 0) {
+                        if (Math.abs(damage) >= Data.getconfigfile().getInt("bt_damage")) {
                             e.setCancelled(true);
                         }
                     }
