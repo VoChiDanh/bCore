@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Join implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(@NotNull PlayerJoinEvent e) {
         PlayerData.loadPlayerData(e.getPlayer());
     }

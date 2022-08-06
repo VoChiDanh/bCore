@@ -60,8 +60,6 @@ public class bCore extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
-        BukkitRunnable runnable = new RemoveHolo();
-        runnable.runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {

@@ -476,7 +476,6 @@ public class bCoreCMD extends CMDBase {
                 commands.add("qp");
                 commands.add("pcp");
                 commands.add("status");
-                commands.add("class");
                 StringUtil.copyPartialMatches(args[0], commands, completions);
             }
             if (args.length == 2) {
@@ -492,7 +491,6 @@ public class bCoreCMD extends CMDBase {
                         || args[0].equalsIgnoreCase("pvpp")
                         || args[0].equalsIgnoreCase("blocks")
                         || args[0].equalsIgnoreCase("pcp")
-                        || args[0].equalsIgnoreCase("class")
                         || args[0].equalsIgnoreCase("qp")) {
                     commands.add("add");
                     commands.add("set");

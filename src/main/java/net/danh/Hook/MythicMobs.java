@@ -45,8 +45,6 @@ public class MythicMobs implements Listener {
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
         int xp = Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p);
         int power = new Random().nextInt(Power.getRestorePower(p) * 2);
-        Hologram.create(mme.getEntity(), "&a+ " + xp + " XP");
-        Hologram.create(mme.getEntity(), "&a+ " + power + " Power");
         PlayerData.addXP(p, xp);
         Power.addPower(p, power);
     }
