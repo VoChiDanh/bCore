@@ -25,7 +25,7 @@ import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 
 public class DamagedByEntity implements Listener {
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onDamagedByEntity(@NotNull EntityDamageByEntityEvent e) {
         //check if attack was a player
         if (e.getDamager() instanceof Player damager && e.getEntity() instanceof Player attacked) {
@@ -79,30 +79,6 @@ public class DamagedByEntity implements Listener {
                     }
                 }
             }
-        }/* else if (e.getDamager() instanceof Projectile) {
-            Projectile arrow = (Projectile) e.getDamager();
-            if (arrow.getShooter() instanceof Player) {
-                if (e.getEntity() instanceof Player) {
-                    Player attacked = (Player) e.getEntity();
-                    Player damager = (Player) arrow.getShooter();
-                    boolean damagerState = Status.getPvPStatus(damager);
-                    boolean attackedState = Status.getPvPStatus(attacked);
-                    LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(damager);
-                    LocalPlayer localPlayer1 = WorldGuardPlugin.inst().wrapPlayer(attacked);
-                    Location loc = new Location(localPlayer.getWorld(), localPlayer.getLocation().getBlockX(), localPlayer.getLocation().getBlockY(), localPlayer.getLocation().getBlockZ());
-                    Location loc1 = new Location(localPlayer1.getWorld(), localPlayer1.getLocation().getBlockX(), localPlayer1.getLocation().getBlockY(), localPlayer1.getLocation().getBlockZ());
-                    RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-                    RegionQuery query = container.createQuery();
-                    if (Credit.getCredit(damager) <= 50) {
-                        damager.sendMessage(Data.convert(Data.getlanguagefile().getString("LOW_CREDIT_WORKING")));
-                        e.setCancelled(true);
-                        return;
-                    }
-                    if (!damagerState || !attackedState || !query.testState(loc, localPlayer, Flags.PVP) || !query.testState(loc1, localPlayer1, Flags.PVP)) {
-                        e.setCancelled(true);
-                    }
-                }
-            }
-        }*/
+        }
     }
 }

@@ -28,7 +28,7 @@ public class RPGPlayer implements RPGHandler {
 
         @Override
         public String getClassName() {
-            return "";
+            return "bClass";
         }
 
         @Override

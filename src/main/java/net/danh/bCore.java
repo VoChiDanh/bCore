@@ -11,10 +11,8 @@ import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
-import net.danh.Manager.PlayerData;
 import net.danh.PlayerData.RPGPlayer;
 import net.danh.dcore.DCore;
-import net.danh.dcore.Indicator.RemoveHolo;
 import net.danh.dcore.NMS.NMSAssistant;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -60,6 +58,13 @@ public class bCore extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
+        (new BukkitRunnable() {
+            public void run() {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    p.setLevel(net.danh.Manager.PlayerData.getLevel(p));
+                }
+            }
+        }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
@@ -134,6 +139,7 @@ public class bCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamagedByFishing(), this);
         getServer().getPluginManager().registerEvents(new Teleport(), this);
         getServer().getPluginManager().registerEvents(new Enchant(), this);
+        getServer().getPluginManager().registerEvents(new Bow(), this);
     }
 
     private void registerMythic() {
