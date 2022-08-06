@@ -57,9 +57,16 @@ public class DamagedByEntity implements Listener {
             if (d_i.getType() != Material.AIR) {
                 NBTItem item = NBTItem.get(d_i);
                 double stat = item.getDouble("MMOITEMS_ATTACK_DAMAGE"); // format is MMOITEMS_STAT_ID
+                NBTItem item1 = NBTItem.get(a_i);
+                double stat1 = item1.getDouble("MMOITEMS_ATTACK_DAMAGE"); // format is MMOITEMS_STAT_ID
                 if (a_i.getType() == Material.AIR) {
                     if (stat >= Data.getconfigfile().getInt("damage")) {
                         e.setCancelled(true);
+                    }
+                    if (d_i.getType() == Material.AIR) {
+                        if (stat1 >= Data.getconfigfile().getInt("damage")){
+                            e.setCancelled(true);
+                        }
                     }
                 } else {
                     NBTItem item2 = NBTItem.get(a_i);

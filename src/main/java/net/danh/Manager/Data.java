@@ -139,4 +139,15 @@ public class Data {
             return 0;
         }
     }
+
+    public static boolean isDouble(java.lang.String s) {
+        try {
+            if (getDouble(s) > 0) {
+                return true;
+            }
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return false;
+    }
 }

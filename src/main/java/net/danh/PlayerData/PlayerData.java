@@ -1,6 +1,9 @@
 package net.danh.PlayerData;
 
 import net.danh.Manager.*;
+import net.danh.PClass.CName;
+import net.danh.PClass.PCPoints;
+import net.danh.PClass.PClass;
 import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -65,7 +68,8 @@ public class PlayerData {
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
         Status.TogglePvP(p, Status.getPvPStatusData(p));
         QPoints.setQP(p, QPoints.getQPData(p));
-        togglePvP(p);
+        PCPoints.setPCP(p, PCPoints.getPCPData(p));
+        PClass.setPClass(p, CName.valueOf(PClass.getPCData(p)));
     }
 
     public static void savePlayerData(Player p) {
@@ -85,6 +89,8 @@ public class PlayerData {
         data.getConfig().set("points", Points.getPvPPoints(p));
         data.getConfig().set("status", Status.getPvPStatus(p));
         data.getConfig().set("qpoints", QPoints.getQP(p));
+        data.getConfig().set("PCPoints", PCPoints.getPCP(p));
+        data.getConfig().set("class", PClass.getPClass(p));
         data.save();
     }
 
