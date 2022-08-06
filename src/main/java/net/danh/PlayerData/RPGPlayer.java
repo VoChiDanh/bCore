@@ -2,7 +2,6 @@ package net.danh.PlayerData;
 
 import net.Indyuce.mmoitems.comp.rpg.RPGHandler;
 import net.danh.Manager.Power;
-import net.danh.PClass.PClass;
 import org.jetbrains.annotations.NotNull;
 
 public class RPGPlayer implements RPGHandler {
@@ -29,7 +28,7 @@ public class RPGPlayer implements RPGHandler {
 
         @Override
         public String getClassName() {
-            return PClass.getPCFName(PClass.getPClass(getPlayer()));
+            return "";
         }
 
         @Override

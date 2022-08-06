@@ -3,8 +3,6 @@ package net.danh.Commands;
 import net.danh.Contest.Mining;
 import net.danh.Manager.Data;
 import net.danh.Manager.Status;
-import net.danh.PClass.CName;
-import net.danh.PClass.PClass;
 import net.danh.bCore;
 import net.danh.dcore.Commands.CMDBase;
 import org.bukkit.Bukkit;
@@ -220,13 +218,6 @@ public class bCoreCMD extends CMDBase {
                             removeQP(t, (int) amount);
                         }
                     }
-                } else {
-                    if (args[0].equalsIgnoreCase("class")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            String class_name = args[3];
-                            PClass.setPClass(t, CName.valueOf(class_name));
-                        }
-                    }
                 }
             }
         }
@@ -439,13 +430,6 @@ public class bCoreCMD extends CMDBase {
                         }
                         if (args[1].equalsIgnoreCase("remove")) {
                             removeQP(t, (int) amount);
-                        }
-                    }
-                } else {
-                    if (args[0].equalsIgnoreCase("class")) {
-                        if (args[1].equalsIgnoreCase("set")) {
-                            String class_name = args[3];
-                            PClass.setPClass(t, CName.valueOf(class_name));
                         }
                     }
                 }

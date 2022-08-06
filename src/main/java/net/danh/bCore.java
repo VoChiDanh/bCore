@@ -64,13 +64,6 @@ public class bCore extends JavaPlugin {
         runnable.runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
             public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    p.setLevel(PlayerData.getLevel(p));
-                }
-            }
-        }).runTaskTimer(this, 20L, 20L);
-        (new BukkitRunnable() {
-            public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
                     Mining.StartMining();
                 }
@@ -143,7 +136,6 @@ public class bCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamagedByFishing(), this);
         getServer().getPluginManager().registerEvents(new Teleport(), this);
         getServer().getPluginManager().registerEvents(new Enchant(), this);
-        getServer().getPluginManager().registerEvents(new Interact(), this);
     }
 
     private void registerMythic() {
