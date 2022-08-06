@@ -2,6 +2,7 @@ package net.danh;
 
 import me.clip.placeholderapi.metrics.bukkit.Metrics;
 import me.clip.placeholderapi.metrics.charts.SimplePie;
+import net.Indyuce.mmoitems.MMOItems;
 import net.danh.Commands.Bank;
 import net.danh.Commands.PvP;
 import net.danh.Commands.bCoreCMD;
@@ -10,7 +11,7 @@ import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
-import net.danh.Manager.PlayerData;
+import net.danh.PlayerData.RPGPlayer;
 import net.danh.dcore.DCore;
 import net.danh.dcore.NMS.NMSAssistant;
 import net.milkbowl.vault.economy.Economy;
@@ -53,13 +54,14 @@ public class bCore extends JavaPlugin {
         RegisterCommands();
         Data.createconfig();
         DCore.RegisterDCore(bCore.getInstance());
+        MMOItems.plugin.setRPG(new RPGPlayer());
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
         (new BukkitRunnable() {
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    p.setLevel(PlayerData.getLevel(p));
+                    p.setLevel(net.danh.Manager.PlayerData.getLevel(p));
                 }
             }
         }).runTaskTimer(this, 20L, 20L);
@@ -93,7 +95,7 @@ public class bCore extends JavaPlugin {
             getLogger().log(Level.INFO, "Loading data matching server version " + nmsAssistant.getNMSVersion().toString());
         } else {
             getLogger().warning("The server version is not suitable to load the plugin");
-            getLogger().warning("Support version 1.9.x - 1.18.x");
+            getLogger().warning("Support version 1.9.x - 1.19.x");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
     }
@@ -137,7 +139,7 @@ public class bCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamagedByFishing(), this);
         getServer().getPluginManager().registerEvents(new Teleport(), this);
         getServer().getPluginManager().registerEvents(new Enchant(), this);
-        getServer().getPluginManager().registerEvents(new Interact(), this);
+        getServer().getPluginManager().registerEvents(new Bow(), this);
     }
 
     private void registerMythic() {

@@ -43,7 +43,9 @@ public class MythicMobs implements Listener {
         }
         int money = Data.getRandomInt(min, max);
         EconomyResponse r = bCore.economy.depositPlayer(p, money);
-        PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
-        Power.addPower(p, new Random().nextInt(Power.getRestorePower(p) * 2));
+        int xp = Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p);
+        int power = new Random().nextInt(Power.getRestorePower(p) * 2);
+        PlayerData.addXP(p, xp);
+        Power.addPower(p, power);
     }
 }

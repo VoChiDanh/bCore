@@ -2,6 +2,7 @@ package net.danh.Hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.danh.Manager.*;
+import net.danh.PClass.PCPoints;
 import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(Player p, @NotNull String identifier) {
         if (p == null) {
-            return "Player not online";
+            return String.valueOf(0);
         }
         if (identifier.equalsIgnoreCase("power")) {
             return String.valueOf(Power.getPower(p));
@@ -100,6 +101,9 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
         if (identifier.equalsIgnoreCase("version")) {
             return getVersion();
+        }
+        if (identifier.equalsIgnoreCase("pcp")) {
+            return String.valueOf(PCPoints.getPCP(p));
         }
         return null;
     }

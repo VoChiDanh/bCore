@@ -27,6 +27,7 @@ import static net.danh.Manager.PlayerData.*;
 import static net.danh.Manager.Points.*;
 import static net.danh.Manager.Power.*;
 import static net.danh.Manager.QPoints.*;
+import static net.danh.PClass.PCPoints.*;
 import static net.danh.dcore.Utils.Player.sendConsoleMessage;
 import static net.danh.dcore.Utils.Player.sendPlayerMessage;
 
@@ -89,6 +90,17 @@ public class bCoreCMD extends CMDBase {
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
                         removeXP(t, (int) amount);
+                    }
+                }
+                if (args[0].equalsIgnoreCase("pcp")) {
+                    if (args[1].equalsIgnoreCase("set")) {
+                        setPCP(t, (int) amount);
+                    }
+                    if (args[1].equalsIgnoreCase("add")) {
+                        addPCP(t, (int) amount);
+                    }
+                    if (args[1].equalsIgnoreCase("remove")) {
+                        removePCP(t, (int) amount);
                     }
                 }
                 if (args[0].equalsIgnoreCase("credit")) {
@@ -292,6 +304,17 @@ public class bCoreCMD extends CMDBase {
                         removeXP(t, (int) amount);
                     }
                 }
+                if (args[0].equalsIgnoreCase("pcp")) {
+                    if (args[1].equalsIgnoreCase("set")) {
+                        setPCP(t, (int) amount);
+                    }
+                    if (args[1].equalsIgnoreCase("add")) {
+                        addPCP(t, (int) amount);
+                    }
+                    if (args[1].equalsIgnoreCase("remove")) {
+                        removePCP(t, (int) amount);
+                    }
+                }
                 if (args[0].equalsIgnoreCase("credit")) {
                     if (args[1].equalsIgnoreCase("set")) {
                         setCredit(t, amount);
@@ -459,6 +482,7 @@ public class bCoreCMD extends CMDBase {
                 commands.add("pvpp");
                 commands.add("blocks");
                 commands.add("qp");
+                commands.add("pcp");
                 commands.add("status");
                 StringUtil.copyPartialMatches(args[0], commands, completions);
             }
@@ -474,6 +498,7 @@ public class bCoreCMD extends CMDBase {
                         || args[0].equalsIgnoreCase("banklevel")
                         || args[0].equalsIgnoreCase("pvpp")
                         || args[0].equalsIgnoreCase("blocks")
+                        || args[0].equalsIgnoreCase("pcp")
                         || args[0].equalsIgnoreCase("qp")) {
                     commands.add("add");
                     commands.add("set");

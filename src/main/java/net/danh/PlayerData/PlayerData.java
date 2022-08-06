@@ -1,6 +1,7 @@
 package net.danh.PlayerData;
 
 import net.danh.Manager.*;
+import net.danh.PClass.PCPoints;
 import net.danh.bCore;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -51,21 +52,21 @@ public class PlayerData {
     public static void loadPlayerData(Player p) {
         PData data = new PData(p.getName());
         data.load();
+        Power.setPower(p, Power.getPowerData(p));
+        net.danh.Manager.PlayerData.setLevel(p, net.danh.Manager.PlayerData.getLevelData(p));
         Event.setBlocksEvent(p, Event.getBEData(p));
         net.danh.Manager.PlayerData.setLeveluptimes(p, net.danh.Manager.PlayerData.getLUData(p));
-        net.danh.Manager.PlayerData.setLevel(p, net.danh.Manager.PlayerData.getLevelData(p));
         net.danh.Manager.PlayerData.setXP(p, net.danh.Manager.PlayerData.getXPData(p));
         net.danh.Manager.PlayerData.setBlocks(p, net.danh.Manager.PlayerData.getBlockData(p));
         Bank.setBankMoney(p, Bank.getBMData(p));
         Bank.setBankLevel(p, Bank.getBLData(p));
         Credit.setCredit(p, Credit.getCreditData(p));
-        Power.setPower(p, Power.getPowerData(p));
         Power.setMaxPower(p, Power.getMaxPowerData(p));
         Power.setRestorePower(p, Power.getRestorePowerData(p));
         Points.setPvPPoints(p, Points.getPvPPointsData(p));
         Status.TogglePvP(p, Status.getPvPStatusData(p));
         QPoints.setQP(p, QPoints.getQPData(p));
-        togglePvP(p);
+        PCPoints.setPCP(p, PCPoints.getPCPData(p));
     }
 
     public static void savePlayerData(Player p) {
@@ -85,6 +86,7 @@ public class PlayerData {
         data.getConfig().set("points", Points.getPvPPoints(p));
         data.getConfig().set("status", Status.getPvPStatus(p));
         data.getConfig().set("qpoints", QPoints.getQP(p));
+        data.getConfig().set("PCPoints", PCPoints.getPCP(p));
         data.save();
     }
 

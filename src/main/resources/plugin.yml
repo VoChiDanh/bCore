@@ -2,6 +2,7 @@ name: bCore
 version: ${project.version}
 main: net.danh.bCore
 softdepend:
+  - MMOItems
   - Vault
   - WorldGuard
   - MythicMobs
