@@ -5,7 +5,6 @@ import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.danh.Manager.Power;
 import net.danh.bCore;
-import net.danh.dcore.Indicator.Hologram;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

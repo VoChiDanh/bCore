@@ -37,13 +37,13 @@ public class RPGPlayer implements RPGHandler {
         }
 
         @Override
-        public double getStamina() {
-            return getPlayer().getFoodLevel();
+        public void setMana(double v) {
+            Power.setPower(getPlayer(), (int) v);
         }
 
         @Override
-        public void setMana(double v) {
-            Power.setPower(getPlayer(), (int) v);
+        public double getStamina() {
+            return getPlayer().getFoodLevel();
         }
 
         @Override
