@@ -44,6 +44,7 @@ public class bCore extends JavaPlugin {
     public void onLoad() {
         instance = this;
         performNMSChecks();
+        MMOItems.plugin.setRPG(new RPGPlayer());
     }
 
     @Override
@@ -55,7 +56,6 @@ public class bCore extends JavaPlugin {
         RegisterCommands();
         Data.createconfig();
         DCore.RegisterDCore(bCore.getInstance());
-        MMOItems.plugin.setRPG(new RPGPlayer());
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
@@ -86,7 +86,7 @@ public class bCore extends JavaPlugin {
 
     public void syncXPBar(Player p) {
         float xp = PlayerData.getXP(p);
-        float level = PlayerData.getLevel(p);
+        float level = PlayerData.getleveluptimes(p);
         float req = level * 10000;
         p.setExp(Float.parseFloat(String.valueOf(xp / req)));
         p.setLevel((int) level);
