@@ -5,7 +5,6 @@ import net.danh.Manager.Data;
 import net.danh.Manager.PlayerData;
 import net.danh.Manager.Power;
 import net.danh.bCore;
-import net.danh.dcore.Indicator.Hologram;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.LivingEntity;
@@ -55,11 +54,6 @@ public class Kill implements Listener {
             EconomyResponse r = bCore.economy.depositPlayer(p, money);
             PlayerData.addXP(p, Data.getconfigfile().getInt("xp") + PlayerData.getleveluptimes(p));
             Power.addPower(p, Power.getRestorePower(p));
-            if (r.transactionSuccess()) {
-                Hologram.create(e.getEntity(), Objects.requireNonNull(Data.getlanguagefile().getString("KILL_MOBS"))
-                        .replaceAll("%money%", String.valueOf(money))
-                        .replaceAll("%mobs%", mob.getName()));
-            }
         }
     }
 
