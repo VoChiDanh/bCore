@@ -59,6 +59,7 @@ public class bCore extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> Bukkit.getServer().getOnlinePlayers().forEach(net.danh.PlayerData.PlayerData::loadPlayerData));
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach(this::syncXPBar), 1L, 1L);
         (new BukkitRunnable() {
             public void run() {
@@ -87,8 +88,9 @@ public class bCore extends JavaPlugin {
     public void syncXPBar(Player p) {
         float xp = PlayerData.getXP(p);
         float level = PlayerData.getleveluptimes(p);
-        float req = level * 10000;
-        if (xp / req <= 1) {
+        float req = level * 5000;
+        if (req == 0) req = 5000;
+        if (xp / req <= 1 && level >= 1) {
             p.setExp(Float.parseFloat(String.valueOf(xp / req)));
             p.setLevel((int) level);
         }

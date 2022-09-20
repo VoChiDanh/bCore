@@ -77,8 +77,8 @@ public class PlayerData {
 
 
     public static void checkLevelUp(Player p) {
-        if (getXP(p) >= getleveluptimes(p) * 10000) {
-            removeXP(p, getleveluptimes(p) * 10000);
+        if (getXP(p) >= getleveluptimes(p) * 5000) {
+            removeXP(p, getleveluptimes(p) * 5000);
             addLevel(p, 1);
             addLeveluptimes(p, 1);
             sendPlayerMessage(p, "&aChúc mừng bạn đã lên cấp độ " + getLevel(p));
