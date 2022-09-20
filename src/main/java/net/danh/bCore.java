@@ -88,8 +88,10 @@ public class bCore extends JavaPlugin {
         float xp = PlayerData.getXP(p);
         float level = PlayerData.getleveluptimes(p);
         float req = level * 10000;
-        p.setExp(Float.parseFloat(String.valueOf(xp / req)));
-        p.setLevel((int) level);
+        if (xp / req <= 1) {
+            p.setExp(Float.parseFloat(String.valueOf(xp / req)));
+            p.setLevel((int) level);
+        }
     }
 
     private void performNMSChecks() {
