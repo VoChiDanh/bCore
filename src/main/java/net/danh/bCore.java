@@ -11,6 +11,7 @@ import net.danh.Events.*;
 import net.danh.Hook.MythicMobs;
 import net.danh.Hook.PlaceholderAPI;
 import net.danh.Manager.Data;
+import net.danh.Manager.PlayerData;
 import net.danh.PlayerData.RPGPlayer;
 import net.danh.dcore.DCore;
 import net.danh.dcore.NMS.NMSAssistant;
@@ -58,13 +59,7 @@ public class bCore extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             loadPlayerData(p);
         }
-        (new BukkitRunnable() {
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    p.setLevel(net.danh.Manager.PlayerData.getLevel(p));
-                }
-            }
-        }).runTaskTimer(this, 20L, 20L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach(this::syncXPBar), 1L, 1L);
         (new BukkitRunnable() {
             public void run() {
                 if (getServer().getOnlinePlayers().size() > 0) {
@@ -88,6 +83,14 @@ public class bCore extends JavaPlugin {
         getLogger().log(Level.INFO, "Saved data");
     }
 
+
+    public void syncXPBar(Player p) {
+        float xp = PlayerData.getXP(p);
+        float level = PlayerData.getLevel(p);
+        float req = level * 10000;
+        p.setExp(Float.parseFloat(String.valueOf(xp / req)));
+        p.setLevel((int) level);
+    }
 
     private void performNMSChecks() {
         NMSAssistant nmsAssistant = new NMSAssistant();
