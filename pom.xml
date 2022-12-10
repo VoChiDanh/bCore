@@ -139,13 +139,13 @@
         <dependency>
             <groupId>net.Indyuce</groupId>
             <artifactId>MMOItems-API</artifactId>
-            <version>6.8.1-SNAPSHOT</version>
+            <version>6.8.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>MythicLib-dist</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -157,7 +157,7 @@
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>5.2.0-SNAPSHOT</version>
+            <version>5.2.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

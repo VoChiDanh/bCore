@@ -32,7 +32,7 @@ public class Credit {
     }
 
     public static void setCredit(@NotNull Player p, Double amount) {
-        if (p.hasPlayedBefore()) {
+        if (new PData(p.getName()).getConfig().contains("credit")) {
             credit.put(p, amount);
         } else {
             credit.put(p, 100D);
